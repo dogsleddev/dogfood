@@ -50,13 +50,14 @@ const expenseChildren: readonly NavLeaf[] = SEED_EXPENSE_GROUPS.map((g) =>
   leaf(g.label, `/forecasts/expenses/${g.id}`),
 );
 
-// The six user guides (§14).
+// The seven user guides (§14 + the Flux Analysis guide).
 const guideChildren: readonly NavLeaf[] = [
   leaf("Getting started", "/setup/guides/getting-started"),
   leaf("Budgets & forecasts", "/setup/guides/budgets-and-forecasts"),
   leaf("Updating actuals", "/setup/guides/updating-actuals"),
   leaf("Creating scenarios", "/setup/guides/creating-scenarios"),
   leaf("Reading the statements", "/setup/guides/reading-the-statements"),
+  leaf("Creating a flux analysis", "/setup/guides/creating-a-flux-analysis"),
   leaf("Asking Scout", "/setup/guides/asking-scout"),
 ];
 
