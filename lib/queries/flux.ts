@@ -18,7 +18,24 @@ export function getCurrentUser(): string {
 }
 
 export async function listFluxNotes(filter: FluxNoteFilter = {}): Promise<readonly FluxNote[]> {
-  return getDataStore().listFluxNotes(filter);
+  const ds = getDataStore();
+  // F4: when filtering by statement line, resolve each account/transaction-anchored note's EFFECTIVE
+  // line from the CURRENT Account Mapping (chart ⊕ overrides) rather than the line denormalized at
+  // write time — a re-point must move the note to its new line on the statement peek pane. Notes
+  // anchored directly to a line (grain 3, no account) keep their stored line; it can't go stale.
+  if (filter.statementLine !== undefined) {
+    const { statementLine: wantLine, ...rest } = filter;
+    const notes = await ds.listFluxNotes(rest);
+    if (notes.length === 0) return notes;
+    const lineByCode = new Map(
+      (await ds.listGlAccounts()).map((g) => [g.code, g.statementLineId as string]),
+    );
+    return notes.filter((n) => {
+      const effective = n.accountCode ? lineByCode.get(n.accountCode) ?? n.statementLine : n.statementLine;
+      return effective === wantLine;
+    });
+  }
+  return ds.listFluxNotes(filter);
 }
 
 /**
