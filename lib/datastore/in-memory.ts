@@ -27,6 +27,7 @@ import type {
   StaffMember,
   ExpenseTransaction,
   GlAccount,
+  AccountOverride,
   JournalEntry,
 } from "@/lib/types/source";
 import type { Scenario } from "@/lib/types/scenario";
@@ -74,12 +75,17 @@ import {
 } from "@/lib/seed/statements";
 import { buildSeedDashboard, buildSeedKpiTile, buildSeedMetricValue } from "@/lib/seed/dashboard-metrics";
 import { CHART_OF_ACCOUNTS, getLedger } from "@/lib/seed/gl";
+import { composeGlAccounts } from "./account-overrides";
 import { getTransactionsSeed } from "@/lib/seed/transactions";
 
 export class InMemoryDataStore implements DataStore {
   private scenarios = new Map<ScenarioId, Scenario>();
   private budget: BudgetSnapshot | undefined;
   private fluxNotes: FluxNote[] = [];
+  // The override layer (§17): a mutable delta list off the immutable chart. Starts EMPTY, so
+  // listGlAccounts() returns CHART_OF_ACCOUNTS by reference (the byte-identical path). Persists across
+  // requests via the globalThis store singleton, exactly like fluxNotes.
+  private accountOverrides: AccountOverride[] = [];
 
   // ── config / account mapping ──
   async getFirm(): Promise<FirmProfile> {
@@ -95,7 +101,22 @@ export class InMemoryDataStore implements DataStore {
     return [...SEED_EXPENSE_GROUPS].sort((a, b) => a.order - b.order);
   }
   async listGlAccounts(): Promise<readonly GlAccount[]> {
-    return CHART_OF_ACCOUNTS;
+    // The EFFECTIVE map = immutable chart ⊕ overrides. Empty overrides ⇒ CHART_OF_ACCOUNTS by reference.
+    return composeGlAccounts(CHART_OF_ACCOUNTS, this.accountOverrides);
+  }
+
+  // ── account-mapping override layer (mutable; read fresh, never cached) ──
+  async listAccountOverrides(): Promise<readonly AccountOverride[]> {
+    return this.accountOverrides;
+  }
+  async setAccountOverride(code: string, delta: Omit<AccountOverride, "code" | "updatedAt">): Promise<void> {
+    const row: AccountOverride = { ...delta, code, updatedAt: new Date().toISOString() };
+    const i = this.accountOverrides.findIndex((o) => o.code === code);
+    if (i >= 0) this.accountOverrides[i] = row;
+    else this.accountOverrides.push(row);
+  }
+  async clearAccountOverride(code: string): Promise<void> {
+    this.accountOverrides = this.accountOverrides.filter((o) => o.code !== code);
   }
 
   // ── layer 1 · source records (from the seed) ──
@@ -228,12 +249,15 @@ export class InMemoryDataStore implements DataStore {
 
   // ── derived financial statements (delegate to the seed's tying-out reference impl) ──
   async getPnL(period: Month): Promise<PnL> {
-    // Overlay the locked Budget snapshot onto the immutable forecast/actual (the budget is a write
-    // surface off immutable source, §4); falls back to the default plan for prior FYs / pre-lock.
-    return applyBudgetSnapshot(buildSeedPnL(period), await this.getBudgetSnapshot(), period);
+    // The ACTUAL column rolls up through the EFFECTIVE Account Mapping (chart ⊕ overrides, §17), so a
+    // re-point moves it. The locked Budget snapshot (default-plan map, no `accounts`) is overlaid onto
+    // the immutable forecast/actual (the budget is a write surface off immutable source, §4); falls back
+    // to the default plan for prior FYs / pre-lock.
+    const accounts = await this.listGlAccounts();
+    return applyBudgetSnapshot(buildSeedPnL(period, accounts), await this.getBudgetSnapshot(), period);
   }
   async getMonthlyPnL(period: Month): Promise<MonthlyPnL> {
-    return buildSeedMonthlyPnL(period);
+    return buildSeedMonthlyPnL(period, await this.listGlAccounts());
   }
   async getBudgetView(period: Month): Promise<BudgetSnapshot> {
     const snap = await this.getBudgetSnapshot();
@@ -241,16 +265,18 @@ export class InMemoryDataStore implements DataStore {
     return buildSeedBudget(period); // default plan for prior fiscal years
   }
   async getBalanceSheet(period: Month): Promise<BalanceSheet> {
-    return buildSeedBalanceSheet(period);
+    // ACTUAL rolls up through the EFFECTIVE Account Mapping (chart ⊕ overrides, §17); empty ⇒ generator chart.
+    return buildSeedBalanceSheet(period, await this.listGlAccounts());
   }
   async getMonthlyBalanceSheet(period: Month): Promise<MonthlyBalanceSheet> {
-    return buildSeedMonthlyBalanceSheet(period);
+    return buildSeedMonthlyBalanceSheet(period, await this.listGlAccounts());
   }
   async getCashFlow(period: Month): Promise<CashFlow> {
-    return buildSeedCashFlow(period);
+    // working-capital + NI Actual roll up through the EFFECTIVE Account Mapping (§17); empty ⇒ generator chart.
+    return buildSeedCashFlow(period, await this.listGlAccounts());
   }
   async getMonthlyCashFlow(period: Month): Promise<MonthlyCashFlow> {
-    return buildSeedMonthlyCashFlow(period);
+    return buildSeedMonthlyCashFlow(period, await this.listGlAccounts());
   }
   async getRunway(asOf: Month): Promise<Runway> {
     return buildSeedRunway(asOf);

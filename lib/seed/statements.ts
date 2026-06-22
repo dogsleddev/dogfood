@@ -10,7 +10,7 @@
  * no longer a per-read view) · Variance = Forecast − Budget. Subtotals foot from the leaves by
  * construction; net income equals the seed's own net-income series.
  */
-import { usd, toMajor, subMoney, zeroMoney, percent, type Money } from "@/lib/types/money";
+import { usd, toMajor, subMoney, zeroMoney, percent, moneyFromMinor, type Money } from "@/lib/types/money";
 import { month, monthYear, monthToIndex, fyStartIndexForYear, type Month } from "@/lib/types/period";
 import type {
   PnL,
@@ -45,7 +45,11 @@ import {
   getSbcSeed,
 } from "./index";
 import { indexToMonth } from "./params"; // negative-safe index↔month, shared with the generators
-import { activityByStatementLine } from "./gl"; // the Account-Mapping rollup that drives the ACTUAL column (§7)
+import type { GlAccount } from "@/lib/types/source";
+// the Account-Mapping rollups that drive the ACTUAL columns (§7); each takes the EFFECTIVE chart,
+// default = CHART_OF_ACCOUNTS, so a re-pointed mapping (override layer §17) moves the closed activity.
+// activityByStatementLine = per-line period activity (P&L); balanceSeriesByLine = cumulative balances (BS).
+import { activityByStatementLine, balanceSeriesByLine, balanceByStatementLine, CHART_OF_ACCOUNTS } from "./gl";
 
 const MONTH_ABBR = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"] as const;
 
@@ -196,12 +200,13 @@ interface ComputedPnL {
   readonly netIncome: ColumnValues;
 }
 
-function computeColumns(period: Month): ComputedPnL {
+function computeColumns(period: Month, accounts: readonly GlAccount[] = CHART_OF_ACCOUNTS): ComputedPnL {
   const series = leafSeriesById();
   // The ACTUAL column rolls up from the GL account→line map (§7 — Account Mapping is load-bearing):
-  // re-pointing an account's statementLineId moves its closed activity to a different line. Forecast +
-  // Budget stay driver-driven (forecast months aren't journalized). Tie-out-neutral by gl.ts plTie.
-  const actualByLine = activityByStatementLine();
+  // re-pointing an account's statementLineId (override layer §17) moves its closed activity to a
+  // different line. Forecast + Budget stay driver-driven (forecast months aren't journalized).
+  // Tie-out-neutral when `accounts` is the generator chart (gl.ts plTie + data-sweep rollup recon).
+  const actualByLine = activityByStatementLine(accounts);
   const zeros: readonly number[] = series.subscription.map(() => 0);
   const { fy, fyStart, fyEnd, actualEnd } = fyWindow(period);
   const leaf = new Map<LeafId, ColumnValues>();
@@ -233,8 +238,8 @@ const leafLine = (spec: LeafSpec, values: ColumnValues): PnLLine => ({
 
 const SEED_FY_LABEL = (period: Month) => `FY${monthYear(period)}`;
 
-export function buildSeedPnL(period: Month): PnL {
-  const c = computeColumns(period);
+export function buildSeedPnL(period: Month, accounts: readonly GlAccount[] = CHART_OF_ACCOUNTS): PnL {
+  const c = computeColumns(period, accounts);
   const v = (id: LeafId) => c.leaf.get(id) ?? cv(0, 0, 0);
   const spec = (id: LeafId) => LEAVES.find((l) => l.id === id)!;
 
@@ -274,40 +279,46 @@ export function buildSeedPnL(period: Month): PnL {
 
 // ── Monthly (month-across-columns) P&L — the board-package view (P0 #3) ──
 // Reuses buildSeedPnL for the canonical line order + metadata + FY margins, and spreads each line's
-// seed series across the 12 months of the fiscal year. Subtotals are recomputed per month with the
-// SAME algebra as computeColumns, so each line's `total` (Σ months) equals the FY Forecast column by
-// construction — the tie-out the data sweep asserts.
-export function buildSeedMonthlyPnL(period: Month): MonthlyPnL {
-  const fyP = buildSeedPnL(period); // canonical lines + metadata + FY margin
+// value across the 12 months of the fiscal year. Two leaf accessors (the total/cell split, §slice-2):
+//   • the DISPLAYED cell rolls up from the GL account→line map for CLOSED months (override-aware, so a
+//     re-point moves the closed cells) and is the series for forecast months;
+//   • the `total` is the forecast/series path over all 12 months, so it still equals the FY P&L Forecast
+//     column by construction — the tie the data sweep asserts (it reads `total`, never the cells).
+// When `accounts` is the generator chart, the closed rollup === the series per month (gl posts the same
+// monthly leaf series), so the displayed cells are byte-identical to the old series path.
+export function buildSeedMonthlyPnL(period: Month, accounts: readonly GlAccount[] = CHART_OF_ACCOUNTS): MonthlyPnL {
+  const fyP = buildSeedPnL(period, accounts); // canonical lines + metadata + FY margin (Actual now map-aware)
   const series = leafSeriesById();
   const { idxs, months } = monthlyColumns(period);
+  const { actualEnd } = fyWindow(period);
+  const actualByLine = activityByStatementLine(accounts); // closed-month GL activity per statement line
 
-  const at = (id: LeafId, i: number): number => series[id]?.[i] ?? 0;
-  const sumLeaves = (ids: readonly LeafId[], i: number) => ids.reduce((s, id) => s + at(id, i), 0);
-  const totRev = (i: number) => at("subscription", i) + at("services", i);
-  const totCor = (i: number) => sumLeaves(COR_LEAF_IDS, i);
-  const totOpex = (i: number) => sumLeaves(OPEX_LEAF_IDS, i);
-  const opInc = (i: number) => totRev(i) - totCor(i) - totOpex(i);
-  const netInc = (i: number) => opInc(i) + at("interest_other", i) - at("taxes", i);
+  // forecast/series leaf value — drives the TOTAL (ties to the FY Forecast column)
+  const fAt = (id: LeafId, i: number): number => series[id]?.[i] ?? 0;
+  // displayed leaf value — closed months roll up (override-aware), forecast months stay series
+  const dAt = (id: LeafId, i: number): number =>
+    i <= actualEnd ? (actualByLine.get(id)?.[i] ?? 0) : (series[id]?.[i] ?? 0);
 
-  // resolve a line's monthly value, mirroring computeColumns' subtotal formulas
-  const valueAt = (id: PnLLineId, i: number): number => {
+  // resolve a line's value via a leaf accessor, mirroring computeColumns' subtotal algebra
+  const valueAt = (id: PnLLineId, i: number, leafAt: (id: LeafId, i: number) => number): number => {
+    const sumLeaves = (ids: readonly LeafId[]) => ids.reduce((s, lid) => s + leafAt(lid, i), 0);
+    const totRev = leafAt("subscription", i) + leafAt("services", i);
     switch (id) {
-      case "total_revenue": return totRev(i);
-      case "total_cor": return totCor(i);
-      case "gross_profit": return totRev(i) - totCor(i);
-      case "total_opex": return totOpex(i);
-      case "operating_income": return opInc(i);
-      case "net_income": return netInc(i);
-      default: return at(id as LeafId, i); // a leaf line
+      case "total_revenue": return totRev;
+      case "total_cor": return sumLeaves(COR_LEAF_IDS);
+      case "gross_profit": return totRev - sumLeaves(COR_LEAF_IDS);
+      case "total_opex": return sumLeaves(OPEX_LEAF_IDS);
+      case "operating_income": return totRev - sumLeaves(COR_LEAF_IDS) - sumLeaves(OPEX_LEAF_IDS);
+      case "net_income": return totRev - sumLeaves(COR_LEAF_IDS) - sumLeaves(OPEX_LEAF_IDS) + leafAt("interest_other", i) - leafAt("taxes", i);
+      default: return leafAt(id as LeafId, i); // a leaf line
     }
   };
 
   const lines: MonthlyPnLLine[] = fyP.lines.map((l) => {
-    const monthly = idxs.map((i) => usd(valueAt(l.id, i)));
-    // total rounds the raw annual sum ONCE (so leaf totals tie to the FY P&L Forecast column exactly);
-    // the displayed month cells round independently, so Σ(cells) can differ by a cent — invisible at $M.
-    const total = usd(idxs.reduce((s, i) => s + valueAt(l.id, i), 0));
+    const monthly = idxs.map((i) => usd(valueAt(l.id, i, dAt))); // displayed: rollup for closed months
+    // total rounds the raw annual sum ONCE on the FORECAST path (so leaf totals tie to the FY P&L Forecast
+    // column exactly); displayed cells round independently + may roll up, so Σ(cells) can differ — by design.
+    const total = usd(idxs.reduce((s, i) => s + valueAt(l.id, i, fAt), 0));
     return {
       id: l.id,
       label: l.label,
@@ -360,11 +371,23 @@ export function buildSeedBudget(period: Month): BudgetSnapshot {
 }
 
 // ── Balance Sheet (point-in-time: Actual = last close, Forecast = fiscal year-end) ──
-export function buildSeedBalanceSheet(period: Month): BalanceSheet {
+export function buildSeedBalanceSheet(period: Month, accounts: readonly GlAccount[] = CHART_OF_ACCOUNTS): BalanceSheet {
   const s = getBalanceSheetSeed().series;
   const { fyEnd, actualEnd } = fyWindow(period);
   const aIdx = Math.max(0, actualEnd);
-  const bsCv = (ser: readonly number[]): ColumnValues => ({ actual: usd(ser[aIdx] ?? 0), forecast: usd(ser[fyEnd] ?? 0) });
+  // The ACTUAL column rolls up from the GL account→line BALANCES (override-aware §17): re-pointing an
+  // account carries its opening + cumulative activity to the target line. Forecast stays the FY-end
+  // series snapshot (forecast months aren't journalized). `?? ser[aIdx]` keeps any line with no
+  // contributing account on its series value. Byte-identical at the generator chart (gl.ts bsTie).
+  const balByLine = balanceByStatementLine(accounts, aIdx);
+  // `?? 0` (NOT ?? series): a line a re-point moved its account AWAY from correctly shows 0 actual (its
+  // balance now rolls up under the target line) — so the section sum, and Assets = L + E on the actual
+  // column, is preserved. A series fallback would double-count. The derived accumulated_deficit line has
+  // no GL account; it uses the signed-series branch below (bsCv's value is discarded for it).
+  const bsCv = (id: BalanceSheetLine["id"], ser: readonly number[]): ColumnValues => ({
+    actual: usd(balByLine.get(id) ?? 0),
+    forecast: usd(ser[fyEnd] ?? 0),
+  });
   type Row = { id: BalanceSheetLine["id"]; label: string; ser: readonly number[]; section: BalanceSheetLine["section"]; deficit?: boolean };
   const rows: Row[] = [
     { id: "cash", label: "Cash", ser: s.cash, section: "asset" },
@@ -383,7 +406,7 @@ export function buildSeedBalanceSheet(period: Month): BalanceSheet {
   // peek their register/driver. Keeps firstTap honest per the P&L convention (§6).
   const BS_PANE_ONLY: ReadonlySet<BalanceSheetLine["id"]> = new Set(["rou_asset", "lease_liability", "paid_in_capital"]);
   const lines: BalanceSheetLine[] = rows.map((r) => {
-    const values = bsCv(r.ser);
+    const values = bsCv(r.id, r.ser);
     // accumulated deficit reduces equity → carry it negative on the statement
     const signed: ColumnValues = r.deficit
       ? { actual: usd(-(s.accumulatedDeficit[aIdx] ?? 0)), forecast: usd(-(s.accumulatedDeficit[fyEnd] ?? 0)) }
@@ -394,31 +417,51 @@ export function buildSeedBalanceSheet(period: Month): BalanceSheet {
 }
 
 // ── Cash Flow (indirect; FY view, current fiscal year) ──
-export function buildSeedCashFlow(period: Month): CashFlow {
+export function buildSeedCashFlow(period: Month, accounts: readonly GlAccount[] = CHART_OF_ACCOUNTS): CashFlow {
   const bs = getBalanceSheetSeed();
   const s = bs.series;
   const { fyStart, fyEnd, actualEnd } = fyWindow(period);
   const prev = fyStart - 1; // end of prior fiscal year (= opening for FY2024 handled by month -1 → guard)
   const aEnd = Math.max(fyStart, actualEnd);
 
-  // balance delta as a CASH impact (sign per the indirect method), forecast (FY-end) vs actual (YTD)
-  const deltaCash = (ser: readonly number[], sign: 1 | -1): ColumnValues => {
-    const base = prev >= 0 ? (ser[prev] ?? 0) : 0;
-    return { forecast: usd(sign * ((ser[fyEnd] ?? 0) - base)), actual: usd(sign * ((ser[aEnd] ?? 0) - base)) };
+  // SINGLE SOURCE: the working-capital ACTUAL deltas read the SAME rolled-up balances the Balance Sheet
+  // does (balanceSeriesByLine) — so a re-point moves BS and CF together, never divergently. Forecast
+  // stays the raw-series delta (forecast months aren't journalized; the rolled balance would be flat
+  // past actualEnd). At the generator chart, balAt(line, i) === s.<series>[i] (bsTie) ⇒ byte-identical.
+  const bal = balanceSeriesByLine(accounts);
+  const balAt = (line: string, i: number): number => bal.get(line)?.[i] ?? 0;
+  // balance delta as a CASH impact (sign per the indirect method); base = prior-FY-end. prev < 0
+  // (FY2024) ⇒ base 0 (NOT balAt(line,-1), which would return the opening — the off-by-one trap).
+  const deltaCashLine = (line: string, ser: readonly number[], sign: 1 | -1): ColumnValues => {
+    const base = prev >= 0 ? (ser[prev] ?? 0) : 0; // forecast base: raw series (unchanged)
+    const baseA = prev >= 0 ? balAt(line, prev) : 0; // actual base: rolled-up balance
+    return { forecast: usd(sign * ((ser[fyEnd] ?? 0) - base)), actual: usd(sign * (balAt(line, aEnd) - baseA)) };
   };
   const flow = (ser: readonly number[]): ColumnValues => ({ forecast: usd(sumRange(ser, fyStart, fyEnd)), actual: usd(sumRange(ser, fyStart, aEnd)) });
 
-  const netIncome = flow(s.netIncome);
+  // NET INCOME — delta-overlay (slice 2): keep the PROVEN single-usd series path as the base, add a
+  // provably-zero-on-empty coherence correction so a P&L re-point moves CF NI without a new rounding
+  // path. overlay = rolled-up NI(effective) − rolled-up NI(base map) = 0 when no P&L account is
+  // re-pointed (same `accounts`), so the actual = the literal old flow(s.netIncome) value byte-for-byte.
+  const niBase = flow(s.netIncome);
+  const niOverlay =
+    (computeColumns(period, accounts).netIncome.actual?.minor ?? 0) -
+    (computeColumns(period, CHART_OF_ACCOUNTS).netIncome.actual?.minor ?? 0);
+  const niBaseActual = niBase.actual ?? zeroMoney();
+  const netIncome: ColumnValues = {
+    forecast: niBase.forecast,
+    actual: moneyFromMinor(niBaseActual.minor + niOverlay, niBaseActual.currency),
+  };
   const depreciation = flow(s.depreciation);
   // Stock-based comp (ASC 718) is a non-cash expense already subtracted from net income, so the
   // indirect method adds it back. The seed's own monthly operating-cash-flow series includes it
   // (lib/seed/balance-sheet.ts), so omitting it here would break the BS-cash tie-out.
   const sbc = flow(getSbcSeed().series.monthly);
-  const changeAr = deltaCash(s.accountsReceivable, -1);
-  const changeDeferred = deltaCash(s.deferredRevenue, 1);
-  const changeWip = deltaCash(s.unbilledWip, -1);
-  const changePrepaid = deltaCash(s.prepaidExpenses, -1);
-  const changeAp = deltaCash(s.accountsPayable, 1);
+  const changeAr = deltaCashLine("accounts_receivable", s.accountsReceivable, -1);
+  const changeDeferred = deltaCashLine("deferred_revenue", s.deferredRevenue, 1);
+  const changeWip = deltaCashLine("unbilled_wip", s.unbilledWip, -1);
+  const changePrepaid = deltaCashLine("prepaid_expenses", s.prepaidExpenses, -1);
+  const changeAp = deltaCashLine("accounts_payable", s.accountsPayable, 1);
   const operating = addCols(netIncome, depreciation, sbc, changeAr, changeDeferred, changeWip, changePrepaid, changeAp);
   const capex = flow(s.investingCashFlow); // already negative (−capex)
   const financing = flow(s.financingCashFlow);
@@ -454,14 +497,17 @@ export function buildSeedCashFlow(period: Month): CashFlow {
 }
 
 // ── Monthly (month-across-columns) Balance Sheet — the board-package view ──
-// Reuses buildSeedBalanceSheet for the canonical line order + labels + firstTap + section + sign, and
-// reads each line's month-END balance from the same seed series. A line's `total` is the FY-END value
-// (a snapshot, NOT a sum) so it equals the FY Balance Sheet Forecast column by construction.
-export function buildSeedMonthlyBalanceSheet(period: Month): MonthlyBalanceSheet {
-  const fyBs = buildSeedBalanceSheet(period); // canonical lines (order/labels/firstTap/section)
+// Reuses buildSeedBalanceSheet for the canonical line order + labels + firstTap + section + sign. The
+// DISPLAYED month-end balance rolls up from the GL account→line balances for CLOSED months (override-
+// aware §17) and is the seed series for forecast months. A line's `total` is the FY-END series value
+// (a snapshot, NOT a sum) so it still equals the FY Balance Sheet Forecast column by construction. When
+// `accounts` is the generator chart, the closed rollup === the series (bsTie), so cells are byte-identical.
+export function buildSeedMonthlyBalanceSheet(period: Month, accounts: readonly GlAccount[] = CHART_OF_ACCOUNTS): MonthlyBalanceSheet {
+  const fyBs = buildSeedBalanceSheet(period, accounts); // canonical lines (order/labels/firstTap/section)
   const s = getBalanceSheetSeed().series;
-  const { fyEnd } = fyWindow(period);
+  const { fyEnd, actualEnd } = fyWindow(period);
   const { idxs, months } = monthlyColumns(period);
+  const balByLine = balanceSeriesByLine(accounts); // closed-month rolled balances per statement line
 
   // accumulated deficit reduces equity → carry it negative, matching the FY statement convention.
   const serFor = (id: BalanceSheetLineId): { ser: readonly number[]; sign: 1 | -1 } => {
@@ -480,6 +526,15 @@ export function buildSeedMonthlyBalanceSheet(period: Month): MonthlyBalanceSheet
     }
   };
 
+  // displayed month-end balance: GL-backed lines roll up for CLOSED months (0 if a re-point uncovered
+  // the line — preserves the section sum, never double-counts via series); forecast months stay on the
+  // series (the plan). The derived accumulated_deficit line (no GL account) always uses the signed series.
+  const cellAt = (id: BalanceSheetLineId, ser: readonly number[], sign: 1 | -1, i: number): number => {
+    if (id === "accumulated_deficit") return sign * (ser[i] ?? 0);
+    if (i <= actualEnd) return sign * (balByLine.get(id)?.[i] ?? 0);
+    return sign * (ser[i] ?? 0);
+  };
+
   const lines: MonthlyBalanceSheetLine[] = fyBs.lines.map((l) => {
     const { ser, sign } = serFor(l.id);
     return {
@@ -487,8 +542,8 @@ export function buildSeedMonthlyBalanceSheet(period: Month): MonthlyBalanceSheet
       label: l.label,
       firstTap: l.firstTap,
       section: l.section,
-      monthly: idxs.map((i) => usd(sign * (ser[i] ?? 0))),
-      total: usd(sign * (ser[fyEnd] ?? 0)),
+      monthly: idxs.map((i) => usd(cellAt(l.id, ser, sign, i))),
+      total: usd(sign * (ser[fyEnd] ?? 0)), // FY-END series snapshot (forecast) — ties to the FY BS column
     };
   });
   return { period, label: SEED_FY_LABEL(period), months, lines };
@@ -496,22 +551,42 @@ export function buildSeedMonthlyBalanceSheet(period: Month): MonthlyBalanceSheet
 
 // ── Monthly (month-across-columns) Cash Flow — the board-package view ──
 // Reuses buildSeedCashFlow for the canonical line order + labels + firstTap + section + isSubtotal, and
-// computes each line's per-MONTH flow. Flow lines (NI/D&A/SBC/capex/financing) are the month's series
-// value; the working-capital lines are the month-over-month balance delta (ser[i] − ser[i−1], with the
-// pre-FY-2024 opening = 0). Σ months telescopes/ sums to the FY deltaCash/flow, so each line's `total`
-// equals the FY Cash Flow Forecast column by construction.
-export function buildSeedMonthlyCashFlow(period: Month): MonthlyCashFlow {
-  const fyCf = buildSeedCashFlow(period); // canonical lines (order/labels/firstTap/section/isSubtotal)
+// computes each line's per-MONTH flow. TWO accessors (the total/cell split, slice 2):
+//   • compF (forecast/series path) drives the `total` (Σ months telescopes to the FY CF Forecast column,
+//     the tie the data sweep asserts — it reads `total`, never the cells);
+//   • compD (DISPLAYED cell) rolls up the working-capital lines' CLOSED-month deltas from the same
+//     balanceSeriesByLine the BS reads (override-aware §17), so a same-section BS re-point moves the
+//     monthly BS balances AND the monthly CF working-capital deltas together. Flow lines (NI/D&A/SBC/
+//     capex/financing) stay series (their accounts aren't re-point targets; FY CF NI moves via the
+//     overlay). When `accounts` is the generator chart, the rolled delta === the series delta (bsTie),
+//     so compD === compF and the cells are byte-identical.
+export function buildSeedMonthlyCashFlow(period: Month, accounts: readonly GlAccount[] = CHART_OF_ACCOUNTS): MonthlyCashFlow {
+  const fyCf = buildSeedCashFlow(period, accounts); // canonical lines (order/labels/firstTap/section/isSubtotal)
   const s = getBalanceSheetSeed().series;
   const sbcSer = getSbcSeed().series.monthly;
   const { idxs, months } = monthlyColumns(period);
+  const { actualEnd } = fyWindow(period);
+  const bal = balanceSeriesByLine(accounts);
 
   const at = (ser: readonly number[], i: number): number => ser[i] ?? 0;
   // balance delta as a cash impact: sign × (this month − last month); month -1 (pre-FY24) opens at 0
   const delta = (ser: readonly number[], sign: 1 | -1, i: number): number =>
     sign * (at(ser, i) - (i - 1 >= 0 ? at(ser, i - 1) : 0));
+  // the rolled-balance MoM delta for a working-capital line (closed months); -1 → 0 (pre-FY24 guard)
+  const balAt = (line: string, i: number): number => (i < 0 ? 0 : (bal.get(line)?.[i] ?? 0));
+  const deltaRolled = (line: string, sign: 1 | -1, i: number): number =>
+    sign * (balAt(line, i) - balAt(line, i - 1));
+  // working-capital line → (BS statement line, indirect-method sign), matching the FY CF deltaCashLine
+  const WC: Partial<Record<CashFlowLineId, { line: string; sign: 1 | -1 }>> = {
+    change_ar: { line: "accounts_receivable", sign: -1 },
+    change_deferred_revenue: { line: "deferred_revenue", sign: 1 },
+    change_unbilled_wip: { line: "unbilled_wip", sign: -1 },
+    change_prepaids: { line: "prepaid_expenses", sign: -1 },
+    change_ap: { line: "accounts_payable", sign: 1 },
+  };
 
-  const comp = (id: CashFlowLineId, i: number): number => {
+  // forecast/series path — drives the TOTAL (the FY-tie the data sweep checks)
+  const compF = (id: CashFlowLineId, i: number): number => {
     switch (id) {
       case "net_income": return at(s.netIncome, i);
       case "depreciation": return at(s.depreciation, i);
@@ -525,12 +600,30 @@ export function buildSeedMonthlyCashFlow(period: Month): MonthlyCashFlow {
       case "financing": return at(s.financingCashFlow, i);
       case "operating_cash_flow":
         return (
-          comp("net_income", i) + comp("depreciation", i) + comp("stock_based_comp", i) +
-          comp("change_ar", i) + comp("change_deferred_revenue", i) + comp("change_unbilled_wip", i) +
-          comp("change_prepaids", i) + comp("change_ap", i)
+          compF("net_income", i) + compF("depreciation", i) + compF("stock_based_comp", i) +
+          compF("change_ar", i) + compF("change_deferred_revenue", i) + compF("change_unbilled_wip", i) +
+          compF("change_prepaids", i) + compF("change_ap", i)
         );
       case "net_change_in_cash":
-        return comp("operating_cash_flow", i) + comp("capex", i) + comp("financing", i);
+        return compF("operating_cash_flow", i) + compF("capex", i) + compF("financing", i);
+    }
+  };
+
+  // displayed path — working-capital CLOSED months roll up; everything else = compF (forecast/series)
+  const compD = (id: CashFlowLineId, i: number): number => {
+    const wc = WC[id];
+    if (wc && i <= actualEnd) return deltaRolled(wc.line, wc.sign, i);
+    switch (id) {
+      case "operating_cash_flow":
+        return (
+          compD("net_income", i) + compD("depreciation", i) + compD("stock_based_comp", i) +
+          compD("change_ar", i) + compD("change_deferred_revenue", i) + compD("change_unbilled_wip", i) +
+          compD("change_prepaids", i) + compD("change_ap", i)
+        );
+      case "net_change_in_cash":
+        return compD("operating_cash_flow", i) + compD("capex", i) + compD("financing", i);
+      default:
+        return compF(id, i);
     }
   };
 
@@ -540,8 +633,8 @@ export function buildSeedMonthlyCashFlow(period: Month): MonthlyCashFlow {
     firstTap: l.firstTap,
     section: l.section,
     isSubtotal: l.isSubtotal ?? false,
-    monthly: idxs.map((i) => usd(comp(l.id, i))),
-    total: usd(idxs.reduce((sum, i) => sum + comp(l.id, i), 0)),
+    monthly: idxs.map((i) => usd(compD(l.id, i))), // displayed: working-capital rolls up for closed months
+    total: usd(idxs.reduce((sum, i) => sum + compF(l.id, i), 0)), // total: forecast path → ties to FY column
   }));
   return { period, label: SEED_FY_LABEL(period), months, lines };
 }

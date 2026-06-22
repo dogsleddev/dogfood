@@ -27,6 +27,7 @@ import type {
   StaffMember,
   ExpenseTransaction,
   GlAccount,
+  AccountOverride,
   JournalEntry,
 } from "@/lib/types/source";
 import type { CustomerInvoice, CashReceipt, Paycheck, Timesheet } from "@/lib/types/transactions";
@@ -111,7 +112,15 @@ export interface DataStore {
   getSettings(): Promise<AppSettings>;
   listDepartments(): Promise<readonly Department[]>;
   listExpenseGroups(): Promise<readonly ExpenseGroup[]>;
+  /** The EFFECTIVE Account Mapping: the immutable chart composed with the override layer (§17). */
   listGlAccounts(): Promise<readonly GlAccount[]>;
+
+  // ── account-mapping override layer (field-level deltas off the immutable chart — §16/§17) ──
+  listAccountOverrides(): Promise<readonly AccountOverride[]>;
+  /** Upsert a field-level override on an account (keyed by code); re-applies on read across re-import. */
+  setAccountOverride(code: string, delta: Omit<AccountOverride, "code" | "updatedAt">): Promise<void>;
+  /** Remove the override for an account — the per-account "reset to default mapping". */
+  clearAccountOverride(code: string): Promise<void>;
 
   // ── layer 1 · source records ──
   listPipeline(): Promise<readonly PipelineOpportunity[]>;

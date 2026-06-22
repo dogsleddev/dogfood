@@ -14,7 +14,7 @@ import {
   getSbcSeed,
   getLeaseSeed,
 } from "@/lib/seed";
-import { getLedger, CHART_OF_ACCOUNTS, activityByStatementLine } from "@/lib/seed/gl";
+import { getLedger, CHART_OF_ACCOUNTS, activityByStatementLine, balanceSeriesByLine } from "@/lib/seed/gl";
 import { getTransactionsSeed } from "@/lib/seed/transactions";
 import type { TieOutCheck } from "@/lib/seed";
 import { buildSeedPnL, buildSeedMonthlyPnL, buildSeedBalanceSheet, buildSeedMonthlyBalanceSheet, buildSeedCashFlow, buildSeedMonthlyCashFlow, seedFyWindow } from "@/lib/seed/statements";
@@ -271,6 +271,30 @@ for (const l of pnl.lines.filter((x) => x.level === 1)) {
 const actOk = actMaxDelta < 0.01;
 L(`  P&L Actual ← GL rollup: every leaf's closed-window account activity === the Actual column (max Δ $${actMaxDelta.toFixed(2)}${actOk ? "" : ` on ${actWorst}  <- FAIL`})`);
 if (!actOk) process.exitCode = 1;
+
+// Slice-2 (override layer) neutrality tripwire — the BS/CF Actual now rolls up from balanceSeriesByLine
+// (opening-by-line + cumulative activity). On the GENERATOR chart it MUST reproduce the seed balance
+// series per line per month — this is the standing guard against OPENING_BY_CODE drifting from the GL.
+// (accumulated_deficit is excluded: it's the derived line that carries the signed series, not a rollup.)
+const balRollup = balanceSeriesByLine(CHART_OF_ACCOUNTS);
+const bsLineSeries: Record<string, readonly number[]> = {
+  cash: bs.series.cash, accounts_receivable: bs.series.accountsReceivable, unbilled_wip: bs.series.unbilledWip,
+  prepaid_expenses: bs.series.prepaidExpenses, fixed_assets_net: bs.series.fixedAssetsNet, rou_asset: bs.series.rouAsset,
+  deferred_revenue: bs.series.deferredRevenue, accounts_payable: bs.series.accountsPayable,
+  lease_liability: bs.series.leaseLiability, paid_in_capital: bs.series.paidInCapital,
+};
+let balMaxDelta = 0;
+let balWorst = "";
+for (const [line, ser] of Object.entries(bsLineSeries)) {
+  const arr = balRollup.get(line) ?? [];
+  for (let i = 0; i < ser.length; i++) {
+    const d = Math.abs((arr[i] ?? 0) - ser[i]);
+    if (d > balMaxDelta) { balMaxDelta = d; balWorst = `${line}@${i}`; }
+  }
+}
+const balOk = balMaxDelta < 1; // bsTie tolerance
+L(`  BS balance ← GL rollup: every BS line's opening+Σactivity === the seed series, every month (max Δ $${balMaxDelta.toFixed(4)}${balOk ? "" : ` on ${balWorst}  <- FAIL`})`);
+if (!balOk) process.exitCode = 1;
 
 // Dashboard financial tiles === the P&L Forecast column (guards the SBC-class drift: the dashboard
 // recomputes revenue/GP/OI/NI from separate FY aggregates than computeColumns — they must agree).

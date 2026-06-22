@@ -147,6 +147,25 @@ export interface GlAccount {
   readonly statementLineId: StatementLineId;
 }
 
+/**
+ * A field-level override on an (immutable) GL account (CLAUDE.md §16/§17 — the override layer).
+ * The synced/generated `GlAccount` stays immutable and is re-seeded / re-imported to its source value;
+ * the CFO's edit layers on top here, keyed by the re-import-stable account `code`, and re-applies on
+ * read via `composeGlAccounts` — the same immutable-source + user-delta pattern as `scenario_inputs`
+ * and `flux_notes`. Each field is optional: `undefined` ⇒ no delta on that field (the base shows
+ * through). `statementLineId` is the load-bearing field (re-points where the account's closed GL
+ * activity rolls up on the statements); `classification`/`function` are descriptive tags.
+ */
+export interface AccountOverride {
+  readonly code: string;
+  readonly statementLineId?: StatementLineId;
+  readonly classification?: StatementClassification;
+  readonly function?: CostFunction;
+  /** provenance of the delta: a CFO edit in the UI, or a future CSV import suggestion */
+  readonly source: "ui" | "import";
+  readonly updatedAt: string;
+}
+
 export type JournalSource = "ap_bill" | "payroll" | "invoice" | "prepaid_amort" | "depreciation" | "manual";
 
 export interface JournalLine {

@@ -287,6 +287,18 @@ create table budget_snapshots (
   amount         numeric(16,2)
 );
 
+-- the Account-Mapping override layer (field-level deltas off the immutable chart — §16/§17; see
+-- 0005_account_overrides.sql). NO hard FK to gl_accounts(code): the override must survive the seed
+-- loader's delete-and-reinsert of gl_accounts (orphans dropped at compose time, not by the DB).
+create table account_overrides (
+  code            text primary key,
+  statement_line  text,                       -- the re-point (null ⇒ inherit the base mapping)
+  classification  text check (classification in ('cost_of_revenue','operating_expense')),
+  function        text check (function in ('direct','rnd','sm','ga')),
+  source          text not null default 'ui' check (source in ('ui','import')),
+  updated_at      timestamptz not null default now()
+);
+
 -- ── indexes for period-filtered + drill reads ──
 create index on vendor_bills (period);
 create index on paychecks (period);
@@ -304,4 +316,6 @@ create or replace function set_updated_at() returns trigger as $$
 begin new.updated_at = now(); return new; end;
 $$ language plpgsql;
 create trigger flux_notes_updated_at before update on flux_notes
+  for each row execute function set_updated_at();
+create trigger account_overrides_updated_at before update on account_overrides
   for each row execute function set_updated_at();

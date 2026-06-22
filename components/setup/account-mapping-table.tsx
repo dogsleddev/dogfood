@@ -68,12 +68,15 @@ const TH = ({ children, right }: { children: React.ReactNode; right?: boolean })
 export function AccountMappingTable({
   accounts,
   notedCodes,
+  editedCodes,
   selectedCode,
 }: {
   accounts: readonly GlAccount[];
   /** account codes that carry a flux note this period (for the row marker) */
   notedCodes?: ReadonlySet<string>;
-  /** the account whose flux card is open (?note=) */
+  /** account codes carrying an override (re-pointed mapping) — for the "edited" marker */
+  editedCodes?: ReadonlySet<string>;
+  /** the account whose card is open (?note= or ?edit=) */
   selectedCode?: string;
 }) {
   const sections = SECTION_ORDER.map((type) => ({
@@ -89,7 +92,8 @@ export function AccountMappingTable({
     <div className="min-w-0">
       <div className="mb-3 text-sm text-steel">
         <span className="font-medium text-ink">{accounts.length}</span> GL accounts mapped to statement
-        lines · grouped by statement section · click the Flux marker to add an account note
+        lines · grouped by account type · <span className="text-ink">Edit</span> re-points a mapping (the
+        Actual columns move) · click the Flux marker to add an account note
       </div>
 
       <div className="overflow-hidden rounded-xl border border-parchment-line bg-surface">
@@ -101,6 +105,7 @@ export function AccountMappingTable({
               <TH>Statement line</TH>
               <TH>Class</TH>
               <TH>Function</TH>
+              <TH>Edit</TH>
               <TH>Flux</TH>
             </tr>
           </thead>
@@ -111,6 +116,7 @@ export function AccountMappingTable({
                 label={section.label}
                 rows={section.rows}
                 notedCodes={notedCodes}
+                editedCodes={editedCodes}
                 selectedCode={selectedCode}
               />
             ))}
@@ -125,22 +131,25 @@ function SectionRows({
   label,
   rows,
   notedCodes,
+  editedCodes,
   selectedCode,
 }: {
   label: string;
   rows: readonly GlAccount[];
   notedCodes?: ReadonlySet<string>;
+  editedCodes?: ReadonlySet<string>;
   selectedCode?: string;
 }) {
   return (
     <>
       <tr className="bg-secondary/60">
-        <td colSpan={6} className="px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-ember-deep">
+        <td colSpan={7} className="px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-ember-deep">
           {label}
         </td>
       </tr>
       {rows.map((a) => {
         const noted = notedCodes?.has(a.code) ?? false;
+        const edited = editedCodes?.has(a.code) ?? false;
         return (
           <tr
             key={a.id}
@@ -151,7 +160,12 @@ function SectionRows({
           >
             <td className="px-3 py-1.5 tabular-nums text-steel">{a.code}</td>
             <td className="px-3 py-1.5 text-ink">{a.name}</td>
-            <td className="px-3 py-1.5 text-steel">{prettyStatementLine(a.statementLineId)}</td>
+            <td className="px-3 py-1.5 text-steel">
+              {prettyStatementLine(a.statementLineId)}
+              {edited && (
+                <span className="ml-1.5 rounded bg-ember-tint px-1 py-0.5 text-[10px] font-medium text-ember-deep">edited</span>
+              )}
+            </td>
             <td className="px-3 py-1.5">
               {a.classification ? (
                 <span className={cn("rounded px-1.5 py-0.5 text-xs font-medium", CLASS_BADGE[a.classification])}>
@@ -162,6 +176,15 @@ function SectionRows({
               )}
             </td>
             <td className="px-3 py-1.5 text-steel">{a.function ? FUNCTION_LABEL[a.function] : "—"}</td>
+            <td className="px-3 py-1.5">
+              <Link
+                href={`/setup/account-mapping?edit=${a.code}`}
+                title="Edit this mapping"
+                className={cn("text-xs", edited ? "text-ember-deep" : "text-steel/50 hover:text-ember-deep")}
+              >
+                edit
+              </Link>
+            </td>
             <td className="px-3 py-1.5">
               <Link
                 href={`/setup/account-mapping?note=${a.code}`}

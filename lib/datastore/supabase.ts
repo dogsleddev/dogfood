@@ -22,6 +22,7 @@
 import { readFileSync, existsSync } from "node:fs";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { InMemoryDataStore } from "./in-memory";
+import { composeGlAccounts } from "./account-overrides";
 import type {
   FirmProfile,
   AppSettings,
@@ -62,6 +63,7 @@ import type {
   Project,
   StaffMember,
   GlAccount,
+  AccountOverride,
   JournalEntry,
   JournalLine,
   ContractStatus,
@@ -141,6 +143,17 @@ const rowToGlAccount = (r: Row): GlAccount => ({
   id: s(r.code) as GlAccountId, code: s(r.code), name: s(r.name), accountType: s(r.account_type) as AccountType,
   classification: opt(r.classification) as StatementClassification | undefined, function: opt(r.function) as CostFunction | undefined,
   statementLineId: s(r.statement_line) as StatementLineId,
+});
+// account_overrides row → AccountOverride. Plain scalars validated by the DB CHECK constraints, so no
+// fail-loud parsing (unlike the scenario JSONB). undefined (not null) where a field is absent → the
+// compose overlay keeps the base value (§17 per-field delta).
+const rowToAccountOverride = (r: Row): AccountOverride => ({
+  code: s(r.code),
+  statementLineId: opt(r.statement_line) as StatementLineId | undefined,
+  classification: opt(r.classification) as StatementClassification | undefined,
+  function: opt(r.function) as CostFunction | undefined,
+  source: (opt(r.source) ?? "ui") as "ui" | "import",
+  updatedAt: s(r.updated_at),
 });
 const rowToVendorBill = (r: Row): VendorBill => ({
   id: s(r.id) as JournalEntryId, period: mo(r.period), glAccountId: s(r.account_id) as GlAccountId,
@@ -293,7 +306,32 @@ export class SupabaseDataStore extends InMemoryDataStore {
     return [...groups].sort((a, b) => a.order - b.order);
   }
   override async listGlAccounts(): Promise<readonly GlAccount[]> {
-    return this.collection("gl_accounts", rowToGlAccount, "code");
+    // immutable chart (cached) ⊕ overrides (mutable → read fresh, never cached); empty ⇒ base by reference
+    const base = await this.collection("gl_accounts", rowToGlAccount, "code");
+    const overrides = await this.listAccountOverrides();
+    return composeGlAccounts(base, overrides);
+  }
+
+  // ── account-mapping override layer (mutable; never cached, fail-loud) ──
+  override async listAccountOverrides(): Promise<readonly AccountOverride[]> {
+    const { data, error } = await this.client.from("account_overrides").select("*").order("code", { ascending: true });
+    if (error) throw new Error(`SupabaseDataStore: select account_overrides: ${error.message}`);
+    return (data as Row[]).map(rowToAccountOverride);
+  }
+  override async setAccountOverride(code: string, delta: Omit<AccountOverride, "code" | "updatedAt">): Promise<void> {
+    const row = {
+      code,
+      statement_line: delta.statementLineId ?? null,
+      classification: delta.classification ?? null,
+      function: delta.function ?? null,
+      source: delta.source,
+    };
+    const { error } = await this.client.from("account_overrides").upsert(row); // on the code PK
+    if (error) throw new Error(`SupabaseDataStore: upsert account_overrides: ${error.message}`);
+  }
+  override async clearAccountOverride(code: string): Promise<void> {
+    const { error } = await this.client.from("account_overrides").delete().eq("code", code);
+    if (error) throw new Error(`SupabaseDataStore: delete account_overrides: ${error.message}`);
   }
 
   // ── layer 1 · source records (overridden: read from Supabase) ──

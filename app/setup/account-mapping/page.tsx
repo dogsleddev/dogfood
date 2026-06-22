@@ -1,22 +1,35 @@
-import { getAccountMap, listExpenseGroups, listFluxNotes } from "@/lib/queries";
+import { getAccountMap, listExpenseGroups, listFluxNotes, repointTargetsFor, listAccountOverrides } from "@/lib/queries";
+import { CHART_OF_ACCOUNTS } from "@/lib/seed/gl";
 import { PLACEHOLDER_SETTINGS } from "@/lib/target/placeholder";
 import { AccountMappingTable } from "@/components/setup/account-mapping-table";
 import { AccountFluxPanel } from "@/components/setup/account-flux-panel";
+import { AccountEditPanel } from "@/components/setup/account-edit-panel";
 import { ExpenseGroupsCards } from "@/components/setup/expense-groups-cards";
 
 export default async function AccountMappingPage({
   searchParams,
 }: {
-  searchParams: Promise<{ note?: string }>;
+  searchParams: Promise<{ note?: string; edit?: string }>;
 }) {
-  const { note: rawNote } = await searchParams;
-  const [accounts, groups] = await Promise.all([getAccountMap(), listExpenseGroups()]);
+  const { note: rawNote, edit: rawEdit } = await searchParams;
+  const [accounts, groups, overrides] = await Promise.all([
+    getAccountMap(),
+    listExpenseGroups(),
+    listAccountOverrides(),
+  ]);
 
   // Flux notes anchor to the last CLOSED month (where flux happens), like the statement panes.
   const period = PLACEHOLDER_SETTINGS.closeThrough;
   const periodNotes = await listFluxNotes({ period });
   const notedCodes = new Set(periodNotes.map((n) => n.accountCode).filter((x): x is string => !!x));
-  const selected = rawNote ? accounts.find((a) => a.code === rawNote) : undefined;
+  const editedCodes = new Set(overrides.map((o) => o.code));
+
+  // The edit panel and the flux note card share the right-hand slot and are mutually exclusive; edit wins.
+  const editAccount = rawEdit ? accounts.find((a) => a.code === rawEdit) : undefined;
+  const baseAccount = editAccount ? CHART_OF_ACCOUNTS.find((a) => a.code === editAccount.code) : undefined;
+  const targets = editAccount ? await repointTargetsFor(editAccount.code) : [];
+  const selectedNote = !editAccount && rawNote ? accounts.find((a) => a.code === rawNote) : undefined;
+  const asideOpen = !!(editAccount && baseAccount) || !!selectedNote;
 
   return (
     <div className="mx-auto max-w-6xl px-8 py-8">
@@ -32,14 +45,22 @@ export default async function AccountMappingPage({
           The load-bearing account → statement-line map, read by the statement engine and every
           drill-down. Each GL account maps to one statement line; expense accounts also carry the typed
           classification (CoR / OpEx) and function sub-role that the metrics and scenario levers reason
-          about.
+          about. Re-point a mapping and the statement Actual columns move.
         </p>
       </header>
 
       <section className="mb-10">
-        <div className={selected ? "grid items-start gap-6 lg:grid-cols-[1fr_22rem]" : ""}>
-          <AccountMappingTable accounts={accounts} notedCodes={notedCodes} selectedCode={selected?.code} />
-          {selected && <AccountFluxPanel account={selected} closeHref="/setup/account-mapping" />}
+        <div className={asideOpen ? "grid items-start gap-6 lg:grid-cols-[1fr_22rem]" : ""}>
+          <AccountMappingTable
+            accounts={accounts}
+            notedCodes={notedCodes}
+            editedCodes={editedCodes}
+            selectedCode={editAccount?.code ?? selectedNote?.code}
+          />
+          {editAccount && baseAccount && (
+            <AccountEditPanel account={editAccount} baseAccount={baseAccount} targets={targets} closeHref="/setup/account-mapping" />
+          )}
+          {selectedNote && <AccountFluxPanel account={selectedNote} closeHref="/setup/account-mapping" />}
         </div>
       </section>
 

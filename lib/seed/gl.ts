@@ -134,15 +134,18 @@ export function getLedger(): Ledger {
  * Σ(accounts mapped to a line) === that line's actual, proven exact by `plTie` (and month-by-month,
  * since `activity` is posted from the same monthly leaf series). The `+=` accumulator handles the
  * general N:1 (many accounts → one line) case; today the P&L map is 1:1.
- * NOTE: reads the GENERATOR chart (CHART_OF_ACCOUNTS), not the DataStore — an editable/DB-persisted map
- * would need to read through the DataStore first (a later override-layer slice; the DB map === the
- * generator map today, parity-checked, so this is neutral).
+ * Override-aware: takes the EFFECTIVE chart (`accounts`), defaulting to the generator constant
+ * CHART_OF_ACCOUNTS. The statement builders pass the composed map (DataStore.listGlAccounts()), so a
+ * persisted re-point moves the account's closed activity to a different line. The default keeps every
+ * direct (no-arg) caller — the gates, getLedger checks — byte-identical to the generator.
  */
-export function activityByStatementLine(): Map<string, readonly number[]> {
+export function activityByStatementLine(
+  accounts: readonly GlAccount[] = CHART_OF_ACCOUNTS,
+): Map<string, readonly number[]> {
   const { activity } = getLedger();
   const n = [...activity.values()][0]?.length ?? 0;
   const byLine = new Map<string, number[]>();
-  for (const a of CHART_OF_ACCOUNTS) {
+  for (const a of accounts) {
     const act = activity.get(a.code);
     if (!act) continue;
     const bucket = byLine.get(a.statementLineId) ?? new Array<number>(n).fill(0);
@@ -150,6 +153,67 @@ export function activityByStatementLine(): Map<string, readonly number[]> {
     byLine.set(a.statementLineId, bucket);
   }
   return byLine;
+}
+
+/**
+ * Per-account opening balances, keyed by account code (the same values buildLedger's local `openFor`
+ * literal uses for bsTie). Lazily memoized off the seed singletons. P&L / equity-deficit accounts have
+ * no opening (→ absent → treated as 0). MUST stay in sync with buildLedger's openFor; the data-sweep
+ * neutrality tripwire (balanceSeriesByLine(CHART) === the BS series, per line per month) enforces that.
+ */
+let _openingByCode: Record<string, number> | undefined;
+function openingByCode(): Record<string, number> {
+  if (_openingByCode) return _openingByCode;
+  const bs = getBalanceSheetSeed();
+  const lease = getLeaseSeed();
+  const o = bs.opening;
+  _openingByCode = {
+    "1000": o.cash, "1100": o.accountsReceivable, "1200": o.unbilledWip, "1300": o.prepaidExpenses,
+    "1500": o.fixedAssetsNet, "1600": lease.opening, "2000": o.accountsPayable,
+    "2100": o.deferredRevenue, "2200": lease.opening, "3000": o.paidInCapital,
+  };
+  return _openingByCode;
+}
+
+/**
+ * The cumulative point-in-time BALANCE series per statement line — the Balance-Sheet twin of
+ * activityByStatementLine, override-aware. For each line: opening-by-line + a running Σ of activity.
+ * Re-pointing an account carries BOTH its opening and its cumulative activity to the target line.
+ * A line with NO contributing account is ABSENT from the map (Map.get → undefined, never a 0 entry) —
+ * that absence is what routes the derived equity lines (accumulated_deficit, paid_in_capital) to the
+ * series fallback in the builders. Byte-identical to getBalanceSheetSeed().series per BS line when
+ * `accounts` is the generator chart (bsTie: opening + Σactivity === series, every month).
+ */
+export function balanceSeriesByLine(
+  accounts: readonly GlAccount[] = CHART_OF_ACCOUNTS,
+): Map<string, number[]> {
+  const { activity } = getLedger();
+  const n = [...activity.values()][0]?.length ?? 0;
+  const opening = openingByCode();
+  const byLine = new Map<string, number[]>();
+  for (const a of accounts) {
+    const act = activity.get(a.code);
+    const arr = byLine.get(a.statementLineId) ?? new Array<number>(n).fill(0);
+    let bal = opening[a.code] ?? 0; // P&L / derived-equity accounts open at 0
+    for (let i = 0; i < n; i++) {
+      bal += act?.[i] ?? 0;
+      arr[i] += bal;
+    }
+    byLine.set(a.statementLineId, arr);
+  }
+  return byLine;
+}
+
+/** Point-in-time wrapper: each line's balance AT `asOfIdx` (clamped to ≥ 0). Absent lines → no entry. */
+export function balanceByStatementLine(
+  accounts: readonly GlAccount[] = CHART_OF_ACCOUNTS,
+  asOfIdx = 0,
+): Map<string, number> {
+  const series = balanceSeriesByLine(accounts);
+  const out = new Map<string, number>();
+  const i = Math.max(0, asOfIdx);
+  for (const [line, arr] of series) out.set(line, arr[i] ?? 0);
+  return out;
 }
 
 function buildLedger(): Ledger {

@@ -5,7 +5,8 @@
  * resolve and a SupabaseDataStore round-trip is byte-faithful to the generator), clears the tables in
  * reverse-FK order for idempotency, then inserts in FK-safe order. Money → numeric dollars; periods →
  * 'YYYY-MM' text; dates → real dates. Re-runnable (deterministic). The write tables (flux_notes /
- * scenarios / budget_snapshots) are left empty — that's the CFO's work.
+ * scenarios / budget_snapshots / account_overrides) are left empty/untouched — that's the CFO's work,
+ * and the override layer (§17) must survive a re-seed.
  *
  * Prereq: the schema is applied (supabase/migrations/0001_init.sql) and the 3 keys are in .env.local.
  * Run: npx tsx scripts/seed-supabase.ts
