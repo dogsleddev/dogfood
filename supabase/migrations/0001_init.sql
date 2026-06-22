@@ -143,6 +143,7 @@ create table vendor_bills (
   date      date,
   due_date  date,
   account_id text references gl_accounts(code),
+  sub_code  text,                                 -- GL sub-account display code within the group (folded from 0006)
   group_id  text,
   function  text,
   vendor    text,

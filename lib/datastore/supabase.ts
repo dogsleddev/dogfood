@@ -156,7 +156,7 @@ const rowToAccountOverride = (r: Row): AccountOverride => ({
   updatedAt: s(r.updated_at),
 });
 const rowToVendorBill = (r: Row): VendorBill => ({
-  id: s(r.id) as JournalEntryId, period: mo(r.period), glAccountId: s(r.account_id) as GlAccountId,
+  id: s(r.id) as JournalEntryId, period: mo(r.period), glAccountId: s(r.account_id) as GlAccountId, subCode: opt(r.sub_code),
   groupId: s(r.group_id) as ExpenseGroupId, function: s(r.function) as CostFunction, vendor: opt(r.vendor), memo: opt(r.memo),
   amount: mny(r.amount), docNumber: s(r.doc_number), date: s(r.date), dueDate: s(r.due_date), status: s(r.status) as DocStatus,
 });

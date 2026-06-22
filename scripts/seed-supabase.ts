@@ -137,7 +137,7 @@ async function main() {
   // ── sub-ledger ──
   await insert("vendor_bills", tx.vendorBills.map((b) => ({
     id: b.id, doc_number: b.docNumber, period: b.period, date: b.date, due_date: b.dueDate, status: b.status,
-    account_id: b.glAccountId, group_id: b.groupId, function: b.function, vendor: b.vendor ?? null, amount: $(b.amount), memo: b.memo ?? null,
+    account_id: b.glAccountId, sub_code: b.subCode ?? null, group_id: b.groupId, function: b.function, vendor: b.vendor ?? null, amount: $(b.amount), memo: b.memo ?? null,
   })));
   await insert("paychecks", tx.paychecks.map((p) => ({
     id: p.id, doc_number: p.docNumber, staff_id: p.staffId, period: p.period, period_label: p.periodLabel, date: p.date,
