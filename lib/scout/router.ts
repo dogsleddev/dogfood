@@ -49,6 +49,11 @@ const ROUTES: readonly Route[] = [
   { test: /projects?|\bwip\b|work[- ]in[- ]progress|utiliz|services delivery|billable|engagement/i, tool: "getProjects", input: {} },
   { test: /\bstaff\b|head\s?count|employees?|\bfte\b|how many people|roster|by department|hiring plan/i, tool: "getStaff", input: {} },
   { test: /expense (transaction|detail|bill)|vendor bill|what did we spend|spend(ing)? on|\bap\b detail/i, tool: "getExpenseTransactions", input: {} },
+  // Monthly BS/CF intent — BEFORE the flux "break down" route and the annual BS/CF/P&L routes, so
+  // "break down cash flow month by month" hits the monthly series, not flux-detail. (Both regexes
+  // require a balance-sheet/cash-flow token, so they never grab flux/driver questions.)
+  { test: /(monthly|by month|each month|month-by-month|which month).*(balance ?sheet|\bbs\b)|balance ?sheet.*(monthly|by month|each month|month-by-month)/i, tool: "getMonthlyBalanceSheet", input: {} },
+  { test: /(monthly|by month|each month|month-by-month|which month).*(cash ?flow|burn)|cash ?flow.*(monthly|by month|each month|month-by-month)|monthly burn/i, tool: "getMonthlyCashFlow", input: {} },
   // ── Flux notes · Board · Scenarios · Forecast drivers — BEFORE the generic statement/metric routes ──
   { test: /break ?down|what'?s driving|decompos|variance (detail|breakdown)|drove the/i, tool: "getFluxDetail", input: { statementLine: "sales_marketing" } },
   { test: /\bflux\b|why is .{1,40}(over|under)|is there (a )?note|notes? on |explanation for/i, tool: "getFluxNotes", input: {} },
@@ -86,6 +91,14 @@ function summarize(tool: string, data: any): string {
     case "getMonthlyPnL": {
       const rows = data.months ?? [];
       return `Month-by-month P&L for ${data.fiscalYear} (revenue · net income): ${rows.map((r: any) => `${r.month} ${r.totalRevenue}/${r.netIncome}`).join(", ")}.`;
+    }
+    case "getMonthlyBalanceSheet": {
+      const rows = data.months ?? [];
+      return `Month-by-month Balance Sheet for ${data.fiscalYear} (cash · AR): ${rows.map((r: any) => `${r.month} ${r.cash}/${r.accountsReceivable}`).join(", ")}.`;
+    }
+    case "getMonthlyCashFlow": {
+      const rows = data.months ?? [];
+      return `Month-by-month Cash Flow for ${data.fiscalYear} (operating CF · net change): ${rows.map((r: any) => `${r.month} ${r.operatingCashFlow}/${r.netChangeInCash}`).join(", ")}.`;
     }
     case "getContracts":
       return `${data.summary.total} contracts (${data.summary.active} active, ${data.summary.churned} churned). ${data.bookings.period} net ΔARR ${data.bookings.netDeltaArr}; deferred closing ${data.deferredRevenue.closing}; RPO ${data.contractedRevenue.contractedForward}.`;

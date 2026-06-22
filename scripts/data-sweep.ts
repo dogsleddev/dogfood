@@ -17,7 +17,7 @@ import {
 import { getLedger, CHART_OF_ACCOUNTS } from "@/lib/seed/gl";
 import { getTransactionsSeed } from "@/lib/seed/transactions";
 import type { TieOutCheck } from "@/lib/seed";
-import { buildSeedPnL, buildSeedMonthlyPnL, buildSeedBalanceSheet, buildSeedCashFlow } from "@/lib/seed/statements";
+import { buildSeedPnL, buildSeedMonthlyPnL, buildSeedBalanceSheet, buildSeedMonthlyBalanceSheet, buildSeedCashFlow, buildSeedMonthlyCashFlow } from "@/lib/seed/statements";
 import { buildSeedDashboard, buildSeedMetricValue } from "@/lib/seed/dashboard-metrics";
 import { SEED_DEPARTMENTS, SEED_EXPENSE_GROUPS, PLACEHOLDER_SETTINGS } from "@/lib/target/placeholder";
 import { TIERS } from "@/lib/seed/params";
@@ -180,6 +180,35 @@ const subCount = mpnl.lines.length - leafCount;
 const monthlyTieOk = leafMaxDelta < 0.01 && subMaxDelta < 1.0;
 L(`  Monthly P&L FY26: ${leafCount} leaf lines tie EXACTLY (max Δ $${leafMaxDelta.toFixed(2)}${leafMaxDelta < 0.01 ? "" : ` on ${worstLine}  <- FAIL`}) · ${subCount} subtotals within rounding (max Δ $${subMaxDelta.toFixed(2)})`);
 if (!monthlyTieOk) process.exitCode = 1;
+
+// Monthly Balance Sheet: each line's Total is the FY-END balance (a snapshot), so it must equal the FY
+// Balance Sheet Forecast column EXACTLY (identical computation, an independent month-across path).
+const mbs = buildSeedMonthlyBalanceSheet(month(2026, 6));
+let mbsMaxDelta = 0;
+let mbsWorst = "";
+for (const ml of mbs.lines) {
+  const fyLine = sheet.lines.find((l) => l.id === ml.id);
+  const d = Math.abs(ml.total.minor / 100 - (fyLine?.values.forecast?.minor ?? 0) / 100);
+  if (d > mbsMaxDelta) { mbsMaxDelta = d; mbsWorst = ml.id; }
+}
+const mbsOk = mbsMaxDelta < 0.01;
+L(`  Monthly BS FY26: ${mbs.lines.length} lines tie EXACTLY to the FY-end balance (max Δ $${mbsMaxDelta.toFixed(2)}${mbsOk ? "" : ` on ${mbsWorst}  <- FAIL`})`);
+if (!mbsOk) process.exitCode = 1;
+
+// Monthly Cash Flow: each line's Total is Σ months — flows sum and the working-capital deltas telescope
+// to the FY deltaCash, so every line ties to the FY Cash Flow Forecast column within the sum-of-rounded
+// vs rounded-sum penny (the subtotals carry it, like the monthly P&L).
+const mcf = buildSeedMonthlyCashFlow(month(2026, 6));
+let mcfMaxDelta = 0;
+let mcfWorst = "";
+for (const ml of mcf.lines) {
+  const fyLine = cf.lines.find((l) => l.id === ml.id);
+  const d = Math.abs(ml.total.minor / 100 - (fyLine?.values.forecast?.minor ?? 0) / 100);
+  if (d > mcfMaxDelta) { mcfMaxDelta = d; mcfWorst = ml.id; }
+}
+const mcfOk = mcfMaxDelta < 1.0;
+L(`  Monthly CF FY26: ${mcf.lines.length} lines tie to the FY forecast (max Δ $${mcfMaxDelta.toFixed(2)}${mcfOk ? "" : ` on ${mcfWorst}  <- FAIL`})`);
+if (!mcfOk) process.exitCode = 1;
 
 // Account Mapping totality (P0 #4): the GL chart-of-accounts -> statement-line map must be TOTAL and
 // well-formed — every leaf P&L line and every BS line has exactly ONE backing account, the 6 computed

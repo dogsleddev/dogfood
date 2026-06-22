@@ -35,6 +35,8 @@ import type { Scenario } from "@/lib/types/scenario";
 import type {
   PnL,
   MonthlyPnL,
+  MonthlyBalanceSheet,
+  MonthlyCashFlow,
   BudgetSnapshot,
   BalanceSheet,
   CashFlow,
@@ -155,7 +157,11 @@ export interface DataStore {
   /** Per-period Budget VIEW derived from the plan (distinct from getBudgetSnapshot, the locked store). */
   getBudgetView(period: Month): Promise<BudgetSnapshot>;
   getBalanceSheet(period: Month): Promise<BalanceSheet>;
+  /** Month-across-columns Balance Sheet for the fiscal year of `period` (the board-package view). */
+  getMonthlyBalanceSheet(period: Month): Promise<MonthlyBalanceSheet>;
   getCashFlow(period: Month): Promise<CashFlow>;
+  /** Month-across-columns Cash Flow for the fiscal year of `period` (the board-package view). */
+  getMonthlyCashFlow(period: Month): Promise<MonthlyCashFlow>;
   getRunway(asOf: Month): Promise<Runway>;
   getNonGaapReconciliation(period: Month): Promise<NonGaapReconciliation>;
 

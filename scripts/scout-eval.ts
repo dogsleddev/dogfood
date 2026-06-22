@@ -73,6 +73,10 @@ const CASES: readonly Case[] = [
   // monthly statement questions must hit getMonthlyPnL, NOT 12x getPnL (which returns the FY total every time)
   { q: "What was our biggest revenue month in 2025?", want: "getMonthlyPnL", check: (rs) => has(rs, "getMonthlyPnL") },
   { q: "Which month in 2025 was the most profitable?", want: "getMonthlyPnL", check: (rs) => has(rs, "getMonthlyPnL") },
+  // monthly BS/CF — the "monthly" intent must reach the month-across tool, NOT the annual statement
+  { q: "Show me the balance sheet by month for this fiscal year.", want: "getMonthlyBalanceSheet", check: (rs) => has(rs, "getMonthlyBalanceSheet") },
+  { q: "Break down our cash flow month by month.", want: "getMonthlyCashFlow", check: (rs) => has(rs, "getMonthlyCashFlow") },
+  { q: "How does our cash position trend month to month this year?", want: "getMonthlyBalanceSheet OR getMonthlyCashFlow", check: (rs) => anyOf(rs, "getMonthlyBalanceSheet", "getMonthlyCashFlow") },
   { q: "Pull up contract C-sub-init-0.", want: "getContract", check: (rs) => has(rs, "getContract") },
   // Customers register — sibling of getContracts; "customers" must NOT steal to getContracts (and vice-versa)
   { q: "How many customers do we have?", want: "getCustomers", check: (rs) => has(rs, "getCustomers") },
@@ -150,6 +154,8 @@ const DET_CASES: readonly { q: string; tool: string }[] = [
   { q: "What's our CAC payback period?", tool: "getMetric" },
   { q: "Show me the P&L / net income.", tool: "getPnL" },
   { q: "What was the biggest revenue month in 2025?", tool: "getMonthlyPnL" },
+  { q: "Show me the balance sheet by month.", tool: "getMonthlyBalanceSheet" },
+  { q: "Break down cash flow month by month.", tool: "getMonthlyCashFlow" },
   { q: "What are total assets on the balance sheet?", tool: "getBalanceSheet" },
   { q: "What renewals are coming up?", tool: "getRenewals" },
   { q: "How much open pipeline do we have?", tool: "getPipeline" },

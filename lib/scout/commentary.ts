@@ -29,8 +29,12 @@ export function stepLabel(tool: string, args: Record<string, unknown> = {}): str
       return `Tracking down the ${lineId || "P&L"} line…`;
     case "getBalanceSheet":
       return "Pawing over the balance sheet…";
+    case "getMonthlyBalanceSheet":
+      return "Laying the balance sheet out month by month…";
     case "getCashFlow":
       return "Chasing down the cash flow…";
+    case "getMonthlyCashFlow":
+      return "Sniffing the cash flow month by month…";
     case "getDashboard":
       return "Rounding up the dashboard…";
     case "getContracts":

@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { getPnL, getMonthlyPnL, getMetricSet } from "@/lib/queries";
 import { month } from "@/lib/types/period";
 import type { PnLLineId } from "@/lib/types/statements";
@@ -8,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { PnlTable } from "@/components/statements/pnl-table";
 import { InspectPane } from "@/components/statements/inspect-pane";
 import { MonthlyPnlTable } from "@/components/statements/monthly-pnl-table";
+import { StatementViewToggle } from "@/components/statements/view-toggle";
 
 const PERIOD = month(2026, 6);
 
@@ -22,26 +22,6 @@ const FOOTER_KPIS: readonly MetricId[] = [
   "magic_number",
   "runway",
 ].map((s) => s as MetricId);
-
-function ViewToggle({ monthly }: { monthly: boolean }) {
-  const tab = (href: string, label: string, active: boolean) => (
-    <Link
-      href={href}
-      className={cn(
-        "rounded-md px-3 py-1 text-sm transition-colors",
-        active ? "bg-surface font-medium text-ink shadow-sm" : "text-steel hover:text-ink",
-      )}
-    >
-      {label}
-    </Link>
-  );
-  return (
-    <div className="inline-flex items-center gap-1 rounded-lg border border-parchment-line bg-secondary/40 p-0.5">
-      {tab("/statements/pnl", "FY columns", !monthly)}
-      {tab("/statements/pnl?view=monthly", "Monthly", monthly)}
-    </div>
-  );
-}
 
 export default async function ForecastedPnlPage({
   searchParams,
@@ -60,7 +40,7 @@ export default async function ForecastedPnlPage({
         <div className="flex flex-wrap items-baseline justify-between gap-2">
           <h1 className="font-heading text-3xl text-ink">Forecasted P&amp;L</h1>
           <div className="flex items-center gap-4">
-            <ViewToggle monthly={monthly} />
+            <StatementViewToggle base="/statements/pnl" monthly={monthly} />
             <span className="text-sm text-steel">FY2026 · as of June 2026</span>
           </div>
         </div>

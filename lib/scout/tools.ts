@@ -14,7 +14,9 @@ import {
   getMonthlyPnL,
   getPnLLine,
   getBalanceSheet,
+  getMonthlyBalanceSheet,
   getCashFlow,
+  getMonthlyCashFlow,
   getMetric,
   getDashboardSummary,
   getKpiTile,
@@ -56,7 +58,7 @@ import type { StaffMember, RenewalStatus, PipelineStage } from "@/lib/types/sour
 import type { CostFunction, ScenarioId } from "@/lib/types/common";
 import { formatMetricValue, METRIC_CATALOG, type MetricValue } from "@/lib/types/metrics";
 import type { MetricId } from "@/lib/types/common";
-import type { PnL, PnLLineId, BalanceSheet, CashFlow } from "@/lib/types/statements";
+import type { PnL, PnLLineId, BalanceSheet, BalanceSheetLineId, CashFlow, CashFlowLineId } from "@/lib/types/statements";
 import type { DashboardSummary, KpiTile } from "@/lib/types/dashboard";
 import type { ScoutReceipt } from "./types";
 
@@ -264,12 +266,71 @@ export const SCOUT_TOOL_IMPLS: Record<string, ScoutToolImpl> = {
     },
   },
 
+  getMonthlyBalanceSheet: {
+    inputSchema: {
+      type: "object",
+      properties: { period: { type: "string", description: "Any month (YYYY-MM) in the target fiscal year. Returns that whole FY Balance Sheet broken out by month (month-end balances). Optional; defaults to the current FY." } },
+      additionalProperties: false,
+    },
+    async run(input) {
+      const period = periodOf(input);
+      const mbs = await getMonthlyBalanceSheet(period);
+      const pick = (id: BalanceSheetLineId) => mbs.lines.find((l) => l.id === id);
+      const cash = pick("cash"), ar = pick("accounts_receivable"), def = pick("deferred_revenue");
+      const months = mbs.months.map((col, i) => ({
+        month: col.label,
+        status: col.status,
+        cash: m(cash?.monthly[i]),
+        accountsReceivable: m(ar?.monthly[i]),
+        deferredRevenue: m(def?.monthly[i]),
+      }));
+      return {
+        data: {
+          fiscalYear: mbs.label ?? "FY",
+          note: "Each row is a month-END snapshot (a balance, not a flow); Assets = Liabilities + Equity every month. For the cash trajectory use getMonthlyCashFlow.",
+          months,
+        },
+        receipt: receipt("getMonthlyBalanceSheet", { period }, `Monthly Balance Sheet · ${mbs.label ?? ""}`.trim(), "/statements/balance-sheet?view=monthly"),
+      };
+    },
+  },
+
   getCashFlow: {
     inputSchema: { type: "object", properties: { period: PERIOD_PROP }, additionalProperties: false },
     async run(input) {
       const period = periodOf(input);
       const cf = await getCashFlow(period);
       return { data: shapeStatement(cf), receipt: receipt("getCashFlow", { period }, "Cash Flow Forecast", "/statements/cash-flow") };
+    },
+  },
+
+  getMonthlyCashFlow: {
+    inputSchema: {
+      type: "object",
+      properties: { period: { type: "string", description: "Any month (YYYY-MM) in the target fiscal year. Returns that whole FY Cash Flow broken out by month. Optional; defaults to the current FY." } },
+      additionalProperties: false,
+    },
+    async run(input) {
+      const period = periodOf(input);
+      const mcf = await getMonthlyCashFlow(period);
+      const pick = (id: CashFlowLineId) => mcf.lines.find((l) => l.id === id);
+      const ni = pick("net_income"), ocf = pick("operating_cash_flow"), capex = pick("capex"), nc = pick("net_change_in_cash");
+      const months = mcf.months.map((col, i) => ({
+        month: col.label,
+        status: col.status,
+        netIncome: m(ni?.monthly[i]),
+        operatingCashFlow: m(ocf?.monthly[i]),
+        capex: m(capex?.monthly[i]),
+        netChangeInCash: m(nc?.monthly[i]),
+      }));
+      return {
+        data: {
+          fiscalYear: mcf.label ?? "FY",
+          note: "Each row is one month's cash FLOW (Σ months = the FY total); the net change in cash ties to the Balance Sheet cash movement.",
+          months,
+        },
+        receipt: receipt("getMonthlyCashFlow", { period }, `Monthly Cash Flow · ${mcf.label ?? ""}`.trim(), "/statements/cash-flow?view=monthly"),
+      };
     },
   },
 

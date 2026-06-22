@@ -20,11 +20,17 @@ import type {
   BalanceSheetLine,
   CashFlow,
   CashFlowLine,
+  CashFlowLineId,
   Runway,
   NonGaapReconciliation,
   MonthlyPnL,
   MonthlyColumn,
   MonthlyPnLLine,
+  BalanceSheetLineId,
+  MonthlyBalanceSheet,
+  MonthlyBalanceSheetLine,
+  MonthlyCashFlow,
+  MonthlyCashFlowLine,
 } from "@/lib/types/statements";
 import { PLACEHOLDER_SETTINGS } from "@/lib/target/placeholder";
 import {
@@ -145,6 +151,22 @@ const sumRange = (ser: readonly number[], lo: number, hi: number): number => {
   return s;
 };
 
+/** The month columns of a fiscal year (index + label + actual/in-close/forecast status). Shared by
+ *  every month-across-columns builder so the close boundary is defined once. */
+function monthlyColumns(period: Month): { idxs: number[]; months: MonthlyColumn[] } {
+  const { fyStart, fyEnd } = fyWindow(period);
+  const closeIdx = monthToIndex(PLACEHOLDER_SETTINGS.closeThrough);
+  const inCloseIdx = PLACEHOLDER_SETTINGS.inCloseMonth ? monthToIndex(PLACEHOLDER_SETTINGS.inCloseMonth) : -1;
+  const idxs: number[] = [];
+  for (let i = fyStart; i <= fyEnd; i++) idxs.push(i);
+  const months: MonthlyColumn[] = idxs.map((i) => ({
+    month: indexToMonth(i),
+    label: MONTH_ABBR[i % 12],
+    status: i <= closeIdx ? "actual" : i === inCloseIdx ? "in_close" : "forecast",
+  }));
+  return { idxs, months };
+}
+
 // ── ColumnValues algebra (subtotals foot from leaves; variance = forecast − budget) ──
 const cv = (forecast: number, actual: number, budget: number): ColumnValues => {
   const f = usd(forecast);
@@ -251,12 +273,7 @@ export function buildSeedPnL(period: Month): PnL {
 export function buildSeedMonthlyPnL(period: Month): MonthlyPnL {
   const fyP = buildSeedPnL(period); // canonical lines + metadata + FY margin
   const series = leafSeriesById();
-  const { fyStart, fyEnd } = fyWindow(period);
-  const closeIdx = monthToIndex(PLACEHOLDER_SETTINGS.closeThrough);
-  const inCloseIdx = PLACEHOLDER_SETTINGS.inCloseMonth ? monthToIndex(PLACEHOLDER_SETTINGS.inCloseMonth) : -1;
-
-  const idxs: number[] = [];
-  for (let i = fyStart; i <= fyEnd; i++) idxs.push(i);
+  const { idxs, months } = monthlyColumns(period);
 
   const at = (id: LeafId, i: number): number => series[id]?.[i] ?? 0;
   const sumLeaves = (ids: readonly LeafId[], i: number) => ids.reduce((s, id) => s + at(id, i), 0);
@@ -278,12 +295,6 @@ export function buildSeedMonthlyPnL(period: Month): MonthlyPnL {
       default: return at(id as LeafId, i); // a leaf line
     }
   };
-
-  const months: MonthlyColumn[] = idxs.map((i) => ({
-    month: indexToMonth(i),
-    label: MONTH_ABBR[i % 12],
-    status: i <= closeIdx ? "actual" : i === inCloseIdx ? "in_close" : "forecast",
-  }));
 
   const lines: MonthlyPnLLine[] = fyP.lines.map((l) => {
     const monthly = idxs.map((i) => usd(valueAt(l.id, i)));
@@ -409,6 +420,99 @@ export function buildSeedCashFlow(period: Month): CashFlow {
     line("net_change_in_cash", "Net Change in Cash", netChange, "total", true),
   ];
   return { period, lines };
+}
+
+// ── Monthly (month-across-columns) Balance Sheet — the board-package view ──
+// Reuses buildSeedBalanceSheet for the canonical line order + labels + firstTap + section + sign, and
+// reads each line's month-END balance from the same seed series. A line's `total` is the FY-END value
+// (a snapshot, NOT a sum) so it equals the FY Balance Sheet Forecast column by construction.
+export function buildSeedMonthlyBalanceSheet(period: Month): MonthlyBalanceSheet {
+  const fyBs = buildSeedBalanceSheet(period); // canonical lines (order/labels/firstTap/section)
+  const s = getBalanceSheetSeed().series;
+  const { fyEnd } = fyWindow(period);
+  const { idxs, months } = monthlyColumns(period);
+
+  // accumulated deficit reduces equity → carry it negative, matching the FY statement convention.
+  const serFor = (id: BalanceSheetLineId): { ser: readonly number[]; sign: 1 | -1 } => {
+    switch (id) {
+      case "cash": return { ser: s.cash, sign: 1 };
+      case "accounts_receivable": return { ser: s.accountsReceivable, sign: 1 };
+      case "unbilled_wip": return { ser: s.unbilledWip, sign: 1 };
+      case "prepaid_expenses": return { ser: s.prepaidExpenses, sign: 1 };
+      case "fixed_assets_net": return { ser: s.fixedAssetsNet, sign: 1 };
+      case "rou_asset": return { ser: s.rouAsset, sign: 1 };
+      case "deferred_revenue": return { ser: s.deferredRevenue, sign: 1 };
+      case "accounts_payable": return { ser: s.accountsPayable, sign: 1 };
+      case "lease_liability": return { ser: s.leaseLiability, sign: 1 };
+      case "paid_in_capital": return { ser: s.paidInCapital, sign: 1 };
+      case "accumulated_deficit": return { ser: s.accumulatedDeficit, sign: -1 };
+    }
+  };
+
+  const lines: MonthlyBalanceSheetLine[] = fyBs.lines.map((l) => {
+    const { ser, sign } = serFor(l.id);
+    return {
+      id: l.id,
+      label: l.label,
+      firstTap: l.firstTap,
+      section: l.section,
+      monthly: idxs.map((i) => usd(sign * (ser[i] ?? 0))),
+      total: usd(sign * (ser[fyEnd] ?? 0)),
+    };
+  });
+  return { period, label: SEED_FY_LABEL(period), months, lines };
+}
+
+// ── Monthly (month-across-columns) Cash Flow — the board-package view ──
+// Reuses buildSeedCashFlow for the canonical line order + labels + firstTap + section + isSubtotal, and
+// computes each line's per-MONTH flow. Flow lines (NI/D&A/SBC/capex/financing) are the month's series
+// value; the working-capital lines are the month-over-month balance delta (ser[i] − ser[i−1], with the
+// pre-FY-2024 opening = 0). Σ months telescopes/ sums to the FY deltaCash/flow, so each line's `total`
+// equals the FY Cash Flow Forecast column by construction.
+export function buildSeedMonthlyCashFlow(period: Month): MonthlyCashFlow {
+  const fyCf = buildSeedCashFlow(period); // canonical lines (order/labels/firstTap/section/isSubtotal)
+  const s = getBalanceSheetSeed().series;
+  const sbcSer = getSbcSeed().series.monthly;
+  const { idxs, months } = monthlyColumns(period);
+
+  const at = (ser: readonly number[], i: number): number => ser[i] ?? 0;
+  // balance delta as a cash impact: sign × (this month − last month); month -1 (pre-FY24) opens at 0
+  const delta = (ser: readonly number[], sign: 1 | -1, i: number): number =>
+    sign * (at(ser, i) - (i - 1 >= 0 ? at(ser, i - 1) : 0));
+
+  const comp = (id: CashFlowLineId, i: number): number => {
+    switch (id) {
+      case "net_income": return at(s.netIncome, i);
+      case "depreciation": return at(s.depreciation, i);
+      case "stock_based_comp": return at(sbcSer, i);
+      case "change_ar": return delta(s.accountsReceivable, -1, i);
+      case "change_deferred_revenue": return delta(s.deferredRevenue, 1, i);
+      case "change_unbilled_wip": return delta(s.unbilledWip, -1, i);
+      case "change_prepaids": return delta(s.prepaidExpenses, -1, i);
+      case "change_ap": return delta(s.accountsPayable, 1, i);
+      case "capex": return at(s.investingCashFlow, i); // already negative (−capex)
+      case "financing": return at(s.financingCashFlow, i);
+      case "operating_cash_flow":
+        return (
+          comp("net_income", i) + comp("depreciation", i) + comp("stock_based_comp", i) +
+          comp("change_ar", i) + comp("change_deferred_revenue", i) + comp("change_unbilled_wip", i) +
+          comp("change_prepaids", i) + comp("change_ap", i)
+        );
+      case "net_change_in_cash":
+        return comp("operating_cash_flow", i) + comp("capex", i) + comp("financing", i);
+    }
+  };
+
+  const lines: MonthlyCashFlowLine[] = fyCf.lines.map((l) => ({
+    id: l.id,
+    label: l.label,
+    firstTap: l.firstTap,
+    section: l.section,
+    isSubtotal: l.isSubtotal ?? false,
+    monthly: idxs.map((i) => usd(comp(l.id, i))),
+    total: usd(idxs.reduce((sum, i) => sum + comp(l.id, i), 0)),
+  }));
+  return { period, label: SEED_FY_LABEL(period), months, lines };
 }
 
 export function buildSeedRunway(asOf: Month): Runway {

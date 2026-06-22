@@ -153,6 +153,31 @@ export interface BalanceSheet {
   readonly lines: readonly BalanceSheetLine[];
 }
 
+// ── Monthly (month-across-columns) Balance Sheet — the board-package view ──
+/**
+ * A balance-sheet line spread across the months of a fiscal year (month-END snapshot per column).
+ * Same line set + order as the FY {@link BalanceSheet}; `total` is the FY-end balance (= the FY BS
+ * Forecast column) — a point-in-time value, NOT a sum (the balance sheet is a snapshot, not a flow).
+ */
+export interface MonthlyBalanceSheetLine {
+  readonly id: BalanceSheetLineId;
+  readonly label: string;
+  readonly firstTap: FirstTap;
+  readonly section: "asset" | "liability" | "equity";
+  /** one value per column in {@link MonthlyBalanceSheet.months} — the month-end balance */
+  readonly monthly: readonly Money[];
+  /** fiscal-year-end balance (= the FY Balance Sheet Forecast column) */
+  readonly total: Money;
+}
+
+export interface MonthlyBalanceSheet {
+  readonly period: Month;
+  readonly label?: string;
+  readonly scenarioId?: ScenarioId;
+  readonly months: readonly MonthlyColumn[];
+  readonly lines: readonly MonthlyBalanceSheetLine[];
+}
+
 // ── Cash Flow Forecast (indirect method — drilldowns-statements.svg) ──
 
 export type CashFlowLineId =
@@ -185,6 +210,32 @@ export interface CashFlow {
   readonly period: Month;
   readonly scenarioId?: ScenarioId;
   readonly lines: readonly CashFlowLine[];
+}
+
+// ── Monthly (month-across-columns) Cash Flow — the board-package view ──
+/**
+ * A cash-flow line spread across the months of a fiscal year (the month's FLOW per column). Same line
+ * set + order as the FY {@link CashFlow} (including the operating-CF and net-change subtotals); `total`
+ * is Σ months = the FY Cash Flow Forecast column (flows sum; the working-capital deltas telescope).
+ */
+export interface MonthlyCashFlowLine {
+  readonly id: CashFlowLineId;
+  readonly label: string;
+  readonly firstTap: FirstTap;
+  readonly section: CashFlowSection;
+  readonly isSubtotal: boolean;
+  /** one value per column in {@link MonthlyCashFlow.months} — that month's flow */
+  readonly monthly: readonly Money[];
+  /** fiscal-year total (= Σ monthly = the FY Cash Flow Forecast column) */
+  readonly total: Money;
+}
+
+export interface MonthlyCashFlow {
+  readonly period: Month;
+  readonly label?: string;
+  readonly scenarioId?: ScenarioId;
+  readonly months: readonly MonthlyColumn[];
+  readonly lines: readonly MonthlyCashFlowLine[];
 }
 
 export interface Runway {

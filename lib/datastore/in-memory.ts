@@ -32,6 +32,8 @@ import type { Scenario } from "@/lib/types/scenario";
 import type {
   PnL,
   MonthlyPnL,
+  MonthlyBalanceSheet,
+  MonthlyCashFlow,
   BudgetSnapshot,
   BalanceSheet,
   CashFlow,
@@ -61,7 +63,9 @@ import {
   buildSeedMonthlyPnL,
   buildSeedBudget,
   buildSeedBalanceSheet,
+  buildSeedMonthlyBalanceSheet,
   buildSeedCashFlow,
+  buildSeedMonthlyCashFlow,
   buildSeedRunway,
   buildSeedNonGaap,
 } from "@/lib/seed/statements";
@@ -220,8 +224,14 @@ export class InMemoryDataStore implements DataStore {
   async getBalanceSheet(period: Month): Promise<BalanceSheet> {
     return buildSeedBalanceSheet(period);
   }
+  async getMonthlyBalanceSheet(period: Month): Promise<MonthlyBalanceSheet> {
+    return buildSeedMonthlyBalanceSheet(period);
+  }
   async getCashFlow(period: Month): Promise<CashFlow> {
     return buildSeedCashFlow(period);
+  }
+  async getMonthlyCashFlow(period: Month): Promise<MonthlyCashFlow> {
+    return buildSeedMonthlyCashFlow(period);
   }
   async getRunway(asOf: Month): Promise<Runway> {
     return buildSeedRunway(asOf);

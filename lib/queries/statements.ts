@@ -7,7 +7,9 @@ import type {
   MonthlyPnL,
   BudgetSnapshot,
   BalanceSheet,
+  MonthlyBalanceSheet,
   CashFlow,
+  MonthlyCashFlow,
   Runway,
   NonGaapReconciliation,
 } from "@/lib/types/statements";
@@ -62,10 +64,22 @@ export async function getBalanceSheet(period: Month, opts: ScenarioOpt = {}): Pr
   return getDataStore().getBalanceSheet(period);
 }
 
+/** Month-across-columns Balance Sheet for the fiscal year of `period` — the board-package view. */
+export async function getMonthlyBalanceSheet(period: Month, opts: ScenarioOpt = {}): Promise<MonthlyBalanceSheet> {
+  assertBaseScope(opts, "getMonthlyBalanceSheet");
+  return getDataStore().getMonthlyBalanceSheet(period);
+}
+
 // ── Cash Flow Forecast (indirect method) ──
 export async function getCashFlow(period: Month, opts: ScenarioOpt = {}): Promise<CashFlow> {
   assertBaseScope(opts, "getCashFlow");
   return getDataStore().getCashFlow(period);
+}
+
+/** Month-across-columns Cash Flow for the fiscal year of `period` — the board-package view. */
+export async function getMonthlyCashFlow(period: Month, opts: ScenarioOpt = {}): Promise<MonthlyCashFlow> {
+  assertBaseScope(opts, "getMonthlyCashFlow");
+  return getDataStore().getMonthlyCashFlow(period);
 }
 
 export async function getRunway(asOf: Month): Promise<Runway> {
