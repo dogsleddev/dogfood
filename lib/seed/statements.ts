@@ -336,8 +336,14 @@ export function buildSeedMonthlyPnL(period: Month, accounts: readonly GlAccount[
   return { period, label: fyP.label, months, lines };
 }
 
-/** The period whose fiscal year the seed Budget is locked for (the current FY26 plan, §8). */
-export const SEED_BUDGET_PERIOD: Month = PLACEHOLDER_SETTINGS.closeThrough;
+/**
+ * The period whose fiscal year the seed Budget is locked for (the current FY26 plan, §8). A FUNCTION,
+ * not a module-load const, so it tracks the mutable close boundary (the as-of advances within the FY
+ * — the budget snapshot is FY-keyed, so staying inside FY2026 keeps the locked plan valid).
+ */
+export function seedBudgetPeriod(): Month {
+  return PLACEHOLDER_SETTINGS.closeThrough;
+}
 
 /**
  * Overlay a locked Budget snapshot's per-line budget onto a freshly-built P&L, keyed by line id (leaves

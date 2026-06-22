@@ -26,12 +26,14 @@ import { composeGlAccounts } from "./account-overrides";
 import type {
   FirmProfile,
   AppSettings,
+  SettingsPatch,
   ExpenseTransactionFilter,
   TimesheetFilter,
   PaycheckFilter,
   CustomerInvoiceFilter,
   CashReceiptFilter,
 } from "./datastore";
+import { setCloseBoundary } from "@/lib/target/placeholder";
 import type { Month, PeriodRange } from "@/lib/types/period";
 import { usd, percent, type Money, type Percent } from "@/lib/types/money";
 import type {
@@ -287,13 +289,41 @@ export class SupabaseDataStore extends InMemoryDataStore {
     const { data, error } = await this.client.from("settings").select("*").eq("id", 1).single();
     if (error) throw new Error(`SupabaseDataStore: select settings: ${error.message}`);
     const r = (data ?? {}) as Row;
-    return {
+    const settings: AppSettings = {
       currency: s(r.currency) as AppSettings["currency"],
       fiscalYearStartMonth: num(r.fiscal_year_start_month),
       closeThrough: mo(r.close_through),
       inCloseMonth: optMo(r.in_close_month),
       forecastHorizon: { start: mo(r.forecast_horizon_start), end: mo(r.forecast_horizon_end) },
     };
+    // READ-REPAIR: the sync seed builders read the close boundary through the placeholder mutable (not
+    // this result), so re-point it to the persisted as-of. Correct under the prototype's single
+    // long-lived process; a multi-lambda deployment would thread the boundary as a builder parameter.
+    setCloseBoundary({
+      closeThrough: settings.closeThrough,
+      inCloseMonth: settings.inCloseMonth,
+      forecastHorizon: settings.forecastHorizon,
+    });
+    return settings;
+  }
+  override async updateSettings(patch: SettingsPatch): Promise<void> {
+    const cur = await this.getSettings(); // current persisted boundary (also read-repairs)
+    const next = {
+      closeThrough: patch.closeThrough ?? cur.closeThrough,
+      inCloseMonth: "inCloseMonth" in patch ? patch.inCloseMonth : cur.inCloseMonth,
+      forecastHorizon: patch.forecastHorizon ?? cur.forecastHorizon,
+    };
+    const { error } = await this.client
+      .from("settings")
+      .update({
+        close_through: next.closeThrough,
+        in_close_month: next.inCloseMonth ?? null,
+        forecast_horizon_start: next.forecastHorizon.start,
+        forecast_horizon_end: next.forecastHorizon.end,
+      })
+      .eq("id", 1);
+    if (error) throw new Error(`SupabaseDataStore: update settings: ${error.message}`);
+    setCloseBoundary(next);
   }
   override async listDepartments(): Promise<readonly Department[]> {
     return this.collection<Department>("departments", (r) => ({ id: s(r.id) as DepartmentId, name: s(r.name), function: s(r.function) as CostFunction }));

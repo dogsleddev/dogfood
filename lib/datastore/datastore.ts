@@ -78,6 +78,13 @@ export interface AppSettings {
   readonly forecastHorizon: PeriodRange;
 }
 
+/** A partial update to the global as-of / close boundary (omitted fields keep their current value). */
+export interface SettingsPatch {
+  readonly closeThrough?: Month;
+  readonly inCloseMonth?: Month;
+  readonly forecastHorizon?: PeriodRange;
+}
+
 export interface ExpenseTransactionFilter {
   readonly period?: Month;
   readonly groupId?: ExpenseGroupId;
@@ -110,6 +117,15 @@ export interface DataStore {
   // ── config / account mapping ──
   getFirm(): Promise<FirmProfile>;
   getSettings(): Promise<AppSettings>;
+  /** Move the global as-of / close boundary (the CFO's write surface for the actual/forecast split, §16). */
+  updateSettings(patch: SettingsPatch): Promise<void>;
+  /**
+   * Close the current in-close month: advance the as-of to `period` so it flips In-close → Actual and
+   * the next month becomes In-close. The CSV importer's commit step (a clean new-month TB). Rejects a
+   * restatement (period <= closeThrough), a cross-fiscal-year move (it would change the Budget FY), and
+   * any advance past the seed horizon (Dec 2026).
+   */
+  advanceClose(period: Month): Promise<void>;
   listDepartments(): Promise<readonly Department[]>;
   listExpenseGroups(): Promise<readonly ExpenseGroup[]>;
   /** The EFFECTIVE Account Mapping: the immutable chart composed with the override layer (§17). */

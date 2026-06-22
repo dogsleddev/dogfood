@@ -9,6 +9,7 @@ import type {
   DataStore,
   FirmProfile,
   AppSettings,
+  SettingsPatch,
   ExpenseTransactionFilter,
   TimesheetFilter,
   PaycheckFilter,
@@ -16,7 +17,7 @@ import type {
   CashReceiptFilter,
 } from "./datastore";
 import type { Month, PeriodRange } from "@/lib/types/period";
-import { monthYear } from "@/lib/types/period";
+import { monthYear, monthToIndex, indexToMonth, month } from "@/lib/types/period";
 import type { Department, ExpenseGroup, ScenarioId, MetricId } from "@/lib/types/common";
 import type {
   Contract,
@@ -55,6 +56,8 @@ import {
   PLACEHOLDER_SETTINGS,
   SEED_DEPARTMENTS,
   SEED_EXPENSE_GROUPS,
+  getCloseBoundary,
+  setCloseBoundary,
 } from "@/lib/target/placeholder";
 import { getSubscriptionSeed, getServicesSeed, getPersonnelSeed, getBalanceSheetSeed, getPipelineSeed, getRenewalsSeed, getCostOfRevenueSeed, getOpExSeed } from "@/lib/seed";
 import type { PersonnelSeed } from "@/lib/seed/personnel";
@@ -65,7 +68,7 @@ import {
   buildSeedMonthlyPnL,
   buildSeedBudget,
   applyBudgetSnapshot,
-  SEED_BUDGET_PERIOD,
+  seedBudgetPeriod,
   buildSeedBalanceSheet,
   buildSeedMonthlyBalanceSheet,
   buildSeedCashFlow,
@@ -93,6 +96,42 @@ export class InMemoryDataStore implements DataStore {
   }
   async getSettings(): Promise<AppSettings> {
     return PLACEHOLDER_SETTINGS;
+  }
+  /**
+   * Move the global as-of. In memory the boundary IS the placeholder mutable, so this just re-points it
+   * (no separate copy). SupabaseDataStore overrides this to also persist the settings row.
+   */
+  async updateSettings(patch: SettingsPatch): Promise<void> {
+    const cur = getCloseBoundary();
+    setCloseBoundary({
+      closeThrough: patch.closeThrough ?? cur.closeThrough,
+      inCloseMonth: "inCloseMonth" in patch ? patch.inCloseMonth : cur.inCloseMonth,
+      forecastHorizon: patch.forecastHorizon ?? cur.forecastHorizon,
+    });
+  }
+  /** Close the current in-close month (advance the as-of). Shared by both stores; rejects bad moves. §16. */
+  async advanceClose(period: Month): Promise<void> {
+    const cur = await this.getSettings(); // store-agnostic + read-repairs the mutable on Supabase
+    const idx = monthToIndex(period);
+    const curIdx = monthToIndex(cur.closeThrough);
+    const lastGen = monthToIndex(month(2026, 12)); // the seed has GL activity only through Dec 2026
+    if (idx <= curIdx) {
+      throw new Error(`${period} is not after the current close ${cur.closeThrough} — a restatement re-imports a closed month and does NOT advance the as-of.`);
+    }
+    if (cur.inCloseMonth && period !== cur.inCloseMonth) {
+      throw new Error(`Close the in-close month (${cur.inCloseMonth}) next, not ${period}.`);
+    }
+    if (idx >= lastGen) {
+      throw new Error(`Cannot advance the as-of to ${period}: the seed has no data beyond ${indexToMonth(lastGen)}.`);
+    }
+    if (monthYear(period) !== monthYear(cur.closeThrough)) {
+      throw new Error(`Cross-fiscal-year advance to ${period} is not supported — it would change the Budget baseline FY.`);
+    }
+    await this.updateSettings({
+      closeThrough: period,
+      inCloseMonth: indexToMonth(idx + 1), // the next month becomes In-close
+      forecastHorizon: { start: indexToMonth(idx + 2), end: cur.forecastHorizon.end },
+    });
   }
   async listDepartments(): Promise<readonly Department[]> {
     return SEED_DEPARTMENTS;
@@ -229,7 +268,7 @@ export class InMemoryDataStore implements DataStore {
 
   // ── budget snapshot (§8: the seed starts with the FY26 Plan locked; lock/reset re-freeze it) ──
   async getBudgetSnapshot(): Promise<BudgetSnapshot | undefined> {
-    if (!this.budget) this.budget = buildSeedBudget(SEED_BUDGET_PERIOD); // initial FY-Plan lock
+    if (!this.budget) this.budget = buildSeedBudget(seedBudgetPeriod()); // initial FY-Plan lock
     return this.budget;
   }
   async saveBudgetSnapshot(snapshot: BudgetSnapshot): Promise<void> {
@@ -237,7 +276,7 @@ export class InMemoryDataStore implements DataStore {
   }
   async lockBudget(opts?: { asOf?: Month; sourcedFrom?: "base" | "scenario" }): Promise<BudgetSnapshot> {
     const snapshot: BudgetSnapshot = {
-      ...buildSeedBudget(opts?.asOf ?? SEED_BUDGET_PERIOD),
+      ...buildSeedBudget(opts?.asOf ?? seedBudgetPeriod()),
       sourcedFrom: opts?.sourcedFrom ?? "base",
     };
     await this.saveBudgetSnapshot(snapshot);

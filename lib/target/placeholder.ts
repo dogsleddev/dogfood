@@ -5,6 +5,7 @@
  * `PLACEHOLDER_TARGET` financials stub is retired along with `lib/target/model.ts`.
  */
 import { month } from "@/lib/types/period";
+import type { Month, PeriodRange } from "@/lib/types/period";
 import type { AppSettings, FirmProfile } from "@/lib/datastore/datastore";
 import type { Department, ExpenseGroup, DepartmentId, ExpenseGroupId } from "@/lib/types/common";
 
@@ -22,16 +23,52 @@ export const PLACEHOLDER_FIRM: FirmProfile = {
 export const PLACEHOLDER_PERIOD_LABEL = "FY26 · Jun";
 
 /**
- * Period config. Boundary follows §11 (calendar FY; through May 2026 closed, June 2026
- * in close, Jul–Dec 2026 forecast). ⚠️ The PRECISE close state is a pending seed
- * parameter (§17) — confirm before generating the seed.
+ * The global "as of" / close boundary (CLAUDE.md §16) — the ONE app-wide actual/forecast split.
+ * It is a MUTABLE runtime value, not a frozen literal, so the CSV importer can advance it when a new
+ * month closes (Setup → Data Import). The seed builders and queries read it through
+ * `PLACEHOLDER_SETTINGS.closeThrough` (a getter) at CALL TIME, so every site tracks this single
+ * source — there is no second copy to drift. The DataStore is the only writer (advanceClose /
+ * updateSettings → setCloseBoundary), and on the Supabase backend it read-repairs this from the
+ * persisted `settings` row on each getSettings(). This is correct under the prototype's single
+ * long-lived server process; a multi-lambda deployment would instead thread the boundary as a
+ * builder parameter (the documented scaling boundary). Defaults follow §11 (through May 2026 closed,
+ * June 2026 in close, Jul–Dec 2026 forecast); a full re-seed resets it to these.
  */
-export const PLACEHOLDER_SETTINGS: AppSettings = {
-  currency: "USD",
-  fiscalYearStartMonth: 1,
+interface CloseBoundary {
+  readonly closeThrough: Month;
+  readonly inCloseMonth?: Month;
+  readonly forecastHorizon: PeriodRange;
+}
+
+let _closeBoundary: CloseBoundary = {
   closeThrough: month(2026, 5),
   inCloseMonth: month(2026, 6),
   forecastHorizon: { start: month(2026, 7), end: month(2026, 12) },
+};
+
+/** Read the current global close boundary (the as-of). The single source every reader tracks. */
+export function getCloseBoundary(): CloseBoundary {
+  return _closeBoundary;
+}
+
+/** Move the global close boundary. ONLY the DataStore calls this (advanceClose / updateSettings / read-repair). */
+export function setCloseBoundary(next: CloseBoundary): void {
+  _closeBoundary = next;
+}
+
+export const PLACEHOLDER_SETTINGS: AppSettings = {
+  currency: "USD",
+  fiscalYearStartMonth: 1,
+  // Getters so every `PLACEHOLDER_SETTINGS.closeThrough` read tracks the mutable boundary above.
+  get closeThrough() {
+    return _closeBoundary.closeThrough;
+  },
+  get inCloseMonth() {
+    return _closeBoundary.inCloseMonth;
+  },
+  get forecastHorizon() {
+    return _closeBoundary.forecastHorizon;
+  },
 };
 
 // ── LOCKED seed departments + function tags (CLAUDE.md §8; editable in Settings) ──
