@@ -4,6 +4,13 @@ import { percent, ratio } from "@/lib/types/money";
 import type { MetricId } from "@/lib/types/common";
 import type { ScenarioBaseline } from "@/lib/types/scenario";
 import type { ScenarioListItem, ScenarioDashboardResult } from "@/lib/queries";
+import Link from "next/link";
+import {
+  createScenarioAction,
+  duplicateScenarioAction,
+  deleteScenarioAction,
+  resetScenarioAction,
+} from "@/app/scenarios/manager/actions";
 
 /** The headline KPIs each scenario row reports a delta on (vs Base). */
 const HEADLINE_METRICS: readonly { id: MetricId; label: string }[] = [
@@ -95,9 +102,10 @@ function HeadlineDeltas({
 }
 
 /**
- * The Scenario Manager list (CLAUDE.md §9): Base + the three seed presets, each as a card with its
- * baseline, adjustment count, and a few headline KPI deltas vs Base. Read-only — authoring (create /
- * duplicate / reset) lands with the persistence layer; this phase renders the contained model only.
+ * The Scenario Manager list (CLAUDE.md §9): Base + presets + any user scenarios, each as a card with
+ * its baseline, adjustment count, and a few headline KPI deltas vs Base. Authoring is live — create a
+ * new scenario, duplicate any row (presets included), or reset/delete your own — all via Server Actions
+ * (no client JS). Base + presets are immutable; only user scenarios persist (lib/scenario/registry).
  */
 export function ScenarioList({
   scenarios,
@@ -111,6 +119,21 @@ export function ScenarioList({
 
   return (
     <div className="space-y-4">
+      <form action={createScenarioAction} className="flex flex-wrap items-end gap-3 rounded-xl border border-parchment-line bg-surface p-4">
+        <div className="flex min-w-[16rem] flex-1 flex-col gap-1">
+          <label htmlFor="new-scenario-name" className="text-xs uppercase tracking-wider text-steel/70">New scenario</label>
+          <input id="new-scenario-name" name="name" required placeholder="e.g. Aggressive hiring" className="rounded-md border border-parchment-line bg-white px-3 py-1.5 text-sm text-ink focus:border-ember focus:outline-none" />
+        </div>
+        <div className="flex flex-col gap-1">
+          <label htmlFor="new-scenario-baseline" className="text-xs uppercase tracking-wider text-steel/70">Compare to</label>
+          <select id="new-scenario-baseline" name="baseline" defaultValue="base" className="rounded-md border border-parchment-line bg-white px-3 py-1.5 text-sm text-ink focus:border-ember focus:outline-none">
+            <option value="base">Base</option>
+            <option value="budget">Budget</option>
+          </select>
+        </div>
+        <button type="submit" className="rounded-md bg-ember px-3.5 py-1.5 text-sm font-medium text-white hover:bg-ember-deep">Create</button>
+      </form>
+
       {base && (
         <div className="rounded-xl border border-parchment-line bg-surface p-5">
           <div className="flex flex-wrap items-center justify-between gap-2">
@@ -148,6 +171,38 @@ export function ScenarioList({
             </span>
           </div>
           <HeadlineDeltas scenarioId={scenario.id} columns={dashboard.columns} />
+          <div className="mt-4 flex flex-wrap items-center gap-2 border-t border-parchment-line/60 pt-3">
+            <Link
+              href={`/scenarios/drivers?scenario=${scenario.id}`}
+              className="rounded-md border border-parchment-line px-2.5 py-1 text-xs font-medium text-steel hover:bg-secondary"
+            >
+              {scenario.isPreset ? "View levers" : "Edit levers"}
+            </Link>
+            <form action={duplicateScenarioAction}>
+              <input type="hidden" name="sourceId" value={scenario.id} />
+              <button type="submit" className="rounded-md border border-parchment-line px-2.5 py-1 text-xs font-medium text-steel hover:bg-secondary">
+                Duplicate
+              </button>
+            </form>
+            {!scenario.isPreset ? (
+              <>
+                <form action={resetScenarioAction}>
+                  <input type="hidden" name="id" value={scenario.id} />
+                  <button type="submit" className="rounded-md border border-parchment-line px-2.5 py-1 text-xs font-medium text-steel hover:bg-secondary">
+                    Reset
+                  </button>
+                </form>
+                <form action={deleteScenarioAction}>
+                  <input type="hidden" name="id" value={scenario.id} />
+                  <button type="submit" className="rounded-md border border-parchment-line px-2.5 py-1 text-xs font-medium text-ember-deep hover:bg-secondary">
+                    Delete
+                  </button>
+                </form>
+              </>
+            ) : (
+              <span className="text-xs text-steel/70">Preset · duplicate to edit</span>
+            )}
+          </div>
         </div>
       ))}
     </div>

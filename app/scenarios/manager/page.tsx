@@ -30,8 +30,9 @@ export default async function ScenarioManagerPage() {
       <ScenarioList scenarios={scenarios} dashboard={dashboard} />
 
       <p className="mt-5 text-xs text-steel">
-        Read-only view. Creating, duplicating, and resetting scenarios lands with the persistence layer; the
-        presets here are editable starting points in the contained model.
+        Create a scenario above, or duplicate any row (presets included) to start from a known shape; reset or
+        delete your own from each card. Base and the presets are immutable starting points — only your scenarios
+        persist. Edit the levers on Scenario Drivers.
       </p>
     </div>
   );

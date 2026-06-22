@@ -12,9 +12,9 @@ import { AdjustmentBoard } from "@/components/scenarios/adjustment-board";
 export default async function ScenarioDriversPage({
   searchParams,
 }: {
-  searchParams: Promise<{ scenario?: string }>;
+  searchParams: Promise<{ scenario?: string; error?: string }>;
 }) {
-  const { scenario: rawId } = await searchParams;
+  const { scenario: rawId, error } = await searchParams;
   const scenarios = await listScenarios();
 
   // Default to the first non-Base scenario (a preset) so the board has levers to show.
@@ -22,6 +22,8 @@ export default async function ScenarioDriversPage({
   const requested = rawId ? scenarios.find((s) => s.id === rawId) : undefined;
   const selectedItem = requested ?? fallback;
   const selectedId = selectedItem?.id ?? ("base" as ScenarioId);
+  // Base + presets are immutable (duplicate a preset to author) → the board renders read-only for them.
+  const readOnly = (selectedItem?.isBase || selectedItem?.isPreset) ?? false;
 
   const selected = selectedItem ? await getScenario(selectedId) : undefined;
 
@@ -40,11 +42,21 @@ export default async function ScenarioDriversPage({
         </div>
         <p className="mt-2 max-w-3xl text-sm text-steel">
           The adjustment board. Each scenario stacks a few levers from the closed typed set, each with
-          a magnitude, a monthly window, and a Step or Ramp shape. Scenarios branch only the forecast
-          months. The deterministic engine re-derives the Scenario P&L and Scenario Dashboard from
-          these; this surface reads them and never leaves the group.
+          a magnitude, a monthly window, and a Step or Ramp shape. Build and edit levers here for your
+          own scenarios (presets are read-only — duplicate one to edit). Scenarios branch only the
+          forecast months; the deterministic engine re-derives the Scenario P&L and Scenario Dashboard
+          from these, and the group stays contained.
         </p>
       </header>
+
+      {error ? (
+        <div className="mb-6 flex items-center justify-between gap-3 rounded-lg border border-ember/40 bg-ember/10 px-4 py-3 text-sm text-ember-deep">
+          <span>Could not save the adjustment: {error}</span>
+          <a href={`/scenarios/drivers?scenario=${selectedId}`} className="shrink-0 text-xs font-medium underline">
+            Dismiss
+          </a>
+        </div>
+      ) : null}
 
       <div className="mb-6">
         <ScenarioPicker scenarios={scenarios} selectedId={selectedId} />
@@ -74,7 +86,7 @@ export default async function ScenarioDriversPage({
             ) : null}
           </div>
 
-          <AdjustmentBoard adjustments={selected.adjustments} />
+          <AdjustmentBoard adjustments={selected.adjustments} scenarioId={selectedId} readOnly={readOnly} />
         </>
       ) : (
         <div className="rounded-xl border border-parchment-line bg-surface p-8 text-center text-sm text-steel">
