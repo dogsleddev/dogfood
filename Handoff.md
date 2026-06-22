@@ -9,6 +9,13 @@
 
 ---
 
+> **📁 Repo moved 2026-06-21 — now at `C:\dev\dogfood` (off OneDrive).** Done to fix the dev-server
+> flakiness (crashes / wedged renderer / dropped streams under OneDrive+Turbopack). Git-initialized
+> here (`main` branch, first commit); `.env.local` is gitignored and carries the Supabase + Anthropic
+> keys. The old `...\OneDrive\02_Projects\dogfood` copy is the stale original — delete once confident.
+> Verified at the new location: tsc 0 · lint 0 · data-sweep 43/43 · `next build` exit 0. **Not yet
+> pushed to GitHub** (awaiting go-ahead). Auto-memory was migrated to the `C--dev-dogfood` namespace.
+
 ## ▶ NEXT SESSION — START HERE
 
 ### State (2026-06-21, latest · the last 2 Flux surfaces built — Flux Analysis COMPLETE across all 3 grains + every reading/config surface) — GREEN  ·  _authoritative; the blocks below are prior context_
