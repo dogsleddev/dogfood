@@ -130,7 +130,7 @@ export interface DataStore {
   listCustomerInvoices(filter?: CustomerInvoiceFilter): Promise<readonly CustomerInvoice[]>;
   listCashReceipts(filter?: CashReceiptFilter): Promise<readonly CashReceipt[]>;
 
-  // ── scenarios (the contained deltas — scenario_inputs) ──
+  // ── scenarios (the contained USER scenarios — scenario_inputs; Base + presets are code-defined, see lib/scenario/registry) ──
   listScenarios(): Promise<readonly Scenario[]>;
   getScenario(id: ScenarioId): Promise<Scenario | undefined>;
   upsertScenario(scenario: Scenario): Promise<void>;

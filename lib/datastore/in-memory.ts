@@ -161,7 +161,7 @@ export class InMemoryDataStore implements DataStore {
     return rows;
   }
 
-  // ── scenarios (contained deltas) ──
+  // ── scenarios (USER scenarios only — Base + presets are code-defined; see lib/scenario/registry) ──
   async listScenarios(): Promise<readonly Scenario[]> {
     return [...this.scenarios.values()];
   }

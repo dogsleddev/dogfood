@@ -83,7 +83,7 @@ async function resolveContext(): Promise<{ period: Month; horizon: PeriodRange }
 
 /** Base + the presets + user scenarios, as list rows (Scenario Manager). */
 export async function listScenarios(): Promise<readonly ScenarioListItem[]> {
-  return allScenarios().map((s) => ({
+  return (await allScenarios()).map((s) => ({
     id: s.id,
     name: s.name,
     baseline: s.baseline,
@@ -100,7 +100,7 @@ export async function getScenario(id: ScenarioId): Promise<Scenario | undefined>
 
 /** Validate a scenario's adjustments against the forecast horizon (Scenario Drivers gate). */
 export async function validateScenarioById(id: ScenarioId): Promise<ValidationResult | undefined> {
-  const scenario = findScenario(id);
+  const scenario = await findScenario(id);
   if (!scenario) return undefined;
   const { horizon } = await resolveContext();
   return validateScenario(scenario, horizon);
@@ -118,7 +118,7 @@ export async function getScenarioPnL(
   id: ScenarioId,
   baseline?: ScenarioBaseline,
 ): Promise<ScenarioPnLResult | undefined> {
-  const scenario = findScenario(id);
+  const scenario = await findScenario(id);
   if (!scenario) return undefined;
   const { period, horizon } = await resolveContext();
   const comparedTo = baseline ?? scenario.baseline;
@@ -164,7 +164,7 @@ export async function getScenarioDashboard(ids: readonly ScenarioId[]): Promise<
   const { period, horizon } = await resolveContext();
   const columns: ScenarioDashboardColumn[] = [];
   for (const id of ids) {
-    const scenario = findScenario(id);
+    const scenario = await findScenario(id);
     if (!scenario) continue;
     const dashboard = runScenario({ scenario, period, horizon }).dashboard;
     columns.push({
@@ -179,7 +179,7 @@ export async function getScenarioDashboard(ids: readonly ScenarioId[]): Promise<
 
 /** Convenience: a single scenario's KPI tiles (the engine dashboard for one scenario). */
 export async function getScenarioKpis(id: ScenarioId): Promise<readonly KpiTile[] | undefined> {
-  const scenario = findScenario(id);
+  const scenario = await findScenario(id);
   if (!scenario) return undefined;
   const { period, horizon } = await resolveContext();
   return runScenario({ scenario, period, horizon }).dashboard.families.flatMap((f) => f.tiles);

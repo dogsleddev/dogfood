@@ -8,9 +8,11 @@
  * persistent record layer — every layer-1 record, the config, the GL, and the sub-ledger —
  * i.e. exactly the CFO's importable/mutable data.
  *
- * Therefore this class EXTENDS InMemoryDataStore and OVERRIDES only the record/config reads to
- * hit Supabase; statements, metrics, the raw driver models, scenarios, and the budget snapshot
- * are INHERITED (generator-backed), so they stay identical by construction. The seed loads into
+ * Therefore this class EXTENDS InMemoryDataStore and OVERRIDES only the record/config reads (plus the
+ * flux-note writes) to hit Supabase; statements, metrics, and the raw driver models are INHERITED
+ * (generator-backed), so they stay identical by construction. The scenario + budget-snapshot write
+ * stores are inherited for now (held in the in-memory write layer); persisting them to Supabase is a
+ * later step. The seed loads into
  * Supabase once (scripts/seed-supabase.ts); a round-trip is then byte-faithful to the generator
  * (proven by scripts/supabase-parity.ts), so swapping the store changes storage, not numbers.
  *

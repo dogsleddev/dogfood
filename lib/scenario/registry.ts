@@ -1,37 +1,58 @@
 /**
- * In-memory scenario registry (CLAUDE.md §9 — the contained `scenario_inputs` store, pre-Supabase).
- * Holds Base + the seed presets + any user-created scenarios. Mirrors the DataStore scenario seam
- * (listScenarios / getScenario / upsert / delete) so the Supabase swap is one file later (§4).
+ * Scenario store access (CLAUDE.md §9). The SINGLE source for "which scenarios exist": the
+ * code-defined Base + presets, composed with the USER scenarios held in the DataStore (the contained
+ * `scenario_inputs` store — InMemory now, Supabase later, §4). The read API (lib/queries/scenarios.ts)
+ * and the write actions both go through here, so there is no second in-memory copy to drift out of sync.
  *
- * This module is the single source of truth for "which scenarios exist". The read API
- * (lib/queries/scenarios.ts) reads through it and runs the engine over what it returns.
+ * Base + presets are immutable code constants (§9 — presets are example bundles you duplicate to edit);
+ * ONLY user-created scenarios persist in the store. So the DataStore's scenario methods manage user
+ * scenarios exclusively, and an attempt to write a Base/preset id is rejected loudly.
  */
 import type { Scenario } from "@/lib/types/scenario";
 import type { ScenarioId } from "@/lib/types/common";
-import { PRESET_SCENARIOS, BASE_SCENARIO } from "./presets";
+import { getDataStore } from "@/lib/datastore";
+import { PRESET_SCENARIOS, BASE_SCENARIO, getPresetScenario } from "./presets";
 
-/** Base first, then the presets, then user scenarios (insertion order). */
-const userScenarios = new Map<ScenarioId, Scenario>();
+const BASE_ID = "base" as ScenarioId;
 
-/** Base + presets + user scenarios, in display order. */
-export function allScenarios(): readonly Scenario[] {
-  return [BASE_SCENARIO, ...PRESET_SCENARIOS, ...userScenarios.values()];
+/** True if `id` names an immutable code scenario (Base or a preset) — never a user scenario. */
+function isImmutable(id: ScenarioId): boolean {
+  return id === BASE_ID || getPresetScenario(id) !== undefined;
 }
 
-export function findScenario(id: ScenarioId): Scenario | undefined {
-  return allScenarios().find((s) => s.id === id);
+/** Base + presets (code) + user scenarios (store), in display order. */
+export async function allScenarios(): Promise<readonly Scenario[]> {
+  const userScenarios = await getDataStore().listScenarios();
+  return [BASE_SCENARIO, ...PRESET_SCENARIOS, ...userScenarios];
 }
 
-/** Create / replace a user scenario. Base + presets are immutable here (duplicate them to edit). */
-export function upsertUserScenario(scenario: Scenario): void {
-  userScenarios.set(scenario.id, scenario);
+/** Resolve any scenario id: Base, a preset, or a user scenario from the store. */
+export async function findScenario(id: ScenarioId): Promise<Scenario | undefined> {
+  if (id === BASE_ID) return BASE_SCENARIO;
+  return getPresetScenario(id) ?? (await getDataStore().getScenario(id));
 }
 
-export function deleteUserScenario(id: ScenarioId): void {
-  userScenarios.delete(id);
+/**
+ * Create / replace a USER scenario. Base + presets are immutable (duplicate them to a new id to edit),
+ * so writing one of those ids throws rather than silently shadowing the code constant.
+ */
+export async function upsertUserScenario(scenario: Scenario): Promise<void> {
+  if (isImmutable(scenario.id)) {
+    throw new Error(`Cannot modify the immutable scenario "${scenario.id}" — duplicate it to a new id first.`);
+  }
+  await getDataStore().upsertScenario(scenario);
 }
 
-/** Reset the user store (tests / a fresh session). */
-export function resetUserScenarios(): void {
-  userScenarios.clear();
+export async function deleteUserScenario(id: ScenarioId): Promise<void> {
+  if (isImmutable(id)) {
+    throw new Error(`Cannot delete the immutable scenario "${id}".`);
+  }
+  await getDataStore().deleteScenario(id);
+}
+
+/** Reset the user store (tests / a fresh session): remove every user scenario, leaving Base + presets. */
+export async function resetUserScenarios(): Promise<void> {
+  const store = getDataStore();
+  const userScenarios = await store.listScenarios();
+  await Promise.all(userScenarios.map((s) => store.deleteScenario(s.id)));
 }
