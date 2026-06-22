@@ -162,17 +162,18 @@ function summarize(tool: string, data: any): string {
 }
 /* eslint-enable @typescript-eslint/no-explicit-any */
 
-// What-if MODELING (creating a new hypothetical): Scout can't set drivers yet (the scenario WRITE
-// path isn't wired), so NEVER fabricate one off a read tool — answer gracefully, point at Scenarios.
-// (Reading EXISTING scenarios is fine — that's getScenarios/getScenarioPnL/compareScenarios, so the
-// bare word "scenario" is intentionally NOT here; only new-hypothetical phrasing is.)
+// What-if MODELING (creating a new hypothetical): the scenario engine + Scout's write tools ARE
+// built, but THIS no-key keyword router can't extract a lever/magnitude/window to drive a write —
+// only the live LLM loop can. So here we decline gracefully (never fabricate the math off a read
+// tool) and point at the Scenarios group. (Reading EXISTING scenarios is fine — getScenarios/
+// getScenarioPnL/compareScenarios — so the bare word "scenario" is intentionally NOT here.)
 const WHATIF = /\bwhat\s*if\b|\bif we (cut|raise|drop|lower|increase|reduce|add|hire|freeze|grow|spend)|\bsensitivity\b|\bmodel(ing)?\b a |\bhypothetical/i;
 
 export async function runDeterministicScout(question: string, onStep?: ScoutOnStep): Promise<ScoutResponse> {
   if (WHATIF.test(question)) {
     return {
       reply:
-        "Scenario modeling isn't available yet — the scenario engine isn't built, so I can't model a what-if and I won't improvise the math (a hand-computed hypothetical wouldn't flow through the drivers, statements, and cash). Once it ships, the Scenarios group (Scenario Manager, Drivers, P&L, Dashboard) is where you'll build and compare these.",
+        "Building a new what-if takes the live model — without an API key I can read existing scenarios but can't model a fresh one here, and I won't improvise the math (a hand-computed hypothetical wouldn't flow through the drivers, statements, and cash). Open the Scenarios group (Scenario Manager, then Drivers) to build it: create or duplicate a scenario and add the driver adjustment. With a key set, I can build and read it for you.",
       receipts: [],
       mode: "deterministic",
     };

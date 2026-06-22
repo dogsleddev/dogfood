@@ -79,6 +79,16 @@ export function stepLabel(tool: string, args: Record<string, unknown> = {}): str
       return "Running the scenario…";
     case "compareScenarios":
       return "Comparing scenarios nose to nose…";
+    case "createScenario":
+      return "Digging a fresh scenario…";
+    case "duplicateScenario":
+      return "Cloning the scenario…";
+    case "setDriver":
+      return "Nudging the scenario lever…";
+    case "resetScenario":
+      return "Clearing the scenario's tracks…";
+    case "deleteScenario":
+      return "Burying the scenario…";
     case "getFluxDetail":
       return "Breaking down the variance…";
     case "getFluxNotes":

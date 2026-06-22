@@ -45,10 +45,17 @@ import {
   listScenarios,
   getScenarioPnL,
   getScenarioDashboard,
+  createScenario,
+  duplicateScenario,
+  resetScenario,
+  deleteScenario,
+  setScenarioDriver,
   listFluxNotes,
   addFluxNote,
   getFluxDetail,
 } from "@/lib/queries";
+import type { DriverInput } from "@/lib/queries/scenarios";
+import type { LeverId, AdjustmentShape } from "@/lib/types/scenario";
 import { SCOUT_REGISTRY } from "@/lib/queries/registry";
 import { GUIDES, getGuide } from "@/lib/guides/content";
 import { month, parseMonth, monthLabel, monthYear, monthToIndex, compareMonth, type Month } from "@/lib/types/period";
@@ -870,6 +877,141 @@ export const SCOUT_TOOL_IMPLS: Record<string, ScoutToolImpl> = {
           })),
         },
         receipt: receipt("compareScenarios", {}, "Scenario Dashboard", "/scenarios/dashboard"),
+      };
+    },
+  },
+
+  // ── Scenarios — WRITES (the full contained authoring surface; §9/§17). Never touch Base/actuals;
+  //    Base + presets are immutable (duplicate to edit). Each write is engine-validated and recorded
+  //    on the user's behalf (undoable via resetScenario / deleteScenario). Scout routes a what-if
+  //    THROUGH the engine (create/duplicate → setDriver → getScenarioPnL) — it never hand-computes it.
+  createScenario: {
+    inputSchema: {
+      type: "object",
+      properties: {
+        name: { type: "string", description: "Name for the new scenario, e.g. 'Downside Case'." },
+        baseline: { type: "string", description: "Comparison baseline: 'base' (the working forecast, default) or 'budget' (the locked plan)." },
+      },
+      required: ["name"],
+      additionalProperties: false,
+    },
+    async run(input) {
+      const name = str(input, "name");
+      const baseline = str(input, "baseline") === "budget" ? "budget" : "base";
+      const res = await createScenario(name, baseline);
+      if (!res.ok) return { data: { error: res.error }, receipt: receipt("createScenario", {}, "Scenario Manager", "/scenarios/manager") };
+      return {
+        data: { created: true, scenarioId: res.scenarioId, name: res.scenarioName, baseline, next: "Add driver adjustments with setDriver, then read it with getScenarioPnL.", attribution: "Created on your behalf (via Scout)." },
+        receipt: receipt("createScenario", { scenarioId: res.scenarioId as string }, `Scenario created · ${res.scenarioName}`, `/scenarios/drivers?scenario=${res.scenarioId}`),
+      };
+    },
+  },
+  duplicateScenario: {
+    inputSchema: {
+      type: "object",
+      properties: {
+        sourceId: { type: "string", description: "Id of the scenario to copy (Base, a preset, or a user one — find via getScenarios)." },
+        name: { type: "string", description: "Optional name for the copy (defaults to '<source> (copy)')." },
+      },
+      required: ["sourceId"],
+      additionalProperties: false,
+    },
+    async run(input) {
+      const sourceId = str(input, "sourceId") as ScenarioId;
+      const name = str(input, "name") || undefined;
+      const res = await duplicateScenario(sourceId, name);
+      if (!res.ok) return { data: { error: res.error }, receipt: receipt("duplicateScenario", {}, "Scenario Manager", "/scenarios/manager") };
+      return {
+        data: { duplicated: true, scenarioId: res.scenarioId, name: res.scenarioName, from: sourceId, next: "Edit it with setDriver, then read with getScenarioPnL." },
+        receipt: receipt("duplicateScenario", { scenarioId: res.scenarioId as string }, `Scenario copied · ${res.scenarioName}`, `/scenarios/drivers?scenario=${res.scenarioId}`),
+      };
+    },
+  },
+  setDriver: {
+    inputSchema: {
+      type: "object",
+      properties: {
+        scenarioId: { type: "string", description: "The USER scenario to adjust (find with getScenarios or create first — Base + presets are immutable; duplicate them)." },
+        lever: { type: "string", description: "One of: revenue, personnel, expense, direct_cost, ar_dso. (ap_dpo is gated/off.)" },
+        magnitude: { type: "number", description: "The slider value: a PERCENT for revenue/direct_cost (25 = +25%), a $/MONTH delta for personnel/expense (e.g. 50000 or -50000), or DAYS for ar_dso (e.g. 45). Omit when freeze=true." },
+        start: { type: "string", description: "Window start month YYYY-MM (must sit inside the forecast horizon, Jul–Dec 2026)." },
+        end: { type: "string", description: "Optional window end YYYY-MM (omit to run start-through-horizon)." },
+        shape: { type: "string", description: "'step' (full at start, default) or 'ramp' (phase in across the window)." },
+        stream: { type: "string", description: "revenue only: 'subscription' (default) or 'services'." },
+        departmentId: { type: "string", description: "personnel only (optional): a department id to scope the change." },
+        freeze: { type: "string", description: "personnel only: pass 'true' for a hiring freeze (magnitude is ignored)." },
+        groupId: { type: "string", description: "expense only: the OpEx group id, e.g. sales-marketing, it, travel-entertainment." },
+      },
+      required: ["scenarioId", "lever", "start"],
+      additionalProperties: false,
+    },
+    async run(input) {
+      const scenarioId = str(input, "scenarioId") as ScenarioId;
+      const lever = str(input, "lever") as LeverId;
+      const VALID_LEVERS = new Set(["revenue", "personnel", "expense", "direct_cost", "ar_dso", "ap_dpo"]);
+      if (!VALID_LEVERS.has(lever)) {
+        return {
+          data: { error: `unknown lever "${lever}". Use one of: revenue, personnel, expense, direct_cost, ar_dso.` },
+          receipt: receipt("setDriver", { scenarioId: scenarioId as string }, "Scenario Drivers", `/scenarios/drivers?scenario=${scenarioId}`),
+        };
+      }
+      const rawMag = input.magnitude;
+      const magnitude = typeof rawMag === "number" ? rawMag : Number(str(input, "magnitude")) || 0;
+      const di: DriverInput = {
+        lever,
+        start: str(input, "start"),
+        end: str(input, "end") || undefined,
+        shape: (str(input, "shape") === "ramp" ? "ramp" : "step") as AdjustmentShape,
+        magnitude,
+        stream: (str(input, "stream") || undefined) as DriverInput["stream"],
+        departmentId: str(input, "departmentId") || undefined,
+        freeze: str(input, "freeze") === "true",
+        groupId: str(input, "groupId") || undefined,
+      };
+      const res = await setScenarioDriver(scenarioId, di);
+      if (!res.ok) {
+        return {
+          data: { error: res.error, hint: "revenue/direct_cost take a %, personnel/expense a $/mo delta, ar_dso days. The window must be in Jul–Dec 2026. To edit Base or a preset, duplicate it first." },
+          receipt: receipt("setDriver", { scenarioId: scenarioId as string }, "Scenario Drivers", `/scenarios/drivers?scenario=${scenarioId}`),
+        };
+      }
+      return {
+        data: { set: true, scenario: res.scenarioName, lever, note: "Adjustment added + validated. Read the result with getScenarioPnL (never hand-compute it).", undo: "Remove it on the Scenario Drivers page, or ask me to reset the scenario." },
+        receipt: receipt("setDriver", { scenarioId: res.scenarioId as string }, `Driver set · ${res.scenarioName}`, `/scenarios/drivers?scenario=${res.scenarioId}`),
+      };
+    },
+  },
+  resetScenario: {
+    inputSchema: {
+      type: "object",
+      properties: { scenarioId: { type: "string", description: "The user scenario to clear (removes all its adjustments)." } },
+      required: ["scenarioId"],
+      additionalProperties: false,
+    },
+    async run(input) {
+      const scenarioId = str(input, "scenarioId") as ScenarioId;
+      const res = await resetScenario(scenarioId);
+      if (!res.ok) return { data: { error: res.error }, receipt: receipt("resetScenario", {}, "Scenario Manager", "/scenarios/manager") };
+      return {
+        data: { reset: true, scenario: res.scenarioName, note: "All adjustments cleared — the scenario is back to its baseline." },
+        receipt: receipt("resetScenario", { scenarioId: scenarioId as string }, `Scenario reset · ${res.scenarioName}`, `/scenarios/drivers?scenario=${scenarioId}`),
+      };
+    },
+  },
+  deleteScenario: {
+    inputSchema: {
+      type: "object",
+      properties: { scenarioId: { type: "string", description: "The user scenario to delete (Base + presets cannot be deleted)." } },
+      required: ["scenarioId"],
+      additionalProperties: false,
+    },
+    async run(input) {
+      const scenarioId = str(input, "scenarioId") as ScenarioId;
+      const res = await deleteScenario(scenarioId);
+      if (!res.ok) return { data: { error: res.error }, receipt: receipt("deleteScenario", {}, "Scenario Manager", "/scenarios/manager") };
+      return {
+        data: { deleted: true, scenario: res.scenarioName ?? scenarioId },
+        receipt: receipt("deleteScenario", {}, "Scenario Manager", "/scenarios/manager"),
       };
     },
   },

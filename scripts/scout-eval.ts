@@ -132,9 +132,13 @@ const CASES: readonly Case[] = [
   { q: "Why is Sales & Marketing over budget — is there a note explaining it?", want: "getFluxNotes (read)", check: (rs) => has(rs, "getFluxNotes") && !has(rs, "addFluxNote") },
   { q: "For account 6200, add a note that the overage is the Q3 campaign pull-forward.", want: "addFluxNote (write)", check: (rs) => has(rs, "addFluxNote") },
   { q: "What's driving the Sales & Marketing overage — break down the actuals.", want: "getFluxDetail", check: (rs) => has(rs, "getFluxDetail") },
-  // what-if — the scenario engine isn't built; Scout must NOT fabricate a hypothetical off getPnL/data
-  { q: "What if we cut S&M spend by 20%, what happens to net income?", want: "no DATA-based hypothetical (scenarios not available)", check: (rs) => !has(rs, "getPnL") && !metricsOf(rs).includes("net_income") },
-  { q: "Model a sensitivity where subscription growth drops to 10%.", want: "no fabricated scenario", check: (rs) => !has(rs, "getPnL") && !has(rs, "getMonthlyPnL") },
+  // Scenarios — WRITE surface (create/duplicate/setDriver) + modeling a what-if THROUGH the engine
+  { q: "Create a new scenario called 'Downside Case'.", want: "createScenario", check: (rs) => has(rs, "createScenario") },
+  { q: "Duplicate the 25% Profit scenario so I can tweak a copy.", want: "duplicateScenario", check: (rs) => has(rs, "duplicateScenario") },
+  { q: "In a new scenario, set subscription revenue to -15% starting July 2026, then show me the P&L.", want: "setDriver (built through the engine)", check: (rs) => has(rs, "setDriver") },
+  // a what-if must now route THROUGH the engine (create/duplicate + setDriver + read), NEVER hand-computed off getPnL
+  { q: "What if we freeze hiring from August — model it and tell me the impact on net income.", want: "engine write path, not a hand-computed getPnL", check: (rs) => anyOf(rs, "setDriver", "createScenario", "duplicateScenario") },
+  { q: "Model a sensitivity where subscription growth drops to +10%.", want: "engine write path (create/duplicate + setDriver), not fabricated off getPnL", check: (rs) => anyOf(rs, "setDriver", "createScenario", "duplicateScenario") },
   // product-knowledge — answer from the guides (a guide tool is fine), NEVER a data/number tool
   { q: "What does the Contracts page do?", want: "no data tool (guide-backed)", check: noDataTool },
   { q: "Where in the app do I create a scenario?", want: "no data tool (guide-backed)", check: noDataTool },

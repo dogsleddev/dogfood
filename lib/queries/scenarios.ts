@@ -8,16 +8,26 @@
  * One source, two callers: the engine reuses the same Base leaf series the live P&L is built from,
  * so Scenario(Base) ties to the live surfaces exactly (the hard invariant).
  */
+import { randomUUID } from "node:crypto";
 import type { Month, PeriodRange } from "@/lib/types/period";
-import { monthYear, month } from "@/lib/types/period";
+import { monthYear, month, parseMonth } from "@/lib/types/period";
 import type { Money, Percent } from "@/lib/types/money";
-import { subMoney, zeroMoney } from "@/lib/types/money";
-import type { ScenarioId } from "@/lib/types/common";
-import type { Scenario, ScenarioBaseline, ValidationResult } from "@/lib/types/scenario";
+import { subMoney, zeroMoney, percent } from "@/lib/types/money";
+import type { ScenarioId, Stream, DepartmentId, ExpenseGroupId } from "@/lib/types/common";
+import type {
+  Scenario,
+  ScenarioBaseline,
+  ValidationResult,
+  Adjustment,
+  Magnitude,
+  AdjustmentShape,
+  AdjustmentWindow,
+  LeverId,
+} from "@/lib/types/scenario";
 import type { PnL, PnLLine, PnLLineId } from "@/lib/types/statements";
 import type { DashboardSummary, KpiTile } from "@/lib/types/dashboard";
 import { getDataStore } from "@/lib/datastore";
-import { allScenarios, findScenario } from "@/lib/scenario/registry";
+import { allScenarios, findScenario, upsertUserScenario, deleteUserScenario } from "@/lib/scenario/registry";
 import { runScenario } from "@/lib/scenario/engine";
 import { validateScenario } from "@/lib/scenario/validation";
 import { buildSeedPnL } from "@/lib/seed/statements";
@@ -183,4 +193,154 @@ export async function getScenarioKpis(id: ScenarioId): Promise<readonly KpiTile[
   if (!scenario) return undefined;
   const { period, horizon } = await resolveContext();
   return runScenario({ scenario, period, horizon }).dashboard.families.flatMap((f) => f.tiles);
+}
+
+// ── writes (CLAUDE.md §9/§17) ─────────────────────────────────────────────────────────────
+// The contained scenario WRITE surface: the spine the Scenario Manager/Drivers Server Actions AND
+// Scout's write tools both call (one source, two callers). Every write goes through the registry's
+// immutable-id guard (Base + presets are code constants — duplicate to edit) and validates against
+// the LIVE forecast horizon before persisting. Containment: only USER scenarios in scenario_inputs
+// change; Base/actuals are never touched.
+
+const newScenarioId = (): ScenarioId => randomUUID() as ScenarioId;
+
+/** The outcome of a scenario write — never throws to the caller; surfaces a friendly error instead. */
+export interface ScenarioWriteResult {
+  readonly ok: boolean;
+  readonly scenarioId?: ScenarioId;
+  readonly scenarioName?: string;
+  readonly error?: string;
+  /** present on setScenarioDriver — the engine validation verdict (ok=false carries the first issue). */
+  readonly validation?: ValidationResult;
+}
+
+/** A typed driver input (the Scout/UI-agnostic shape). Magnitude meaning is lever-dependent, §9. */
+export interface DriverInput {
+  readonly lever: LeverId;
+  /** window start, YYYY-MM */
+  readonly start: string;
+  /** optional window end, YYYY-MM (omit to run start-through-horizon) */
+  readonly end?: string;
+  readonly shape?: AdjustmentShape;
+  /** % for rate levers (revenue/direct_cost), $/mo delta for level (personnel/expense), days for absolute (ar_dso/ap_dpo); ignored for a freeze */
+  readonly magnitude?: number;
+  // lever sub-dimensions
+  readonly stream?: Stream; // revenue
+  readonly departmentId?: string; // personnel (optional — omit for all departments)
+  readonly freeze?: boolean; // personnel hiring freeze (categorical)
+  readonly groupId?: string; // expense
+}
+
+/** Create an empty user scenario (baseline defaults to Base). */
+export async function createScenario(name: string, baseline: ScenarioBaseline = "base"): Promise<ScenarioWriteResult> {
+  const nm = name.trim();
+  if (!nm) return { ok: false, error: "a scenario name is required" };
+  const id = newScenarioId();
+  await upsertUserScenario({ id, name: nm, baseline, adjustments: [] });
+  return { ok: true, scenarioId: id, scenarioName: nm };
+}
+
+/** Duplicate any scenario (Base, a preset, or a user one) into a fresh, editable user scenario. */
+export async function duplicateScenario(sourceId: ScenarioId, name?: string): Promise<ScenarioWriteResult> {
+  const src = await findScenario(sourceId);
+  if (!src) return { ok: false, error: `no scenario "${sourceId}" — list ids with getScenarios` };
+  const id = newScenarioId();
+  // Fresh per-adjustment ids — preset adjustment ids ("p25-freeze") are not globally unique.
+  const adjustments: Adjustment[] = src.adjustments.map((a) => ({ ...a, id: randomUUID() }));
+  const nm = name?.trim() || `${src.name} (copy)`;
+  await upsertUserScenario({ id, name: nm, baseline: src.baseline, adjustments });
+  return { ok: true, scenarioId: id, scenarioName: nm };
+}
+
+/** Clear a user scenario's adjustments (reset to its baseline). Rejects Base/presets. */
+export async function resetScenario(id: ScenarioId): Promise<ScenarioWriteResult> {
+  const sc = await findScenario(id);
+  if (!sc) return { ok: false, error: `no scenario "${id}"` };
+  try {
+    await upsertUserScenario({ ...sc, adjustments: [] });
+  } catch (e) {
+    return { ok: false, error: (e as Error).message };
+  }
+  return { ok: true, scenarioId: id, scenarioName: sc.name };
+}
+
+/** Delete a user scenario. Rejects Base/presets. */
+export async function deleteScenario(id: ScenarioId): Promise<ScenarioWriteResult> {
+  const sc = await findScenario(id);
+  try {
+    await deleteUserScenario(id);
+  } catch (e) {
+    return { ok: false, error: (e as Error).message };
+  }
+  return { ok: true, scenarioId: id, scenarioName: sc?.name };
+}
+
+/** The magnitude, DERIVED from the lever (the kind is coupled to the lever — §9 / the Drivers form). */
+function magnitudeFor(lever: LeverId, value: number, freeze?: boolean): Magnitude {
+  switch (lever) {
+    case "expense":
+      return { kind: "level", delta: value };
+    case "ar_dso":
+    case "ap_dpo":
+      return { kind: "absolute", value, unit: "days" };
+    case "personnel":
+      return freeze ? { kind: "categorical", value: "freeze" } : { kind: "level", delta: value };
+    case "revenue":
+    case "direct_cost":
+    default:
+      return { kind: "rate", value: percent(value / 100) }; // 25 → +25%
+  }
+}
+
+/** Build one typed Adjustment from a DriverInput (throws on a malformed month → caught by the caller). */
+function buildAdjustment(input: DriverInput): Adjustment {
+  const id = randomUUID();
+  const shape: AdjustmentShape = input.shape === "ramp" ? "ramp" : "step";
+  const start = parseMonth(input.start.trim());
+  const window: AdjustmentWindow = { start, ...(input.end?.trim() ? { end: parseMonth(input.end.trim()) } : {}) };
+  const magnitude = magnitudeFor(input.lever, input.magnitude ?? 0, input.freeze);
+  const base = { id, magnitude, window, shape };
+  switch (input.lever) {
+    case "personnel":
+      return { ...base, lever: "personnel", ...(input.departmentId ? { departmentId: input.departmentId as DepartmentId } : {}) };
+    case "expense":
+      return { ...base, lever: "expense", groupId: (input.groupId ?? "") as ExpenseGroupId };
+    case "direct_cost":
+      return { ...base, lever: "direct_cost" };
+    case "ar_dso":
+      return { ...base, lever: "ar_dso" };
+    case "ap_dpo":
+      return { ...base, lever: "ap_dpo" };
+    case "revenue":
+    default:
+      return { ...base, lever: "revenue", stream: (input.stream ?? "subscription") as Stream };
+  }
+}
+
+/**
+ * Add one driver adjustment to a user scenario (the engine "set a driver"). Validates the WHOLE
+ * scenario (existing + the new adjustment) against the live horizon before persisting; rejects a
+ * Base/preset id (duplicate first). Returns the validation verdict either way (ok=false → not saved).
+ */
+export async function setScenarioDriver(scenarioId: ScenarioId, input: DriverInput): Promise<ScenarioWriteResult> {
+  const sc = await findScenario(scenarioId);
+  if (!sc) return { ok: false, error: `no scenario "${scenarioId}" — list ids with getScenarios, or create one first` };
+  let adjustment: Adjustment;
+  try {
+    adjustment = buildAdjustment(input);
+  } catch (e) {
+    return { ok: false, error: `could not read the driver: ${(e as Error).message}` };
+  }
+  const next: Scenario = { ...sc, adjustments: [...sc.adjustments, adjustment] };
+  const { horizon } = await resolveContext();
+  const validation = validateScenario(next, horizon);
+  if (!validation.ok) {
+    return { ok: false, scenarioId: sc.id, scenarioName: sc.name, error: validation.issues[0].message, validation };
+  }
+  try {
+    await upsertUserScenario(next); // immutable id (Base/preset) throws → surfaced as an error
+  } catch (e) {
+    return { ok: false, error: (e as Error).message };
+  }
+  return { ok: true, scenarioId: sc.id, scenarioName: sc.name, validation };
 }
