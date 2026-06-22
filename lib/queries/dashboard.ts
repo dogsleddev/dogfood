@@ -3,14 +3,15 @@ import type { Month } from "@/lib/types/period";
 import type { MetricId } from "@/lib/types/common";
 import type { DashboardSummary, KpiTile, BoardPackage } from "@/lib/types/dashboard";
 import { getDataStore } from "@/lib/datastore";
-import { type ScenarioOpt } from "./util";
+import { assertBaseScope, type ScenarioOpt } from "./util";
 
 /**
  * Reads through the DataStore seam (§4). The Financial family is derived from the same seed P&L
  * getPnL reads, so the Dashboard's Revenue tile === the P&L Total Revenue (one source, two callers).
- * scenarioId is ignored here: the Dashboard is always Base + actuals (containment, §9).
+ * A scenarioId is REJECTED here: the Dashboard is always Base + actuals (containment, §9).
  */
-export async function getDashboardSummary(period: Month, _opts: ScenarioOpt = {}): Promise<DashboardSummary> {
+export async function getDashboardSummary(period: Month, opts: ScenarioOpt = {}): Promise<DashboardSummary> {
+  assertBaseScope(opts, "getDashboardSummary");
   return getDataStore().getDashboardSummary(period);
 }
 

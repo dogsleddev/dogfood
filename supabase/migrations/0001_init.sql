@@ -4,7 +4,8 @@
 -- The deterministic generator seeds these tables ONCE (scripts/seed-supabase.ts); after that the
 -- app reads/writes Supabase. Statements stay computed in TS over the stored records + series.
 -- Run: `supabase db push`  (or paste into the Supabase SQL editor).
--- RLS policies land in 0002 once the auth model is decided.
+-- Access model (DECIDED): single-tenant, trusted server-side service-role (which bypasses RLS), with
+-- edge HTTP Basic Auth (middleware.ts) as the real gate. RLS is OPTIONAL here, not a prerequisite.
 
 -- ── config / account mapping ──────────────────────────────────────────────
 create table firm (

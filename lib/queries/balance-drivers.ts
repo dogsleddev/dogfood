@@ -7,14 +7,15 @@ import type {
   PrepaidsForecastLine,
 } from "@/lib/types/drivers";
 import { getDataStore } from "@/lib/datastore";
-import { type ScenarioOpt } from "./util";
+import { assertBaseScope, type ScenarioOpt } from "./util";
 
 /**
  * DSO-driven receivables: one line per month of the period's fiscal year. The balance is the seed's
  * AR series (DSO/365 × trailing billings), so it === the Balance Sheet AR line and the month-over-
  * month delta === the cash-flow change-in-AR — closing the revenue → AR → cash drill.
  */
-export async function getArForecast(period: Month, _opts: ScenarioOpt = {}): Promise<readonly ArForecastLine[]> {
+export async function getArForecast(period: Month, opts: ScenarioOpt = {}): Promise<readonly ArForecastLine[]> {
+  assertBaseScope(opts, "getArForecast");
   const bs = await getDataStore().getBalanceSheetModel();
   const months = bs.series.months;
   const fyStart = (monthYear(period) - 2024) * 12;
@@ -32,7 +33,8 @@ export async function getArForecast(period: Month, _opts: ScenarioOpt = {}): Pro
  * Reads the seed's capex / depreciation / fixed-assets-net series, so netBookValue === the Balance
  * Sheet Fixed Assets line and depreciation === the P&L D&A line (one source, two callers).
  */
-export async function getFixedAssetForecast(period: Month, _opts: ScenarioOpt = {}): Promise<readonly FixedAssetForecastLine[]> {
+export async function getFixedAssetForecast(period: Month, opts: ScenarioOpt = {}): Promise<readonly FixedAssetForecastLine[]> {
+  assertBaseScope(opts, "getFixedAssetForecast");
   const bs = (await getDataStore().getBalanceSheetModel()).series;
   const months = bs.months;
   const fyStart = (monthYear(period) - 2024) * 12;
@@ -57,7 +59,8 @@ export async function getFixedAssetForecast(period: Month, _opts: ScenarioOpt = 
  * the opening balance) and additions, with additions backed out as the plug so the roll ties to the
  * authoritative balance every month (balance = prior + additions − amortization).
  */
-export async function getPrepaidsForecast(period: Month, _opts: ScenarioOpt = {}): Promise<readonly PrepaidsForecastLine[]> {
+export async function getPrepaidsForecast(period: Month, opts: ScenarioOpt = {}): Promise<readonly PrepaidsForecastLine[]> {
+  assertBaseScope(opts, "getPrepaidsForecast");
   const bs = (await getDataStore().getBalanceSheetModel()).series;
   const months = bs.months;
   const fyStart = (monthYear(period) - 2024) * 12;

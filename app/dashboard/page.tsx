@@ -24,8 +24,9 @@ export default async function DashboardPage() {
         </div>
         <p className="mt-2 max-w-2xl text-sm text-steel">
           The live cockpit. Tiles are the Metrics layer surfaced here; each peek tile opens to its
-          working surface, each pure metric decomposes in a pane. Financial-family tiles tie to the
-          P&amp;L by construction (one source, two callers).
+          working surface, while a pure metric shows its tie-out basis (it decomposes into its
+          component lines in the statement peek panes). Financial-family tiles tie to the P&amp;L by
+          construction (one source, two callers).
         </p>
       </header>
 

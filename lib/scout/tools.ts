@@ -154,7 +154,7 @@ export const SCOUT_TOOL_IMPLS: Record<string, ScoutToolImpl> = {
     inputSchema: {
       type: "object",
       properties: {
-        metricId: { type: "string", description: "Metric id, e.g. runway, nrr, magic_number, cac_payback, ltv_cac, rule_of_40, burn_multiple, gross_margin_pct, arr_mrr. ARR, MRR, and 'monthly/annual recurring revenue' all use arr_mrr." },
+        metricId: { type: "string", description: "Metric id, e.g. runway, nrr, magic_number, cac_payback (dollar CAC per new logo), cac_payback_months (months to recover CAC — the payback PERIOD), ltv_cac, rule_of_40, burn_multiple, gross_margin_pct, arr_mrr. ARR, MRR, and 'monthly/annual recurring revenue' all use arr_mrr." },
         period: PERIOD_PROP,
       },
       required: ["metricId"],
@@ -867,7 +867,14 @@ export const SCOUT_TOOL_IMPLS: Record<string, ScoutToolImpl> = {
       try {
         const saved = await addFluxNote({ anchor, body, source: "scout", resolved: str(input, "resolve") === "true" });
         const anchorLabel = saved.transactionId ?? (saved.accountCode ? `account ${saved.accountCode}` : saved.statementLine) ?? "—";
-        const href = saved.transactionId ? `/reporting/expense-transactions?note=${saved.transactionId}` : "/reporting/expense-transactions";
+        // Route the receipt to the surface that actually shows the note, by anchor grain: a
+        // transaction note opens the Expense register; an account note opens Account Mapping (both via
+        // ?note=). A statement-line-only note has no single working surface, so fall back to the register.
+        const href = saved.transactionId
+          ? `/reporting/expense-transactions?note=${saved.transactionId}`
+          : saved.accountCode
+            ? `/setup/account-mapping?note=${saved.accountCode}`
+            : "/reporting/expense-transactions";
         return {
           data: {
             added: true,

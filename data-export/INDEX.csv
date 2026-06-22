@@ -17,4 +17,4 @@ revrec_by_contract.csv,2881,"Subscription 606 recognition, per contract per mont
 revrec_by_project.csv,325,"Services %-complete recognition, per project per month"
 driver_series_monthly.csv,36,All monthly driver + balance-sheet series (master pivot)
 pnl_monthly.csv,828,"Monthly P&L, every line × month, FY24-26"
-dashboard_metrics.csv,19,The 19 dashboard KPI tiles (as of Jun 2026)
+dashboard_metrics.csv,20,The 19 dashboard KPI tiles (as of Jun 2026)

@@ -1,6 +1,6 @@
 /** Sales — the revenue funnel (layer 1 — CLAUDE.md §8). Contracts is the 606/deferred pivot. */
 import { type Month, type PeriodRange, monthYear, monthIndex, monthLabel } from "@/lib/types/period";
-import { usd, percent, type Money, type Percent, type Ratio } from "@/lib/types/money";
+import { usd, percent, ratio, sumMoney, type Money, type Percent, type Ratio } from "@/lib/types/money";
 import type { Stream, MetricId } from "@/lib/types/common";
 import type {
   PipelineOpportunity,
@@ -8,10 +8,10 @@ import type {
   Contract,
   Customer,
   Renewal,
+  RenewalStatus,
 } from "@/lib/types/source";
 import { getDataStore } from "@/lib/datastore";
 import { PLACEHOLDER_SETTINGS } from "@/lib/target/placeholder";
-import { notImplemented } from "./util";
 
 const monthToIndex = (m: Month): number => (monthYear(m) - 2024) * 12 + (monthIndex(m) - 1);
 
@@ -22,6 +22,9 @@ export interface PipelineFilter {
 }
 export interface PipelineCoverage {
   readonly openArr: Money;
+  /** next quarter's PLANNED gross new bookings (new business + expansion) — the coverage target */
+  readonly target: Money;
+  /** openArr ÷ target — the standard "do we have enough pipeline to hit plan" ratio */
   readonly coverage: Ratio;
 }
 export async function listPipeline(filter: PipelineFilter = {}): Promise<readonly PipelineOpportunity[]> {
@@ -30,8 +33,25 @@ export async function listPipeline(filter: PipelineFilter = {}): Promise<readonl
   if (filter.byRep) rows = rows.filter((o) => o.owner === filter.byRep);
   return rows;
 }
+/**
+ * Pipeline coverage — open funnel ARR vs the bookings target it is meant to cover. The target is the
+ * next quarter's PLANNED gross new bookings (new business + expansion) read from the forecast bookings
+ * ledger (the same series whose cumulative net === ARR); closeThrough is the actual/forecast boundary,
+ * so the three months after it are the quarter the open pipeline closes into. Coverage = openArr ÷
+ * target, the standard "do we have enough pipeline to hit plan" ratio.
+ */
 export async function getPipelineCoverage(): Promise<PipelineCoverage> {
-  return notImplemented("getPipelineCoverage");
+  const store = getDataStore();
+  const openArr = sumMoney((await store.listPipeline()).map((o) => o.arr));
+  const sub = await store.getSubscriptionModel();
+  const closeIdx = monthToIndex((await store.getSettings()).closeThrough);
+  let targetMajor = 0;
+  for (let i = closeIdx + 1; i <= closeIdx + 3; i++) {
+    const b = sub.series.bookings[i];
+    if (b) targetMajor += b.newBusiness + b.expansion;
+  }
+  const target = usd(targetMajor);
+  return { openArr, target, coverage: ratio(target.minor > 0 ? openArr.minor / target.minor : 0) };
 }
 
 // ── Contracts (register + Bookings + Schedules/Deferred + contracted-revenue bridge) ──
@@ -197,6 +217,17 @@ export async function getNrr(period: Month): Promise<Percent> {
   const mv = await getDataStore().getMetricValue("nrr" as MetricId, period);
   return mv?.percent ?? percent(1);
 }
-export async function getGrr(period: Month): Promise<Percent> {
-  return notImplemented("getGrr", { period });
+/**
+ * Gross dollar retention on the CLOSED renewal book (the seed's renewal worklist is book-level, so
+ * `_period` is accepted for signature symmetry): face-value ARR kept (renewed + expanded + contracted)
+ * ÷ ARR that came up for renewal. Mirrors the getRenewals Scout tool exactly (one source, two callers)
+ * — same records, same formula — so the UI and Scout never diverge. For the NRR cohort rate use getNrr.
+ */
+export async function getGrr(_period: Month): Promise<Percent> {
+  const CLOSED: readonly RenewalStatus[] = ["renewed", "expanded", "contracted", "churned"];
+  const closed = (await listRenewals()).filter((r) => CLOSED.includes(r.status));
+  const closedArr = sumMoney(closed.map((r) => r.arrUpForRenewal));
+  if (closedArr.minor === 0) return percent(1);
+  const keptArr = sumMoney(closed.filter((r) => r.status !== "churned").map((r) => r.arrUpForRenewal));
+  return percent(keptArr.minor / closedArr.minor);
 }

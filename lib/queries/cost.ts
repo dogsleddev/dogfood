@@ -10,7 +10,7 @@ import { usd, percent } from "@/lib/types/money";
 import { getDataStore } from "@/lib/datastore";
 import { monthlyCompFor } from "@/lib/seed/personnel";
 import { SUBSCRIPTION_HOSTING_RATE, SERVICES_PASSTHROUGH_RATE } from "@/lib/seed/params";
-import { type ScenarioOpt, type StreamOpt } from "./util";
+import { assertBaseScope, type ScenarioOpt, type StreamOpt } from "./util";
 
 /**
  * Cost of Revenue = ASSEMBLED coupled driver (§8): Direct Payroll (from Personnel's Direct-
@@ -24,6 +24,7 @@ import { type ScenarioOpt, type StreamOpt } from "./util";
  * own cost-to-serve rate (the swappable input the "Direct cost" scenario lever perturbs).
  */
 export async function getCostOfRevenue(period: Month, opts: StreamOpt = {}): Promise<readonly CostOfRevenueLine[]> {
+  assertBaseScope(opts, "getCostOfRevenue");
   const cor = (await getDataStore().getCostOfRevenueModel()).series;
   const months = cor.months;
   const fyStart = (monthYear(period) - 2024) * 12;
@@ -80,6 +81,7 @@ export interface PersonnelOpt extends ScenarioOpt {
  * lives in the Employee Expenses OpEx group.
  */
 export async function getPersonnelForecast(period: Month, opts: PersonnelOpt = {}): Promise<readonly PersonnelForecastLine[]> {
+  assertBaseScope(opts, "getPersonnelForecast");
   const store = getDataStore();
   const per = await store.getPersonnelModel();
   const series = per.series;
@@ -139,6 +141,7 @@ export interface ExpenseOpt extends ScenarioOpt {
  * month === the seed total === the P&L's non-payroll OpEx lines (one source, two callers).
  */
 export async function getExpenseForecast(period: Month, opts: ExpenseOpt = {}): Promise<readonly ExpenseForecastLine[]> {
+  assertBaseScope(opts, "getExpenseForecast");
   const opx = (await getDataStore().getOpExModel()).series;
   const months = opx.months;
   const fyStart = (monthYear(period) - 2024) * 12;

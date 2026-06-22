@@ -1,8 +1,8 @@
 /**
  * Seed → the 19 dashboard metrics (step 6). The Financial family is derived from the seed P&L
  * (one source, two callers — it ties to the statement by construction); the SaaS metrics
- * (ARR/MRR, bookings, NRR, logo retention, CAC, LTV:CAC, magic number, utilization, burn,
- * runway, Rule of 40, burn multiple) compute from the real seed series — with a REAL prior-year
+ * (ARR/MRR, bookings, NRR, logo retention, CAC, CAC payback, LTV:CAC, magic number, utilization,
+ * burn, runway, Rule of 40, burn multiple) compute from the real seed series — with a REAL prior-year
  * (the same formula 12 months earlier) and a real trailing sparkline, replacing the model's
  * hand-set PY_RULES constants.
  */
@@ -110,6 +110,10 @@ function computeMetricsAt(idx: number): Record<string, number> {
   const lifetimeYears = Math.min(1 / annualChurn, 5);
   const ltv = avgArr * gmPct * lifetimeYears;
   const ltvCac = cac > 0 ? ltv / cac : 0;
+  // CAC payback PERIOD (months) — the gross-margin-adjusted months to recover one new logo's CAC.
+  // Reuses the same cac / avgArr / gmPct above (one source), so it ties to the dollar CAC + GM% tiles.
+  const monthlyGmPerLogo = (avgArr * gmPct) / 12;
+  const cacPaybackMonths = monthlyGmPerLogo > 0 ? cac / monthlyGmPerLogo : 0;
   const magicNumber = ttmSMLagged > 0 ? ttmNetBookings / ttmSMLagged : 0;
   const utilization = (() => {
     let s = 0;
@@ -145,6 +149,7 @@ function computeMetricsAt(idx: number): Record<string, number> {
     logo_retention: logoRetention,
     growth_rate: growthRate,
     cac_payback: cac,
+    cac_payback_months: cacPaybackMonths,
     ltv_cac: ltvCac,
     magic_number: magicNumber,
     utilization,
@@ -193,6 +198,7 @@ const BUDGET_FACTOR_OVERRIDE: Record<string, number> = {
   logo_retention: 0.99,
   growth_rate: 0.93, // grew faster than planned
   cac_payback: 1.07, // CAC per logo came in below plan (lower is better → beat)
+  cac_payback_months: 1.06, // recovered CAC a bit faster than planned (lower is better → beat)
   ltv_cac: 0.91, // unit economics beat plan
   magic_number: 1.05, // efficiency slightly below plan
   utilization: 0.85, // capacity-gated at 100% — planned below and exceeded

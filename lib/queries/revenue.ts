@@ -4,7 +4,7 @@ import type { Stream, ContractId } from "@/lib/types/common";
 import type { RevenueForecastLine, RecognizedRevenue, RecognizedSubscriptionRow, RecognizedServicesRow } from "@/lib/types/drivers";
 import { usd, toMajor, percent } from "@/lib/types/money";
 import { getDataStore } from "@/lib/datastore";
-import { type StreamOpt } from "./util";
+import { assertBaseScope, type StreamOpt } from "./util";
 
 const monthToIndex = (m: Month): number => (monthYear(m) - 2024) * 12 + (monthIndex(m) - 1);
 const PLAN_LABEL: Record<string, string> = { starter: "Starter", growth: "Growth", scale: "Scale" };
@@ -17,6 +17,7 @@ const PLAN_LABEL: Record<string, string> = { starter: "Starter", growth: "Growth
  * all "contracted"; the wedge opens only in the forecast tail.
  */
 export async function getRevenueForecast(period: Month, opts: StreamOpt = {}): Promise<readonly RevenueForecastLine[]> {
+  assertBaseScope(opts, "getRevenueForecast");
   const store = getDataStore();
   const sub = await store.getSubscriptionModel();
   const svc = await store.getServicesModel();

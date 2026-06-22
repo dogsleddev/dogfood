@@ -63,6 +63,9 @@ const CASES: readonly Case[] = [
   { q: "What were our bookings this year compared to last year?", want: "getBookingsHistory", check: (rs) => has(rs, "getBookingsHistory") },
   { q: "How are bookings trending year over year?", want: "getBookingsHistory", check: (rs) => has(rs, "getBookingsHistory") },
   { q: "What's our CAC?", want: "getMetric(cac_payback)", check: (rs) => metricsOf(rs).includes("cac_payback") },
+  // CAC payback PERIOD (months) is a distinct metric from the dollar CAC — must not collide either way
+  { q: "What's our CAC payback period in months?", want: "getMetric(cac_payback_months)", check: (rs) => metricsOf(rs).includes("cac_payback_months") },
+  { q: "How long does it take to recover our customer acquisition cost?", want: "getMetric(cac_payback_months)", check: (rs) => metricsOf(rs).includes("cac_payback_months") },
   { q: "What's our Rule of 40?", want: "getMetric(rule_of_40)", check: (rs) => metricsOf(rs).includes("rule_of_40") },
   { q: "What are our total assets?", want: "getBalanceSheet", check: (rs) => has(rs, "getBalanceSheet") },
   { q: "How is cash flow looking this year?", want: "getCashFlow", check: (rs) => has(rs, "getCashFlow") },
@@ -144,6 +147,7 @@ const DET_CASES: readonly { q: string; tool: string }[] = [
   { q: "What's our MRR?", tool: "getMetric" },
   { q: "What's our monthly recurring revenue?", tool: "getMetric" },
   { q: "What's our logo churn rate?", tool: "getMetric" },
+  { q: "What's our CAC payback period?", tool: "getMetric" },
   { q: "Show me the P&L / net income.", tool: "getPnL" },
   { q: "What was the biggest revenue month in 2025?", tool: "getMonthlyPnL" },
   { q: "What are total assets on the balance sheet?", tool: "getBalanceSheet" },

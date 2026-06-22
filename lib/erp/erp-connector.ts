@@ -1,7 +1,9 @@
 /**
- * ErpConnector — THE one and only live integration (CLAUDE.md §4, §16).
- * Everything else is CSV/XLSX import templates or seed; no other live connectors.
- * Dogfood READS actuals from the ERP (plan-to-perform, downstream of a clean close).
+ * ErpConnector — the typed seam for a FUTURE live ERP connection (CLAUDE.md §16, §18 roadmap).
+ * In this build every data domain batch-imports from its system of record via CSV/XLSX
+ * (import-templates/); a live API connector (the ERP, Salesforce, Rippling, …) can replace the CSV
+ * step later behind this seam, and the CSV template is the contract a connector fills. No live
+ * connector is wired today. Dogfood READS actuals (plan-to-perform, downstream of a clean close).
  *
  * This is a stub: it defines the seam and throws until a real connector is wired.
  * It sits alongside the DataStore (actuals flow ERP → DataStore → lib/queries).

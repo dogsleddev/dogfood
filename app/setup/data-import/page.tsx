@@ -6,7 +6,7 @@ export default function DataImportPage() {
       kicker="Setup"
       layer="Config · feeds source records"
       title="Data Import"
-      description="CSV / XLSX templates (trial balance, JEs, COA, budget, headcount, AR/AP aging, customers/vendors, FX) plus the single live ERP connection — the one and only live integration."
+      description="Batch CSV / XLSX imports for every data domain on a stable-id upsert: trial balance + COA + JEs from the ERP, customers / contracts / pipeline from the CRM, staff from HRIS, vendors from AP, plus budget, AR/AP aging, and FX. Live API connectors are on the roadmap; the CSV template is the contract a connector fills."
       queries={["ErpConnector (stub)"]}
     />
   );

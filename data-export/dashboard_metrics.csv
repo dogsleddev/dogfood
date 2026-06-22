@@ -10,7 +10,8 @@ bookings_delta_arr,Bookings (ΔARR),growth_retention,trailing-12-mo net ΔARR (n
 nrr,Net revenue retention,growth_retention,i-12 cohort: cohort ARR now ÷ cohort ARR 12 mo ago (within-cohort expansion/contraction/churn; excludes new logos),109%,99%,107%
 logo_retention,Logo retention / churn,growth_retention,1 − trailing-12-mo churned logos ÷ active logos 12 mo ago,92%,93%,91%
 growth_rate,Revenue growth (FY),growth_retention,FY recognized revenue ÷ prior FY − 1 (lags ARR growth via ratable recognition),61%,97%,57%
-cac_payback,CAC per new logo,unit_economics,"trailing-12-mo S&M (payroll + programs, lagged 1 quarter) ÷ new logos (dollar CAC, not payback months)",$136.2K,$96.6K,$145.7K
+cac_payback,CAC per new logo,unit_economics,"trailing-12-mo S&M (payroll + programs, lagged 1 quarter) ÷ new logos (dollar CAC, not payback months — for the period see CAC payback)",$136.2K,$96.6K,$145.7K
+cac_payback_months,CAC payback,unit_economics,"months to recover CAC: CAC per new logo ÷ (avg ARR per logo × gross margin % ÷ 12), the gross-margin-adjusted payback period",15 mo,12 mo,16 mo
 ltv_cac,LTV : CAC,unit_economics,"LTV (avg ARR × gross margin % × min(1 ÷ annual churn, 5 yr)) ÷ CAC (S&M lagged 1 quarter)",4.1x,5.1x,3.7x
 magic_number,Magic number,unit_economics,trailing-12-mo net ΔARR ÷ trailing-12-mo S&M (lagged 1 quarter),1.2x,1.5x,1.2x
 utilization,Utilization,unit_economics,trailing-12-mo avg services utilization (delivery ÷ capacity),83%,85%,71%

@@ -24,3 +24,20 @@ export function notImplemented(fn: string, _ctx?: unknown): never {
     `${fn}() is a Harness spine signature with no implementation yet (CLAUDE.md §13 — built in the Run).`,
   );
 }
+
+/**
+ * Containment guard (§9). The Base reads (Dashboard / Statements / Drivers) accept a ScenarioOpt for
+ * signature symmetry but never APPLY it — the scenario lens lives ONLY inside the Scenarios group
+ * (lib/queries/scenarios.ts + the engine), so these surfaces are always Base + actuals. A caller that
+ * passes a scenarioId here would otherwise silently get Base back; reject it loudly instead, so the
+ * (upcoming) Scout scenario-write surface can't quietly read Base when it means a hypothetical.
+ */
+export function assertBaseScope(opts: ScenarioOpt, fn: string): void {
+  if (opts.scenarioId != null) {
+    throw new Error(
+      `${fn}() is a Base + actuals read and does not apply a scenario (containment, §9). ` +
+        `For a contained scenario result use the Scenarios group (getScenarioPnL / compareScenarios); ` +
+        `scenarioId "${opts.scenarioId}" is not valid here.`,
+    );
+  }
+}
