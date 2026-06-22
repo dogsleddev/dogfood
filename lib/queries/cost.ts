@@ -6,9 +6,11 @@ import type {
   PersonnelForecastLine,
   ExpenseForecastLine,
 } from "@/lib/types/drivers";
-import { usd, percent } from "@/lib/types/money";
+import { usd, percent, toMajor } from "@/lib/types/money";
 import { getDataStore } from "@/lib/datastore";
 import { monthlyCompFor } from "@/lib/seed/personnel";
+import { opexSubAccountById } from "@/lib/seed/opex-accounts";
+import { PLACEHOLDER_SETTINGS } from "@/lib/target/placeholder";
 import { SUBSCRIPTION_HOSTING_RATE, SERVICES_PASSTHROUGH_RATE } from "@/lib/seed/params";
 import { assertBaseScope, type ScenarioOpt, type StreamOpt } from "./util";
 
@@ -132,13 +134,23 @@ const monthToIndexLocal = (mo: Month): number => (monthYear(mo) - 2024) * 12 + (
 
 export interface ExpenseOpt extends ScenarioOpt {
   readonly groupId?: ExpenseGroupId;
+  /** drill depth: 'group' (default, back-compatible) · 'account' (GL sub-accounts) · 'vendor'. §7 */
+  readonly breakdown?: "group" | "account" | "vendor";
 }
 
+const r2 = (x: number): number => Math.round(x * 100) / 100;
+
 /**
- * Expense Forecast — non-payroll OpEx only, by group, per month (§8). Reads the seed OpEx series
- * (the 8 groups). Default: one line per group per month for the period's fiscal year (so the page
- * can show the group breakdown); a `groupId` filter narrows to that single group. Σ groups per
- * month === the seed total === the P&L's non-payroll OpEx lines (one source, two callers).
+ * Expense Forecast — non-payroll OpEx, per month, drillable group -> account -> vendor (§7/§8). Reads
+ * the seed OpEx series (the 8 groups + their GL sub-accounts). `breakdown`:
+ *   'group'   (default): one line per group per month — today's behavior, unchanged for existing callers.
+ *   'account': one line per GL sub-account per month (group total × the account's fixed share; the seed's
+ *              subAccounts series, so Σ accounts === group === the P&L OpEx line by construction).
+ *   'vendor':  FORECAST months show recurring vendors at a stable run-rate + one "Other — <account>"
+ *              residual line per sub-account (a planning lens, never a sampled vendor name); CLOSED months
+ *              (period ≤ closeThrough) show the REAL sub-ledger bills bucketed by sub-account (Peek-vs-Place
+ *              §6: actuals = register detail, forecast = driver projection).
+ * Σ per group-month is identical across all three breakdowns (one source, two callers).
  */
 export async function getExpenseForecast(period: Month, opts: ExpenseOpt = {}): Promise<readonly ExpenseForecastLine[]> {
   assertBaseScope(opts, "getExpenseForecast");
@@ -146,13 +158,65 @@ export async function getExpenseForecast(period: Month, opts: ExpenseOpt = {}): 
   const months = opx.months;
   const fyStart = (monthYear(period) - 2024) * 12;
   const groups = opts.groupId ? opx.groups.filter((g) => g.groupId === opts.groupId) : opx.groups;
+  const breakdown = opts.breakdown ?? "group";
+  const closeThrough = PLACEHOLDER_SETTINGS.closeThrough;
   const lines: ExpenseForecastLine[] = [];
+
+  // vendor breakdown · closed months: prefetch the real bills once, bucket in memory by (period, subCode, vendor)
+  let actualBills: readonly { period: Month; subCode?: string; groupId: string; vendor?: string; amount: number }[] = [];
+  if (breakdown === "vendor") {
+    const bills = await getDataStore().listExpenseTransactions(opts.groupId ? { groupId: opts.groupId } : {});
+    actualBills = bills.map((b) => ({ period: b.period, subCode: b.subCode, groupId: b.groupId as string, vendor: b.vendor, amount: toMajor(b.amount) }));
+  }
 
   for (let m = fyStart; m <= fyStart + 11; m++) {
     const mo = months[m];
     if (!mo) continue;
+    const isClosed = mo <= closeThrough;
     for (const g of groups) {
-      lines.push({ period: mo, groupId: g.groupId as ExpenseGroupId, amount: usd(g.monthly[m] ?? 0) });
+      const groupId = g.groupId as ExpenseGroupId;
+
+      if (breakdown === "group") {
+        lines.push({ period: mo, groupId, amount: usd(g.monthly[m] ?? 0) });
+        continue;
+      }
+
+      for (const sa of g.subAccounts) {
+        const amt = sa.monthly[m] ?? 0;
+        if (breakdown === "account") {
+          lines.push({ period: mo, groupId, accountId: sa.id, accountLabel: sa.label, subCode: sa.subCode, amount: usd(amt) });
+          continue;
+        }
+
+        // breakdown === "vendor"
+        if (isClosed) {
+          // real sub-ledger bills for this sub-account this month, one line per (vendor)
+          const billsHere = actualBills.filter((b) => b.period === mo && b.subCode === sa.subCode);
+          const byVendor = new Map<string, number>();
+          for (const b of billsHere) byVendor.set(b.vendor ?? "—", (byVendor.get(b.vendor ?? "—") ?? 0) + b.amount);
+          for (const [vendor, vAmt] of byVendor) {
+            lines.push({ period: mo, groupId, accountId: sa.id, accountLabel: sa.label, subCode: sa.subCode, vendor, amount: usd(vAmt), isActual: true });
+          }
+          continue;
+        }
+
+        // forecast month: anchors at run-rate + one "Other — <account>" residual (rounding-absorbed)
+        const cfg = opexSubAccountById(sa.id);
+        let anchorAcc = 0;
+        for (const [vendor, w] of cfg?.anchors ?? []) {
+          const vAmt = r2(amt * w);
+          if (vAmt <= 0.005) continue;
+          lines.push({ period: mo, groupId, accountId: sa.id, accountLabel: sa.label, subCode: sa.subCode, vendor, amount: usd(vAmt) });
+          anchorAcc = r2(anchorAcc + vAmt);
+        }
+        const residual = r2(amt - anchorAcc);
+        if (residual > 0.005 || anchorAcc === 0) {
+          lines.push({
+            period: mo, groupId, accountId: sa.id, accountLabel: sa.label, subCode: sa.subCode,
+            vendor: `Other — ${sa.label}`, amount: usd(Math.max(0, residual)), isResidual: true,
+          });
+        }
+      }
     }
   }
   return lines;

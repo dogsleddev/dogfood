@@ -74,6 +74,19 @@ export interface ExpenseForecastLine {
   readonly period: Month;
   readonly groupId?: ExpenseGroupId;
   readonly amount: Money;
+  // ── group->account->vendor drill (§7; additive, populated only for breakdown 'account'/'vendor') ──
+  /** the GL sub-account slug id (e.g. "sm-paid-advertising") */
+  readonly accountId?: string;
+  /** the GL sub-account display label (e.g. "Paid Advertising") */
+  readonly accountLabel?: string;
+  /** the GL sub-account display code (e.g. "6210") */
+  readonly subCode?: string;
+  /** vendor name (breakdown 'vendor'); a residual "Other —" line for the variable remainder */
+  readonly vendor?: string;
+  /** true when this is the "Other — <account>" residual line (forecast variable spend) */
+  readonly isResidual?: boolean;
+  /** true when the row is a real closed-month bill (vs a forecast run-rate projection) */
+  readonly isActual?: boolean;
 }
 
 export interface ArForecastLine {

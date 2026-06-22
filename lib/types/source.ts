@@ -125,6 +125,9 @@ export interface ExpenseTransaction {
   readonly period: Month;
   readonly glAccountId: GlAccountId;
   readonly groupId: ExpenseGroupId;
+  /** GL sub-account display code (e.g. "6210") — the account WITHIN the group (§7). Optional/additive;
+   *  the real GL account stays glAccountId (the parent group account), so statements/Flux are unchanged. */
+  readonly subCode?: string;
   readonly function: CostFunction;
   readonly vendor?: string;
   readonly memo?: string;

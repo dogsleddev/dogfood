@@ -16,6 +16,7 @@ import { SEED_RNG_SEED, SEED_MONTH_COUNT, indexToMonth, SUBSCRIPTION_HOSTING_RAT
 import { monthlyCompFor } from "./personnel";
 import { SEED_EXPENSE_GROUPS, PLACEHOLDER_SETTINGS } from "@/lib/target/placeholder";
 import { CHART_OF_ACCOUNTS } from "./gl";
+import { opexSubAccountById, opexGroupPool } from "./opex-accounts";
 import { usd, toMajor } from "@/lib/types/money";
 import { month, monthYear, monthIndex as monthNo, type Month } from "@/lib/types/period";
 import type { GlAccountId, ExpenseGroupId, JournalEntryId, CustomerId, ContractId, ProjectId, StaffId, CostFunction } from "@/lib/types/common";
@@ -81,34 +82,21 @@ function split(rng: Rng, amount: number, n: number): number[] {
   return parts;
 }
 
-// ── vendor pools per expense group + the non-employee CoR streams ──
+// ── vendor pools: the non-employee CoR streams here; the 8 OpEx groups now live in opex-accounts.ts ──
 // Bearing's own SaaS/AI stack — the tools a 2025 AI-native finance company actually expenses
-// (Numeric/Campfire peer profile, 2026-06-18). On-brand: it pays Anthropic/OpenAI for the model
-// inference behind its own product (CoR-hosting). Pure cosmetic strings — never touch amounts,
-// counts, or the reconciliation, so the pool is safe to re-theme.
-// Each group has ANCHOR vendors — the real fixed-contract spend (core SaaS, the payroll/PEO provider,
-// insurance carriers, the primary cloud) that recurs EVERY month at a stable share of the group total
-// (+ small jitter) — plus ROTATING vendors that fill the remainder and vary month to month. The prior
-// model sampled the whole pool without replacement each month, so a recurring vendor like Datadog
-// swung 2–4x and vanished for months at a time, and three competing PEOs billed interchangeably — tells
-// a CFO catches drilling a single vendor (data audit 2026-06-21). Σ per group-month is UNCHANGED:
-// anchors + the rotating remainder are renormalized to the driver total, so every reconciliation holds.
+// (Numeric/Campfire peer profile). On-brand: it pays Anthropic/OpenAI for the model inference behind its
+// own product (CoR-hosting). Pure cosmetic strings — never touch amounts, counts, or the reconciliation.
+// Each pool has ANCHOR vendors (fixed-contract spend, recurring every month at a stable share + jitter)
+// plus ROTATING vendors that fill the remainder. Σ per bucket-month is UNCHANGED: anchors + the rotating
+// remainder are renormalized to the driver total, so every reconciliation holds.
+// NOTE (2026-06-22): the OpEx group pools moved to lib/seed/opex-accounts.ts (OPEX_SUB_ACCOUNTS) — emit()
+// is now called PER SUB-ACCOUNT, so each group's vendors live under their GL sub-account. The CoR streams
+// stay here (non_employee_cor is one account, not a sub-accounted OpEx group).
 type VendorPool = { readonly anchors: readonly (readonly [string, number])[]; readonly rotating: readonly string[] };
 const VENDOR_POOLS: Record<string, VendorPool> = {
-  // ONE payroll/PEO provider (Rippling) billed every month, plus IRS taxes + the benefits carriers —
-  // not three competing PEOs sampled at random (#3).
-  "employee-expenses": { anchors: [["IRS — payroll taxes", 0.46], ["Rippling", 0.3], ["Anthem Health", 0.14], ["Guideline 401(k)", 0.1]], rotating: [] },
-  "sales-marketing": { anchors: [["Google Ads", 0.26], ["LinkedIn Ads", 0.2], ["HubSpot", 0.16]], rotating: ["Apollo.io", "Clearbit", "Gong", "ZoomInfo", "Webflow", "G2", "Salesforce"] },
-  // T&E is genuinely variable; one card program is the anchor, the airlines/hotels rotate.
-  "travel-entertainment": { anchors: [["Amex T&E", 0.34]], rotating: ["United Airlines", "Delta Air Lines", "Marriott", "Hilton", "Uber", "Lyft", "Airbnb", "DoorDash"] },
-  it: { anchors: [["Datadog", 0.16], ["Atlassian", 0.12], ["GitHub", 0.11], ["Okta", 0.1], ["Vercel", 0.09], ["Notion", 0.08], ["Figma", 0.08], ["Slack", 0.07]], rotating: ["Linear", "1Password", "Zoom", "Sentry", "Cursor", "Retool"] },
-  hr: { anchors: [["Greenhouse", 0.42], ["Lattice", 0.3]], rotating: ["Ashby", "Deel"] },
-  admin: { anchors: [["Carta", 0.24], ["Ramp", 0.2], ["Mercury", 0.16], ["Cooley LLP", 0.14]], rotating: ["Brex", "DocuSign", "Bench Accounting"] },
-  facilities: { anchors: [["WeWork", 0.56], ["PG&E", 0.18]], rotating: ["Industrious", "Iron Mountain", "Flexport (office)"] },
-  insurance: { anchors: [["Vouch Insurance", 0.5], ["Embroker", 0.32]], rotating: ["The Hartford", "Chubb"] },
   // non-employee Cost of Revenue — infra/hosting + model inference (the on-brand AI touch)
   "cor-hosting": { anchors: [["Amazon Web Services", 0.42], ["Anthropic", 0.26], ["OpenAI", 0.14]], rotating: ["Google Cloud", "Cloudflare", "MongoDB Atlas", "Snowflake", "Pinecone"] },
-  // 1–2 anchor implementation partners carry the steady spend, the rest are occasional overflow (#36).
+  // 1–2 anchor implementation partners carry the steady spend, the rest are occasional overflow.
   "cor-passthrough": { anchors: [["Implementation Partners LLC", 0.46], ["Slalom", 0.3]], rotating: ["Northbeam Consulting", "Turing", "Crossover Solutions"] },
 };
 
@@ -215,12 +203,11 @@ function buildTransactions(): TransactionsSeed {
   const vendorBills: VendorBill[] = [];
   let billSeq = 0;
   const groupMeta = new Map(SEED_EXPENSE_GROUPS.map((g) => [g.id as string, g]));
-  const emit = (i: number, groupId: string, line: string, fn: CostFunction, total: number) => {
+  const emit = (i: number, groupId: string, line: string, fn: CostFunction, total: number, poolDef: VendorPool, subCode?: string) => {
     if (total < 1) return 0;
     const acct = acctForLine(line);
     const fnTag = groupMeta.get(groupId)?.function ?? fn;
     const moNo = monthNo(indexToMonth(i) as Month);
-    const poolDef: VendorPool = VENDOR_POOLS[groupId] ?? { anchors: [], rotating: ["Vendor"] };
 
     // Build the bill lines: ANCHOR vendors first (recurring every month at their stable share of the
     // group total, with ±8% month jitter so they aren't byte-identical), then a ROTATING remainder
@@ -264,6 +251,7 @@ function buildTransactions(): TransactionsSeed {
         status,
         glAccountId: acct,
         groupId: groupId as ExpenseGroupId,
+        subCode,
         function: fnTag,
         vendor: ln.vendor,
         memo: billMemo(groupId, ln.vendor, moNo),
@@ -275,10 +263,25 @@ function buildTransactions(): TransactionsSeed {
     return posted;
   };
   for (let i = 0; i < n; i++) {
-    for (const g of opx.series.groups) emit(i, g.groupId, g.groupId.replace(/-/g, "_"), groupMeta.get(g.groupId)?.function ?? "ga", g.monthly[i]);
+    // Each OpEx group bills PER SUB-ACCOUNT (§7): the sub-account's monthly amount, split across its own
+    // vendor pool, stamped with its subCode. Σ over sub-accounts === g.monthly[i] (opex.ts), so the
+    // per-month bills-roll-up below is unchanged. glAccountId stays the PARENT group account (acctForLine).
+    for (const g of opx.series.groups) {
+      const line = g.groupId.replace(/-/g, "_");
+      const fn = groupMeta.get(g.groupId)?.function ?? "ga";
+      if (g.subAccounts.length === 0) {
+        emit(i, g.groupId, line, fn, g.monthly[i], opexGroupPool(g.groupId));
+      } else {
+        for (const sa of g.subAccounts) {
+          const cfg = opexSubAccountById(sa.id);
+          const pool: VendorPool = cfg ? { anchors: cfg.anchors, rotating: cfg.rotating } : { anchors: [], rotating: ["Vendor"] };
+          emit(i, g.groupId, line, fn, sa.monthly[i], pool, sa.subCode);
+        }
+      }
+    }
     // non-employee CoR splits into hosting (% of sub) + pass-through (% of svc); Σ === cor.nonEmployee[i]
-    emit(i, "cor-hosting", "non_employee_cor", "direct", SUBSCRIPTION_HOSTING_RATE * cor.series.subscriptionRevenue[i]);
-    emit(i, "cor-passthrough", "non_employee_cor", "direct", SERVICES_PASSTHROUGH_RATE * cor.series.servicesRevenue[i]);
+    emit(i, "cor-hosting", "non_employee_cor", "direct", SUBSCRIPTION_HOSTING_RATE * cor.series.subscriptionRevenue[i], VENDOR_POOLS["cor-hosting"]);
+    emit(i, "cor-passthrough", "non_employee_cor", "direct", SERVICES_PASSTHROUGH_RATE * cor.series.servicesRevenue[i], VENDOR_POOLS["cor-passthrough"]);
   }
   // reconcile per month: Σ vendor bills === non-payroll OpEx total + non-employee CoR
   const billByMonth = new Array<number>(n).fill(0);

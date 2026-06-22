@@ -12,14 +12,27 @@
  */
 import { SEED_MONTHS, OPEX_DRIVERS } from "./params";
 import { SEED_EXPENSE_GROUPS } from "@/lib/target/placeholder";
+import { opexSubAccounts } from "./opex-accounts";
 import type { Month } from "@/lib/types/period";
 import type { TieOutCheck } from "./subscription";
+
+const r2 = (x: number): number => Math.round(x * 100) / 100;
+
+/** A GL sub-account's monthly series — group.monthly split by its fixed share (last absorbs residual). */
+export interface OpExSubAccountSeries {
+  readonly id: string;
+  readonly subCode: string;
+  readonly label: string;
+  readonly monthly: readonly number[];
+}
 
 export interface OpExGroupSeries {
   readonly groupId: string;
   readonly label: string;
   readonly monthly: readonly number[];
   readonly fyTotal: Readonly<Record<number, number>>;
+  /** the group total split across its GL sub-accounts (§7); Σ subAccounts[*].monthly[i] === monthly[i]. */
+  readonly subAccounts: readonly OpExSubAccountSeries[];
 }
 
 export interface OpExSeries {
@@ -57,7 +70,20 @@ export function generateOpExSeed(
     monthly.forEach((a, i) => {
       fyTotal[2024 + Math.floor(i / 12)] += a;
     });
-    return { groupId: g.id, label: g.label, monthly, fyTotal };
+
+    // Split the group total across its GL sub-accounts by fixed share, per month. The LAST sub-account
+    // absorbs the rounding residual so Σ sub-accounts === group monthly EXACTLY (tie-out-neutral, §7).
+    const subs = opexSubAccounts(g.id);
+    const subAccounts: OpExSubAccountSeries[] = subs.map((sa) => ({ id: sa.id, subCode: sa.subCode, label: sa.label, monthly: [] as number[] }));
+    for (let i = 0; i < n; i++) {
+      let acc = 0;
+      for (let k = 0; k < subs.length; k++) {
+        const amt = k === subs.length - 1 ? r2(monthly[i] - acc) : r2(monthly[i] * subs[k].share);
+        (subAccounts[k].monthly as number[]).push(amt);
+        acc = r2(acc + amt);
+      }
+    }
+    return { groupId: g.id, label: g.label, monthly, fyTotal, subAccounts };
   });
 
   const total: number[] = [];
@@ -77,10 +103,18 @@ export function generateOpExSeed(
   const burdenOk =
     !!employee && n > 0 && employee.monthly.every((a, i) => Math.abs(a - (OPEX_DRIVERS["employee-expenses"]?.rate ?? 0) * totalPayroll[i]) < 1);
   const allNonNeg = n > 0 && groups.every((g) => g.monthly.every((a) => a >= 0));
+  // Σ sub-account monthly === group monthly, every month (the group->account split, §7). Definitional:
+  // the last sub-account absorbs the residual (above), so this holds by construction — it guards a
+  // future share-vector / ordering regression. Groups with no sub-accounts are vacuously fine.
+  const subTotal = (sas: readonly OpExSubAccountSeries[], i: number) => sas.reduce((s, sa) => s + sa.monthly[i], 0);
+  const subAccountPartitionOk =
+    n > 0 && groups.every((g) => g.subAccounts.length === 0 || g.monthly.every((t, i) => Math.abs(subTotal(g.subAccounts, i) - t) < 1));
+  const subCount = groups.reduce((s, g) => s + g.subAccounts.length, 0);
 
   const checks: TieOutCheck[] = [
     { label: "Total non-payroll OpEx === Σ group amounts", ok: sumsToTotal, detail: `definitional — total := Σ group (${groups.length} groups)`, kind: "definitional" },
     { label: "Employee Expenses === burden rate × total payroll", ok: burdenOk, detail: "definitional — group := rate × payroll; the lookup is a group-existence guard", kind: "definitional" },
+    { label: "Σ sub-account monthly === group monthly, every month", ok: subAccountPartitionOk, detail: `definitional — group->account split, last absorbs residual (${subCount} sub-accounts across ${groups.length} groups)`, kind: "definitional" },
     { label: "Every expense group ≥ 0", ok: allNonNeg, detail: "no negative OpEx; one-sided bound", kind: "sanity" },
   ];
 
