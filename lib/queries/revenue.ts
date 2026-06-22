@@ -1,12 +1,11 @@
 /** Revenue Forecast — owns subscription + services (layer 2 — CLAUDE.md §8). */
-import { type Month, monthYear, monthIndex } from "@/lib/types/period";
+import { type Month, monthToIndex, fyStartIndex } from "@/lib/types/period";
 import type { Stream, ContractId } from "@/lib/types/common";
 import type { RevenueForecastLine, RecognizedRevenue, RecognizedSubscriptionRow, RecognizedServicesRow } from "@/lib/types/drivers";
 import { usd, toMajor, percent } from "@/lib/types/money";
 import { getDataStore } from "@/lib/datastore";
 import { assertBaseScope, type StreamOpt } from "./util";
 
-const monthToIndex = (m: Month): number => (monthYear(m) - 2024) * 12 + (monthIndex(m) - 1);
 const PLAN_LABEL: Record<string, string> = { starter: "Starter", growth: "Growth", scale: "Scale" };
 
 /**
@@ -22,7 +21,7 @@ export async function getRevenueForecast(period: Month, opts: StreamOpt = {}): P
   const sub = await store.getSubscriptionModel();
   const svc = await store.getServicesModel();
   const months = sub.series.months;
-  const fyStart = (monthYear(period) - 2024) * 12;
+  const fyStart = fyStartIndex(period);
   const closeIdx = monthToIndex((await store.getSettings()).closeThrough);
   const custStart = new Map(sub.customers.map((c) => [c.id as string, monthToIndex(c.startMonth)]));
   const projStart = new Map(svc.projects.map((p) => [p.id as string, custStart.get(p.customerId as string) ?? 0]));

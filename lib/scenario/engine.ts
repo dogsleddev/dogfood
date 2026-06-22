@@ -27,7 +27,7 @@
  * net income and the working-capital cash deltas.
  */
 import { usd, toMajor, percent, type Money } from "@/lib/types/money";
-import { monthYear, type Month, type PeriodRange, monthsInRange, compareMonth } from "@/lib/types/period";
+import { monthYear, monthToIndex, type Month, type PeriodRange, monthsInRange, compareMonth } from "@/lib/types/period";
 import type {
   Scenario,
   Adjustment,
@@ -48,9 +48,6 @@ import { buildSeedPnL } from "@/lib/seed/statements";
 import { buildSeedDashboard, buildSeedKpiTile } from "@/lib/seed/dashboard-metrics";
 import { getBalanceSheetSeed, getSbcSeed } from "@/lib/seed";
 import { metricValueFromMagnitude } from "@/lib/types/metrics";
-
-// ── index helpers (the seed timeline starts Jan-2024 = index 0) ──
-const monthToIndex = (mo: Month): number => (monthYear(mo) - 2024) * 12 + (Number(mo.slice(5, 7)) - 1);
 
 /** Direct-function departments route payroll into Cost of Revenue; everything else into OpEx (§8). */
 const DIRECT_DEPARTMENTS: ReadonlySet<string> = new Set(["professional-services", "support"]);

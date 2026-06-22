@@ -14,7 +14,7 @@
  * expense side); the by-function decomposition sums to the total each month.
  */
 import { toMajor } from "@/lib/types/money";
-import { monthYear, monthIndex, type Month } from "@/lib/types/period";
+import { monthToIndex, type Month } from "@/lib/types/period";
 import { SEED_MONTHS, SEED_MONTH_COUNT, SBC_VEST_MONTHS, SBC_EARLY_PREMIUM, SBC_FUNCTION_MULTIPLE } from "./params";
 import type { CostFunction } from "@/lib/types/common";
 import type { StaffMember } from "@/lib/types/source";
@@ -22,7 +22,6 @@ import type { TieOutCheck } from "./subscription";
 
 type FunctionBuckets = Record<CostFunction, number>;
 const zeroBuckets = (): FunctionBuckets => ({ direct: 0, rnd: 0, sm: 0, ga: 0 });
-const monthToIndex = (m: Month): number => (monthYear(m) - 2024) * 12 + (monthIndex(m) - 1);
 
 export interface SbcSeries {
   readonly months: readonly Month[];

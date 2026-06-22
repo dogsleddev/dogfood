@@ -1,5 +1,5 @@
 import { listStaff } from "@/lib/queries";
-import { month, monthLabel, monthYear, monthIndex, type Month } from "@/lib/types/period";
+import { month, monthLabel, monthToIndex, type Month } from "@/lib/types/period";
 import type { StaffMember } from "@/lib/types/source";
 import type { CostFunction, DepartmentId } from "@/lib/types/common";
 import { SEED_DEPARTMENTS } from "@/lib/target/placeholder";
@@ -9,12 +9,11 @@ import { StaffTable, FUNCTION_ORDER, type DeptFilter, type FnFilter } from "@/co
 // The people register reads as of the last fully closed month — the live roster (CLAUDE.md §11).
 const AS_OF: Month = month(2026, 5);
 
-const toIndex = (m: Month): number => (monthYear(m) - 2024) * 12 + (monthIndex(m) - 1);
 /** A staff member is on the books in `period` if they've started and not yet left. */
 const activeIn = (s: StaffMember, period: Month): boolean => {
-  const i = toIndex(period);
-  const start = toIndex(s.startMonth);
-  const end = s.endMonth ? toIndex(s.endMonth) : Infinity;
+  const i = monthToIndex(period);
+  const start = monthToIndex(s.startMonth);
+  const end = s.endMonth ? monthToIndex(s.endMonth) : Infinity;
   return start <= i && i <= end;
 };
 

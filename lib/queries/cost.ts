@@ -1,5 +1,5 @@
 /** Cost of Revenue (assembled) · Personnel · Expense Forecast (layer 2 — CLAUDE.md §8). */
-import { type Month, monthYear } from "@/lib/types/period";
+import { type Month, monthToIndex, fyStartIndex } from "@/lib/types/period";
 import type { CostFunction, DepartmentId, ExpenseGroupId } from "@/lib/types/common";
 import type {
   CostOfRevenueLine,
@@ -29,7 +29,7 @@ export async function getCostOfRevenue(period: Month, opts: StreamOpt = {}): Pro
   assertBaseScope(opts, "getCostOfRevenue");
   const cor = (await getDataStore().getCostOfRevenueModel()).series;
   const months = cor.months;
-  const fyStart = (monthYear(period) - 2024) * 12;
+  const fyStart = fyStartIndex(period);
   const lines: CostOfRevenueLine[] = [];
 
   for (let m = fyStart; m <= fyStart + 11; m++) {
@@ -88,7 +88,7 @@ export async function getPersonnelForecast(period: Month, opts: PersonnelOpt = {
   const per = await store.getPersonnelModel();
   const series = per.series;
   const months = series.months;
-  const fyStart = (monthYear(period) - 2024) * 12;
+  const fyStart = fyStartIndex(period);
   const lines: PersonnelForecastLine[] = [];
 
   // departmentId filter: re-aggregate the staff records (the series carries function/total cuts,
@@ -96,7 +96,7 @@ export async function getPersonnelForecast(period: Month, opts: PersonnelOpt = {
   const deptStaff = opts.departmentId
     ? per.staff
         .filter((s) => s.departmentId === opts.departmentId)
-        .map((s) => ({ hireIndex: monthToIndexLocal(s.startMonth), baseComp: s.baseComp.minor / 100 }))
+        .map((s) => ({ hireIndex: monthToIndex(s.startMonth), baseComp: s.baseComp.minor / 100 }))
     : undefined;
 
   for (let m = fyStart; m <= fyStart + 11; m++) {
@@ -130,8 +130,6 @@ export async function getPersonnelForecast(period: Month, opts: PersonnelOpt = {
   return lines;
 }
 
-const monthToIndexLocal = (mo: Month): number => (monthYear(mo) - 2024) * 12 + (Number(mo.slice(5, 7)) - 1);
-
 export interface ExpenseOpt extends ScenarioOpt {
   readonly groupId?: ExpenseGroupId;
   /** drill depth: 'group' (default, back-compatible) · 'account' (GL sub-accounts) · 'vendor'. §7 */
@@ -156,7 +154,7 @@ export async function getExpenseForecast(period: Month, opts: ExpenseOpt = {}): 
   assertBaseScope(opts, "getExpenseForecast");
   const opx = (await getDataStore().getOpExModel()).series;
   const months = opx.months;
-  const fyStart = (monthYear(period) - 2024) * 12;
+  const fyStart = fyStartIndex(period);
   const groups = opts.groupId ? opx.groups.filter((g) => g.groupId === opts.groupId) : opx.groups;
   const breakdown = opts.breakdown ?? "group";
   const closeThrough = PLACEHOLDER_SETTINGS.closeThrough;

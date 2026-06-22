@@ -10,21 +10,21 @@
  * contracts get one recent outcome + (if due soon) one forward "open".
  */
 import { mulberry32 } from "./prng";
-import { monthYear, monthIndex } from "@/lib/types/period";
+import { monthToIndex } from "@/lib/types/period";
+import { PLACEHOLDER_SETTINGS } from "@/lib/target/placeholder";
 import { indexToMonth, SEED_RNG_SEED } from "./params";
 import { usd, toMajor } from "@/lib/types/money";
-import type { Month } from "@/lib/types/period";
 import type { RenewalId } from "@/lib/types/common";
 import type { Contract, Renewal, RenewalStatus } from "@/lib/types/source";
 
 const RENEWALS_SEED = (SEED_RNG_SEED ^ 0x85ebca6b) >>> 0;
 // As-of is the in-close month (2026-06). A renewal due IN or AFTER it has not resolved yet (the month
 // isn't closed), so it stays "open"; only renewals due in a fully-closed month carry an outcome (#30).
-const NOW_IDX = 29; // 2026-06 (in close)
+// Derive from the global as-of: the in-close month (2026-06 → index 29), NOT the last-closed month
+// (closeThrough = 2026-05 → 28). Centralized so moving the as-of (the global-as-of work) moves this too.
+const NOW_IDX = monthToIndex(PLACEHOLDER_SETTINGS.inCloseMonth ?? PLACEHOLDER_SETTINGS.closeThrough);
 const WINDOW_BACK = 6; // months of recent history to show (< the 12-mo term — see header)
 const WINDOW_FWD = 12; // forthcoming renewals to defend
-
-const idxOf = (m: Month): number => (monthYear(m) - 2024) * 12 + (monthIndex(m) - 1);
 
 export interface RenewalsSeed {
   readonly renewals: readonly Renewal[];
@@ -35,7 +35,7 @@ export function generateRenewalsSeed(contracts: readonly Contract[]): RenewalsSe
   const renewals: Renewal[] = [];
 
   for (const c of contracts) {
-    const start = idxOf(c.startMonth);
+    const start = monthToIndex(c.startMonth);
     const term = c.termMonths > 0 ? c.termMonths : 12;
     for (let due = start + term; due <= NOW_IDX + WINDOW_FWD; due += term) {
       if (due < NOW_IDX - WINDOW_BACK) continue;

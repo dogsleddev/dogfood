@@ -5,7 +5,7 @@
  * the engine. Story events live here: churn spike Q3-2024, soft quarter Q1-2026, price
  * increase Jan-2026. (Hiring surge belongs to the later headcount step.)
  */
-import { month, type Month } from "@/lib/types/period";
+import { indexToMonth, type Month } from "@/lib/types/period";
 import type { PlanTier } from "@/lib/types/source";
 import type { CostFunction } from "@/lib/types/common";
 
@@ -13,8 +13,9 @@ export const SEED_RNG_SEED = 20260617;
 
 /** Timeline: Jan 2024 – Dec 2026 (36 months). Close boundary is read from AppSettings. */
 export const SEED_MONTH_COUNT = 36;
-// Handles negative indices too (the pre-existing book starts in 2023).
-export const indexToMonth = (i: number): Month => month(2024 + Math.floor(i / 12), (((i % 12) + 12) % 12) + 1);
+// The canonical negative-safe index↔month pair now lives in lib/types/period.ts (period seam, §17);
+// re-exported here so the 8 seed modules that import it from params keep working unchanged.
+export { indexToMonth };
 export const SEED_MONTHS: readonly Month[] = Array.from({ length: SEED_MONTH_COUNT }, (_, i) => indexToMonth(i));
 
 export interface TierSpec {

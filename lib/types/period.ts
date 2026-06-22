@@ -34,6 +34,25 @@ export const parseMonth = (value: string): Month => {
 export const monthYear = (mo: Month): number => Number(mo.slice(0, 4));
 export const monthIndex = (mo: Month): number => Number(mo.slice(5, 7)); // 1–12
 
+/**
+ * Fiscal-year base: absolute month index 0 = Jan of this year (Bearing runs a calendar FY — §11).
+ * Module-PRIVATE on purpose: the future global as-of moves the CLOSE boundary (a Settings value),
+ * not the seed epoch, so this literal stays one named constant here.
+ */
+const FY_BASE_YEAR = 2024;
+
+/** Month → absolute month index from the FY base (Jan 2024 = 0). The canonical inverse of indexToMonth. */
+export const monthToIndex = (mo: Month): number => (monthYear(mo) - FY_BASE_YEAR) * 12 + (monthIndex(mo) - 1);
+
+/** Absolute month index → Month. Negative-safe (the pre-window book starts before the base year). */
+export const indexToMonth = (i: number): Month => month(FY_BASE_YEAR + Math.floor(i / 12), (((i % 12) + 12) % 12) + 1);
+
+/** First absolute month index of a Month's fiscal year (FY start). */
+export const fyStartIndex = (period: Month): number => (monthYear(period) - FY_BASE_YEAR) * 12;
+
+/** First absolute month index of a fiscal year — raw-year form. */
+export const fyStartIndexForYear = (fy: number): number => (fy - FY_BASE_YEAR) * 12;
+
 const MONTH_ABBR = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 /** Short display label for a month — "2026-06" → "Jun 2026". Display only; never for keys. */
 export const monthLabel = (mo: Month): string => `${MONTH_ABBR[monthIndex(mo) - 1]} ${monthYear(mo)}`;

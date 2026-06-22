@@ -7,7 +7,7 @@
  * hand-set PY_RULES constants.
  */
 import { usd, toMajor } from "@/lib/types/money";
-import { monthYear, monthIndex, type Month } from "@/lib/types/period";
+import { monthToIndex, type Month } from "@/lib/types/period";
 import type { MetricId } from "@/lib/types/common";
 import type { MetricFamily, MetricValue, MetricValueKind } from "@/lib/types/metrics";
 import { METRIC_CATALOG, METRIC_FAMILY_LABELS, metricValueFromMagnitude } from "@/lib/types/metrics";
@@ -24,7 +24,6 @@ import {
 import { seedPnLColumns } from "./statements";
 import type { ColumnValues } from "@/lib/types/statements";
 
-const monthToIndex = (mo: Month): number => (monthYear(mo) - 2024) * 12 + (monthIndex(mo) - 1);
 const clampIdx = (i: number, n: number) => Math.max(0, Math.min(i, n - 1));
 const fyOf = (idx: number) => 2024 + Math.floor(idx / 12);
 

@@ -51,7 +51,7 @@ import {
 } from "@/lib/queries";
 import { SCOUT_REGISTRY } from "@/lib/queries/registry";
 import { GUIDES, getGuide } from "@/lib/guides/content";
-import { month, parseMonth, monthLabel, monthYear, monthIndex, compareMonth, type Month } from "@/lib/types/period";
+import { month, parseMonth, monthLabel, monthYear, monthToIndex, compareMonth, type Month } from "@/lib/types/period";
 import { formatMoney, sumMoney, moneyFromMinor, type Money } from "@/lib/types/money";
 import { PLACEHOLDER_SETTINGS, SEED_DEPARTMENTS, SEED_EXPENSE_GROUPS } from "@/lib/target/placeholder";
 import type { StaffMember, RenewalStatus, PipelineStage } from "@/lib/types/source";
@@ -131,7 +131,6 @@ const shapeMetric = (v: MetricValue) => {
 const receipt = (tool: string, args: Record<string, string>, label: string, href: string): ScoutReceipt => ({ tool, args, label, href });
 
 // ── register-tool helpers (the layer-1 fan-out: Renewals · Pipeline · Projects · Staff · Expenses) ──
-const monthToIndex = (mo: Month): number => (monthYear(mo) - 2024) * 12 + (monthIndex(mo) - 1);
 /** A staff member is on the books in `period` if they've started and not yet left (mirrors the Staff register). */
 const staffActiveIn = (s: StaffMember, period: Month): boolean => {
   const i = monthToIndex(period);

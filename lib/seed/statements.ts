@@ -11,7 +11,7 @@
  * construction; net income equals the seed's own net-income series.
  */
 import { usd, toMajor, subMoney, zeroMoney, percent, type Money } from "@/lib/types/money";
-import { month, monthYear, monthIndex, type Month } from "@/lib/types/period";
+import { month, monthYear, monthToIndex, fyStartIndexForYear, type Month } from "@/lib/types/period";
 import type {
   PnL,
   PnLLine,
@@ -46,7 +46,6 @@ import {
 } from "./index";
 import { indexToMonth } from "./params"; // negative-safe index↔month, shared with the generators
 
-const monthToIndex = (mo: Month): number => (monthYear(mo) - 2024) * 12 + (monthIndex(mo) - 1);
 const MONTH_ABBR = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"] as const;
 
 /** The leaf (input) P&L lines and the seed series each one sums. */
@@ -140,7 +139,7 @@ function planFactor(id: string, fy: number, central: number): number {
 /** The fiscal-year window + close boundary for a period. */
 function fyWindow(period: Month) {
   const fy = monthYear(period);
-  const fyStart = (fy - 2024) * 12;
+  const fyStart = fyStartIndexForYear(fy);
   const fyEnd = fyStart + 11;
   const closeIdx = monthToIndex(PLACEHOLDER_SETTINGS.closeThrough);
   const actualEnd = Math.min(fyEnd, closeIdx); // last closed month within the FY

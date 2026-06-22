@@ -1,5 +1,5 @@
 /** Sales — the revenue funnel (layer 1 — CLAUDE.md §8). Contracts is the 606/deferred pivot. */
-import { type Month, type PeriodRange, monthYear, monthIndex, monthLabel } from "@/lib/types/period";
+import { type Month, type PeriodRange, monthYear, monthLabel, monthToIndex, fyStartIndexForYear } from "@/lib/types/period";
 import { usd, percent, ratio, sumMoney, type Money, type Percent, type Ratio } from "@/lib/types/money";
 import type { Stream, MetricId } from "@/lib/types/common";
 import type {
@@ -12,8 +12,6 @@ import type {
 } from "@/lib/types/source";
 import { getDataStore } from "@/lib/datastore";
 import { PLACEHOLDER_SETTINGS } from "@/lib/target/placeholder";
-
-const monthToIndex = (m: Month): number => (monthYear(m) - 2024) * 12 + (monthIndex(m) - 1);
 
 // ── Pipeline ──
 export interface PipelineFilter {
@@ -175,8 +173,8 @@ export async function getBookingsHistory(period: Month): Promise<BookingsHistory
     return { label, newBusiness: usd(nb), expansion: usd(ex), contraction: usd(co), gross: usd(nb + ex), net: usd(net) };
   };
   const year = monthYear(period);
-  const fyLo = (year - 2024) * 12;
-  const priorFyLo = (year - 1 - 2024) * 12;
+  const fyLo = fyStartIndexForYear(year);
+  const priorFyLo = fyStartIndexForYear(year - 1);
   return {
     period,
     fiscalYear: window(fyLo, fyLo + 11, `FY${year}`),

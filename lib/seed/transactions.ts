@@ -18,7 +18,7 @@ import { SEED_EXPENSE_GROUPS, PLACEHOLDER_SETTINGS } from "@/lib/target/placehol
 import { CHART_OF_ACCOUNTS } from "./gl";
 import { opexSubAccountById, opexGroupPool } from "./opex-accounts";
 import { usd, toMajor } from "@/lib/types/money";
-import { month, monthYear, monthIndex as monthNo, type Month } from "@/lib/types/period";
+import { month, monthYear, monthIndex as monthNo, monthToIndex, type Month } from "@/lib/types/period";
 import type { GlAccountId, ExpenseGroupId, JournalEntryId, CustomerId, ContractId, ProjectId, StaffId, CostFunction } from "@/lib/types/common";
 import type { CustomerInvoice, CashReceipt, Paycheck, Timesheet, ProjectJobCost, VendorBill, DocStatus } from "@/lib/types/transactions";
 import type { TieOutCheck } from "./subscription";
@@ -31,7 +31,6 @@ import {
   getBalanceSheetSeed,
 } from "./index";
 
-const monthToIndex = (m: Month): number => (monthYear(m) - 2024) * 12 + (monthNo(m) - 1);
 const r2 = (x: number) => Math.round(x * 100) / 100;
 
 // ── dates & document numbers ──
@@ -58,7 +57,7 @@ function addDays(iso: string, days: number): string {
 // The close boundary: actuals are closed through this date; anything due (and not yet collected
 // or paid) after it is still "open". Drives invoice/bill open|paid status realistically.
 const CLOSE_THROUGH = PLACEHOLDER_SETTINGS.closeThrough as Month;
-const CLOSE_IDX = (monthYear(CLOSE_THROUGH) - 2024) * 12 + (monthNo(CLOSE_THROUGH) - 1); // last closed month index
+const CLOSE_IDX = monthToIndex(CLOSE_THROUGH); // last closed month index
 const CLOSE_LAST_ISO = (() => {
   const y = monthYear(CLOSE_THROUGH);
   const mo = monthNo(CLOSE_THROUGH);

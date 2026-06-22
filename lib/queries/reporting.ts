@@ -1,13 +1,11 @@
 /** Reporting — Projects · Staff · Expense Transactions (layer 1 — CLAUDE.md §8). */
-import { type Month, monthYear, monthIndex } from "@/lib/types/period";
+import { type Month, monthToIndex } from "@/lib/types/period";
 import { percent, type Percent } from "@/lib/types/money";
 import type { DepartmentId } from "@/lib/types/common";
 import type { Project, StaffMember, ExpenseTransaction } from "@/lib/types/source";
 import type { ExpenseTransactionFilter } from "@/lib/datastore";
 import { getDataStore } from "@/lib/datastore";
 import { PLACEHOLDER_SETTINGS } from "@/lib/target/placeholder";
-
-const monthToIndex = (m: Month): number => (monthYear(m) - 2024) * 12 + (monthIndex(m) - 1);
 /** A staff member is on the books in `period` if they've started and not yet left. */
 const activeIn = (s: StaffMember, period: Month): boolean => {
   const i = monthToIndex(period);
