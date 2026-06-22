@@ -1,0 +1,19 @@
+-- 0004 — scenarios persistence: store the full typed Adjustment[] losslessly as JSONB.
+--
+-- The flat scenario_inputs columns (lever / sub_dimension / magnitude numeric(10,4) /
+-- start_month / end_month / shape) cannot hold the discriminated Adjustment + Magnitude unions
+-- (lib/types/scenario.ts): they lose magnitude.kind, the 'days' unit, the categorical 'freeze'
+-- (a numeric column can't hold a string), the per-lever target field (stream / departmentId /
+-- groupId), and the per-adjustment id. numeric(10,4) would also truncate (the class of bug 0002
+-- fixed for ratios). JSONB stores the serialized object verbatim (JSON numbers are float64 —
+-- fine for slider magnitudes).
+--
+-- A scenario is one row; its adjustments live in a single jsonb array column — the DataStore
+-- contract is whole-scenario (upsertScenario(scenario) / listScenarios() -> Scenario[] with
+-- adjustments: readonly Adjustment[]). Only USER scenarios persist; Base + presets stay
+-- code-defined (lib/scenario/registry.ts).
+--
+-- Folded into 0001_init.sql too, for fresh applies (per the 0002/0003 convention).
+-- NOTE: the now-unused flat scenario_inputs table is intentionally NOT dropped here — it is empty
+-- and never written, so leaving it orphaned avoids a destructive DDL on the live DB. Drop later if desired.
+alter table scenarios add column if not exists adjustments jsonb not null default '[]'::jsonb;

@@ -6,13 +6,15 @@
  * Exits non-zero on any failure. Additive only — does not touch the seed/statement tie-outs.
  */
 import { month, type PeriodRange } from "@/lib/types/period";
-import { toMajor } from "@/lib/types/money";
-import type { MetricId } from "@/lib/types/common";
-import type { Adjustment } from "@/lib/types/scenario";
+import { toMajor, percent } from "@/lib/types/money";
+import type { MetricId, ScenarioId, ExpenseGroupId } from "@/lib/types/common";
+import type { Adjustment, Scenario } from "@/lib/types/scenario";
 import { runScenario, assertBaseInvariant } from "@/lib/scenario/engine";
 import { PRESET_SCENARIOS, BASE_SCENARIO } from "@/lib/scenario/presets";
-import { validateAdjustment } from "@/lib/scenario/validation";
+import { validateAdjustment, validateScenario } from "@/lib/scenario/validation";
 import { buildSeedKpiTile } from "@/lib/seed/dashboard-metrics";
+import { getDataStore } from "@/lib/datastore";
+import { upsertUserScenario, deleteUserScenario } from "@/lib/scenario/registry";
 
 const PERIOD = month(2026, 6);
 const HORIZON: PeriodRange = { start: month(2026, 7), end: month(2026, 12) };
@@ -111,5 +113,42 @@ function fmt(n: number): string {
   return n.toFixed(3);
 }
 
-console.log(`\n${fail === 0 ? "PASS" : "FAIL"} — ${pass}/${pass + fail} checks\n`);
-process.exit(fail === 0 ? 0 : 1);
+// Canonical (key-sorted) JSON for order-insensitive deep equality (the JSONB round-trip may reorder keys).
+function canon(v: unknown): string {
+  return JSON.stringify(v, (_k, val) =>
+    val && typeof val === "object" && !Array.isArray(val)
+      ? Object.fromEntries(Object.entries(val as Record<string, unknown>).sort(([a], [b]) => a.localeCompare(b)))
+      : val,
+  );
+}
+
+void (async () => {
+  console.log("\n4. Persist → read → run-engine round-trip (lossless JSONB + re-brand)");
+  const sid = "check-roundtrip" as ScenarioId;
+  // One adjustment of EVERY magnitude kind across the lever set — every union arm the JSONB must preserve.
+  const adjustments: Adjustment[] = [
+    { id: "rt-rate", lever: "revenue", stream: "subscription", magnitude: { kind: "rate", value: percent(0.08) }, window: { start: month(2026, 7) }, shape: "ramp" }, // open-ended (no end)
+    { id: "rt-level", lever: "expense", groupId: "sales-marketing" as ExpenseGroupId, magnitude: { kind: "level", delta: -100_000 }, window: { start: month(2026, 7), end: month(2026, 12) }, shape: "ramp" },
+    { id: "rt-absolute", lever: "ar_dso", magnitude: { kind: "absolute", value: 35, unit: "days" }, window: { start: month(2026, 7), end: month(2026, 12) }, shape: "step" },
+    { id: "rt-categorical", lever: "personnel", magnitude: { kind: "categorical", value: "freeze" }, window: { start: month(2026, 7), end: month(2026, 12) }, shape: "step" },
+  ];
+  const sc: Scenario = { id: sid, name: "Round-trip check", baseline: "base", adjustments };
+  const store = getDataStore();
+  await upsertUserScenario(sc);
+  const round = await store.getScenario(sid);
+  ok("scenario round-trips from the store", round !== undefined);
+  if (round) {
+    ok("adjustments structurally identical (lossless)", canon(round.adjustments) === canon(sc.adjustments),
+      `sent ${canon(sc.adjustments)} | back ${canon(round.adjustments)}`);
+    ok("open-ended window round-trips with end ABSENT", round.adjustments[0]?.window.end === undefined);
+    const sentPnl = runScenario({ scenario: sc, period: PERIOD, horizon: HORIZON }).pnl;
+    const backPnl = runScenario({ scenario: round, period: PERIOD, horizon: HORIZON }).pnl;
+    ok("engine output identical from deserialized scenario (re-brand correct)", canon(sentPnl) === canon(backPnl));
+    ok("deserialized scenario validates", validateScenario(round, HORIZON).ok);
+  }
+  await deleteUserScenario(sid);
+  ok("scenario deletes cleanly", (await store.getScenario(sid)) === undefined);
+
+  console.log(`\n${fail === 0 ? "PASS" : "FAIL"} — ${pass}/${pass + fail} checks\n`);
+  process.exit(fail === 0 ? 0 : 1);
+})();

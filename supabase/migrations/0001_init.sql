@@ -247,12 +247,17 @@ create table flux_notes (
 );
 
 create table scenarios (
-  id         text primary key,
-  name       text not null,
-  baseline   text not null default 'base' check (baseline in ('base','budget')),
-  created_at timestamptz not null default now()
+  id          text primary key,
+  name        text not null,
+  baseline    text not null default 'base' check (baseline in ('base','budget')),
+  -- the full typed Adjustment[] stored losslessly as JSONB (see 0004_scenario_jsonb.sql)
+  adjustments jsonb not null default '[]'::jsonb,
+  created_at  timestamptz not null default now()
 );
 
+-- DEPRECATED (0004): scenario adjustments now live in scenarios.adjustments (jsonb). The flat
+-- columns below cannot hold the discriminated Adjustment/Magnitude unions. This table is unused
+-- and never written; kept only so a fresh apply matches the live DB (which was migrated, not dropped).
 create table scenario_inputs (
   id            uuid primary key default gen_random_uuid(),
   scenario_id   text not null references scenarios(id) on delete cascade,

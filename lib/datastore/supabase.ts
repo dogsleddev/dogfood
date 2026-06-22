@@ -10,9 +10,9 @@
  *
  * Therefore this class EXTENDS InMemoryDataStore and OVERRIDES only the record/config reads (plus the
  * flux-note writes) to hit Supabase; statements, metrics, and the raw driver models are INHERITED
- * (generator-backed), so they stay identical by construction. The scenario + budget-snapshot write
- * stores are inherited for now (held in the in-memory write layer); persisting them to Supabase is a
- * later step. The seed loads into
+ * (generator-backed), so they stay identical by construction. Scenario writes persist to Supabase
+ * (the scenarios.adjustments JSONB column, overridden below); the budget-snapshot write store is
+ * still inherited in-memory (its persistence is a later step). The seed loads into
  * Supabase once (scripts/seed-supabase.ts); a round-trip is then byte-faithful to the generator
  * (proven by scripts/supabase-parity.ts), so swapping the store changes storage, not numbers.
  *
@@ -52,6 +52,7 @@ import type {
   RenewalId,
   ProjectId,
   StaffId,
+  ScenarioId,
 } from "@/lib/types/common";
 import type {
   Contract,
@@ -73,6 +74,8 @@ import type {
 } from "@/lib/types/source";
 import type { CustomerInvoice, CashReceipt, Paycheck, Timesheet, VendorBill, DocStatus, CustomerInvoiceKind } from "@/lib/types/transactions";
 import type { FluxNote, NewFluxNote, FluxNoteFilter, FluxNoteSource } from "@/lib/types/flux";
+import type { Scenario, Adjustment, Magnitude, ScenarioBaseline, AdjustmentShape } from "@/lib/types/scenario";
+import { parseMonth } from "@/lib/types/period";
 
 // ── env + client (server-only: the service-role key never reaches the browser) ──
 function makeClient(): SupabaseClient {
@@ -166,6 +169,54 @@ const rowToFluxNote = (r: Row): FluxNote => ({
   id: s(r.id), transactionId: opt(r.transaction_id), accountCode: opt(r.account_code), statementLine: opt(r.statement_line),
   period: optMo(r.period), author: s(r.author), body: s(r.body), amountAtNote: optMny(r.amount_at_note),
   resolved: r.resolved === true, source: s(r.source) as FluxNoteSource, createdAt: s(r.created_at), updatedAt: s(r.updated_at),
+});
+
+// ── scenario serializers — the JSONB adjustments array round-trips the full discriminated union ──
+// WRITE is verbatim (branded Percent/Month erase to number/string at runtime; supabase-js serializes
+// the array to JSONB — do NOT JSON.stringify, that double-encodes). READ reconstructs + re-brands:
+// the JSONB is hand-editable in Supabase, so treat it as untrusted and fail loud on a bad shape
+// rather than feed the engine an un-branded Month or a magnitude missing its kind.
+const scenarioToRow = (sc: Scenario): Row => ({
+  id: sc.id,
+  name: sc.name,
+  baseline: sc.baseline,
+  adjustments: sc.adjustments, // supabase-js → JSONB; Base/presets never reach here (registry guards)
+});
+
+const parseMagnitude = (m: Record<string, unknown>): Magnitude => {
+  switch (m.kind) {
+    case "rate": return { kind: "rate", value: percent(Number(m.value)) };
+    case "level": return { kind: "level", delta: Number(m.delta) };
+    case "absolute": return { kind: "absolute", value: Number(m.value), unit: "days" };
+    case "categorical": return { kind: "categorical", value: "freeze" };
+    default: throw new Error(`SupabaseDataStore: unknown magnitude kind "${String(m.kind)}" in scenario adjustments`);
+  }
+};
+
+const parseAdjustment = (raw: Record<string, unknown>): Adjustment => {
+  const w = (raw.window ?? {}) as Record<string, unknown>;
+  const base = {
+    id: String(raw.id),
+    window: { start: parseMonth(String(w.start)), ...(w.end ? { end: parseMonth(String(w.end)) } : {}) },
+    shape: raw.shape as AdjustmentShape,
+    magnitude: parseMagnitude((raw.magnitude ?? {}) as Record<string, unknown>),
+  };
+  switch (raw.lever) {
+    case "revenue": return { ...base, lever: "revenue", stream: raw.stream as Stream };
+    case "personnel": return { ...base, lever: "personnel", ...(raw.departmentId ? { departmentId: raw.departmentId as DepartmentId } : {}) };
+    case "expense": return { ...base, lever: "expense", groupId: raw.groupId as ExpenseGroupId };
+    case "direct_cost": return { ...base, lever: "direct_cost" };
+    case "ar_dso": return { ...base, lever: "ar_dso" };
+    case "ap_dpo": return { ...base, lever: "ap_dpo" };
+    default: throw new Error(`SupabaseDataStore: unknown lever "${String(raw.lever)}" in scenario adjustments`);
+  }
+};
+
+const rowToScenario = (r: Row): Scenario => ({
+  id: s(r.id) as ScenarioId,
+  name: s(r.name),
+  baseline: s(r.baseline) as ScenarioBaseline,
+  adjustments: ((r.adjustments ?? []) as Record<string, unknown>[]).map(parseAdjustment),
 });
 
 export class SupabaseDataStore extends InMemoryDataStore {
@@ -352,5 +403,26 @@ export class SupabaseDataStore extends InMemoryDataStore {
   override async deleteFluxNote(id: string): Promise<void> {
     const { error } = await this.client.from("flux_notes").delete().eq("id", id);
     if (error) throw new Error(`SupabaseDataStore: delete flux_notes: ${error.message}`);
+  }
+
+  // ── scenarios (USER scenarios only) — never cached: mutable, so always read fresh ──
+  override async listScenarios(): Promise<readonly Scenario[]> {
+    const { data, error } = await this.client.from("scenarios").select("*").order("created_at", { ascending: true });
+    if (error) throw new Error(`SupabaseDataStore: select scenarios: ${error.message}`);
+    return (data as Row[]).map(rowToScenario);
+  }
+  override async getScenario(id: ScenarioId): Promise<Scenario | undefined> {
+    const { data, error } = await this.client.from("scenarios").select("*").eq("id", id).maybeSingle();
+    if (error) throw new Error(`SupabaseDataStore: select scenario: ${error.message}`);
+    return data ? rowToScenario(data as Row) : undefined;
+  }
+  override async upsertScenario(scenario: Scenario): Promise<void> {
+    // upsert on the PK (id) → create-or-replace, matching the in-memory Map.set() semantics
+    const { error } = await this.client.from("scenarios").upsert(scenarioToRow(scenario));
+    if (error) throw new Error(`SupabaseDataStore: upsert scenarios: ${error.message}`);
+  }
+  override async deleteScenario(id: ScenarioId): Promise<void> {
+    const { error } = await this.client.from("scenarios").delete().eq("id", id);
+    if (error) throw new Error(`SupabaseDataStore: delete scenarios: ${error.message}`);
   }
 }
