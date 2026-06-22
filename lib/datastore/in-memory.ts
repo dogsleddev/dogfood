@@ -16,6 +16,7 @@ import type {
   CashReceiptFilter,
 } from "./datastore";
 import type { Month, PeriodRange } from "@/lib/types/period";
+import { monthYear } from "@/lib/types/period";
 import type { Department, ExpenseGroup, ScenarioId, MetricId } from "@/lib/types/common";
 import type {
   Contract,
@@ -62,6 +63,8 @@ import {
   buildSeedPnL,
   buildSeedMonthlyPnL,
   buildSeedBudget,
+  applyBudgetSnapshot,
+  SEED_BUDGET_PERIOD,
   buildSeedBalanceSheet,
   buildSeedMonthlyBalanceSheet,
   buildSeedCashFlow,
@@ -203,23 +206,39 @@ export class InMemoryDataStore implements DataStore {
     this.fluxNotes = this.fluxNotes.filter((n) => n.id !== id);
   }
 
-  // ── budget snapshot ──
+  // ── budget snapshot (§8: the seed starts with the FY26 Plan locked; lock/reset re-freeze it) ──
   async getBudgetSnapshot(): Promise<BudgetSnapshot | undefined> {
+    if (!this.budget) this.budget = buildSeedBudget(SEED_BUDGET_PERIOD); // initial FY-Plan lock
     return this.budget;
   }
   async saveBudgetSnapshot(snapshot: BudgetSnapshot): Promise<void> {
     this.budget = snapshot;
   }
+  async lockBudget(opts?: { asOf?: Month; sourcedFrom?: "base" | "scenario" }): Promise<BudgetSnapshot> {
+    const snapshot: BudgetSnapshot = {
+      ...buildSeedBudget(opts?.asOf ?? SEED_BUDGET_PERIOD),
+      sourcedFrom: opts?.sourcedFrom ?? "base",
+    };
+    await this.saveBudgetSnapshot(snapshot);
+    return snapshot;
+  }
+  async resetBudget(): Promise<BudgetSnapshot> {
+    return this.lockBudget(); // re-freeze the default FY Plan
+  }
 
   // ── derived financial statements (delegate to the seed's tying-out reference impl) ──
   async getPnL(period: Month): Promise<PnL> {
-    return buildSeedPnL(period);
+    // Overlay the locked Budget snapshot onto the immutable forecast/actual (the budget is a write
+    // surface off immutable source, §4); falls back to the default plan for prior FYs / pre-lock.
+    return applyBudgetSnapshot(buildSeedPnL(period), await this.getBudgetSnapshot(), period);
   }
   async getMonthlyPnL(period: Month): Promise<MonthlyPnL> {
     return buildSeedMonthlyPnL(period);
   }
   async getBudgetView(period: Month): Promise<BudgetSnapshot> {
-    return buildSeedBudget(period);
+    const snap = await this.getBudgetSnapshot();
+    if (snap && monthYear(snap.horizon.start) === monthYear(period)) return snap;
+    return buildSeedBudget(period); // default plan for prior fiscal years
   }
   async getBalanceSheet(period: Month): Promise<BalanceSheet> {
     return buildSeedBalanceSheet(period);

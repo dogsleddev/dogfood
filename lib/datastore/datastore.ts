@@ -147,6 +147,10 @@ export interface DataStore {
   // ── budget snapshot (the locked baseline — §8) ──
   getBudgetSnapshot(): Promise<BudgetSnapshot | undefined>;
   saveBudgetSnapshot(snapshot: BudgetSnapshot): Promise<void>;
+  /** Freeze a Budget snapshot from the current Base plan (the default) and persist it. §8 lock lifecycle. */
+  lockBudget(opts?: { asOf?: Month; sourcedFrom?: "base" | "scenario" }): Promise<BudgetSnapshot>;
+  /** Restore the Budget to the default FY plan (re-freeze) — the user-facing reset. */
+  resetBudget(): Promise<BudgetSnapshot>;
 
   // ── derived financial statements (layer 3) ──
   // The seed's tying-out reference implementation lives behind these. lib/queries forwards or
@@ -154,7 +158,7 @@ export interface DataStore {
   getPnL(period: Month): Promise<PnL>;
   /** Month-across-columns P&L for the fiscal year of `period` (the board-package view). */
   getMonthlyPnL(period: Month): Promise<MonthlyPnL>;
-  /** Per-period Budget VIEW derived from the plan (distinct from getBudgetSnapshot, the locked store). */
+  /** Budget for `period`'s FY: the locked snapshot when it covers that FY, else the default plan. */
   getBudgetView(period: Month): Promise<BudgetSnapshot>;
   getBalanceSheet(period: Month): Promise<BalanceSheet>;
   /** Month-across-columns Balance Sheet for the fiscal year of `period` (the board-package view). */

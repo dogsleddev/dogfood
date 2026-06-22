@@ -55,7 +55,17 @@ export interface LockBudgetInput {
 }
 
 export async function lockBudget(input: LockBudgetInput): Promise<BudgetSnapshot> {
-  return notImplemented("lockBudget", { input });
+  if (input.source === "scenario") {
+    // Promoting an approved scenario into the Budget freezes the scenario engine's P&L — deferred
+    // with scenario-sourced locks. Freezing the current Base plan is the live path (§8, Chris 2026-06-22).
+    return notImplemented("lockBudget(source=scenario)", { input });
+  }
+  return getDataStore().lockBudget({ asOf: input.asOf, sourcedFrom: "base" });
+}
+
+/** Reset the Budget to the default FY plan (re-freeze the current values) — the user-facing reset. */
+export async function resetBudget(): Promise<BudgetSnapshot> {
+  return getDataStore().resetBudget();
 }
 
 // ── Balance Sheet ──

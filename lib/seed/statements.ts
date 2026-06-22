@@ -5,8 +5,10 @@
  * this is the "swap don't rewrite" seam (§4).
  *
  * Columns (§8): Forecast = full fiscal year · Actual = YTD through the close boundary · Budget =
- * the frozen plan (forecast × a per-line plan factor) · Variance = Forecast − Budget. Subtotals
- * foot from the leaves by construction; net income equals the seed's own net-income series.
+ * the frozen, lockable snapshot (DataStore.getBudgetSnapshot, overlaid via applyBudgetSnapshot;
+ * the per-line plan factor below is the GENERATOR of the default FY plan + the prior-year fallback,
+ * no longer a per-read view) · Variance = Forecast − Budget. Subtotals foot from the leaves by
+ * construction; net income equals the seed's own net-income series.
  */
 import { usd, toMajor, subMoney, zeroMoney, percent, type Money } from "@/lib/types/money";
 import { month, monthYear, monthIndex, type Month } from "@/lib/types/period";
@@ -316,6 +318,30 @@ export function buildSeedMonthlyPnL(period: Month): MonthlyPnL {
   });
 
   return { period, label: fyP.label, months, lines };
+}
+
+/** The period whose fiscal year the seed Budget is locked for (the current FY26 plan, §8). */
+export const SEED_BUDGET_PERIOD: Month = PLACEHOLDER_SETTINGS.closeThrough;
+
+/**
+ * Overlay a locked Budget snapshot's per-line budget onto a freshly-built P&L, keyed by line id (leaves
+ * AND subtotals — the snapshot already carries correct subtotal budgets, so nothing is re-footed). The
+ * LIVE forecast/actual are kept; only budget is swapped and variance (= forecast − budget) re-derived.
+ * Applies ONLY when the snapshot covers `period`'s fiscal year; otherwise the P&L keeps its default
+ * (factor-derived) budget — the fallback for prior fiscal years and the pre-lock state.
+ */
+export function applyBudgetSnapshot(pnl: PnL, snap: BudgetSnapshot | undefined, period: Month): PnL {
+  if (!snap || monthYear(snap.horizon.start) !== monthYear(period)) return pnl;
+  const budgetById = new Map<PnLLineId, Money>(snap.lines.map((l) => [l.id, l.values.budget ?? zeroMoney()]));
+  return {
+    ...pnl,
+    lines: pnl.lines.map((l) => {
+      const b = budgetById.get(l.id);
+      if (!b) return l;
+      const forecast = l.values.forecast ?? zeroMoney();
+      return { ...l, values: { ...l.values, budget: b, variance: subMoney(forecast, b) } };
+    }),
+  };
 }
 
 export function buildSeedBudget(period: Month): BudgetSnapshot {

@@ -1,4 +1,4 @@
-import { getPnL, getMonthlyPnL, getMetricSet } from "@/lib/queries";
+import { getPnL, getMonthlyPnL, getMetricSet, getBudget } from "@/lib/queries";
 import { month } from "@/lib/types/period";
 import type { PnLLineId } from "@/lib/types/statements";
 import type { MetricId } from "@/lib/types/common";
@@ -8,6 +8,7 @@ import { PnlTable } from "@/components/statements/pnl-table";
 import { InspectPane } from "@/components/statements/inspect-pane";
 import { MonthlyPnlTable } from "@/components/statements/monthly-pnl-table";
 import { StatementViewToggle } from "@/components/statements/view-toggle";
+import { BudgetStatus } from "@/components/statements/budget-status";
 
 const PERIOD = month(2026, 6);
 
@@ -68,16 +69,19 @@ async function MonthlyView() {
 }
 
 async function FyView({ inspect }: { inspect?: string }) {
-  const pnl = await getPnL(PERIOD);
+  const [pnl, budget] = await Promise.all([getPnL(PERIOD), getBudget(PERIOD)]);
   const inspectId = (inspect && pnl.lines.some((l) => l.id === inspect) ? inspect : undefined) as
     | PnLLineId
     | undefined;
   return (
-    <div className="flex items-start gap-6">
-      <div className="min-w-0 flex-1">
-        <PnlTable pnl={pnl} inspect={inspectId} />
+    <div>
+      <BudgetStatus snapshot={budget} />
+      <div className="flex items-start gap-6">
+        <div className="min-w-0 flex-1">
+          <PnlTable pnl={pnl} inspect={inspectId} />
+        </div>
+        {inspectId && <InspectPane pnl={pnl} lineId={inspectId} />}
       </div>
-      {inspectId && <InspectPane pnl={pnl} lineId={inspectId} />}
     </div>
   );
 }
