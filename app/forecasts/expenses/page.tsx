@@ -23,7 +23,7 @@ export default async function ExpenseForecastPage() {
           → group) is owned by Account Mapping, the label and order by Settings — so a group defined
           upstream simply appears here. Payroll and Cost of Revenue live in their own drivers; the sum
           of these groups per month equals the P&amp;L non-payroll OpEx lines by construction. Open any
-          group for its detail.
+          group to drill it into its GL sub-accounts and the vendors under each.
         </p>
       </header>
 
