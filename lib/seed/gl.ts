@@ -127,6 +127,31 @@ export function getLedger(): Ledger {
   return cached;
 }
 
+/**
+ * The Account-Mapping rollup seam (§7 — the map is LOAD-BEARING). Groups the per-account monthly GL
+ * activity by each account's `statementLineId`, so re-pointing an account's mapping moves its closed
+ * activity into a different statement line. The statement builders read this for the ACTUAL column:
+ * Σ(accounts mapped to a line) === that line's actual, proven exact by `plTie` (and month-by-month,
+ * since `activity` is posted from the same monthly leaf series). The `+=` accumulator handles the
+ * general N:1 (many accounts → one line) case; today the P&L map is 1:1.
+ * NOTE: reads the GENERATOR chart (CHART_OF_ACCOUNTS), not the DataStore — an editable/DB-persisted map
+ * would need to read through the DataStore first (a later override-layer slice; the DB map === the
+ * generator map today, parity-checked, so this is neutral).
+ */
+export function activityByStatementLine(): Map<string, readonly number[]> {
+  const { activity } = getLedger();
+  const n = [...activity.values()][0]?.length ?? 0;
+  const byLine = new Map<string, number[]>();
+  for (const a of CHART_OF_ACCOUNTS) {
+    const act = activity.get(a.code);
+    if (!act) continue;
+    const bucket = byLine.get(a.statementLineId) ?? new Array<number>(n).fill(0);
+    for (let i = 0; i < n; i++) bucket[i] += act[i];
+    byLine.set(a.statementLineId, bucket);
+  }
+  return byLine;
+}
+
 function buildLedger(): Ledger {
   const sub = getSubscriptionSeed();
   const svc = getServicesSeed();

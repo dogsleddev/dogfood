@@ -45,6 +45,7 @@ import {
   getSbcSeed,
 } from "./index";
 import { indexToMonth } from "./params"; // negative-safe index↔month, shared with the generators
+import { activityByStatementLine } from "./gl"; // the Account-Mapping rollup that drives the ACTUAL column (§7)
 
 const MONTH_ABBR = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"] as const;
 
@@ -197,12 +198,17 @@ interface ComputedPnL {
 
 function computeColumns(period: Month): ComputedPnL {
   const series = leafSeriesById();
+  // The ACTUAL column rolls up from the GL account→line map (§7 — Account Mapping is load-bearing):
+  // re-pointing an account's statementLineId moves its closed activity to a different line. Forecast +
+  // Budget stay driver-driven (forecast months aren't journalized). Tie-out-neutral by gl.ts plTie.
+  const actualByLine = activityByStatementLine();
+  const zeros: readonly number[] = series.subscription.map(() => 0);
   const { fy, fyStart, fyEnd, actualEnd } = fyWindow(period);
   const leaf = new Map<LeafId, ColumnValues>();
   for (const spec of LEAVES) {
     const ser = series[spec.id];
     const forecast = sumRange(ser, fyStart, fyEnd);
-    const actual = actualEnd >= fyStart ? sumRange(ser, fyStart, actualEnd) : 0;
+    const actual = actualEnd >= fyStart ? sumRange(actualByLine.get(spec.id) ?? zeros, fyStart, actualEnd) : 0;
     leaf.set(spec.id, cv(forecast, actual, forecast * planFactor(spec.id, fy, spec.budgetFactor)));
   }
   const v = (id: LeafId) => leaf.get(id) ?? cv(0, 0, 0);
@@ -640,13 +646,16 @@ export function computeColumnsFromSeries(
   adjusted: Record<LeafId, readonly number[]>,
 ): ComputedPnL {
   const base = leafSeriesById();
+  // ACTUAL reads the SAME GL rollup as Base (Scenario(Base).actual === Base.actual === GL actual — the
+  // immutable-actuals invariant); budget reads the Base plan. Only the forecast shape moves per scenario.
+  const actualByLine = activityByStatementLine();
+  const zeros: readonly number[] = base.subscription.map(() => 0);
   const { fy, fyStart, fyEnd, actualEnd } = fyWindow(period);
   const leaf = new Map<LeafId, ColumnValues>();
   for (const spec of LEAVES) {
     const fSer = adjusted[spec.id] ?? base[spec.id];
     const forecast = sumRange(fSer, fyStart, fyEnd);
-    // actuals + budget read the BASE series (immutable / locked plan)
-    const actual = actualEnd >= fyStart ? sumRange(base[spec.id], fyStart, actualEnd) : 0;
+    const actual = actualEnd >= fyStart ? sumRange(actualByLine.get(spec.id) ?? zeros, fyStart, actualEnd) : 0;
     const budget = sumRange(base[spec.id], fyStart, fyEnd) * planFactor(spec.id, fy, spec.budgetFactor);
     leaf.set(spec.id, cv(forecast, actual, budget));
   }

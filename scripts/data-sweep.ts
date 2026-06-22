@@ -14,10 +14,10 @@ import {
   getSbcSeed,
   getLeaseSeed,
 } from "@/lib/seed";
-import { getLedger, CHART_OF_ACCOUNTS } from "@/lib/seed/gl";
+import { getLedger, CHART_OF_ACCOUNTS, activityByStatementLine } from "@/lib/seed/gl";
 import { getTransactionsSeed } from "@/lib/seed/transactions";
 import type { TieOutCheck } from "@/lib/seed";
-import { buildSeedPnL, buildSeedMonthlyPnL, buildSeedBalanceSheet, buildSeedMonthlyBalanceSheet, buildSeedCashFlow, buildSeedMonthlyCashFlow } from "@/lib/seed/statements";
+import { buildSeedPnL, buildSeedMonthlyPnL, buildSeedBalanceSheet, buildSeedMonthlyBalanceSheet, buildSeedCashFlow, buildSeedMonthlyCashFlow, seedFyWindow } from "@/lib/seed/statements";
 import { buildSeedDashboard, buildSeedMetricValue } from "@/lib/seed/dashboard-metrics";
 import { SEED_DEPARTMENTS, SEED_EXPENSE_GROUPS, PLACEHOLDER_SETTINGS } from "@/lib/target/placeholder";
 import { TIERS } from "@/lib/seed/params";
@@ -235,8 +235,9 @@ if (!mcfOk) process.exitCode = 1;
 
 // Account Mapping totality (P0 #4): the GL chart-of-accounts -> statement-line map must be TOTAL and
 // well-formed — every leaf P&L line and every BS line has exactly ONE backing account, the 6 computed
-// subtotals have NONE, and no account points at an unknown line. Catches GL<->statements drift that the
-// rollup tie-outs miss (the statements never read the map, so a bad mapping otherwise fails silently).
+// subtotals have NONE, and no account points at an unknown line. Since step 6 the P&L ACTUAL column
+// rolls up through this map (activityByStatementLine), so a mis-mapping now MOVES the Actual column —
+// this totality check + the closed-window rollup check below are the complementary guardrails.
 const leafPnlIds = pnl.lines.filter((l) => l.level === 1).map((l) => l.id as string);
 const subtotalPnlIds = pnl.lines.filter((l) => l.level === 0).map((l) => l.id as string);
 const bsIds = sheet.lines.map((l) => l.id as string);
@@ -249,6 +250,27 @@ const subtotalBacked = subtotalPnlIds.filter((id) => coaCountByLine.has(id));
 const mapOk = orphanAccts.length === 0 && uncovered.length === 0 && subtotalBacked.length === 0;
 L(`  Account Mapping: ${CHART_OF_ACCOUNTS.length} accounts -> ${backedLineIds.size} statement lines ${mapOk ? "TOTAL + well-formed" : "BROKEN"} (orphans ${orphanAccts.length} · uncovered ${uncovered.length} · subtotals-backed ${subtotalBacked.length})${mapOk ? "" : "  <- FAIL"}`);
 if (!mapOk) { process.exitCode = 1; if (orphanAccts.length) L(`    orphan accounts: ${orphanAccts.join(", ")}`); if (uncovered.length) L(`    uncovered lines: ${uncovered.join(", ")}`); if (subtotalBacked.length) L(`    subtotals with an account: ${subtotalBacked.join(", ")}`); }
+
+// Step 6 — the P&L ACTUAL column is driven by the GL→line rollup (Account Mapping is load-bearing).
+// For each leaf P&L line, Σ(GL activity for its mapped accounts) over the CLOSED window [fyStart..actualEnd]
+// === the line's Actual column. Asserts the rollup at the partial-close grain (plTie only proves the FY
+// grain), so it proves the Actual column is map-driven AND still ties. Window derived from seedFyWindow,
+// so it tracks the close boundary automatically.
+const { fyStart: clFyStart, actualEnd: clActualEnd } = seedFyWindow(month(2026, 6));
+const actualByLine = activityByStatementLine();
+let actMaxDelta = 0;
+let actWorst = "";
+for (const l of pnl.lines.filter((x) => x.level === 1)) {
+  const ser = actualByLine.get(l.id as string);
+  let glActual = 0;
+  for (let i = clFyStart; i <= clActualEnd; i++) glActual += ser?.[i] ?? 0;
+  const colActual = (l.values.actual?.minor ?? 0) / 100;
+  const d = Math.abs(glActual - colActual);
+  if (d > actMaxDelta) { actMaxDelta = d; actWorst = l.id as string; }
+}
+const actOk = actMaxDelta < 0.01;
+L(`  P&L Actual ← GL rollup: every leaf's closed-window account activity === the Actual column (max Δ $${actMaxDelta.toFixed(2)}${actOk ? "" : ` on ${actWorst}  <- FAIL`})`);
+if (!actOk) process.exitCode = 1;
 
 // Dashboard financial tiles === the P&L Forecast column (guards the SBC-class drift: the dashboard
 // recomputes revenue/GP/OI/NI from separate FY aggregates than computeColumns — they must agree).
