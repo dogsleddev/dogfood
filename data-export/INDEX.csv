@@ -8,9 +8,9 @@ staff.csv,163,People register (by dept + function)
 gl_accounts.csv,28,Chart of accounts + Account Mapping
 journal_lines.csv,1324,Balanced JE lines (monthly-summary GL)
 gl_account_monthly.csv,925,Per-account monthly GL activity (pivotable)
-vendor_bills.csv,1748,AP expense detail (drill + flux-note anchor)
+vendor_bills.csv,2057,AP expense detail (drill + flux-note anchor; sub_code = GL sub-account within the group)
 paychecks.csv,5852,"Salary detail, paycheck by paycheck"
-timesheets.csv,2360,"Labor detail, timesheet by timesheet"
+timesheets.csv,2325,"Labor detail, timesheet by timesheet"
 customer_invoices.csv,825,Customer billing detail
 cash_receipts.csv,780,Cash collections (FIFO-applied)
 revrec_by_contract.csv,2881,"Subscription 606 recognition, per contract per month"

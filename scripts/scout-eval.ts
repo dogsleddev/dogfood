@@ -117,6 +117,7 @@ const CASES: readonly Case[] = [
   { q: "Break down our Cost of Revenue / cost-to-serve.", want: "getCostOfRevenue", check: (rs) => has(rs, "getCostOfRevenue") },
   { q: "What's our payroll forecast by function?", want: "getPersonnelForecast", check: (rs) => has(rs, "getPersonnelForecast") },
   { q: "What's the OpEx forecast by group for the year?", want: "getExpenseForecast", check: (rs) => has(rs, "getExpenseForecast") },
+  { q: "What makes up the Sales & Marketing forecast in July — break it down by account and vendor?", want: "getExpenseForecast (drill)", check: (rs) => has(rs, "getExpenseForecast") },
   { q: "What's our DSO and AR forecast?", want: "getArForecast", check: (rs) => has(rs, "getArForecast") },
   { q: "What's our capex and depreciation plan?", want: "getFixedAssetForecast", check: (rs) => has(rs, "getFixedAssetForecast") },
   // driver vs actual overlap — bare "revenue this year" is the statement number, NOT the forecast driver

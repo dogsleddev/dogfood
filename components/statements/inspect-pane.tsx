@@ -1,12 +1,58 @@
 import Link from "next/link";
 import { X, ArrowUpRight } from "lucide-react";
-import { formatMoney, formatPercent, type Money } from "@/lib/types/money";
+import { formatMoney, formatPercent, sumMoney, type Money } from "@/lib/types/money";
+import { month } from "@/lib/types/period";
 import type { PnL, PnLLineId } from "@/lib/types/statements";
-import { PNL_DRILL, PNL_DECOMPOSITION, type DrillTarget } from "./drill-map";
+import type { ExpenseGroupId } from "@/lib/types/common";
+import { getExpenseForecast } from "@/lib/queries";
+import { PNL_DRILL, PNL_DECOMPOSITION, OPEX_LINE_GROUP, type DrillTarget } from "./drill-map";
 import { StatementFluxNotes } from "./statement-flux-notes";
 import { addLineFluxNoteAction, resolvePnlFluxNoteAction, deletePnlFluxNoteAction } from "@/app/statements/pnl/actions";
 
 const fmt = (m?: Money) => (m ? formatMoney(m, { compact: true }) : "—");
+const PEEK_PERIOD = month(2026, 6);
+
+/**
+ * "By account" mini-breakdown for an OpEx line (§7): the group's GL sub-accounts with their FY total,
+ * each linking to the Expense Forecast drill (group -> account -> vendor). Async server component — a
+ * spine caller like the rest of the pane (one source, two callers).
+ */
+async function OpExAccountPeek({ groupId }: { groupId: string }) {
+  const lines = await getExpenseForecast(PEEK_PERIOD, { groupId: groupId as ExpenseGroupId, breakdown: "account" });
+  const byAcct = new Map<string, { label: string; subCode: string; amts: Money[] }>();
+  for (const l of lines) {
+    if (!l.accountId) continue;
+    const e = byAcct.get(l.accountId) ?? { label: l.accountLabel ?? l.accountId, subCode: l.subCode ?? "", amts: [] };
+    e.amts.push(l.amount);
+    byAcct.set(l.accountId, e);
+  }
+  const accts = [...byAcct.entries()]
+    .map(([id, e]) => ({ id, label: e.label, subCode: e.subCode, total: sumMoney(e.amts) }))
+    .sort((a, b) => b.total.minor - a.total.minor);
+  if (accts.length === 0) return null;
+  return (
+    <div className="border-t border-parchment-line px-4 py-3">
+      <div className="text-xs font-medium uppercase tracking-wide text-steel">By account · FY26</div>
+      <ul className="mt-2 space-y-1">
+        {accts.map((a) => (
+          <li key={a.id}>
+            <Link
+              href={`/forecasts/expenses/${groupId}?account=${a.id}`}
+              className="flex items-center justify-between rounded px-2 py-1 text-sm hover:bg-ember-tint/60"
+            >
+              <span className="text-ink">
+                <span className="mr-1.5 font-mono text-xs text-steel">{a.subCode}</span>
+                {a.label}
+              </span>
+              <span className="tabular-nums text-steel">{fmt(a.total)}</span>
+            </Link>
+          </li>
+        ))}
+      </ul>
+      <p className="mt-1 text-xs text-steel">Open the Expense Forecast to drill each account to its vendors.</p>
+    </div>
+  );
+}
 
 function ValueRow({ label, value }: { label: string; value?: Money }) {
   return (
@@ -108,6 +154,9 @@ export function InspectPane({ pnl, lineId }: { pnl: PnL; lineId: PnLLineId }) {
           </div>
         </div>
       )}
+
+      {/* OpEx lines: a "By account" mini-breakdown (drills to vendors on the Expense Forecast, §7). */}
+      {OPEX_LINE_GROUP[lineId] && <OpExAccountPeek groupId={OPEX_LINE_GROUP[lineId]!} />}
 
       {/* Flux Analysis: the line note + rolled-up account/transaction notes for the close period. */}
       <StatementFluxNotes

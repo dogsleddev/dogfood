@@ -101,9 +101,9 @@ async function main() {
 
   // ── Sub-ledger transactions (lowest level) ──
   const bills = (await ds.listExpenseTransactions()) as VendorBill[];
-  write("vendor_bills.csv", ["id", "doc_number", "period", "date", "due_date", "status", "account_id", "group_id", "function", "vendor", "amount", "memo"],
-    bills.map((b) => [b.id, b.docNumber, b.period, b.date, b.dueDate, b.status, b.glAccountId, b.groupId, b.function, b.vendor ?? "", usd(b.amount), b.memo ?? ""]),
-    "AP expense detail (drill + flux-note anchor)");
+  write("vendor_bills.csv", ["id", "doc_number", "period", "date", "due_date", "status", "account_id", "sub_code", "group_id", "function", "vendor", "amount", "memo"],
+    bills.map((b) => [b.id, b.docNumber, b.period, b.date, b.dueDate, b.status, b.glAccountId, b.subCode ?? "", b.groupId, b.function, b.vendor ?? "", usd(b.amount), b.memo ?? ""]),
+    "AP expense detail (drill + flux-note anchor; sub_code = GL sub-account within the group)");
 
   write("paychecks.csv", ["id", "doc_number", "staff_id", "period", "period_label", "date", "gross_pay", "employee_taxes", "benefits", "net_pay"],
     (await ds.listPaychecks()).map((p) => [p.id, p.docNumber, p.staffId, p.period, p.periodLabel, p.date, usd(p.grossPay), usd(p.employeeTaxes), usd(p.benefits), usd(p.netPay)]),

@@ -387,7 +387,7 @@ export const SCOUT_REGISTRY: readonly ScoutToolBinding[] = [
     lane: "data",
     query: "getExpenseForecast",
     wired: true,
-    description: "The Expense Forecast driver — non-payroll OpEx by group (Sales & Marketing, IT, Facilities, …) for the fiscal year. Use for the opex forecast/plan by group. For ACTUAL expense detail (bills) use getExpenseTransactions; for the P&L opex lines use getPnL.",
+    description: "The Expense Forecast driver — non-payroll OpEx by group (Sales & Marketing, IT, Facilities, …) for the fiscal year, drillable group → GL sub-account → vendor via groupId + breakdown ('account'|'vendor'). Use for 'what makes up <group> in <month>'. For ACTUAL expense detail (bills) use getExpenseTransactions; for the P&L opex lines use getPnL.",
   },
   {
     tool: "getArForecast",

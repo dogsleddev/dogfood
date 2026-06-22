@@ -699,9 +699,52 @@ export const SCOUT_TOOL_IMPLS: Record<string, ScoutToolImpl> = {
     },
   },
   getExpenseForecast: {
-    inputSchema: { type: "object", properties: { period: PERIOD_PROP }, additionalProperties: false },
+    inputSchema: {
+      type: "object",
+      properties: {
+        period: PERIOD_PROP,
+        groupId: { type: "string", description: "OpEx group slug to drill, e.g. 'sales-marketing', 'it' (required for breakdown account/vendor)" },
+        breakdown: { type: "string", description: "drill depth, one of: 'group' (default) · 'account' (GL sub-accounts) · 'vendor' (recurring vendors at run-rate + an Other line per account on forecast months)" },
+      },
+      additionalProperties: false,
+    },
     async run(input) {
       const period = periodOf(input);
+      const fiscalYear = `FY${monthYear(period)}`;
+      const breakdown = (input.breakdown as "group" | "account" | "vendor" | undefined) ?? "group";
+      const groupId = input.groupId as string | undefined;
+
+      // account / vendor drill for one group, focused on the requested month (the period)
+      if ((breakdown === "account" || breakdown === "vendor") && groupId) {
+        const all = await getExpenseForecast(period, { groupId: groupId as never, breakdown });
+        const monthLines = all.filter((l) => l.period === period);
+        const total = m(sumMoney(monthLines.map((l) => l.amount)));
+        const base = { fiscalYear, month: monthLabel(period), group: prettyGroup(groupId), total };
+        const drillReceipt = receipt("getExpenseForecast", { period, groupId, breakdown }, `Expense Forecast · ${prettyGroup(groupId)}`, `/forecasts/expenses/${groupId}?month=${period}`);
+        if (breakdown === "account") {
+          return {
+            data: {
+              ...base,
+              byAccount: monthLines.map((l) => ({ account: `${l.subCode} ${l.accountLabel}`, amount: m(l.amount) })),
+              note: `${prettyGroup(groupId)} by GL sub-account for ${monthLabel(period)}. Drill further to vendors with breakdown 'vendor'.`,
+            },
+            receipt: drillReceipt,
+          };
+        }
+        return {
+          data: {
+            ...base,
+            byVendor: monthLines.map((l) => ({ account: l.subCode, vendor: l.vendor, amount: m(l.amount), ...(l.isResidual ? { residual: true } : {}), ...(l.isActual ? { actual: true } : {}) })),
+            note:
+              period <= PLACEHOLDER_SETTINGS.closeThrough
+                ? `${prettyGroup(groupId)} real vendor bills for ${monthLabel(period)} (closed month).`
+                : `${prettyGroup(groupId)} forecast for ${monthLabel(period)}: recurring vendors at run-rate + an "Other —" line per account (the variable remainder).`,
+          },
+          receipt: drillReceipt,
+        };
+      }
+
+      // default: by group across the fiscal year
       const lines = await getExpenseForecast(period);
       const totals = new Map<string, number>();
       for (const l of lines) totals.set(l.groupId as string, (totals.get(l.groupId as string) ?? 0) + l.amount.minor);
@@ -710,10 +753,10 @@ export const SCOUT_TOOL_IMPLS: Record<string, ScoutToolImpl> = {
         .map(([id, minor]) => ({ group: prettyGroup(id), amount: m(moneyFromMinor(minor)) }));
       return {
         data: {
-          fiscalYear: `FY${monthYear(period)}`,
+          fiscalYear,
           totalOpEx: m(sumMoney(lines.map((l) => l.amount))),
           byGroup,
-          note: "Forward non-payroll OpEx by group. For actual bills use getExpenseTransactions; for the P&L opex lines use getPnL.",
+          note: "Forward non-payroll OpEx by group. Drill a group with groupId + breakdown 'account'/'vendor'. For actual bills use getExpenseTransactions; for the P&L opex lines use getPnL.",
         },
         receipt: receipt("getExpenseForecast", { period }, "Expense Forecast", "/forecasts/expenses"),
       };

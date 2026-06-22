@@ -160,6 +160,29 @@ const cfTieOk = Math.abs(cfNetChange - bsCashDelta) < 0.01;
 L(`  Cash flow FY26: net change ${n(r0(cfNetChange))} ${cfTieOk ? "===" : "=/="} BS cash Δ ${n(r0(bsCashDelta))} (Δ ${(cfNetChange - bsCashDelta).toFixed(2)})${cfTieOk ? "" : "  <- FAIL"}`);
 if (!cfTieOk) process.exitCode = 1;
 
+// Vendor bills reconcile to the GL SUB-ACCOUNT series (§7 expense granularity): Σ bills stamped with
+// a subCode === that sub-account's monthly series, every month. Independent of the group roll-up —
+// catches a bill mis-stamped to the wrong sub-account even when the group total still ties.
+const subExpected = new Map<string, readonly number[]>();
+for (const g of opx.series.groups) for (const sa of g.subAccounts) subExpected.set(sa.subCode, sa.monthly);
+const subActual = new Map<string, number[]>();
+for (const b of tx.vendorBills) {
+  if (!b.subCode) continue;
+  const i = months.indexOf(b.period);
+  if (i < 0) continue;
+  const arr = subActual.get(b.subCode) ?? new Array(months.length).fill(0);
+  arr[i] += b.amount.minor / 100;
+  subActual.set(b.subCode, arr);
+}
+let subAcctMaxDelta = 0;
+for (const [code, exp] of subExpected) {
+  const act = subActual.get(code) ?? [];
+  for (let i = 0; i < exp.length; i++) subAcctMaxDelta = Math.max(subAcctMaxDelta, Math.abs((act[i] ?? 0) - exp[i]));
+}
+const subTieOk = subAcctMaxDelta < 1;
+L(`  Vendor bills → GL sub-account: ${subExpected.size} sub-accounts reconcile to the OpEx series (max Δ $${subAcctMaxDelta.toFixed(2)})${subTieOk ? "" : "  <- FAIL"}`);
+if (!subTieOk) process.exitCode = 1;
+
 // Monthly board view: each line's FY Total must equal the FY P&L Forecast column. The month-across
 // assembler spreads the same series and recomputes subtotals per month — an independent path to the
 // same number. LEAF lines tie to the cent (same annual sum); SUBTOTAL lines carry only the standard

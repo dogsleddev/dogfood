@@ -65,6 +65,19 @@ export const PNL_DRILL: Partial<Record<PnLLineId, LineDrill>> = {
   interest_other: { driver: { href: "/statements/cash-flow", label: "Cash Flow Forecast" } },
 };
 
+/** P&L OpEx lines that are config-driven expense groups (§7) → the group slug, for the peek pane's
+ *  "By account" mini-breakdown (group -> GL sub-account -> vendor lives on the Expense Forecast). */
+export const OPEX_LINE_GROUP: Partial<Record<PnLLineId, string>> = {
+  employee_expenses: "employee-expenses",
+  sales_marketing: "sales-marketing",
+  travel_entertainment: "travel-entertainment",
+  it: "it",
+  hr: "hr",
+  admin: "admin",
+  facilities: "facilities",
+  insurance: "insurance",
+};
+
 /** Pure derived (pane-only) lines decompose into their component lines (§6). */
 export interface Decomposition {
   readonly formula: string;
