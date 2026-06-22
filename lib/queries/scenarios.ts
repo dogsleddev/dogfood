@@ -170,7 +170,7 @@ export async function getScenarioDashboard(ids: readonly ScenarioId[]): Promise<
     columns.push({
       scenarioId: scenario.id,
       scenarioName: scenario.name,
-      isBase: scenario.adjustments.length === 0,
+      isBase: scenario.adjustments.length === 0 && scenario.id === ("base" as ScenarioId),
       dashboard,
     });
   }

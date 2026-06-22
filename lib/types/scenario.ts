@@ -82,6 +82,7 @@ export type CompositionRule = typeof COMPOSITION_RULE;
 export type ValidationCode =
   | "end_before_start"
   | "magnitude_out_of_range"
+  | "magnitude_kind_mismatch" // a magnitude kind the lever can't apply (the engine would silently no-op it)
   | "lever_not_in_set"
   | "window_outside_horizon"
   | "lever_gated"; // AP▸DPO used while AP/DPO is still off

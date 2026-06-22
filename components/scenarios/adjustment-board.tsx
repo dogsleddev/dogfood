@@ -109,15 +109,13 @@ function AddAdjustmentForm({ scenarioId }: { scenarioId: ScenarioId }) {
             <option value="ar_dso">AR · DSO (days)</option>
           </select>
         </FormField>
-        <FormField label="Magnitude kind">
-          <select name="magnitudeKind" className={INPUT} defaultValue="rate">
-            <option value="rate">Rate — % (revenue / direct cost)</option>
-            <option value="level">Level — $/mo (personnel / expense)</option>
-            <option value="absolute">Absolute — days (DSO)</option>
-            <option value="categorical">Freeze (personnel)</option>
+        <FormField label="Personnel change — if Lever = Personnel">
+          <select name="personnelMode" className={INPUT} defaultValue="level">
+            <option value="level">Adjust headcount ($/mo)</option>
+            <option value="freeze">Freeze hiring</option>
           </select>
         </FormField>
-        <FormField label="Value (% / $ per mo / days)">
+        <FormField label="Value (units follow the lever)">
           <input name="magnitudeValue" type="number" step="any" defaultValue="0" className={INPUT} />
         </FormField>
         <FormField label="Revenue stream — if Lever = Revenue">
@@ -159,7 +157,9 @@ function AddAdjustmentForm({ scenarioId }: { scenarioId: ScenarioId }) {
           Add adjustment
         </button>
         <p className="text-xs text-steel">
-          Window must sit inside Jul–Dec 2026. Only the sub-dimension matching the chosen lever is used.
+          Value units follow the lever — Revenue / Direct cost = % (type 25 for +25%), Personnel / Expense = $/mo,
+          AR · DSO = days (Freeze ignores the value). Window must sit inside Jul–Dec 2026; only the sub-dimension
+          matching the chosen lever is used.
         </p>
       </div>
     </form>

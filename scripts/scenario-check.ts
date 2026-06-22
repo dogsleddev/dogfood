@@ -7,7 +7,7 @@
  */
 import { month, type PeriodRange } from "@/lib/types/period";
 import { toMajor, percent } from "@/lib/types/money";
-import type { MetricId, ScenarioId, ExpenseGroupId } from "@/lib/types/common";
+import type { MetricId, ScenarioId, ExpenseGroupId, DepartmentId } from "@/lib/types/common";
 import type { Adjustment, Scenario } from "@/lib/types/scenario";
 import { runScenario, assertBaseInvariant } from "@/lib/scenario/engine";
 import { PRESET_SCENARIOS, BASE_SCENARIO } from "@/lib/scenario/presets";
@@ -97,6 +97,7 @@ const has = (adj: Adjustment, code: string) => validateAdjustment(adj, HORIZON).
 ok("end_before_start", has(mk({ window: { start: month(2026, 12), end: month(2026, 7) } }), "end_before_start"));
 ok("window_outside_horizon", has(mk({ window: { start: month(2026, 1), end: month(2026, 3) } }), "window_outside_horizon"));
 ok("magnitude_out_of_range", has(mk({ magnitude: { kind: "rate", value: 0.9 as never } }), "magnitude_out_of_range"));
+ok("magnitude_kind_mismatch", has(mk({ magnitude: { kind: "level", delta: 100 } as never }), "magnitude_kind_mismatch"));
 ok("lever_not_in_set", has(mk({ lever: "bogus" as never }), "lever_not_in_set"));
 const gated: Adjustment = {
   id: "g",
@@ -131,6 +132,8 @@ void (async () => {
     { id: "rt-level", lever: "expense", groupId: "sales-marketing" as ExpenseGroupId, magnitude: { kind: "level", delta: -100_000 }, window: { start: month(2026, 7), end: month(2026, 12) }, shape: "ramp" },
     { id: "rt-absolute", lever: "ar_dso", magnitude: { kind: "absolute", value: 35, unit: "days" }, window: { start: month(2026, 7), end: month(2026, 12) }, shape: "step" },
     { id: "rt-categorical", lever: "personnel", magnitude: { kind: "categorical", value: "freeze" }, window: { start: month(2026, 7), end: month(2026, 12) }, shape: "step" },
+    { id: "rt-dept", lever: "personnel", departmentId: "engineering" as DepartmentId, magnitude: { kind: "level", delta: 50_000 }, window: { start: month(2026, 7), end: month(2026, 12) }, shape: "ramp" }, // departmentId-present target
+    { id: "rt-services", lever: "revenue", stream: "services", magnitude: { kind: "rate", value: percent(0.12) }, window: { start: month(2026, 7), end: month(2026, 12) }, shape: "step" }, // the second stream
   ];
   const sc: Scenario = { id: sid, name: "Round-trip check", baseline: "base", adjustments };
   const store = getDataStore();

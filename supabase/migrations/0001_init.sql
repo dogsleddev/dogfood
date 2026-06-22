@@ -235,15 +235,23 @@ create table revrec_by_project (
 -- ── write tables (the CFO's work — persisted, the first mutable surfaces) ──
 create table flux_notes (
   id              uuid primary key default gen_random_uuid(),
-  transaction_id  text not null,         -- stable sub-ledger id (vendor_bills.id, paychecks.id, …)
+  transaction_id  text,                  -- stable sub-ledger id; null for account/line notes (folded from 0003)
+  account_code    text,                  -- the trial-balance grain (ERP COA code) (folded from 0003)
   statement_line  text,
   period          text,
   author          text,
   body            text not null,
   amount_at_note  numeric(16,2),         -- snapshot → flags flux-on-the-flux after a restatement
   resolved        boolean not null default false,
+  source          text not null default 'ui' check (source in ('ui', 'scout')),  -- provenance (folded from 0003)
   created_at      timestamptz not null default now(),
-  updated_at      timestamptz not null default now()
+  updated_at      timestamptz not null default now(),
+  -- a note must anchor to exactly one grain (folded from 0003)
+  constraint flux_notes_anchor_ck check (
+    transaction_id is not null
+    or (account_code is not null and period is not null)
+    or (statement_line is not null and period is not null)
+  )
 );
 
 create table scenarios (
@@ -288,6 +296,7 @@ create index on journal_entries (period);
 create index on journal_lines (entry_id);
 create index on flux_notes (transaction_id);
 create index on flux_notes (period, statement_line);
+create index if not exists flux_notes_acct_ix on flux_notes (account_code, period);  -- (folded from 0003)
 
 -- updated_at maintenance for the mutable tables
 create or replace function set_updated_at() returns trigger as $$

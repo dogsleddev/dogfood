@@ -471,9 +471,9 @@ export const SCOUT_REGISTRY: readonly ScoutToolBinding[] = [
     module: "scenarios",
     lane: "data",
     query: null,
-    plannedQuery: "(scenario write — scenario_inputs persistence)",
+    plannedQuery: "(scenario write — setDriver on scenarios.adjustments JSONB)",
     wired: false,
-    description: "Set one scenario adjustment (lever + magnitude + window + step/ramp). Group-scoped. NOT wired: scenario WRITE persistence isn't built yet (the in-memory registry isn't a durable Scout write target).",
+    description: "Set one scenario adjustment (lever + magnitude + window + step/ramp). Group-scoped. Persistence IS built (scenarios.adjustments JSONB + the Manager/Drivers Server Actions); this Scout WRITE tool is wired in a later step (the full Scout scenario-write surface).",
   },
 
   // ── Product-knowledge lane (how-tos / descriptions — NOT the number spine) ───

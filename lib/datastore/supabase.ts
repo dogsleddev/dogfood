@@ -183,11 +183,20 @@ const scenarioToRow = (sc: Scenario): Row => ({
   adjustments: sc.adjustments, // supabase-js → JSONB; Base/presets never reach here (registry guards)
 });
 
+const finiteNum = (v: unknown, field: string): number => {
+  const n = Number(v);
+  if (!Number.isFinite(n)) throw new Error(`SupabaseDataStore: non-finite magnitude.${field} in scenario adjustments`);
+  return n;
+};
+const parseShape = (v: unknown): AdjustmentShape => {
+  if (v === "step" || v === "ramp") return v;
+  throw new Error(`SupabaseDataStore: unknown shape "${String(v)}" in scenario adjustments`);
+};
 const parseMagnitude = (m: Record<string, unknown>): Magnitude => {
   switch (m.kind) {
-    case "rate": return { kind: "rate", value: percent(Number(m.value)) };
-    case "level": return { kind: "level", delta: Number(m.delta) };
-    case "absolute": return { kind: "absolute", value: Number(m.value), unit: "days" };
+    case "rate": return { kind: "rate", value: percent(finiteNum(m.value, "value")) };
+    case "level": return { kind: "level", delta: finiteNum(m.delta, "delta") };
+    case "absolute": return { kind: "absolute", value: finiteNum(m.value, "value"), unit: "days" };
     case "categorical": return { kind: "categorical", value: "freeze" };
     default: throw new Error(`SupabaseDataStore: unknown magnitude kind "${String(m.kind)}" in scenario adjustments`);
   }
@@ -198,7 +207,7 @@ const parseAdjustment = (raw: Record<string, unknown>): Adjustment => {
   const base = {
     id: String(raw.id),
     window: { start: parseMonth(String(w.start)), ...(w.end ? { end: parseMonth(String(w.end)) } : {}) },
-    shape: raw.shape as AdjustmentShape,
+    shape: parseShape(raw.shape),
     magnitude: parseMagnitude((raw.magnitude ?? {}) as Record<string, unknown>),
   };
   switch (raw.lever) {
@@ -212,10 +221,14 @@ const parseAdjustment = (raw: Record<string, unknown>): Adjustment => {
   }
 };
 
+const parseBaseline = (v: unknown): ScenarioBaseline => {
+  if (v === "base" || v === "budget") return v;
+  throw new Error(`SupabaseDataStore: unknown baseline "${String(v)}" in scenario`);
+};
 const rowToScenario = (r: Row): Scenario => ({
   id: s(r.id) as ScenarioId,
   name: s(r.name),
-  baseline: s(r.baseline) as ScenarioBaseline,
+  baseline: parseBaseline(r.baseline),
   adjustments: ((r.adjustments ?? []) as Record<string, unknown>[]).map(parseAdjustment),
 });
 

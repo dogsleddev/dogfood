@@ -13,8 +13,8 @@ import type { ScenarioId } from "@/lib/types/common";
 import type { Adjustment, ScenarioBaseline } from "@/lib/types/scenario";
 import { findScenario, upsertUserScenario, deleteUserScenario } from "@/lib/scenario/registry";
 
-const MANAGER = "/scenarios/manager";
 const DRIVERS = "/scenarios/drivers";
+const GROUP = "/scenarios"; // revalidate the whole contained group on any write (manager + drivers + compare)
 
 const newId = (): ScenarioId => randomUUID() as ScenarioId;
 
@@ -24,7 +24,7 @@ export async function createScenarioAction(formData: FormData): Promise<void> {
   if (!name) return; // empty submit — no-op, don't error the page
   const id = newId();
   await upsertUserScenario({ id, name, baseline, adjustments: [] });
-  revalidatePath(MANAGER);
+  revalidatePath(GROUP, "layout");
   redirect(`${DRIVERS}?scenario=${id}`); // land on what you just made
 }
 
@@ -37,7 +37,7 @@ export async function duplicateScenarioAction(formData: FormData): Promise<void>
   // Fresh per-adjustment ids — preset adjustment ids ("p25-freeze") are not globally unique.
   const adjustments: Adjustment[] = src.adjustments.map((a) => ({ ...a, id: randomUUID() }));
   await upsertUserScenario({ id, name: `${src.name} (copy)`, baseline: src.baseline, adjustments });
-  revalidatePath(MANAGER);
+  revalidatePath(GROUP, "layout");
   redirect(`${DRIVERS}?scenario=${id}`);
 }
 
@@ -49,7 +49,7 @@ export async function deleteScenarioAction(formData: FormData): Promise<void> {
   } catch {
     return;
   }
-  revalidatePath(MANAGER);
+  revalidatePath(GROUP, "layout");
 }
 
 export async function resetScenarioAction(formData: FormData): Promise<void> {
@@ -63,5 +63,5 @@ export async function resetScenarioAction(formData: FormData): Promise<void> {
   } catch {
     return;
   }
-  revalidatePath(MANAGER);
+  revalidatePath(GROUP, "layout");
 }

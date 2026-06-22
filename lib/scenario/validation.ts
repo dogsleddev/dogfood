@@ -11,6 +11,7 @@ import type { PeriodRange } from "@/lib/types/period";
 import { compareMonth, monthsInRange } from "@/lib/types/period";
 import type {
   Adjustment,
+  Magnitude,
   Scenario,
   ValidationIssue,
   ValidationResult,
@@ -26,6 +27,20 @@ const ALL_LEVERS: ReadonlySet<LeverId> = new Set([
   "ar_dso",
   "ap_dpo",
 ]);
+
+/**
+ * The magnitude kinds each lever can actually apply (engine.ts applyOneAt). A lever paired with any
+ * other kind is a silent no-op in the engine, so the form/serializer must never produce one and the
+ * validator rejects it (magnitude_kind_mismatch) — this is what stops a "zombie" adjustment.
+ */
+const LEVER_KINDS: Record<LeverId, ReadonlySet<Magnitude["kind"]>> = {
+  revenue: new Set(["rate"]),
+  personnel: new Set(["level", "categorical"]),
+  expense: new Set(["level"]),
+  direct_cost: new Set(["rate"]),
+  ar_dso: new Set(["absolute"]),
+  ap_dpo: new Set(["absolute"]),
+};
 
 /** Per-lever magnitude limits (sanity rails; tunable). Rate is a fraction (0.5 = ±50%). */
 const RATE_LIMIT = 0.5; // revenue / direct_cost rate override, ±50%
@@ -45,6 +60,10 @@ export function validateAdjustment(adj: Adjustment, horizon: PeriodRange): Valid
   // gated lever (AP▸DPO) while still off
   if (GATED_LEVERS.includes(adj.lever)) {
     issues.push({ code: "lever_gated", adjustmentId: adj.id, message: `lever "${adj.lever}" is gated (AP/DPO is off — §17)` });
+  }
+  // magnitude kind the lever can actually apply (else the engine silently no-ops the adjustment)
+  if (!LEVER_KINDS[adj.lever].has(adj.magnitude.kind)) {
+    issues.push({ code: "magnitude_kind_mismatch", adjustmentId: adj.id, message: `lever "${adj.lever}" cannot take a "${adj.magnitude.kind}" magnitude` });
   }
 
   // window sanity
