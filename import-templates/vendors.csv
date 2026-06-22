@@ -1,0 +1,11 @@
+vendor_id,name,expense_group
+V-0001,Amazon Web Services,cost_of_revenue
+V-0002,Anthropic,cost_of_revenue
+V-0003,OpenAI,cost_of_revenue
+V-0004,Datadog,it
+V-0005,Ramp,admin
+V-0006,Rippling,hr
+V-0007,Carta,admin
+V-0008,WeWork,facilities
+V-0009,Google Ads,sales-marketing
+V-0010,Chubb,insurance

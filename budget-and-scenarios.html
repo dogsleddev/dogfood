@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Setting up a budget and creating scenarios · Dogfood</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    /* color tokens consumed by markup (mirror app/globals.css) */
+    --color-ember:#ec6d3f;
+    --color-ember-deep:#c9582e;
+    --color-ember-tint:#fbefe9;
+    --color-amber:#e7b23a;
+    --color-amber-deep:#b9852a;
+    --color-sage:#46c99a;
+    --color-sage-deep:#2fa37d;
+    --color-sage-deeper:#2a8a66;
+    --color-frost:#9db8cc;
+    --color-steel:#5a6b7a;
+    --color-ink:#1c2530;
+    --color-parchment:#faf7f1;
+    --color-parchment-2:#f7f3ec;
+    --color-card:#ffffff;
+    --color-card-2:#fbfaf6;
+    --color-border:#ece6db;
+    --color-midnight:#0e1726;
+    --color-midnight-2:#0b121e;
+    --color-sidebar-fg:#bfc9d4;
+    --color-sidebar-accent:#16273a;
+    --color-sidebar-border:#1a2738;
+    --color-destructive:#c0392b;
+    --radius:0.625rem;
+
+    --font-heading:"Fraunces", Georgia, "Times New Roman", serif;
+    --font-sans:"Geist", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --font-mono:"Geist Mono", ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:var(--font-sans);
+    background:var(--color-parchment);
+    color:var(--color-ink);
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  .app{display:flex;flex-direction:row;min-height:100vh;align-items:stretch;}
+
+  /* ============ RAIL ============ */
+  .rail{
+    width:288px;
+    flex:0 0 288px;
+    position:sticky;
+    top:0;
+    align-self:flex-start;
+    height:100vh;
+    background:linear-gradient(180deg, var(--color-midnight), var(--color-midnight-2));
+    color:var(--color-sidebar-fg);
+    display:flex;
+    flex-direction:column;
+  }
+  .rail-header{padding:1rem 0.75rem 0.5rem;display:flex;flex-direction:column;gap:0.75rem;}
+  .brand{display:flex;align-items:center;gap:0.5rem;padding:0 0.25rem;}
+  .wordmark{font-family:var(--font-heading);font-size:18px;color:var(--color-parchment);font-weight:600;letter-spacing:0.2px;}
+  .wordmark .dot{color:var(--color-steel);}
+
+  .chip{
+    display:flex;align-items:center;gap:0.5rem;width:100%;text-align:left;
+    border:1px solid rgba(255,255,255,.10);
+    background:rgba(255,255,255,.05);
+    border-radius:var(--radius);
+    padding:0.5rem 0.625rem;
+    cursor:pointer;color:inherit;font-family:inherit;
+    transition:background .15s ease;
+  }
+  .chip:hover{background:rgba(255,255,255,.10);}
+  .chip-square{
+    width:32px;height:32px;border-radius:calc(var(--radius) * 0.8);
+    background:linear-gradient(135deg, var(--color-ember), var(--color-amber));
+    color:#fff;font-weight:600;font-size:12px;
+    display:flex;align-items:center;justify-content:center;flex:0 0 32px;
+  }
+  .chip-meta{display:flex;flex-direction:column;line-height:1.15;min-width:0;flex:1;}
+  .chip-name{font-size:14px;font-weight:500;color:var(--color-parchment);}
+  .chip-period{font-size:12px;color:var(--color-steel);}
+  .chip-chev{color:var(--color-steel);flex:0 0 auto;}
+
+  /* nav */
+  .nav{flex:1;overflow-y:auto;padding:0 0.5rem 0.5rem;}
+  .group-label{padding:1rem 0.75rem 0.25rem;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:rgba(90,107,122,.8);}
+  .nav-list{display:flex;flex-direction:column;gap:2px;}
+
+  .leaf{
+    position:relative;display:flex;align-items:center;gap:0.625rem;
+    border-radius:calc(var(--radius) * 0.8);
+    padding:0.375rem 0.5rem 0.375rem 0.75rem;
+    font-size:14px;color:var(--color-sidebar-fg);
+    text-decoration:none;transition:background .12s ease, color .12s ease;
+    cursor:pointer;
+  }
+  .leaf:hover{background:rgba(255,255,255,.05);color:var(--color-parchment);}
+  .leaf .ic{width:16px;height:16px;flex:0 0 16px;color:var(--color-steel);}
+  .leaf.nested{padding-left:2.25rem;}
+  .leaf.active{background:rgba(236,109,63,.12);color:var(--color-parchment);font-weight:500;}
+  .leaf.active .ic{color:var(--color-ember);}
+  .leaf .leaf-bar{position:absolute;left:0;top:4px;bottom:4px;width:3px;border-top-right-radius:3px;border-bottom-right-radius:3px;background:var(--color-ember);}
+
+  .parent{
+    position:relative;display:flex;width:100%;align-items:center;gap:0.625rem;
+    border-radius:calc(var(--radius) * 0.8);
+    padding:0.375rem 0.5rem 0.375rem 0.75rem;
+    font-size:14px;color:var(--color-sidebar-fg);
+    background:transparent;border:none;cursor:pointer;font-family:inherit;text-align:left;
+    transition:background .12s ease, color .12s ease;
+  }
+  .parent:hover{background:rgba(255,255,255,.05);color:var(--color-parchment);}
+  .parent .ic{width:16px;height:16px;flex:0 0 16px;color:var(--color-steel);}
+  .parent .plabel{flex:1;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .parent .chev{width:14px;height:14px;color:var(--color-steel);flex:0 0 14px;transition:transform .15s ease;}
+  .children{margin-top:2px;display:flex;flex-direction:column;gap:2px;}
+
+  .subgroup{margin-top:4px;}
+  .subgroup-inner{border-left:1px solid rgba(255,255,255,.10);padding-left:0.75rem;margin-left:0.25rem;}
+  .sub-label{padding:0 0 0.25rem;font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.025em;color:rgba(90,107,122,.7);}
+
+  .divider-dashed{margin:0.75rem 0.25rem;border-top:1px dashed rgba(255,255,255,.10);}
+
+  .rail-footer{border-top:1px solid rgba(255,255,255,.10);padding:0.75rem;display:flex;flex-direction:column;gap:0.75rem;}
+  .who{display:flex;align-items:center;gap:0.5rem;}
+  .avatar{width:32px;height:32px;border-radius:9999px;background:#16273a;color:var(--color-parchment);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:500;flex:0 0 32px;}
+  .who-meta{display:flex;flex-direction:column;line-height:1.15;}
+  .who-name{font-size:14px;font-weight:500;color:var(--color-parchment);}
+  .who-role{font-size:12px;color:var(--color-steel);}
+
+  .scout-launch{
+    display:flex;align-items:center;gap:0.5rem;width:100%;
+    border:1px solid rgba(236,109,63,.4);
+    background:linear-gradient(135deg, rgba(236,109,63,.9), rgba(70,201,154,.55));
+    border-radius:var(--radius);
+    padding:0.625rem 0.75rem;color:#fff;cursor:pointer;font-family:inherit;
+    box-shadow:0 1px 2px rgba(0,0,0,.18);transition:opacity .15s ease;
+  }
+  .scout-launch:hover{opacity:.95;}
+  .scout-launch .sp-ic{width:16px;height:16px;flex:0 0 16px;}
+  .scout-launch .sl-meta{display:flex;flex-direction:column;line-height:1.15;flex:1;text-align:left;}
+  .scout-launch .sl-top{font-size:14px;font-weight:500;}
+  .scout-launch .sl-sub{font-size:11px;color:rgba(255,255,255,.8);}
+  .scout-launch .sl-arrow{width:16px;height:16px;color:rgba(255,255,255,.9);flex:0 0 16px;}
+
+  /* rail scrollbar */
+  .nav::-webkit-scrollbar{width:10px;}
+  .nav::-webkit-scrollbar-track{background:transparent;}
+  .nav::-webkit-scrollbar-thumb{
+    background:#243348;border:3px solid transparent;background-clip:padding-box;border-radius:9999px;
+  }
+  .nav::-webkit-scrollbar-thumb:hover{background:#30435c;border:3px solid transparent;background-clip:padding-box;}
+  .nav{scrollbar-width:thin;scrollbar-color:#243348 transparent;}
+
+  /* ============ CONTENT ============ */
+  .content{flex:1;min-width:0;overflow-x:hidden;}
+  .page{max-width:48rem;margin:0 auto;padding:2rem;}
+  .page-wide{max-width:48rem;margin:0 auto;padding:0 2rem;}
+
+  .kicker{margin-bottom:0.25rem;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--color-ember-deep);}
+  .page h1{font-family:var(--font-heading);font-size:30px;line-height:1.15;color:var(--color-ink);margin:0;font-weight:600;}
+  .page-summary{margin-top:0.5rem;max-width:42rem;font-size:14px;line-height:1.5;color:var(--color-steel);}
+  header.page-header{margin-bottom:1.5rem;}
+
+  article > * + *{margin-top:0.875rem;}
+  article h2{
+    margin-top:2rem;border-bottom:1px solid var(--color-border);padding-bottom:0.375rem;
+    font-family:var(--font-heading);font-size:20px;color:var(--color-ink);font-weight:600;line-height:1.2;
+  }
+  article h3{margin-top:1.5rem;font-family:var(--font-heading);font-size:16px;font-weight:600;color:var(--color-ink);}
+  article p{font-size:15px;line-height:1.75rem;color:rgba(28,37,48,.9);margin:0;}
+  article ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:0.375rem;margin-left:0.25rem;}
+  article li{display:flex;gap:0.625rem;font-size:15px;line-height:1.75rem;color:rgba(28,37,48,.9);}
+  article li .dot{margin-top:0.625rem;width:6px;height:6px;flex:0 0 6px;border-radius:9999px;background:rgba(236,109,63,.7);}
+  article b, article strong{font-weight:600;color:var(--color-ink);}
+  code{background:var(--color-parchment-2);padding:1px 4px;border-radius:4px;font-family:var(--font-mono);font-size:.85em;color:var(--color-ember-deep);}
+  pre.code{
+    background:var(--color-parchment-2);border:1px solid var(--color-border);border-radius:8px;
+    padding:0.75rem 0.875rem;font-family:var(--font-mono);font-size:13px;color:var(--color-ember-deep);
+    overflow-x:auto;margin:0;line-height:1.5;
+  }
+  pre.code code{background:transparent;padding:0;color:inherit;}
+
+  /* ============ MOCK PANELS ============ */
+  .mock{margin:1.5rem auto;}
+  .mock-wide{max-width:48rem;}
+  .card{
+    background:var(--color-card);border:1px solid var(--color-border);border-radius:14px;
+    box-shadow:0 1px 2px rgba(28,37,48,.05), 0 1px 3px rgba(28,37,48,.04);
+    overflow:hidden;
+  }
+  .card-head{display:flex;align-items:center;justify-content:space-between;padding:0.875rem 1rem;border-bottom:1px solid var(--color-border);background:var(--color-card-2);}
+  .card-title{font-family:var(--font-heading);font-size:15px;color:var(--color-ink);font-weight:600;}
+  .card-sub{font-size:12px;color:var(--color-steel);}
+  .card-body{padding:1rem;}
+  .mock-caption{margin-top:0.5rem;font-size:12px;color:var(--color-steel);text-align:center;font-style:italic;}
+
+  /* strip P&L table */
+  table.pnl{width:100%;border-collapse:collapse;font-size:13px;}
+  table.pnl th{
+    text-align:right;font-weight:600;color:var(--color-steel);font-size:11px;text-transform:uppercase;letter-spacing:.04em;
+    padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border);
+  }
+  table.pnl th:first-child{text-align:left;}
+  table.pnl td{padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border);text-align:right;font-variant-numeric:tabular-nums;font-feature-settings:"tnum";color:var(--color-ink);}
+  table.pnl td:first-child{text-align:left;color:var(--color-ink);}
+  table.pnl tr:last-child td{border-bottom:none;}
+  table.pnl tr.total td{font-weight:600;background:var(--color-card-2);}
+  .var-up{color:var(--color-sage-deep);font-weight:600;}
+  .var-down{color:var(--color-ember);font-weight:600;}
+
+  /* scenario drivers board */
+  .adj-row{display:flex;align-items:center;gap:0.75rem;padding:0.75rem;border:1px solid var(--color-border);border-radius:10px;background:var(--color-card-2);flex-wrap:wrap;}
+  .adj-row + .adj-row{margin-top:0.625rem;}
+  .pill{
+    display:inline-flex;align-items:center;gap:0.375rem;
+    background:var(--color-ember-tint);color:var(--color-ember-deep);
+    border:1px solid rgba(236,109,63,.25);border-radius:9999px;
+    padding:0.25rem 0.625rem;font-size:12px;font-weight:600;white-space:nowrap;
+  }
+  .pill.alt{background:#eef6f2;color:var(--color-sage-deeper);border-color:rgba(70,201,154,.3);}
+  .slider{flex:1;min-width:120px;display:flex;align-items:center;gap:0.5rem;}
+  .track{position:relative;flex:1;height:6px;border-radius:9999px;background:#e9e2d6;}
+  .track .fill{position:absolute;left:0;top:0;bottom:0;border-radius:9999px;background:linear-gradient(90deg,var(--color-amber),var(--color-ember));}
+  .track .knob{position:absolute;top:50%;width:14px;height:14px;border-radius:9999px;background:var(--color-ember);border:2px solid #fff;box-shadow:0 1px 3px rgba(28,37,48,.25);transform:translate(-50%,-50%);}
+  .mag{font-size:12px;font-weight:600;color:var(--color-ink);font-variant-numeric:tabular-nums;min-width:46px;text-align:right;}
+  .win-chips{display:flex;align-items:center;gap:0.375rem;}
+  .chip-sm{font-size:11px;padding:0.2rem 0.5rem;border-radius:6px;background:var(--color-parchment-2);border:1px solid var(--color-border);color:var(--color-steel);white-space:nowrap;}
+  .chip-sm .lab{color:rgba(90,107,122,.7);}
+  .toggle{display:inline-flex;border:1px solid var(--color-border);border-radius:8px;overflow:hidden;}
+  .toggle button{border:none;background:#fff;font-family:inherit;font-size:11px;font-weight:600;padding:0.3rem 0.625rem;color:var(--color-steel);cursor:pointer;}
+  .toggle button.on{background:var(--color-ember);color:#fff;}
+  .add-row{display:flex;align-items:center;gap:0.5rem;padding:0.625rem 0.75rem;border:1px dashed var(--color-border);border-radius:10px;color:var(--color-steel);font-size:13px;margin-top:0.625rem;cursor:pointer;background:transparent;width:100%;font-family:inherit;}
+  .add-row:hover{border-color:rgba(236,109,63,.4);color:var(--color-ember-deep);}
+
+  /* four-surface cards */
+  .four-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0.75rem;}
+  @media (min-width:880px){.four-grid{grid-template-columns:repeat(4,1fr);}}
+  .surface{border:1px solid var(--color-border);border-radius:12px;background:var(--color-card);padding:0.875rem;display:flex;flex-direction:column;gap:0.5rem;}
+  .surface .glyph{width:30px;height:30px;border-radius:8px;background:var(--color-ember-tint);color:var(--color-ember-deep);display:flex;align-items:center;justify-content:center;}
+  .surface .s-name{font-family:var(--font-heading);font-size:14px;font-weight:600;color:var(--color-ink);}
+  .surface .s-desc{font-size:12px;line-height:1.5;color:var(--color-steel);}
+
+  /* compare dashboard */
+  table.cmp{width:100%;border-collapse:collapse;font-size:13px;}
+  table.cmp th{padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border);font-size:12px;}
+  table.cmp th.metric-h{text-align:left;color:var(--color-steel);font-weight:600;text-transform:uppercase;font-size:11px;letter-spacing:.04em;}
+  table.cmp th.col{text-align:right;font-family:var(--font-heading);color:var(--color-ink);font-weight:600;font-size:13px;}
+  table.cmp th.ref .tag{display:block;font-size:10px;color:var(--color-steel);font-weight:500;text-transform:none;letter-spacing:0;font-family:var(--font-sans);}
+  table.cmp td{padding:0.5rem 0.75rem;border-bottom:1px solid var(--color-border);text-align:right;font-variant-numeric:tabular-nums;color:var(--color-ink);}
+  table.cmp td.metric{text-align:left;color:var(--color-steel);font-weight:500;}
+  table.cmp tr:last-child td{border-bottom:none;}
+  table.cmp td.refcol{background:var(--color-parchment-2);}
+  .delta{display:block;font-size:11px;margin-top:1px;}
+  .delta.up{color:var(--color-sage-deep);}
+  .delta.down{color:var(--color-ember);}
+
+  /* callout */
+  .callout{border:1px solid var(--color-border);border-left:4px solid var(--color-ember);background:var(--color-ember-tint);border-radius:12px;padding:1rem 1.125rem;}
+  .callout .co-title{font-family:var(--font-heading);font-size:15px;font-weight:600;color:var(--color-ink);margin-bottom:0.5rem;}
+  .callout ol{margin:0.5rem 0 0;padding-left:1.25rem;}
+  .callout ol li{font-size:14px;line-height:1.7;color:rgba(28,37,48,.92);margin-top:0.25rem;}
+  .callout code{background:rgba(255,255,255,.7);}
+
+  /* floating Scout panel */
+  .scout-panel{
+    position:fixed;right:1.5rem;bottom:1.5rem;width:360px;max-width:calc(100vw - 2rem);
+    background:#fff;border:1px solid var(--color-border);border-radius:14px;
+    box-shadow:0 12px 36px rgba(14,23,38,.22), 0 2px 8px rgba(14,23,38,.12);
+    overflow:hidden;z-index:50;
+  }
+  .scout-head{display:flex;align-items:center;gap:0.5rem;padding:0.75rem 0.875rem;border-bottom:1px solid var(--color-border);background:var(--color-card-2);}
+  .scout-mark{width:26px;height:26px;border-radius:9999px;background:linear-gradient(135deg,var(--color-ember),var(--color-amber));display:flex;align-items:center;justify-content:center;flex:0 0 26px;}
+  .scout-name{font-family:var(--font-heading);font-size:14px;font-weight:600;color:var(--color-ink);flex:1;}
+  .scout-dim{font-size:11px;color:var(--color-steel);}
+  .scout-body{padding:0.875rem;display:flex;flex-direction:column;gap:0.625rem;max-height:340px;overflow-y:auto;}
+  .msg{font-size:13px;line-height:1.55;}
+  .msg .who-lbl{font-weight:600;color:var(--color-ink);}
+  .msg.you{color:var(--color-ink);}
+  .msg.scout{background:var(--color-parchment-2);border:1px solid var(--color-border);border-radius:10px;padding:0.625rem 0.75rem;color:rgba(28,37,48,.92);}
+  .step{display:flex;align-items:center;gap:0.5rem;font-size:12px;color:var(--color-steel);}
+  .step .spin{width:12px;height:12px;border:2px solid rgba(236,109,63,.3);border-top-color:var(--color-ember);border-radius:9999px;flex:0 0 12px;animation:spin 0.9s linear infinite;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .receipt{display:inline-flex;align-items:center;gap:0.375rem;font-family:var(--font-mono);font-size:11px;color:var(--color-ember-deep);background:var(--color-ember-tint);border:1px solid rgba(236,109,63,.25);border-radius:6px;padding:0.25rem 0.5rem;align-self:flex-start;}
+  .scout-input{display:flex;align-items:center;gap:0.5rem;padding:0.625rem 0.75rem;border-top:1px solid var(--color-border);}
+  .scout-input .fake-input{flex:1;font-size:13px;color:var(--color-steel);background:var(--color-parchment-2);border:1px solid var(--color-border);border-radius:8px;padding:0.4rem 0.625rem;}
+  .scout-input .send{width:30px;height:30px;border-radius:8px;background:var(--color-ember);color:#fff;display:flex;align-items:center;justify-content:center;flex:0 0 30px;}
+
+  @media (max-width:1100px){
+    .page-wide{padding:0 1rem;}
+    .scout-panel{display:none;}
+  }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- ================= RAIL ================= -->
+  <aside class="rail">
+    <div class="rail-header">
+      <div class="brand">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <polyline points="3,17 7,14 3,11" stroke="var(--color-frost)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <polyline points="9,15 13,12 9,9" stroke="var(--color-steel)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <polyline points="15,13 19,10 15,7" stroke="var(--color-ember)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="wordmark">dogfood<span class="dot">.cafe</span></span>
+      </div>
+      <button class="chip" type="button">
+        <span class="chip-square">BR</span>
+        <span class="chip-meta">
+          <span class="chip-name">Bearing</span>
+          <span class="chip-period">FY26 · Jun</span>
+        </span>
+        <svg class="chip-chev" width="16" height="16" viewBox="0 0 24 24" fill="none"><polyline points="6 9 12 15 18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+
+    <nav class="nav">
+      <!-- OVERVIEW -->
+      <div class="group-label">Overview</div>
+      <div class="nav-list">
+        <a class="leaf"><svg class="ic" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="7" height="9" rx="1" stroke="currentColor" stroke-width="2"/><rect x="14" y="3" width="7" height="5" rx="1" stroke="currentColor" stroke-width="2"/><rect x="14" y="12" width="7" height="9" rx="1" stroke="currentColor" stroke-width="2"/><rect x="3" y="16" width="7" height="5" rx="1" stroke="currentColor" stroke-width="2"/></svg>Dashboard</a>
+        <a class="leaf"><svg class="ic" viewBox="0 0 24 24" fill="none"><rect x="8" y="2" width="8" height="4" rx="1" stroke="currentColor" stroke-width="2"/><path d="M9 4H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-3" stroke="currentColor" stroke-width="2"/></svg>Board Package</a>
+      </div>
+
+      <!-- FINANCIAL STATEMENTS -->
+      <div class="group-label">Financial Statements</div>
+      <div class="nav-list">
+        <a class="leaf"><svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="currentColor" stroke-width="2"/><path d="M14 2v6h6M8 13h8M8 17h8M8 9h2" stroke="currentColor" stroke-width="2"/></svg>Forecasted P&amp;L</a>
+        <a class="leaf"><svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M12 3v18M3 7h18M6 7l-3 7h6zM18 7l-3 7h6z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>Balance Sheet</a>
+        <a class="leaf"><svg class="ic" viewBox="0 0 24 24" fill="none"><rect x="2" y="6" width="20" height="12" rx="2" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="2.5" stroke="currentColor" stroke-width="2"/></svg>Cash Flow Forecast</a>
+      </div>
+
+      <!-- REPORTING -->
+      <div class="group-label">Reporting</div>
+      <div class="nav-list">
+        <a class="leaf"><svg class="ic" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M9 3v18M3 9h6" stroke="currentColor" stroke-width="2"/></svg>Projects</a>
+        <a class="leaf"><svg class="ic" viewBox="0 0 24 24" fill="none"><circle cx="9" cy="8" r="3" stroke="currentColor" stroke-width="2"/><path d="M3 20a6 6 0 0 1 12 0M17 11a3 3 0 1 0-2-5.2M21 20a5.5 5.5 0 0 0-4-5.3" stroke="currentColor" stroke-width="2"/></svg>Staff</a>
+        <a class="leaf"><svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M5 3h14v18l-3-2-3 2-3-2-3 2zM9 8h6M9 12h6" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>Expense Transactions</a>
+      </div>
+
+      <!-- SALES -->
+      <div class="group-label">Sales</div>
+      <div class="nav-list">
+        <a class="leaf"><svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M3 4h18l-7 8v6l-4 2v-8z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>Pipeline</a>
+        <a class="leaf"><svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="currentColor" stroke-width="2"/><path d="M14 2v6h6M9 14a2 2 0 1 0 4 0c0-2-3-1.5-3-3a1.6 1.6 0 0 1 3 0" stroke="currentColor" stroke-width="2"/></svg>Contracts</a>
+        <a class="leaf"><svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M3 21V8l6-4 6 4v13M9 21v-5h3v5M15 11h6v10M18 14h.01M18 17h.01" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>Customers</a>
+        <a class="leaf"><svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M3 12a9 9 0 0 1 15-6.7L21 8M21 3v5h-5M21 12a9 9 0 0 1-15 6.7L3 16M3 21v-5h5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Renewals</a>
+      </div>
+
+      <!-- FORECASTS -->
+      <div class="group-label">Forecasts</div>
+      <div class="subgroup">
+        <div class="subgroup-inner">
+          <div class="sub-label">P&amp;L drivers</div>
+          <div class="nav-list">
+            <a class="leaf"><svg class="ic" viewBox="0 0 24 24" fill="none"><polyline points="3 17 9 11 13 15 21 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><polyline points="15 7 21 7 21 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Revenue Forecast</a>
+            <a class="leaf"><svg class="ic" viewBox="0 0 24 24" fill="none"><circle cx="8" cy="8" r="5" stroke="currentColor" stroke-width="2"/><path d="M14.5 5.5a5 5 0 1 1 0 13" stroke="currentColor" stroke-width="2"/></svg>Cost of Revenue</a>
+            <a class="leaf"><svg class="ic" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.5" stroke="currentColor" stroke-width="2"/><path d="M5 20a7 7 0 0 1 14 0" stroke="currentColor" stroke-width="2"/></svg>Personnel</a>
+            <button class="parent" type="button" id="expBtn" onclick="toggleExp()">
+              <svg class="ic" viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="18" height="13" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 10h18M16 14h2" stroke="currentColor" stroke-width="2"/></svg>
+              <span class="plabel">Expense Forecast</span>
+              <svg class="chev" id="expChev" viewBox="0 0 24 24" fill="none"><polyline points="9 6 15 12 9 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="children" id="expChildren" style="display:none;">
+              <a class="leaf nested">Employee Expenses</a>
+              <a class="leaf nested">Sales &amp; Marketing</a>
+              <a class="leaf nested">Travel &amp; Entertainment</a>
+              <a class="leaf nested">IT</a>
+              <a class="leaf nested">HR</a>
+              <a class="leaf nested">Admin</a>
+              <a class="leaf nested">Facilities</a>
+              <a class="leaf nested">Insurance</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="subgroup">
+        <div class="subgroup-inner">
+          <div class="sub-label">Balance sheet drivers</div>
+          <div class="nav-list">
+            <a class="leaf"><svg class="ic" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>AR Forecast</a>
+            <a class="leaf"><svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M4 7.5 12 12l8-4.5M12 12v9" stroke="currentColor" stroke-width="2"/></svg>Fixed Asset Budget</a>
+            <a class="leaf"><svg class="ic" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="16" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 9h18M8 3v4M16 3v4M12 13v3l2 1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Prepaids Budget</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCENARIOS -->
+      <div class="group-label">Scenarios</div>
+      <div class="nav-list">
+        <a class="leaf"><svg class="ic" viewBox="0 0 24 24" fill="none"><circle cx="6" cy="6" r="2.5" stroke="currentColor" stroke-width="2"/><circle cx="6" cy="18" r="2.5" stroke="currentColor" stroke-width="2"/><circle cx="18" cy="9" r="2.5" stroke="currentColor" stroke-width="2"/><path d="M6 8.5v7M8 6.5h4a3.5 3.5 0 0 1 3.5 3.5" stroke="currentColor" stroke-width="2"/></svg>Scenario Manager</a>
+        <a class="leaf"><svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="8" cy="6" r="2" fill="currentColor"/><circle cx="15" cy="12" r="2" fill="currentColor"/><circle cx="10" cy="18" r="2" fill="currentColor"/></svg>Scenario Drivers</a>
+        <a class="leaf"><svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M16 3h5v5M21 3l-7 7M8 21H3v-5M3 21l7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Scenario P&amp;L</a>
+        <a class="leaf"><svg class="ic" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="8" height="8" rx="1" stroke="currentColor" stroke-width="2"/><rect x="13" y="3" width="8" height="8" rx="1" stroke="currentColor" stroke-width="2"/><rect x="3" y="13" width="8" height="8" rx="1" stroke="currentColor" stroke-width="2"/><rect x="13" y="13" width="8" height="8" rx="1" stroke="currentColor" stroke-width="2"/></svg>Scenario Dashboard</a>
+      </div>
+
+      <div class="divider-dashed"></div>
+
+      <!-- SETUP -->
+      <div class="group-label">Setup</div>
+      <div class="nav-list">
+        <a class="leaf"><svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M12 16V4M8 8l4-4 4 4M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Data Import</a>
+        <a class="leaf"><svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2zM9 4v14M15 6v14" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>Account Mapping</a>
+        <a class="leaf"><svg class="ic" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-2.7 1.1V21a2 2 0 0 1-4 0v-.1A1.6 1.6 0 0 0 7 19.4a1.6 1.6 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0-1.1-2.7H1a2 2 0 0 1 0-4h.1A1.6 1.6 0 0 0 2.6 7a1.6 1.6 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3H7a1.6 1.6 0 0 0 1-1.5V1a2 2 0 0 1 4 0v.1a1.6 1.6 0 0 0 2.7 1.1l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8V7a1.6 1.6 0 0 0 1.5 1H23a2 2 0 0 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1z" stroke="currentColor" stroke-width="1.5"/></svg>Settings</a>
+
+        <button class="parent" type="button">
+          <svg class="ic" style="color:var(--color-ember);" viewBox="0 0 24 24" fill="none"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20V2H6.5A2.5 2.5 0 0 0 4 4.5z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+          <span class="plabel">User Guides</span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none"><polyline points="6 9 12 15 18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="children">
+          <a class="leaf nested">Getting started</a>
+          <a class="leaf nested">Budgets &amp; forecasts</a>
+          <a class="leaf nested">Updating actuals</a>
+          <a class="leaf nested active" href="#" aria-current="page"><span class="leaf-bar"></span>Creating scenarios</a>
+          <a class="leaf nested">Reading the statements</a>
+          <a class="leaf nested">Asking Scout</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="rail-footer">
+      <div class="who">
+        <span class="avatar">C</span>
+        <span class="who-meta">
+          <span class="who-name">Chris</span>
+          <span class="who-role">CFO</span>
+        </span>
+      </div>
+      <button class="scout-launch" type="button">
+        <svg class="sp-ic" viewBox="0 0 24 24" fill="none"><path d="M12 3l1.6 4.3L18 9l-4.4 1.7L12 15l-1.6-4.3L6 9l4.4-1.7zM19 14l.8 2.2L22 17l-2.2.8L19 20l-.8-2.2L16 17l2.2-.8z" fill="currentColor"/></svg>
+        <span class="sl-meta">
+          <span class="sl-top">Ask Scout</span>
+          <span class="sl-sub">opens lower-right</span>
+        </span>
+        <svg class="sl-arrow" viewBox="0 0 24 24" fill="none"><path d="M7 17 17 7M8 7h9v9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ================= CONTENT ================= -->
+  <main class="content">
+    <div class="page">
+      <header class="page-header">
+        <div class="kicker">Setup · User Guides</div>
+        <h1>Setting up a budget and creating scenarios</h1>
+        <p class="page-summary">Lock your approved plan as a frozen Budget, keep reforecasting Base as the months close, then build contained what-if scenarios off that plan and compare them against Base or Budget.</p>
+      </header>
+
+      <article>
+        <p>Your forecast is only as useful as the plan you measure it against. This guide walks the full planning loop: lock the approved annual plan as your <b>Budget</b>, keep reforecasting <b>Base</b> as the months close, and then build <b>scenarios</b> off that plan to test what-if moves before you commit to them. Budget and scenarios are one continuous workflow, not two separate features. Every number here ties back to the same drivers and the same source data, so what you compare is honest by construction.</p>
+
+        <h2>The shape of the workflow</h2>
+        <p>There is a rhythm to planning Bearing's year, and the rest of this guide is these four steps in order:</p>
+        <p>1. <b>Build the plan</b> in the layer-2 drivers (the Forecasts group).</p>
+        <p>2. <b>Lock the plan</b> as your Budget, the frozen yardstick you measure against all year.</p>
+        <p>3. <b>Reforecast Base</b> as each month closes, so your working forecast stays honest while the Budget holds still.</p>
+        <p>4. <b>Explore alternatives</b> as scenarios, contained what-ifs you compare against Base or Budget.</p>
+        <p>The first three steps are about committing to a plan and tracking against it. The fourth is about asking "what if we did something different?" without disturbing the plan.</p>
+        <p>For depth on how each driver is built, see the <b>Budgets and forecasts</b> guide. This guide assumes you have a working forecast and shows you what to do with it.</p>
+
+        <h2>How is Base different from Budget?</h2>
+        <p>Two versions of the forecast run side by side, and the difference between them is the whole point of variance.</p>
+        <ul>
+          <li><span class="dot"></span><span><b>Base</b> is the living working forecast. It keeps moving as actuals close each month, and it is the app default: the Dashboard, the Forecasted P&amp;L, and the three statements always show Base plus actuals. When you reforecast, you are moving Base.</span></li>
+          <li><span class="dot"></span><span><b>Budget</b> is a frozen snapshot of the layer-2 drivers, taken at plan time. Once you lock it, it does not move, even as Base reforecasts. It is the yardstick: the plan you committed to at the start of the year.</span></li>
+        </ul>
+        <p>You never edit statement lines to set a budget. The Budget captures the <b>drivers</b> behind the statements (Revenue Forecast, Personnel, Expense Forecast, and the rest), and the statements roll up from there. Because Base and Budget read the same driver model (one is just frozen), variance is a clean comparison and not two copies of the truth drifting apart.</p>
+        <p>For Bearing, Base today reflects the closed actuals (Jan 2024 through May 2026), June 2026 in close, and the live forecast for Jul through Dec 2026. The Budget is whatever you locked at the start of FY26, untouched since.</p>
+
+        <h2>How do I lock the plan as my budget?</h2>
+        <p>You set the Budget by <b>locking</b> a working plan. Get the plan into the shape you want in the Forecasts group, then lock it. Dogfood snapshots the layer-2 drivers as the Budget. Think of the two budget queries as a pair: <code>lockBudget</code> is the write that freezes the plan, and <code>getBudget(period)</code> is the read that everything else uses to pull the snapshot back.</p>
+        <p>There are two ways to lock:</p>
+        <ul>
+          <li><span class="dot"></span><span><b>Lock the current Base forecast.</b> This is the common path: your approved annual plan is the Base you have been building, so you freeze it as-is.</span></li>
+        </ul>
+        <pre class="code"><code>lockBudget({ source: "base", asOf: "2026-01" })</code></pre>
+        <ul>
+          <li><span class="dot"></span><span><b>Promote an approved scenario.</b> If the plan the board approved lives in a scenario (say a version you tuned in the Scenarios group), promote that scenario's drivers to the Budget instead.</span></li>
+        </ul>
+        <pre class="code"><code>lockBudget({ source: "scenario", scenarioId, asOf: "2026-01" })</code></pre>
+        <p>Either way the result is a <code>BudgetSnapshot</code>: the month it was locked, where it came from (<code>sourcedFrom: "base"</code> or <code>"scenario"</code>), the horizon it covers, and the snapshot of the P&amp;L lines. Read it back at any period with <code>getBudget(period)</code>. The snapshot lives in <code>budget_snapshots</code>.</p>
+        <p>After you lock, the lifecycle is simple: <b>reforecasting moves Base, never the Budget.</b> Each month you close actuals and Base updates; the Budget you locked stays exactly where it was, so the gap between them is the story you tell the board. The only way the Budget changes is a deliberate re-lock.</p>
+
+        <h3>Worked example: locking Bearing's FY26 budget</h3>
+        <p>1. Build the FY26 plan in the Forecasts group until Revenue Forecast, Personnel, Expense Forecast, and the balance-sheet drivers all read the way the board approved (revenue ramping to about $23.4M, headcount to about 140, an 85% subscription / 15% services mix).</p>
+        <p>2. Lock it: <code>lockBudget({ source: "base", asOf: "2026-01" })</code>. Dogfood freezes the layer-2 drivers as the FY26 Budget.</p>
+        <p>3. From then on, close each month and let Base reforecast. Open the Forecasted P&amp;L and the Budget column still shows the January plan while the Forecast column tracks where you are headed now.</p>
+
+        <h2>Watch Base reforecast as actuals close</h2>
+        <p>Once the Budget is locked, your monthly job is to keep Base honest. As each month closes (Bearing has Jan 2024 through May 2026 closed, June 2026 in close, and Jul through Dec 2026 in forecast), the closed month becomes Actual and Base reforecasts the remaining months off the new reality. Base moves; the Budget you locked does not.</p>
+
+        <h3>Where does variance show up?</h3>
+        <p>There is no separate variance module. Variance is the columns on the <b>Forecasted P&amp;L</b>, read straight off the locked snapshot:</p>
+        <ul>
+          <li><span class="dot"></span><span><b>Budget</b> (the locked snapshot), <b>Actual</b> (closed months), <b>Variance</b> (the gap), <b>Forecast</b> (Base, forward).</span></li>
+        </ul>
+      </article>
+    </div>
+
+    <!-- MOCK 1: Forecasted P&L strip -->
+    <div class="page-wide mock mock-wide">
+      <div class="card">
+        <div class="card-head">
+          <span class="card-title">Forecasted P&amp;L</span>
+          <span class="card-sub">FY26 · figures in $000s</span>
+        </div>
+        <div class="card-body" style="padding:0;">
+          <table class="pnl">
+            <thead>
+              <tr><th>Line</th><th>Budget</th><th>Actual</th><th>Variance</th><th>Forecast</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Subscription</td><td>19,180</td><td>19,640</td><td class="var-up">+460</td><td>19,890</td></tr>
+              <tr><td>Services</td><td>3,520</td><td>3,310</td><td class="var-down">(210)</td><td>3,470</td></tr>
+              <tr class="total"><td>Total Revenue</td><td>22,700</td><td>22,950</td><td class="var-up">+250</td><td>23,360</td></tr>
+              <tr><td>Direct Payroll</td><td>2,470</td><td>2,520</td><td class="var-down">(50)</td><td>2,580</td></tr>
+              <tr><td>Non-employee Cost of Revenue</td><td>3,290</td><td>3,420</td><td class="var-down">(130)</td><td>3,480</td></tr>
+              <tr class="total"><td>Total Cost of Revenue</td><td>5,760</td><td>5,940</td><td class="var-down">(180)</td><td>6,060</td></tr>
+              <tr class="total"><td>Gross Profit</td><td>16,940</td><td>17,010</td><td class="var-up">+70</td><td>17,300</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="mock-caption">First tap on any cell opens the lineage in a right-side pane. Variance is favorable in sage, unfavorable in ember.</p>
+    </div>
+
+    <div class="page">
+      <article>
+        <p>The Variance column reads <code>getBudget(period)</code> for the plan side and the live statement for the actual and forecast sides, so the comparison ties to the screen. Because Budget reads the snapshot and Forecast reads live Base, the gap is always honest: what you committed to against where you are headed. For the narrative around it, ask Scout: it reads the same columns and explains the drivers behind a variance, with a click-through receipt on every number.</p>
+
+        <h2>What drivers does the budget actually snapshot?</h2>
+        <p>The Budget freezes the seven layer-2 drivers in the Forecasts group:</p>
+        <ul>
+          <li><span class="dot"></span><span><b>P&amp;L drivers:</b> Revenue Forecast, Cost of Revenue, Personnel, Expense Forecast.</span></li>
+          <li><span class="dot"></span><span><b>Balance-sheet drivers:</b> AR Forecast, Fixed Asset Budget, Prepaids Budget.</span></li>
+        </ul>
+        <p>Two things worth remembering when you read them:</p>
+        <ul>
+          <li><span class="dot"></span><span><b>Cost of Revenue is assembled, not entered.</b> It is Direct payroll (read from Personnel's Direct-function departments) plus a rate times revenue per stream. You tune the rate, not a CoR line.</span></li>
+          <li><span class="dot"></span><span><b>The two-axis cost model:</b> every cost has a nature (payroll vs non-payroll, which is how you input it) and a function (Direct/CoR, R&amp;D, S&amp;M, G&amp;A, which is how you present and measure it).</span></li>
+        </ul>
+        <p>For depth on each driver and how to build them, see the <b>Budgets and forecasts</b> guide.</p>
+
+        <h2>What is a scenario?</h2>
+        <p>A <b>scenario</b> is a what-if version of Bearing's forecast. You build it by stacking a few adjustments on the working plan, then read the result on a contained P&amp;L and dashboard. Scenarios are <b>dynamic and user-created</b>: you create, duplicate, and reset your own. The shipped presets are starting points, not a fixed list you are stuck with.</p>
+        <p>A scenario is about the <b>shape</b> of the plan (margin, runway, growth), not about drilling a single number to a transaction.</p>
+
+        <h2>Scenarios stay contained (and why that is good)</h2>
+        <p>Scenarios live <b>only inside the Scenarios group</b>. Everywhere else, the Dashboard, the three statements, and every Reporting, Sales, and Forecasts surface, always shows Base plus actuals. There is <b>no global switcher and no top-bar toggle</b>: the live cockpit never flips into a hypothetical.</p>
+        <p>This holds because actuals are <b>shared and immutable</b>. A scenario can never alter closed history; it branches only the forecast months (for Bearing, Jul through Dec 2026), and only within the four Scenario surfaces. The adjustments themselves are stored as deltas in <code>scenario_inputs</code>, layered over Base, so the source plan is never touched.</p>
+        <p>The trade-off: you cannot drill a scenario number to a source transaction through the rest of the app. That is by design. Scenarios answer "what shape does the plan take if we do X," and for that the contained P&amp;L and dashboard are exactly what you want.</p>
+
+        <h2>The adjustment: the building block of a scenario</h2>
+        <p>Every scenario is a small stack of <b>adjustments</b>. One adjustment is four parts:</p>
+        <ul>
+          <li><span class="dot"></span><span><b>Lever</b> (plus an optional <b>sub-dimension</b> that narrows it): what you are changing.</span></li>
+          <li><span class="dot"></span><span><b>Magnitude:</b> the slider, how much.</span></li>
+          <li><span class="dot"></span><span><b>Time window:</b> a Start month and an optional End month, at monthly granularity. Most adjustments run start-through-horizon; a bounded one reverts to Base after its End.</span></li>
+          <li><span class="dot"></span><span><b>Shape:</b> <b>Step</b> applies the full change at the Start; <b>Ramp</b> phases it in across the window.</span></li>
+        </ul>
+      </article>
+    </div>
+
+    <!-- MOCK 2: Scenario Drivers board -->
+    <div class="page-wide mock mock-wide">
+      <div class="card">
+        <div class="card-head">
+          <span class="card-title">Scenario Drivers</span>
+          <span class="card-sub">Hiring freeze · 1 adjustment</span>
+        </div>
+        <div class="card-body">
+          <div class="adj-row">
+            <span class="pill">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.5" stroke="currentColor" stroke-width="2"/><path d="M5 20a7 7 0 0 1 14 0" stroke="currentColor" stroke-width="2"/></svg>
+              Personnel · Sales
+            </span>
+            <div class="slider">
+              <div class="track"><div class="fill" style="width:18%"></div><div class="knob" style="left:18%"></div></div>
+              <span class="mag">Freeze</span>
+            </div>
+            <div class="win-chips">
+              <span class="chip-sm"><span class="lab">Start</span> Aug 2026</span>
+              <span class="chip-sm"><span class="lab">End</span> Dec 2026</span>
+            </div>
+            <div class="toggle"><button class="on">Step</button><button>Ramp</button></div>
+          </div>
+          <button class="add-row" type="button">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            Add adjustment
+          </button>
+        </div>
+      </div>
+      <p class="mock-caption">Each row is one adjustment: a lever pill, a magnitude slider, a monthly Start/End window, and a Step/Ramp shape.</p>
+    </div>
+
+    <div class="page">
+      <article>
+        <p>Depth comes from <b>more rules and finer targeting, not per-line month-cell editing.</b> The slider set stays coarse on purpose. There are two behaviors to keep straight:</p>
+        <ul>
+          <li><span class="dot"></span><span><b>Rate levers</b> (revenue growth, DSO, target margin) override the rate inside the window and return to Base outside it.</span></li>
+          <li><span class="dot"></span><span><b>Level levers</b> (headcount adds, an opex amount) apply their delta inside the window.</span></li>
+        </ul>
+
+        <h3>The lever set</h3>
+        <p>The levers are a closed, typed set. There are no free-form levers:</p>
+        <ul>
+          <li><span class="dot"></span><span><b>Revenue</b>, by stream (<code>subscription</code> or <code>services</code>): bookings / growth.</span></li>
+          <li><span class="dot"></span><span><b>Personnel</b>, by department (optional, so it can be company-wide): hiring pace / adds, plus a hiring <b>freeze</b> mode.</span></li>
+          <li><span class="dot"></span><span><b>Expense</b>, by group (the live OpEx group set, for example <b>Sales &amp; Marketing</b> or <b>IT</b>): the opex level.</span></li>
+          <li><span class="dot"></span><span><b>Direct cost</b>: the Cost-of-Revenue rate / target margin.</span></li>
+          <li><span class="dot"></span><span><b>AR DSO</b>: days sales outstanding.</span></li>
+          <li><span class="dot"></span><span><b>AP DPO</b>: days payable outstanding (available once AP/DPO planning is turned on).</span></li>
+        </ul>
+        <p>The Revenue and Expense levers require a sub-dimension (which stream, which group); Personnel's department is optional. The OpEx groups you can target are the live eight: Employee Expenses, Sales &amp; Marketing, Travel &amp; Entertainment, IT, HR, Admin, Facilities, Insurance. Personnel departments are the ten seed departments, tagged by function: Professional Services and Support (Direct/CoR); Engineering and Product &amp; Design (R&amp;D); Sales, Marketing, and Customer Success (S&amp;M); Finance, People, and Ops (G&amp;A).</p>
+
+        <h3>How levers stack</h3>
+        <ul>
+          <li><span class="dot"></span><span>Adjustments on <b>different levers</b> apply independently and compose together. A revenue change and a personnel change just both happen.</span></li>
+          <li><span class="dot"></span><span>When two adjustments hit the <b>same lever with overlapping windows</b>, the <b>later window overrides</b> the earlier one in the overlap.</span></li>
+        </ul>
+        <p>The engine is <b>deterministic</b>: the same inputs always produce the same result. One operation runs the whole thing: Base plus the scenario's active adjustments for the period, re-derived into the Scenario P&amp;L and Scenario Dashboard. Nothing outside the Scenarios group changes.</p>
+        <p>And it validates as you go, rejecting bad inputs before they ever reach the P&amp;L:</p>
+        <ul>
+          <li><span class="dot"></span><span>An <b>End before its Start</b>.</span></li>
+          <li><span class="dot"></span><span>A <b>window outside the forecast horizon</b> (for Bearing, anything outside Jul through Dec 2026).</span></li>
+          <li><span class="dot"></span><span>A <b>magnitude past its limit</b>.</span></li>
+          <li><span class="dot"></span><span>A <b>lever that is not in the set</b>.</span></li>
+        </ul>
+        <p>You cannot build a scenario that does not compute.</p>
+
+        <h2>The four Scenario surfaces</h2>
+        <p>The Scenarios nav group has four surfaces, each a step in the loop:</p>
+      </article>
+    </div>
+
+    <!-- MOCK 3: four surfaces -->
+    <div class="page-wide mock mock-wide">
+      <div class="four-grid">
+        <div class="surface">
+          <span class="glyph"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="6" cy="6" r="2.5" stroke="currentColor" stroke-width="2"/><circle cx="6" cy="18" r="2.5" stroke="currentColor" stroke-width="2"/><circle cx="18" cy="9" r="2.5" stroke="currentColor" stroke-width="2"/><path d="M6 8.5v7M8 6.5h4a3.5 3.5 0 0 1 3.5 3.5" stroke="currentColor" stroke-width="2"/></svg></span>
+          <span class="s-name">Scenario Manager</span>
+          <span class="s-desc">Your library: create, duplicate, and reset scenarios (and Base).</span>
+        </div>
+        <div class="surface">
+          <span class="glyph"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2"/><circle cx="8" cy="6" r="2" fill="currentColor"/><circle cx="15" cy="12" r="2" fill="currentColor"/><circle cx="10" cy="18" r="2" fill="currentColor"/></svg></span>
+          <span class="s-name">Scenario Drivers</span>
+          <span class="s-desc">The adjustment board: stack levers with sliders, windows, Step or Ramp.</span>
+        </div>
+        <div class="surface">
+          <span class="glyph"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M16 3h5v5M21 3l-7 7M8 21H3v-5M3 21l7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span class="s-name">Scenario P&amp;L</span>
+          <span class="s-desc">The contained result, with a per-scenario comparison baseline.</span>
+        </div>
+        <div class="surface">
+          <span class="glyph"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="8" height="8" rx="1" stroke="currentColor" stroke-width="2"/><rect x="13" y="3" width="8" height="8" rx="1" stroke="currentColor" stroke-width="2"/><rect x="3" y="13" width="8" height="8" rx="1" stroke="currentColor" stroke-width="2"/><rect x="13" y="13" width="8" height="8" rx="1" stroke="currentColor" stroke-width="2"/></svg></span>
+          <span class="s-name">Scenario Dashboard</span>
+          <span class="s-desc">The compare / board view: two or three scenarios side by side with KPIs.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="page">
+      <article>
+        <ul>
+          <li><span class="dot"></span><span><b>Scenario Manager:</b> your library. Create, duplicate, and reset scenarios (and Base). No global save-state machinery: a scenario is just its name, its baseline, and its stack of adjustments.</span></li>
+          <li><span class="dot"></span><span><b>Scenario Drivers:</b> the adjustment board. Stack levers here, each with a slider, a monthly window, and a <b>Step</b> or <b>Ramp</b> shape.</span></li>
+          <li><span class="dot"></span><span><b>Scenario P&amp;L:</b> the contained result. Each scenario picks its <b>comparison baseline</b>, and a version dropdown sets it.</span></li>
+          <li><span class="dot"></span><span><b>Scenario Dashboard:</b> the compare / board view. Place two or three scenarios (and Budget) side by side with their KPIs.</span></li>
+        </ul>
+
+        <h3>Can I compare against the plan or against the live forecast?</h3>
+        <p>Both, and you choose per scenario. On the Scenario P&amp;L, the version dropdown sets the <b>baseline</b> the scenario compares against:</p>
+        <ul>
+          <li><span class="dot"></span><span><b>Base</b> (the working forecast): "how does this move change where we are actually headed?"</span></li>
+          <li><span class="dot"></span><span><b>Budget</b> (the locked snapshot): "how does this move compare to the plan we committed to?"</span></li>
+        </ul>
+        <p>On the Scenario Dashboard, Budget can be one of the columns alongside your scenarios, so you can line up two what-ifs against the locked plan at once.</p>
+      </article>
+    </div>
+
+    <!-- MOCK 4: compare dashboard -->
+    <div class="page-wide mock mock-wide">
+      <div class="card">
+        <div class="card-head">
+          <span class="card-title">Scenario Dashboard</span>
+          <span class="card-sub">FY26 · 3 columns compared</span>
+        </div>
+        <div class="card-body" style="padding:0;">
+          <table class="cmp">
+            <thead>
+              <tr>
+                <th class="metric-h">KPI</th>
+                <th class="col ref">Budget<span class="tag">reference</span></th>
+                <th class="col">Hiring freeze</th>
+                <th class="col">25% Profit</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="metric">Revenue</td>
+                <td class="refcol">$22.7M</td>
+                <td>$23.4M<span class="delta up">+$0.7M</span></td>
+                <td>$22.1M<span class="delta down">-$0.6M</span></td>
+              </tr>
+              <tr>
+                <td class="metric">Operating margin</td>
+                <td class="refcol">-48%</td>
+                <td>-41%<span class="delta up">+7 pts</span></td>
+                <td>-25%<span class="delta up">+23 pts</span></td>
+              </tr>
+              <tr>
+                <td class="metric">Runway</td>
+                <td class="refcol">49 mo</td>
+                <td>57 mo<span class="delta up">+8 mo</span></td>
+                <td>71 mo<span class="delta up">+22 mo</span></td>
+              </tr>
+              <tr>
+                <td class="metric">Net income</td>
+                <td class="refcol">-$12.1M</td>
+                <td>-$10.4M<span class="delta up">+$1.7M</span></td>
+                <td>-$5.6M<span class="delta up">+$6.5M</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="mock-caption">Budget is the reference column; deltas read against it. Favorable shifts in sage, unfavorable in ember.</p>
+    </div>
+
+    <div class="page">
+      <article>
+        <h2>The seed presets</h2>
+        <p>Three presets ship as editable starting points (they are starting points, not part of the model):</p>
+        <ul>
+          <li><span class="dot"></span><span><b>25% Profit:</b> levers tuned to a 25% operating profit.</span></li>
+          <li><span class="dot"></span><span><b>Capacity:</b> a services-capacity-constrained view.</span></li>
+          <li><span class="dot"></span><span><b>Breakeven:</b> levers tuned to reach breakeven.</span></li>
+        </ul>
+        <p>Duplicate one to start from a known shape, edit its adjustments, or build a scenario from scratch in the Scenario Manager. The <b>25% Profit</b> preset is a good first thing to open: it shows the kind of lever stack (margin and spend moves) that pulls Bearing to a target operating profit, and you can retune it to your own number.</p>
+
+        <h2>What if we freeze hiring in Sales for H2?</h2>
+        <p>Here is the full worked example, end to end.</p>
+      </article>
+    </div>
+
+    <!-- MOCK 6: callout worked example -->
+    <div class="page-wide mock" style="max-width:48rem;">
+      <div class="callout">
+        <div class="co-title">Worked example: "Hiring freeze"</div>
+        <ol>
+          <li>In <b>Scenario Manager</b>, create a new scenario (or duplicate one to start from a known shape). Name it "Hiring freeze."</li>
+          <li>In <b>Scenario Drivers</b>, add one adjustment: lever Personnel, sub-dimension department <b>Sales</b>; magnitude a hiring <b>freeze</b>; window Start <b>Aug 2026</b>, End <b>Dec 2026</b>; shape <b>Step</b>.</li>
+          <li>Set the scenario's baseline to <b>Budget</b> so you measure the freeze against the plan you committed to.</li>
+          <li>Open <b>Scenario P&amp;L</b>: Sales headcount holds flat Aug through Dec, S&amp;M payroll comes in under plan, operating income and runway shift accordingly. Everything outside the window stays on Base.</li>
+          <li>Open <b>Scenario Dashboard</b> to place "Hiring freeze" next to Budget (and the <b>25% Profit</b> preset for a third column) and read the KPI deltas side by side.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="page">
+      <article>
+        <p>1. In <b>Scenario Manager</b>, create a new scenario (or duplicate one to start from a known shape). Name it "Hiring freeze."</p>
+        <p>2. In <b>Scenario Drivers</b>, add one adjustment:</p>
+        <ul>
+          <li><span class="dot"></span><span><b>Lever:</b> Personnel, sub-dimension department <b>Sales</b>.</span></li>
+          <li><span class="dot"></span><span><b>Magnitude:</b> a hiring <b>freeze</b>.</span></li>
+          <li><span class="dot"></span><span><b>Window:</b> Start <b>Aug 2026</b>, End <b>Dec 2026</b> (inside Bearing's Jul through Dec 2026 forecast horizon).</span></li>
+          <li><span class="dot"></span><span><b>Shape:</b> <b>Step</b> (the freeze applies in full from August).</span></li>
+        </ul>
+        <p>3. Set the scenario's baseline to <b>Budget</b> so you measure the freeze against the plan you committed to.</p>
+        <p>4. Open <b>Scenario P&amp;L</b> to read the contained result: Sales headcount holds flat Aug through Dec, S&amp;M payroll comes in under plan, and operating income and runway shift accordingly. Everything outside the window stays on Base.</p>
+        <p>5. Open <b>Scenario Dashboard</b> to place "Hiring freeze" next to Budget (and the <b>25% Profit</b> preset if you want a third column) and read the KPI deltas side by side.</p>
+        <p>Because the freeze is a single Personnel adjustment in a bounded window, it reverts to Base after December, and nothing outside the Scenarios group changes: the live Dashboard and statements still show Base plus actuals the whole time. If you later add a second Personnel adjustment in Sales with an overlapping window, remember the precedence rule: the later window overrides the earlier one in the overlap.</p>
+
+        <h2>Asking Scout in the Scenarios group</h2>
+        <p>Scout's scenario tools, <code>setDriver</code> (add or change an adjustment) and <code>compareScenarios</code> (line up two or three scenarios against Base or Budget), are scoped to the Scenarios group. There, Scout can build, compare, and explain a scenario's shape for you. Outside the group, Scout's Dashboard, P&amp;L, and statement answers always read Base plus actuals, so a scenario number never leaks into the live cockpit. Every Scout answer carries a click-through receipt, so you can trace any figure it quotes.</p>
+
+        <h2>End-to-end SOP checklist</h2>
+        <p>1. <b>Build the plan.</b> Set the layer-2 drivers in the Forecasts group until the annual plan reads the way it was approved. (See the Budgets and forecasts guide for driver depth.)</p>
+        <p>2. <b>Lock the Budget.</b> Lock the Base forecast, or promote an approved scenario: <code>lockBudget({ source: "base", asOf })</code>. This freezes the layer-2 drivers as your yardstick.</p>
+        <p>3. <b>Reforecast Base monthly.</b> Close each month; Base moves, the Budget does not. Watch the Budget / Actual / Variance / Forecast columns on the Forecasted P&amp;L.</p>
+        <p>4. <b>Build scenarios.</b> In the Scenarios group, create or duplicate a scenario, then stack adjustments (lever + magnitude + window + Step/Ramp) on Scenario Drivers. Mind validation: keep windows inside the forecast horizon and magnitudes within range.</p>
+        <p>5. <b>Pick each scenario's baseline.</b> On Scenario P&amp;L, compare against Base (where you are headed) or Budget (the plan you committed to).</p>
+        <p>6. <b>Compare.</b> On Scenario Dashboard, place two or three scenarios (and Budget) side by side and read the shape: margin, runway, growth. Ask Scout to narrate the differences, with a receipt on every number.</p>
+        <p>7. <b>Promote if approved.</b> If a scenario becomes the new plan, lock it as the Budget with <code>lockBudget({ source: "scenario", scenarioId, asOf })</code> and start the loop again.</p>
+      </article>
+      <div style="height:3rem;"></div>
+    </div>
+  </main>
+</div>
+
+<!-- ================= FLOATING SCOUT PANEL ================= -->
+<aside class="scout-panel" aria-label="Scout">
+  <div class="scout-head">
+    <span class="scout-mark">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 4l1.4 3.8L17 9l-3.6 1.4L12 14l-1.4-3.6L7 9l3.6-1.2z" fill="#faf7f1"/></svg>
+    </span>
+    <span class="scout-name">Scout</span>
+    <span class="scout-dim">Scenarios</span>
+  </div>
+  <div class="scout-body">
+    <div class="msg you"><span class="who-lbl">You:</span> Compare the hiring freeze to budget.</div>
+    <div class="step"><span class="spin"></span> Comparing scenarios...</div>
+    <div class="msg scout">The hiring freeze lands 7 points better on operating margin than Budget (-34% vs -41%) and extends runway by 8 months to 57. Revenue holds at $23.4M; net income improves $1.7M to -$10.4M.</div>
+    <span class="receipt">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M5 3h14v18l-3-2-3 2-3-2-3 2z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+      receipt · compareScenarios(hiring-freeze, budget)
+    </span>
+  </div>
+  <div class="scout-input">
+    <span class="fake-input">Ask about a scenario...</span>
+    <span class="send"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 12l16-8-6 16-2-6z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span>
+  </div>
+</aside>
+
+<script>
+  function toggleExp(){
+    var kids = document.getElementById('expChildren');
+    var chev = document.getElementById('expChev');
+    var open = kids.style.display !== 'none';
+    kids.style.display = open ? 'none' : 'flex';
+    chev.style.transform = open ? 'rotate(0deg)' : 'rotate(90deg)';
+  }
+</script>
+</body>
+</html>

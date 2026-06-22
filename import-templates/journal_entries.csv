@@ -1,0 +1,10 @@
+entry_id,period,entry_date,doc_ref,source,account_code,debit,credit,memo
+JE-2026-06-00,2026-06,2026-06-30,2026-06-invoice,invoice,2100,742000.00,0.00,Subscription revenue recognized
+JE-2026-06-00,2026-06,2026-06-30,2026-06-invoice,invoice,4000,0.00,742000.00,Subscription revenue recognized
+JE-2026-06-01,2026-06,2026-06-30,2026-06-invoice,invoice,1100,1180000.00,0.00,Subscription billed (annual upfront)
+JE-2026-06-01,2026-06,2026-06-30,2026-06-invoice,invoice,2100,0.00,1180000.00,Subscription billed (annual upfront)
+JE-2026-06-05,2026-06,2026-06-30,2026-06-payroll,payroll,5000,214000.00,0.00,Payroll - direct
+JE-2026-06-05,2026-06,2026-06-30,2026-06-payroll,payroll,6000,1268000.00,0.00,Payroll - indirect
+JE-2026-06-05,2026-06,2026-06-30,2026-06-payroll,payroll,1000,0.00,1482000.00,Payroll paid in cash
+JE-2026-06-09,2026-06,2026-06-30,2026-06-depreciation,depreciation,6900,49500.00,0.00,Depreciation & amortization
+JE-2026-06-09,2026-06,2026-06-30,2026-06-depreciation,depreciation,1500,0.00,49500.00,Depreciation & amortization

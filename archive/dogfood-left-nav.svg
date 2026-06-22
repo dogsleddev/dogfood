@@ -1,0 +1,237 @@
+<svg viewBox="0 0 900 904" width="900" height="904" xmlns="http://www.w3.org/2000/svg" font-family="Geist, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <defs>
+    <clipPath id="round"><rect x="0" y="0" width="900" height="904" rx="16"/></clipPath>
+    <linearGradient id="gSide" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0E1726"/><stop offset="1" stop-color="#0B121E"/>
+    </linearGradient>
+    <linearGradient id="gAv" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#EC6D3F"/><stop offset="1" stop-color="#E7B23A"/>
+    </linearGradient>
+    <linearGradient id="gTeal" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#46C99A"/><stop offset="1" stop-color="#2C7A60"/>
+    </linearGradient>
+    <linearGradient id="gScout" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#EC6D3F" stop-opacity="0.16"/><stop offset="1" stop-color="#46C99A" stop-opacity="0.10"/>
+    </linearGradient>
+    <linearGradient id="gEdge" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#EC6D3F" stop-opacity="0"/><stop offset="0.5" stop-color="#EC6D3F" stop-opacity="0.28"/><stop offset="1" stop-color="#EC6D3F" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="16" stdDeviation="24" flood-color="#0E1726" flood-opacity="0.30"/>
+    </filter>
+  </defs>
+
+  <!-- shadow caster -->
+  <rect x="6" y="6" width="888" height="892" rx="16" fill="#0E1726" filter="url(#soft)"/>
+
+  <g clip-path="url(#round)">
+    <!-- content canvas -->
+    <rect x="270" y="0" width="630" height="904" fill="#FAF7F1"/>
+    <!-- sidebar -->
+    <rect x="0" y="0" width="270" height="904" fill="url(#gSide)"/>
+    <rect x="269" y="0" width="1" height="904" fill="url(#gEdge)"/>
+
+    <!-- ===== SIDEBAR ===== -->
+    <!-- brand: connected-trail chevron mark -->
+    <g transform="translate(16,18)">
+      <path d="M11 21 L18 16 L25 11" stroke="#9DB8CC" stroke-width="2" stroke-dasharray="0.5 4" stroke-linecap="round" fill="none" opacity="0.5"/>
+      <path d="M7 17 L11 21 L7 25" stroke="#F4ECDD" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M14 12 L18 16 L14 20" stroke="#F4ECDD" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M21 7 L25 11 L21 15" stroke="#EC6D3F" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+    <text x="56" y="40" font-family="Fraunces, Georgia, serif" font-size="19" font-weight="600" fill="#F4ECDD">dogfood<tspan fill="#9DB8CC" font-weight="500">.cafe</tspan></text>
+
+    <!-- company switcher -->
+    <rect x="14" y="64" width="242" height="44" rx="11" fill="#FFFFFF" fill-opacity="0.025" stroke="#9DB8CC" stroke-opacity="0.16"/>
+    <rect x="26" y="73" width="26" height="26" rx="7" fill="url(#gAv)"/>
+    <text x="39" y="91" font-size="11" font-weight="700" fill="#0E1726" text-anchor="middle">BD</text>
+    <text x="62" y="84" font-size="13" font-weight="600" fill="#F4ECDD">Beacon Devices</text>
+    <circle cx="64" cy="96" r="2.6" fill="#E7B23A"/>
+    <text x="72" y="100" font-size="10.5" fill="#9DB8CC">FY26 · May · Open</text>
+    <path d="M240 83 l4 4 4 -4" stroke="#9DB8CC" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- Scout pill -->
+    <rect x="14" y="122" width="242" height="48" rx="12" fill="url(#gScout)" stroke="#EC6D3F" stroke-opacity="0.35"/>
+    <g transform="translate(26,134)">
+      <path d="M10 1.5 L11.4 7.6 L17.5 9 L11.4 10.4 L10 16.5 L8.6 10.4 L2.5 9 L8.6 7.6 Z" fill="#EC6D3F"/>
+      <path d="M16 1 L16.6 3.1 L18.7 3.7 L16.6 4.3 L16 6.4 L15.4 4.3 L13.3 3.7 L15.4 3.1 Z" fill="#EC6D3F" opacity="0.85"/>
+    </g>
+    <text x="58" y="144" font-size="14" font-weight="600" fill="#F4ECDD">Ask Scout</text>
+    <text x="58" y="160" font-size="10.5" fill="#9DB8CC">Across every module</text>
+    <rect x="214" y="137" width="32" height="18" rx="6" fill="none" stroke="#9DB8CC" stroke-opacity="0.25"/>
+    <text x="230" y="150" font-size="10" fill="#9DB8CC" text-anchor="middle">⌘K</text>
+
+    <!-- ===== NAV ===== -->
+    <!-- OVERVIEW -->
+    <text x="24" y="198" font-size="10.5" font-weight="600" letter-spacing="0.8" fill="#8FA6BB" fill-opacity="0.6">OVERVIEW</text>
+    <g transform="translate(26,216) scale(0.8)" fill="none" stroke="#8FA6BB" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="3" width="8" height="8" rx="1.6"/><rect x="13" y="3" width="8" height="8" rx="1.6"/><rect x="13" y="13" width="8" height="8" rx="1.6"/><rect x="3" y="13" width="8" height="8" rx="1.6"/>
+    </g>
+    <text x="52" y="231" font-size="13" font-weight="500" fill="#BFC9D4">Dashboard</text>
+
+    <!-- CLOSE -->
+    <text x="24" y="266" font-size="10.5" font-weight="600" letter-spacing="0.8" fill="#8FA6BB" fill-opacity="0.6">CLOSE</text>
+    <!-- active: Period Close -->
+    <rect x="12" y="277" width="244" height="34" rx="9" fill="#EC6D3F" fill-opacity="0.12"/>
+    <rect x="0" y="281" width="3" height="26" rx="1.5" fill="#EC6D3F"/>
+    <g transform="translate(26,284) scale(0.8)" fill="none" stroke="#EC6D3F" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="4.5" width="18" height="16" rx="2.2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="8" y1="2.5" x2="8" y2="6"/><line x1="16" y1="2.5" x2="16" y2="6"/><path d="M8.5 14.5 l2.4 2.4 4.6 -5"/>
+    </g>
+    <text x="52" y="299" font-size="13" font-weight="600" fill="#F4ECDD">Period Close</text>
+    <rect x="196" y="282" width="58" height="18" rx="9" fill="#E7B23A" fill-opacity="0.12" stroke="#E7B23A" stroke-opacity="0.45"/>
+    <circle cx="206" cy="291" r="2.6" fill="#E7B23A"/>
+    <text x="214" y="295" font-size="11" font-weight="600" fill="#E7B23A">Open</text>
+    <!-- JE Approvals -->
+    <g transform="translate(26,324) scale(0.8)" fill="none" stroke="#8FA6BB" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 3 h7.5 L19 8.5 V20 a1 1 0 0 1 -1 1 H6 a1 1 0 0 1 -1 -1 V4 a1 1 0 0 1 1 -1 Z"/><path d="M13.5 3 V8.5 H19"/><path d="M8.5 14.5 l2 2 4 -4.5"/>
+    </g>
+    <text x="52" y="339" font-size="13" font-weight="500" fill="#BFC9D4">JE Approvals</text>
+    <rect x="232" y="322" width="20" height="18" rx="9" fill="#EC6D3F"/>
+    <text x="242" y="335" font-size="11" font-weight="700" fill="#1B1206" text-anchor="middle">4</text>
+    <!-- Flux & Variance -->
+    <g transform="translate(26,364) scale(0.8)" fill="none" stroke="#8FA6BB" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 12 h3.5 L9.5 5 L14 19 L16.5 12 H21"/>
+    </g>
+    <text x="52" y="379" font-size="13" font-weight="500" fill="#BFC9D4">Flux &amp; Variance</text>
+
+    <!-- ACCOUNTING -->
+    <text x="24" y="414" font-size="10.5" font-weight="600" letter-spacing="0.8" fill="#8FA6BB" fill-opacity="0.6">ACCOUNTING</text>
+    <!-- Revenue 606 -->
+    <g transform="translate(26,432) scale(0.8)" fill="none" stroke="#8FA6BB" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 3 H18 V20 L15.6 18.6 L13.2 20 L10.8 18.6 L8.4 20 L6 18.6 Z"/><line x1="9" y1="8.5" x2="15" y2="8.5"/><line x1="9" y1="12.5" x2="15" y2="12.5"/>
+    </g>
+    <text x="52" y="447" font-size="13" font-weight="500" fill="#BFC9D4">Revenue</text>
+    <rect x="222" y="431" width="32" height="17" rx="5" fill="#8FA6BB" fill-opacity="0.14"/>
+    <text x="238" y="443" font-size="10" font-weight="600" fill="#9DB8CC" text-anchor="middle" font-family="ui-monospace, monospace">606</text>
+    <!-- Leases 842 -->
+    <g transform="translate(26,472) scale(0.8)" fill="none" stroke="#8FA6BB" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="5" y="3" width="14" height="18" rx="1.4"/><path d="M9 7 h2 M13 7 h2 M9 11 h2 M13 11 h2 M9 15 h2 M13 15 h2"/><path d="M10 21 v-3 h4 v3"/>
+    </g>
+    <text x="52" y="487" font-size="13" font-weight="500" fill="#BFC9D4">Leases</text>
+    <rect x="222" y="471" width="32" height="17" rx="5" fill="#8FA6BB" fill-opacity="0.14"/>
+    <text x="238" y="483" font-size="10" font-weight="600" fill="#9DB8CC" text-anchor="middle" font-family="ui-monospace, monospace">842</text>
+    <!-- Foreign Currency 830 -->
+    <g transform="translate(26,512) scale(0.8)" fill="none" stroke="#8FA6BB" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="9"/><line x1="3" y1="12" x2="21" y2="12"/><path d="M12 3 a13 13 0 0 1 0 18 a13 13 0 0 1 0 -18"/>
+    </g>
+    <text x="52" y="527" font-size="13" font-weight="500" fill="#BFC9D4">Foreign Currency</text>
+    <rect x="222" y="511" width="32" height="17" rx="5" fill="#8FA6BB" fill-opacity="0.14"/>
+    <text x="238" y="523" font-size="10" font-weight="600" fill="#9DB8CC" text-anchor="middle" font-family="ui-monospace, monospace">830</text>
+    <!-- Freight Accrual -->
+    <g transform="translate(26,552) scale(0.8)" fill="none" stroke="#8FA6BB" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M2 6 h13 v10 H2 Z"/><path d="M15 9 h4 l3 3 v4 h-7 Z"/><circle cx="6.5" cy="18.5" r="1.9"/><circle cx="17.5" cy="18.5" r="1.9"/>
+    </g>
+    <text x="52" y="567" font-size="13" font-weight="500" fill="#BFC9D4">Freight Accrual</text>
+    <!-- AR Reconciliation -->
+    <g transform="translate(26,592) scale(0.8)" fill="none" stroke="#8FA6BB" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 8 H16"/><path d="M13 5 L16 8 L13 11"/><path d="M18 16 H8"/><path d="M11 13 L8 16 L11 19"/>
+    </g>
+    <text x="52" y="607" font-size="13" font-weight="500" fill="#BFC9D4">AR Reconciliation</text>
+
+    <!-- REPORTING -->
+    <text x="24" y="642" font-size="10.5" font-weight="600" letter-spacing="0.8" fill="#8FA6BB" fill-opacity="0.6">REPORTING</text>
+    <!-- Cash Flow -->
+    <g transform="translate(26,660) scale(0.8)" fill="none" stroke="#8FA6BB" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="7" width="18" height="10" rx="1.8"/><circle cx="12" cy="12" r="2.3"/><line x1="6" y1="9.5" x2="6" y2="14.5"/><line x1="18" y1="9.5" x2="18" y2="14.5"/>
+    </g>
+    <text x="52" y="675" font-size="13" font-weight="500" fill="#BFC9D4">Cash Flow</text>
+    <!-- Budget vs Actuals -->
+    <g transform="translate(26,700) scale(0.8)" fill="none" stroke="#8FA6BB" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 4 V20 H20"/><rect x="7" y="12" width="3.4" height="6" rx="0.6"/><rect x="12.3" y="8" width="3.4" height="10" rx="0.6"/><rect x="17" y="14" width="3" height="4" rx="0.6"/>
+    </g>
+    <text x="52" y="715" font-size="13" font-weight="500" fill="#BFC9D4">Budget vs Actuals</text>
+
+    <!-- PLANNING -->
+    <text x="24" y="750" font-size="10.5" font-weight="600" letter-spacing="0.8" fill="#8FA6BB" fill-opacity="0.6">PLANNING</text>
+    <!-- Staff Budget -->
+    <g transform="translate(26,768) scale(0.8)" fill="none" stroke="#8FA6BB" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="9" cy="8" r="3"/><path d="M3.5 20 a5.5 5.5 0 0 1 11 0"/><circle cx="16.5" cy="9" r="2.3"/><path d="M15.2 14.2 a5 5 0 0 1 5.3 5.8"/>
+    </g>
+    <text x="52" y="783" font-size="13" font-weight="500" fill="#BFC9D4">Staff Budget</text>
+    <!-- Indirect Expenses -->
+    <g transform="translate(26,808) scale(0.8)" fill="none" stroke="#8FA6BB" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="6" width="18" height="13" rx="2.2"/><line x1="3" y1="10" x2="21" y2="10"/><circle cx="16.5" cy="14.5" r="1.3"/>
+    </g>
+    <text x="52" y="823" font-size="13" font-weight="500" fill="#BFC9D4">Indirect Expenses</text>
+
+    <!-- footer -->
+    <line x1="14" y1="850" x2="256" y2="850" stroke="#9DB8CC" stroke-opacity="0.16"/>
+    <circle cx="30" cy="880" r="14" fill="url(#gTeal)"/>
+    <text x="30" y="884" font-size="12" font-weight="700" fill="#0E1726" text-anchor="middle">C</text>
+    <text x="52" y="876" font-size="12.5" font-weight="600" fill="#F4ECDD">Chris</text>
+    <text x="52" y="890" font-size="10.5" fill="#9DB8CC">Controller</text>
+    <g transform="translate(236,872) scale(0.72)" fill="none" stroke="#8FA6BB" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="3"/><path d="M12 2.5 V5 M12 19 V21.5 M2.5 12 H5 M19 12 H21.5 M5.2 5.2 L7 7 M17 17 L18.8 18.8 M18.8 5.2 L17 7 M7 17 L5.2 18.8"/>
+    </g>
+
+    <!-- ===== CONTENT (dimmed context) ===== -->
+    <line x1="270" y1="54" x2="900" y2="54" stroke="#ECE6DB"/>
+    <text x="292" y="33" font-size="13" fill="#8A93A0">Close<tspan fill="#1c2530" font-weight="600">  /  Period Close</tspan></text>
+    <rect x="596" y="11" width="184" height="32" rx="8" fill="#FFFFFF" stroke="#ECE6DB"/>
+    <g transform="translate(612,27)" fill="none" stroke="#9AA4B0" stroke-width="1.6" stroke-linecap="round"><circle cx="0" cy="0" r="5"/><line x1="3.6" y1="3.6" x2="7" y2="7"/></g>
+    <text x="624" y="31" font-size="12" fill="#9AA4B0">Search</text>
+    <circle cx="862" cy="27" r="15" fill="url(#gTeal)"/>
+
+    <text x="292" y="98" font-family="Fraunces, Georgia, serif" font-size="23" font-weight="600" fill="#1c2530">Period Close</text>
+    <text x="292" y="120" font-size="12.5" fill="#7A8694">May 2026  ·  target close June 4</text>
+
+    <!-- stat cards -->
+    <rect x="292" y="136" width="185" height="78" rx="12" fill="#FFFFFF" stroke="#ECE6DB"/>
+    <text x="308" y="166" font-size="10.5" font-weight="600" letter-spacing="0.6" fill="#8A93A0">TASKS COMPLETE</text>
+    <text x="308" y="198" font-family="Fraunces, Georgia, serif" font-size="21" font-weight="600" fill="#1c2530">12 / 18</text>
+    <rect x="491" y="136" width="185" height="78" rx="12" fill="#FFFFFF" stroke="#ECE6DB"/>
+    <text x="507" y="166" font-size="10.5" font-weight="600" letter-spacing="0.6" fill="#8A93A0">JES TO APPROVE</text>
+    <text x="507" y="198" font-family="Fraunces, Georgia, serif" font-size="21" font-weight="600" fill="#EC6D3F">4</text>
+    <rect x="690" y="136" width="185" height="78" rx="12" fill="#FFFFFF" stroke="#ECE6DB"/>
+    <text x="706" y="166" font-size="10.5" font-weight="600" letter-spacing="0.6" fill="#8A93A0">FLUX FLAGS</text>
+    <text x="706" y="198" font-family="Fraunces, Georgia, serif" font-size="21" font-weight="600" fill="#E7B23A">3</text>
+
+    <!-- checklist card -->
+    <rect x="292" y="228" width="583" height="646" rx="12" fill="#FFFFFF" stroke="#ECE6DB"/>
+    <text x="308" y="256" font-size="13" font-weight="600" fill="#1c2530">Close checklist</text>
+    <text x="859" y="256" font-size="11" fill="#9AA4B0" text-anchor="end">May 2026</text>
+    <line x1="308" y1="272" x2="859" y2="272" stroke="#F1ECE2"/>
+
+    <!-- row 1 done -->
+    <circle cx="322" cy="304" r="9" fill="#46C99A"/>
+    <path d="M319 304 l2 2.2 4.2 -4.8" transform="translate(0,0)" stroke="#FFFFFF" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="344" y="297" width="300" height="11" rx="5" fill="#E7E0D4"/>
+    <rect x="344" y="314" width="190" height="8" rx="4" fill="#F1ECE2"/>
+    <rect x="758" y="296" width="101" height="22" rx="11" fill="#46C99A" fill-opacity="0.14"/>
+    <text x="808" y="311" font-size="10.5" font-weight="600" fill="#2C7A60" text-anchor="middle">Done</text>
+    <!-- row 2 done -->
+    <circle cx="322" cy="366" r="9" fill="#46C99A"/>
+    <path d="M319 366 l2 2.2 4.2 -4.8" stroke="#FFFFFF" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="344" y="359" width="250" height="11" rx="5" fill="#E7E0D4"/>
+    <rect x="344" y="376" width="150" height="8" rx="4" fill="#F1ECE2"/>
+    <rect x="758" y="358" width="101" height="22" rx="11" fill="#46C99A" fill-opacity="0.14"/>
+    <text x="808" y="373" font-size="10.5" font-weight="600" fill="#2C7A60" text-anchor="middle">Done</text>
+    <!-- row 3 in review -->
+    <circle cx="322" cy="428" r="9" fill="none" stroke="#C3CDD7" stroke-width="1.6"/>
+    <rect x="344" y="421" width="320" height="11" rx="5" fill="#E7E0D4"/>
+    <rect x="344" y="438" width="210" height="8" rx="4" fill="#F1ECE2"/>
+    <rect x="758" y="420" width="101" height="22" rx="11" fill="#8FA6BB" fill-opacity="0.16"/>
+    <text x="808" y="435" font-size="10.5" font-weight="600" fill="#6C7A88" text-anchor="middle">In review</text>
+    <!-- row 4 open -->
+    <circle cx="322" cy="490" r="9" fill="none" stroke="#C3CDD7" stroke-width="1.6"/>
+    <rect x="344" y="483" width="270" height="11" rx="5" fill="#E7E0D4"/>
+    <rect x="344" y="500" width="170" height="8" rx="4" fill="#F1ECE2"/>
+    <rect x="758" y="482" width="101" height="22" rx="11" fill="#E7B23A" fill-opacity="0.12"/>
+    <text x="808" y="497" font-size="10.5" font-weight="600" fill="#B9852A" text-anchor="middle">Open</text>
+    <!-- row 5 open -->
+    <circle cx="322" cy="552" r="9" fill="none" stroke="#C3CDD7" stroke-width="1.6"/>
+    <rect x="344" y="545" width="300" height="11" rx="5" fill="#E7E0D4"/>
+    <rect x="344" y="562" width="160" height="8" rx="4" fill="#F1ECE2"/>
+    <rect x="758" y="544" width="101" height="22" rx="11" fill="#E7B23A" fill-opacity="0.12"/>
+    <text x="808" y="559" font-size="10.5" font-weight="600" fill="#B9852A" text-anchor="middle">Open</text>
+    <!-- row 6 open -->
+    <circle cx="322" cy="614" r="9" fill="none" stroke="#C3CDD7" stroke-width="1.6"/>
+    <rect x="344" y="607" width="230" height="11" rx="5" fill="#E7E0D4"/>
+    <rect x="344" y="624" width="140" height="8" rx="4" fill="#F1ECE2"/>
+    <rect x="758" y="606" width="101" height="22" rx="11" fill="#E7B23A" fill-opacity="0.12"/>
+    <text x="808" y="621" font-size="10.5" font-weight="600" fill="#B9852A" text-anchor="middle">Open</text>
+  </g>
+
+  <!-- frame border -->
+  <rect x="0.5" y="0.5" width="899" height="903" rx="16" fill="none" stroke="#0E1726" stroke-opacity="0.12"/>
+</svg>

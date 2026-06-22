@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Setting up a new period · Dogfood</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ember:#ec6d3f; --ember-deep:#c9582e; --ember-tint:#fbefe9;
+    --amber:#e7b23a; --amber-deep:#b9852a;
+    --sage:#46c99a; --sage-deep:#2fa37d; --sage-deeper:#2a8a66;
+    --frost:#9db8cc; --steel:#5a6b7a; --ink:#1c2530;
+    --parchment:#faf7f1; --parchment-2:#f7f3ec; --card:#ffffff; --card-2:#fbfaf6; --border:#ece6db;
+    --midnight:#0e1726; --midnight-2:#0b121e; --sidebar-fg:#bfc9d4; --sidebar-accent:#16273a; --destructive:#c0392b;
+    --radius:0.625rem;
+    --sans:"Geist",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --serif:"Fraunces",Georgia,"Times New Roman",serif;
+    --mono:"Geist Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{font-family:var(--sans); color:var(--ink); background:var(--parchment); -webkit-font-smoothing:antialiased;}
+
+  /* ---------- LAYOUT ---------- */
+  .app{display:flex; flex-direction:row; min-height:100vh; align-items:flex-start;}
+  .rail{
+    width:288px; flex:0 0 288px; position:sticky; top:0; align-self:flex-start;
+    height:100vh; overflow-y:auto;
+    background:linear-gradient(180deg,var(--midnight),var(--midnight-2));
+    color:var(--sidebar-fg);
+    display:flex; flex-direction:column;
+  }
+  .content{flex:1 1 auto; min-width:0; background:var(--parchment);}
+
+  /* ---------- RAIL SCROLLBAR ---------- */
+  .rail::-webkit-scrollbar{width:8px;}
+  .rail::-webkit-scrollbar-thumb{background:rgba(157,184,204,.18); border-radius:8px;}
+  .rail::-webkit-scrollbar-track{background:transparent;}
+
+  /* ---------- RAIL HEADER ---------- */
+  .rail-header{padding:18px 18px 10px;}
+  .brand{display:flex; align-items:center; gap:10px;}
+  .trailmark{display:flex; align-items:center; line-height:1;}
+  .trailmark svg{width:22px; height:22px; display:block;}
+  .wordmark{font-family:var(--serif); font-size:18px; font-weight:600; letter-spacing:.2px;}
+  .wordmark .pf{color:var(--parchment);}
+  .wordmark .cafe{color:var(--steel);}
+
+  .company-chip{
+    margin:14px 4px 4px; padding:8px; display:flex; align-items:center; gap:10px;
+    background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.10); border-radius:10px; cursor:pointer;
+  }
+  .br-square{
+    width:32px; height:32px; flex:0 0 32px; border-radius:8px;
+    background:linear-gradient(135deg,var(--ember),var(--amber));
+    color:#fff; font-weight:700; font-size:13px; display:flex; align-items:center; justify-content:center;
+  }
+  .company-meta{display:flex; flex-direction:column; line-height:1.2; flex:1; min-width:0;}
+  .company-meta .nm{color:var(--parchment); font-size:14px; font-weight:500;}
+  .company-meta .fy{color:var(--steel); font-size:12px;}
+  .chip-caret{color:var(--steel); font-size:12px;}
+
+  /* ---------- NAV ---------- */
+  nav{padding:8px 10px 14px; flex:1;}
+  .nav-group-label{
+    font-size:11px; text-transform:uppercase; letter-spacing:.07em;
+    color:rgba(90,107,122,.85); padding:14px 12px 6px; font-weight:600;
+  }
+  .nav-sub-label{
+    font-size:10px; text-transform:uppercase; letter-spacing:.06em;
+    color:rgba(90,107,122,.7); padding:8px 12px 4px 12px; font-weight:600;
+  }
+  .leaf{
+    display:flex; align-items:center; gap:9px;
+    padding:6px 8px 6px 12px; border-radius:6px; font-size:14px;
+    color:var(--sidebar-fg); cursor:pointer; position:relative; text-decoration:none;
+  }
+  .leaf .ic{width:16px; height:16px; flex:0 0 16px; color:var(--steel); display:flex; align-items:center; justify-content:center;}
+  .leaf .ic svg{width:16px; height:16px; display:block;}
+  .leaf:hover{background:rgba(255,255,255,.05); color:var(--parchment);}
+  .leaf:hover .ic{color:var(--frost);}
+  .leaf.parent .caret{margin-left:auto; color:var(--steel); font-size:11px;}
+  .leaf.child{padding-left:33px; font-size:13px;}
+  .leaf.active{
+    background:rgba(236,109,63,.12); color:var(--parchment); font-weight:500;
+  }
+  .leaf.active .ic{color:var(--ember);}
+  .leaf.active::before{
+    content:""; position:absolute; left:0; top:4px; bottom:4px; width:3px;
+    background:var(--ember); border-radius:0 3px 3px 0;
+  }
+  .nav-divider{border:0; border-top:1px dashed rgba(255,255,255,.10); margin:12px 8px;}
+  .nav-subgroup{border-left:1px solid rgba(255,255,255,.10); margin:0 8px 0 12px; padding-left:8px;}
+
+  /* ---------- RAIL FOOTER ---------- */
+  .rail-footer{padding:12px 14px 18px; border-top:1px solid rgba(255,255,255,.10);}
+  .user-row{display:flex; align-items:center; gap:10px; margin-bottom:12px;}
+  .avatar{
+    width:32px; height:32px; flex:0 0 32px; border-radius:50%;
+    background:#16273a; color:var(--parchment); display:flex; align-items:center; justify-content:center;
+    font-size:14px; font-weight:600;
+  }
+  .user-meta{display:flex; flex-direction:column; line-height:1.2;}
+  .user-meta .u{color:var(--parchment); font-size:14px; font-weight:500;}
+  .user-meta .r{color:var(--steel); font-size:12px;}
+  .scout-launch{
+    width:100%; display:flex; align-items:center; gap:10px; cursor:pointer;
+    border:1px solid rgba(236,109,63,.4); border-radius:10px; padding:9px 11px;
+    background:linear-gradient(135deg,rgba(236,109,63,.9),rgba(70,201,154,.55));
+    color:#fff; font-family:var(--sans);
+  }
+  .scout-launch .spark{font-size:14px;}
+  .scout-launch .sl-meta{display:flex; flex-direction:column; line-height:1.2; flex:1; text-align:left;}
+  .scout-launch .sl-meta .t{font-size:14px; font-weight:600;}
+  .scout-launch .sl-meta .s{font-size:11px; opacity:.85;}
+  .scout-launch .arr{font-size:14px;}
+
+  /* ---------- GUIDE BODY ---------- */
+  .guide-wrap{padding:40px 56px 120px; max-width:1180px;}
+  .reading{max-width:760px;}
+  .kicker{
+    font-size:12px; text-transform:uppercase; letter-spacing:.08em; color:var(--ember-deep);
+    font-weight:600; margin:0 0 10px;
+  }
+  h1.guide-title{
+    font-family:var(--serif); font-size:30px; font-weight:600; color:var(--ink);
+    margin:0 0 14px; line-height:1.15;
+  }
+  .summary{color:var(--steel); font-size:16px; line-height:1.6; margin:0 0 8px; max-width:760px;}
+  h2{
+    font-family:var(--serif); font-size:20px; font-weight:600; color:var(--ink);
+    margin:2.4rem 0 .9rem; padding-bottom:.4rem; border-bottom:1px solid var(--border);
+  }
+  h3{font-family:var(--serif); font-size:16px; font-weight:600; color:var(--ink); margin:1.6rem 0 .5rem;}
+  p{font-size:15px; line-height:1.75; color:rgba(28,37,48,.9); margin:0 0 1rem; max-width:760px;}
+  ul{margin:0 0 1.1rem; padding:0; list-style:none; max-width:760px;}
+  ul li{position:relative; padding-left:20px; font-size:15px; line-height:1.7; color:rgba(28,37,48,.9); margin-bottom:7px;}
+  ul li::before{content:""; position:absolute; left:2px; top:11px; width:6px; height:6px; border-radius:50%; background:rgba(236,109,63,.7);}
+  ol{margin:0 0 1.1rem; padding-left:22px; max-width:760px;}
+  ol li{font-size:15px; line-height:1.7; color:rgba(28,37,48,.9); margin-bottom:9px;}
+  code{
+    background:var(--parchment-2); padding:1px 5px; border-radius:4px;
+    font-family:var(--mono); font-size:.85em; color:var(--ember-deep);
+  }
+  pre{
+    background:var(--card-2); border:1px solid var(--border); border-radius:10px;
+    padding:14px 16px; overflow-x:auto; margin:0 0 1.2rem; max-width:760px;
+  }
+  pre code{background:none; padding:0; color:var(--ink); font-size:13px; line-height:1.6;}
+  strong{font-weight:600; color:var(--ink);}
+
+  /* ---------- CALLOUT ---------- */
+  .callout{
+    border-left:4px solid var(--ember); background:var(--ember-tint);
+    border-radius:0 12px 12px 0; padding:18px 22px; margin:1.4rem 0 1.6rem; max-width:780px;
+  }
+  .callout h3{margin-top:0;}
+  .callout ol{margin-bottom:.3rem;}
+
+  /* ---------- MOCK PANELS ---------- */
+  .panel{
+    background:var(--card); border:1px solid var(--border); border-radius:14px;
+    padding:18px 20px; margin:1.2rem 0 1.6rem; box-shadow:0 1px 2px rgba(28,37,48,.04), 0 4px 14px rgba(28,37,48,.04);
+    max-width:920px;
+  }
+  .panel-head{display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;}
+  .panel-title{font-family:var(--serif); font-size:14px; font-weight:600; color:var(--ink);}
+  .panel-sub{font-size:12px; color:var(--steel);}
+
+  /* timeline */
+  .timeline{display:flex; align-items:stretch; gap:6px; flex-wrap:wrap;}
+  .tl-chip{
+    border-radius:8px; padding:8px 10px; font-size:12px; line-height:1.3;
+    display:flex; flex-direction:column; gap:2px; min-width:64px;
+  }
+  .tl-chip .m{font-weight:600;}
+  .tl-chip .s{font-size:10px; opacity:.85;}
+  .tl-actual{background:rgba(70,201,154,.14); color:var(--sage-deeper); border:1px solid rgba(70,201,154,.3);}
+  .tl-ellipsis{align-self:center; color:var(--steel); padding:0 4px; font-size:14px;}
+  .tl-close{background:rgba(231,178,58,.18); color:var(--amber-deep); border:1px solid rgba(231,178,58,.45); position:relative;}
+  .tl-forecast{background:rgba(157,184,204,.16); color:var(--steel); border:1px solid rgba(157,184,204,.4);}
+  .tl-marker{
+    margin-top:10px; display:flex; align-items:center; gap:10px; font-size:12px; color:var(--steel);
+  }
+  .tl-marker .pin{color:var(--ember); font-weight:600;}
+  .btn{
+    border:1px solid var(--border); background:var(--card-2); color:var(--ink);
+    font-family:var(--sans); font-size:12px; font-weight:500; border-radius:8px; padding:6px 12px; cursor:pointer;
+  }
+  .btn.ember{background:var(--ember); border-color:var(--ember-deep); color:#fff;}
+  .btn.ghost{background:#fff;}
+
+  /* import grid */
+  .import-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:10px;}
+  .tpl-card{
+    border:1px solid var(--border); border-radius:10px; background:var(--card-2);
+    padding:11px 12px; display:flex; flex-direction:column; gap:7px;
+  }
+  .tpl-card .nm{font-size:13px; font-weight:500; color:var(--ink);}
+  .tpl-card .nm .src{font-size:9.5px; font-weight:600; text-transform:uppercase; letter-spacing:.04em; color:var(--steel); margin-left:5px;}
+  .pill{font-size:10.5px; font-weight:600; padding:2px 8px; border-radius:999px; align-self:flex-start;}
+  .pill.ok{background:rgba(70,201,154,.16); color:var(--sage-deeper);}
+  .pill.need{background:rgba(236,109,63,.12); color:var(--ember-deep);}
+  .erp-row{
+    display:flex; align-items:center; justify-content:space-between; gap:10px; margin-top:12px;
+    border:1px solid var(--border); border-radius:10px; padding:10px 12px; background:#fff;
+  }
+  .erp-row .lbl{font-size:13px; font-weight:500;}
+  .erp-row.faint{opacity:.55; background:var(--card-2); margin-top:8px;}
+  .pill.conn{background:rgba(70,201,154,.16); color:var(--sage-deeper);}
+  .pill.road{background:rgba(157,184,204,.18); color:var(--steel);}
+
+  /* validation */
+  .check-list{display:flex; flex-direction:column; gap:9px;}
+  .check-row{display:flex; align-items:flex-start; gap:10px; font-size:13.5px; line-height:1.5;}
+  .check-mark{
+    width:18px; height:18px; flex:0 0 18px; border-radius:50%; margin-top:1px;
+    background:var(--sage); color:#fff; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700;
+  }
+  .check-row .mono{font-family:var(--mono); font-size:12px; color:var(--steel);}
+  .gate-tag{font-size:10px; font-weight:600; text-transform:uppercase; letter-spacing:.04em; color:var(--ember-deep); background:rgba(236,109,63,.12); padding:1px 7px; border-radius:999px; margin-left:6px; white-space:nowrap;}
+
+  /* reconciliation table */
+  table.recon{width:100%; border-collapse:collapse; font-size:13px;}
+  table.recon th{
+    text-align:left; font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:var(--steel);
+    font-weight:600; padding:6px 10px; border-bottom:1px solid var(--border);
+  }
+  table.recon td{padding:8px 10px; border-bottom:1px solid var(--border); color:var(--ink);}
+  table.recon td.num{font-family:var(--mono); font-size:12px; text-align:right;}
+  .status-tied{color:var(--sage-deeper); font-weight:600;}
+  .status-flag{color:var(--amber-deep); font-weight:600;}
+  .recon-actions{display:flex; gap:10px; margin-top:14px;}
+
+  /* settings as-of */
+  .asof-card{display:flex; align-items:center; gap:14px; flex-wrap:wrap;}
+  .asof-label{font-size:12px; color:var(--steel); font-weight:500;}
+  .asof-selector{
+    display:flex; align-items:center; gap:0; border:1px solid var(--border); border-radius:10px; overflow:hidden;
+  }
+  .asof-selector button{
+    border:0; background:var(--card-2); color:var(--ink); font-size:15px; font-weight:600;
+    width:34px; height:38px; cursor:pointer;
+  }
+  .asof-selector .val{
+    padding:0 16px; height:38px; display:flex; align-items:center; gap:8px; font-size:14px; font-weight:600;
+    border-left:1px solid var(--border); border-right:1px solid var(--border);
+  }
+  .asof-selector .val .badge{font-size:10.5px; font-weight:600; color:var(--sage-deeper); background:rgba(70,201,154,.16); padding:1px 7px; border-radius:999px;}
+  .asof-selector .val .badge.close{color:var(--amber-deep); background:rgba(231,178,58,.18);}
+  .asof-note{font-size:12px; color:var(--steel);}
+
+  /* scout floating */
+  .scout-panel{
+    position:fixed; right:24px; bottom:24px; width:360px;
+    background:#fff; border:1px solid var(--border); border-radius:16px;
+    box-shadow:0 10px 40px rgba(28,37,48,.18); overflow:hidden; z-index:50;
+  }
+  .scout-head{display:flex; align-items:center; gap:10px; padding:13px 16px; border-bottom:1px solid var(--border);}
+  .scout-mark{
+    width:28px; height:28px; flex:0 0 28px; border-radius:50%;
+    background:linear-gradient(135deg,var(--ember),var(--amber));
+    display:flex; align-items:center; justify-content:center; color:#fff; font-size:13px;
+  }
+  .scout-head .nm{font-family:var(--serif); font-weight:600; font-size:15px; color:var(--ink);}
+  .scout-head .x{margin-left:auto; color:var(--steel); cursor:pointer; font-size:16px;}
+  .scout-body{padding:14px 16px; display:flex; flex-direction:column; gap:12px;}
+  .msg-you{align-self:flex-end; background:var(--parchment-2); border:1px solid var(--border); border-radius:12px 12px 4px 12px; padding:8px 12px; font-size:13px; max-width:85%;}
+  .msg-you b{color:var(--steel); font-weight:600; font-size:11px; display:block; margin-bottom:2px;}
+  .msg-scout{align-self:flex-start; background:var(--ember-tint); border-radius:12px 12px 12px 4px; padding:9px 12px; font-size:13px; line-height:1.55; max-width:90%; color:var(--ink);}
+  .receipt{
+    align-self:flex-start; display:inline-flex; align-items:center; gap:6px;
+    font-family:var(--mono); font-size:11px; color:var(--ember-deep);
+    background:#fff; border:1px solid rgba(236,109,63,.3); border-radius:999px; padding:3px 10px;
+  }
+  .scout-input{display:flex; align-items:center; gap:8px; padding:11px 14px; border-top:1px solid var(--border);}
+  .scout-input .field{flex:1; font-size:13px; color:var(--steel);}
+  .scout-input .send{width:28px; height:28px; border-radius:50%; background:var(--ember); color:#fff; display:flex; align-items:center; justify-content:center; font-size:13px;}
+
+  @media (max-width:1000px){
+    .guide-wrap{padding:28px 24px 120px;}
+  }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- ============ LEFT RAIL ============ -->
+  <aside class="rail">
+    <div class="rail-header">
+      <div class="brand">
+        <div class="trailmark">
+          <svg viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polyline points="3,17 7,14 3,11" stroke="#9db8cc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <polyline points="9,15 13,12 9,9" stroke="#5a6b7a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <polyline points="15,13 19,10 15,7" stroke="#ec6d3f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="wordmark"><span class="pf">dogfood</span><span class="cafe">.cafe</span></div>
+      </div>
+      <div class="company-chip">
+        <div class="br-square">BR</div>
+        <div class="company-meta">
+          <span class="nm">Bearing</span>
+          <span class="fy">FY26 · Jun</span>
+        </div>
+        <span class="chip-caret">▾</span>
+      </div>
+    </div>
+
+    <nav>
+      <div class="nav-group-label">Overview</div>
+      <a class="leaf"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg></span>Dashboard</a>
+      <a class="leaf"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg></span>Board Package</a>
+
+      <div class="nav-group-label">Financial Statements</div>
+      <a class="leaf"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg></span>Forecasted P&amp;L</a>
+      <a class="leaf"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg></span>Balance Sheet</a>
+      <a class="leaf"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="12" x="2" y="6" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/></svg></span>Cash Flow Forecast</a>
+
+      <div class="nav-group-label">Reporting</div>
+      <a class="leaf"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z"/><path d="M2 10h20"/></svg></span>Projects</a>
+      <a class="leaf"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>Staff</a>
+      <a class="leaf"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 2H8a2 2 0 0 0-2 2v18l3-2 2 2 2-2 2 2 2-2 3 2V4a2 2 0 0 0-2-2Z"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 17.5v-11"/></svg></span>Expense Transactions</a>
+
+      <div class="nav-group-label">Sales</div>
+      <a class="leaf"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg></span>Pipeline</a>
+      <a class="leaf"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 19.5v.5a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8.5L20 7.5v3"/><path d="M14 2v6h6"/><path d="M10.42 12.61a2.1 2.1 0 1 1 2.97 2.97L7.95 21 4 22l.99-3.95 5.43-5.44Z"/></svg></span>Contracts</a>
+      <a class="leaf"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 21a8 8 0 0 0-12 0"/><circle cx="12" cy="11" r="4"/><circle cx="12" cy="12" r="10"/></svg></span>Customers</a>
+      <a class="leaf"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg></span>Renewals</a>
+
+      <div class="nav-group-label">Forecasts</div>
+      <div class="nav-subgroup">
+        <div class="nav-sub-label">P&amp;L drivers</div>
+        <a class="leaf"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></span>Revenue Forecast</a>
+        <a class="leaf"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18"/><path d="M7 6h1v4"/><path d="m16.71 13.88.7.71-2.82 2.82"/></svg></span>Cost of Revenue</a>
+        <a class="leaf"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 21a8 8 0 0 0-12 0"/><circle cx="10" cy="8" r="5"/><path d="M22 20c0-3.37-2-6.5-4-8a5 5 0 0 0-.45-8.3"/></svg></span>Personnel</a>
+        <a class="leaf parent"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 2H8a2 2 0 0 0-2 2v18l3-2 2 2 2-2 2 2 2-2 3 2V4a2 2 0 0 0-2-2Z"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 17.5v-11"/></svg></span>Expense Forecast<span class="caret">▸</span></a>
+        <div class="nav-sub-label">Balance sheet drivers</div>
+        <a class="leaf"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" x2="5" y1="12" y2="12"/><line x1="19" x2="22" y1="12" y2="12"/><line x1="12" x2="12" y1="2" y2="5"/><line x1="12" x2="12" y1="19" y2="22"/><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="3"/></svg></span>AR Forecast</a>
+        <a class="leaf"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg></span>Fixed Asset Budget</a>
+        <a class="leaf"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/></svg></span>Prepaids Budget</a>
+      </div>
+
+      <div class="nav-group-label">Scenarios</div>
+      <a class="leaf"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" x2="6" y1="3" y2="15"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="6" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></svg></span>Scenario Manager</a>
+      <a class="leaf"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="21" x2="14" y1="4" y2="4"/><line x1="10" x2="3" y1="4" y2="4"/><line x1="21" x2="12" y1="12" y2="12"/><line x1="8" x2="3" y1="12" y2="12"/><line x1="21" x2="16" y1="20" y2="20"/><line x1="12" x2="3" y1="20" y2="20"/><line x1="14" x2="14" y1="2" y2="6"/><line x1="8" x2="8" y1="10" y2="14"/><line x1="16" x2="16" y1="18" y2="22"/></svg></span>Scenario Drivers</a>
+      <a class="leaf"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg></span>Scenario P&amp;L</a>
+      <a class="leaf"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg></span>Scenario Dashboard</a>
+
+      <hr class="nav-divider">
+
+      <div class="nav-group-label">Setup</div>
+      <a class="leaf"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg></span>Data Import</a>
+      <a class="leaf"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 20 3 17V4l6 3 6-3 6 3v13l-6 3-6-3Z"/><path d="M9 7v13"/><path d="M15 4v13"/></svg></span>Account Mapping</a>
+      <a class="leaf"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2Z"/><circle cx="12" cy="12" r="3"/></svg></span>Settings</a>
+      <a class="leaf parent"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"/></svg></span>User Guides<span class="caret">▾</span></a>
+      <a class="leaf child">Getting started</a>
+      <a class="leaf child">Budgets &amp; forecasts</a>
+      <a class="leaf child active">Updating actuals</a>
+      <a class="leaf child">Creating scenarios</a>
+      <a class="leaf child">Reading the statements</a>
+      <a class="leaf child">Asking Scout</a>
+    </nav>
+
+    <div class="rail-footer">
+      <div class="user-row">
+        <div class="avatar">C</div>
+        <div class="user-meta">
+          <span class="u">Chris</span>
+          <span class="r">CFO</span>
+        </div>
+      </div>
+      <button class="scout-launch">
+        <span class="spark">✦</span>
+        <span class="sl-meta">
+          <span class="t">Ask Scout</span>
+          <span class="s">opens lower-right</span>
+        </span>
+        <span class="arr">↗</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ============ CONTENT ============ -->
+  <main class="content">
+    <div class="guide-wrap">
+
+      <p class="kicker">Setup · User Guides · Updating actuals</p>
+      <h1 class="guide-title">Setting up a new period</h1>
+      <p class="summary">Setting up a new period is the monthly close roll-forward: you bring in the just-closed month's actuals from your ERP and systems of record, advance Dogfood's one global as-of date so that month flips from in close to Actual, and let Base reforecast the rest of the year while the locked Budget snapshot stays put, all on trial-balance-driven statements that the sub-ledger reconciles up to.</p>
+
+      <div class="reading">
+
+        <h2>What setting up a new period is</h2>
+        <p>Setting up a new period is the monthly close roll-forward. It is how you move Dogfood forward in time after your books close, and it is the same calm, ordered ritual every month:</p>
+        <ul>
+          <li>Your ERP closes the month.</li>
+          <li>You import it into Dogfood.</li>
+          <li>You validate and reconcile the detail up to the trial balance.</li>
+          <li>You advance the global as-of date, and the in-close month flips to Actual while Base reforecasts.</li>
+        </ul>
+        <p>Dogfood does not run the close. It reads a clean close from your ERP. That is the plan-to-perform side of the line: your ERP and your accounting team own record-to-report (posting entries, reconciling subledgers, finalizing the books), and Dogfood reads the finished result to plan the future off it. Dogfood never posts a journal entry, never reconciles a bank account, and never re-summes your books.</p>
+        <p>So "setting up a new period" means two things happening together:</p>
+        <ul>
+          <li>You bring in the just-closed month's actuals (the trial balance plus the supporting detail).</li>
+          <li>You advance Dogfood's clock so that month becomes Actual and the forecast rolls forward off the new reality.</li>
+        </ul>
+        <p>Everything in this guide is built so that <strong>nothing silently changes a statement</strong>. The trial balance is authoritative, the statements are a view of it, and every check below tells you exactly what it guarantees.</p>
+
+        <h2>The global as-of date and the three month states</h2>
+        <p>Dogfood has one app-wide close boundary, a single global as-of date. It is not a per-report setting. Every surface (the Dashboard, the statements, the registers, the drivers, Scout) reads the same boundary, so the whole app always agrees on what is closed and what is still a forecast.</p>
+        <p>Each month sits in exactly one of three states:</p>
+        <ul>
+          <li><strong>Actual (closed):</strong> the books are final. The numbers come straight from the imported trial balance.</li>
+          <li><strong>In close:</strong> the boundary month, provisional. The month your team is finishing now. Numbers may still move until you import the final close.</li>
+          <li><strong>Forecast:</strong> future months, generated by the layer-2 drivers (Revenue, Cost of Revenue, Personnel, Expense, AR, and the balance-sheet drivers).</li>
+        </ul>
+        <p>For Bearing today:</p>
+        <ul>
+          <li><strong>Actual:</strong> January 2024 through May 2026.</li>
+          <li><strong>In close:</strong> June 2026.</li>
+          <li><strong>Forecast:</strong> July 2026 through December 2026.</li>
+        </ul>
+        <p>The company chip in the rail reads <code>FY26 · Jun</code>, which is the as-of month. When you import a new month, the as-of advances and these three bands all shift together by one month.</p>
+      </div>
+
+      <!-- PANEL 1: close boundary timeline -->
+      <div class="panel">
+        <div class="panel-head">
+          <span class="panel-title">Close boundary &middot; FY26</span>
+          <span class="panel-sub">one global as-of for the whole app</span>
+        </div>
+        <div class="timeline">
+          <div class="tl-chip tl-actual"><span class="m">Jan 2024</span><span class="s">Actual</span></div>
+          <span class="tl-ellipsis">···</span>
+          <div class="tl-chip tl-actual"><span class="m">Apr 2026</span><span class="s">Actual</span></div>
+          <div class="tl-chip tl-actual"><span class="m">May 2026</span><span class="s">Actual</span></div>
+          <div class="tl-chip tl-close"><span class="m">Jun 2026</span><span class="s">In close</span></div>
+          <div class="tl-chip tl-forecast"><span class="m">Jul 2026</span><span class="s">Forecast</span></div>
+          <span class="tl-ellipsis">···</span>
+          <div class="tl-chip tl-forecast"><span class="m">Dec 2026</span><span class="s">Forecast</span></div>
+        </div>
+        <div class="tl-marker">
+          <span class="pin">▲ as-of: Jun 2026 (in close)</span>
+          <span>importing the June close flips it to Actual; July becomes in close</span>
+          <button class="btn ember" style="margin-left:auto;">Advance period →</button>
+        </div>
+      </div>
+
+      <div class="reading">
+        <h2>Statements are trial-balance-driven</h2>
+        <p>This is the core guarantee, so it is worth being precise about it.</p>
+        <p>Your ERP's <strong>trial balance</strong> is authoritative. It is already summed and already adjusted (it includes every manual entry, accrual, and reclass your team booked during the close). Dogfood's three statements (Forecasted P&amp;L, Balance Sheet, Cash Flow) are a <strong>view of the trial balance</strong>, assembled through the chart of accounts. They are <strong>never re-summed from a line-item feed.</strong></p>
+        <p>The transaction sub-ledger (the <code>expense_transactions</code> detail and any other document-level feeds) rides <strong>alongside</strong> the statements. It exists for two jobs: drilling into a number to see what makes it up, and Flux Analysis. It does <strong>not</strong> build the statement. Instead it <strong>reconciles up</strong> to the trial balance:</p>
+        <pre><code>Σ (sub-ledger detail for an account in a month)  ===  that account's trial balance movement</code></pre>
+        <p>So drill-to-transaction is for <strong>explanation, not derivation</strong>. The statement number is the trial balance number. The detail's job is to explain it, and reconciliation (below) tells you whether that explanation is complete.</p>
+
+        <h2>What you import for a new period</h2>
+        <p>You import in <strong>Setup &gt; Data Import</strong> using the CSV/XLSX templates. Every template <strong>upserts on a stable id</strong>: re-importing a period overwrites the existing rows for that period, it never appends duplicates and never asks you to re-key anything.</p>
+        <p>Here is what comes in, and from where.</p>
+      </div>
+
+      <!-- PANEL 2: data import grid -->
+      <div class="panel">
+        <div class="panel-head">
+          <span class="panel-title">Setup &middot; Data Import</span>
+          <span class="panel-sub">CSV / XLSX templates &middot; upsert on stable id</span>
+        </div>
+        <div class="import-grid">
+          <div class="tpl-card"><span class="nm">Trial Balance</span><span class="pill ok">Imported</span></div>
+          <div class="tpl-card"><span class="nm">Chart of Accounts</span><span class="pill ok">Imported</span></div>
+          <div class="tpl-card"><span class="nm">Expense Transactions</span><span class="pill ok">Imported</span></div>
+          <div class="tpl-card"><span class="nm">Customers <span class="src">CRM</span></span><span class="pill ok">Imported</span></div>
+          <div class="tpl-card"><span class="nm">Contracts <span class="src">CRM</span></span><span class="pill ok">Imported</span></div>
+          <div class="tpl-card"><span class="nm">Pipeline <span class="src">CRM</span></span><span class="pill ok">Imported</span></div>
+          <div class="tpl-card"><span class="nm">Headcount</span><span class="pill ok">Imported</span></div>
+          <div class="tpl-card"><span class="nm">Vendors</span><span class="pill ok">Imported</span></div>
+          <div class="tpl-card"><span class="nm">AR aging</span><span class="pill ok">Imported</span></div>
+          <div class="tpl-card"><span class="nm">AP aging</span><span class="pill ok">Imported</span></div>
+          <div class="tpl-card"><span class="nm">Budget</span><span class="pill ok">Imported</span></div>
+          <div class="tpl-card"><span class="nm">FX</span><span class="pill ok">Imported</span></div>
+        </div>
+        <div class="erp-row">
+          <span class="lbl">ERP connection</span>
+          <span class="pill conn">Connected</span>
+        </div>
+        <div class="erp-row faint">
+          <span class="lbl">Salesforce / Rippling</span>
+          <span class="pill road">roadmap</span>
+        </div>
+      </div>
+
+      <div class="reading">
+        <p><strong>From the ERP (this drives the numbers):</strong></p>
+        <ul>
+          <li><code>trial_balance.csv</code> every month, the financials. One row per (<code>period</code>, <code>account_code</code>). Balance-sheet accounts carry the period-end balance; P&amp;L accounts carry the fiscal-year-to-date activity; exactly one of <code>debit</code> / <code>credit</code> is non-zero per row.</li>
+          <li><code>chart_of_accounts.csv</code> imported at setup and whenever the COA changes. Its <code>statement_line</code> column <strong>is</strong> Account Mapping: it is the map from each <code>account_code</code> to exactly one statement line.</li>
+        </ul>
+        <p><strong>The sub-ledger detail (for drill and flux):</strong></p>
+        <ul>
+          <li><code>expense_transactions.csv</code>, AP and vendor bills, one row per document, each with a stable <code>transaction_id</code>.</li>
+          <li>Optional <code>journal_entries.csv</code> for GL-level drill. Payroll, billing, and receipts detail follow the same row-per-document shape.</li>
+        </ul>
+        <p><strong>From each system of record:</strong></p>
+        <ul>
+          <li><code>headcount.csv</code> from your HRIS, feeds Staff and Personnel.</li>
+          <li><code>customers.csv</code> from Billing/CRM, feeds Customers and ARR.</li>
+          <li><code>vendors.csv</code> from AP, the vendor names.</li>
+          <li><code>ar_aging.csv</code> / <code>ap_aging.csv</code> from the ERP aging.</li>
+          <li><code>budget.csv</code> once, at plan lock.</li>
+          <li><code>fx_rates.csv</code>, a single identity row (Bearing is USD-only).</li>
+        </ul>
+        <p><strong>What you do NOT import:</strong> the forward-looking, Dogfood-native data. Your <strong>forecasts</strong>, your <strong>scenarios</strong>, your <strong>planned hires</strong>, and <strong>Account Mapping</strong> itself all live in Dogfood. Importing actuals never overwrites them. Importing a new month reforecasts the remaining periods off the new actuals, but the assumptions you set stay yours.</p>
+
+        <h2>Validation: what each gate guarantees</h2>
+        <p>When you import, Dogfood runs five checks before anything lands. Each one guarantees a specific property of a clean period.</p>
+        <ul>
+          <li><strong>The trial balance balances.</strong> Sum of <code>debit</code> equals sum of <code>credit</code> for the period. This is the <strong>hard gate</strong>: a TB that does not foot is not a close, and the import stops here. (Bearing's real May 2026 <code>trial_balance</code> foots to $59,567,335.23 on each side.)</li>
+          <li><strong>Every account is known.</strong> Every <code>account_code</code> in the trial balance exists in <code>chart_of_accounts</code>. No mystery accounts.</li>
+          <li><strong>Every account is mapped.</strong> Every account maps to exactly one <code>statement_line</code>: no orphans, no gaps. This is what guarantees every dollar in the TB has a home on a statement.</li>
+          <li><strong>One row per (<code>period</code>, <code>account_code</code>).</strong> A trial balance has a single row per account per period, so re-importing a period cleanly overwrites it instead of double-counting.</li>
+          <li><strong>Period format and continuity.</strong> <code>period</code> is <code>YYYY-MM</code>, and there are no gaps across the closed range.</li>
+        </ul>
+      </div>
+
+      <!-- PANEL 3: validation -->
+      <div class="panel">
+        <div class="panel-head">
+          <span class="panel-title">Import validation &middot; June 2026</span>
+          <span class="panel-sub">5 / 5 gates cleared</span>
+        </div>
+        <div class="check-list">
+          <div class="check-row"><span class="check-mark">✓</span><span>Trial balance balances: <span class="mono">$59,567,335.23 = $59,567,335.23</span> <span class="gate-tag">hard gate</span></span></div>
+          <div class="check-row"><span class="check-mark">✓</span><span>All account codes known</span></div>
+          <div class="check-row"><span class="check-mark">✓</span><span>All accounts mapped to a statement line</span></div>
+          <div class="check-row"><span class="check-mark">✓</span><span>One row per period + account</span></div>
+          <div class="check-row"><span class="check-mark">✓</span><span>Period format OK <span class="mono">(YYYY-MM, no gaps)</span></span></div>
+        </div>
+      </div>
+
+      <div class="reading">
+        <p>Because the TB balances and every account maps to exactly one line, the statements are guaranteed to tie out <strong>by construction</strong>. Validation is what protects that guarantee at the door.</p>
+
+        <h2>Reconciliation: detail vs trial balance</h2>
+        <p>Validation proves the statements are clean. Reconciliation proves the <strong>explanation underneath them is complete</strong>. The two are separate on purpose.</p>
+        <p>The statements always equal the trial balance, because the TB is the source and it balances. So reconciliation never checks the statement against the detail to decide the statement. It checks the <strong>detail against the TB</strong>, per (<code>account</code>, <code>period</code>):</p>
+        <ul>
+          <li><strong>Tie (gap within the materiality threshold):</strong> the account is reconciled. The sub-ledger fully explains the trial balance movement.</li>
+          <li><strong>Variance (gap above the threshold):</strong> the account is <strong>flagged with the dollar gap</strong>. You see a per-account reconciliation status rolled up onto each statement line, an exception list, and on drill the explicit breakdown: <strong>"TB $X, detail $Y, unreconciled $Z."</strong></li>
+        </ul>
+      </div>
+
+      <!-- PANEL 4: reconciliation -->
+      <div class="panel">
+        <div class="panel-head">
+          <span class="panel-title">Reconciliation &middot; detail vs TB &middot; June 2026</span>
+          <span class="panel-sub">materiality threshold $1</span>
+        </div>
+        <table class="recon">
+          <thead>
+            <tr><th>Account</th><th style="text-align:right;">TB</th><th style="text-align:right;">Detail</th><th style="text-align:right;">Unreconciled</th><th>Status</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>6000 · Hosting &amp; infra</td><td class="num">412,880.00</td><td class="num">412,880.00</td><td class="num">0.00</td><td class="status-tied">Tied</td></tr>
+            <tr><td>6200 · Salaries &amp; wages</td><td class="num">1,038,540.00</td><td class="num">1,038,540.00</td><td class="num">0.00</td><td class="status-tied">Tied</td></tr>
+            <tr><td>6400 · Software &amp; IT</td><td class="num">87,210.00</td><td class="num">87,210.00</td><td class="num">0.00</td><td class="status-tied">Tied</td></tr>
+            <tr><td>6700 · Travel &amp; entertainment</td><td class="num">54,320.00</td><td class="num">50,420.00</td><td class="num">3,900.00</td><td class="status-flag">Unreconciled $3,900 · fix upstream</td></tr>
+            <tr><td>6900 · Insurance</td><td class="num">19,750.00</td><td class="num">19,750.00</td><td class="num">0.00</td><td class="status-tied">Tied</td></tr>
+          </tbody>
+        </table>
+        <div class="recon-actions">
+          <button class="btn ember">Fix upstream &amp; re-import</button>
+        </div>
+      </div>
+
+      <div class="reading">
+        <p>A materiality threshold (for example $1, or 0.1% of the line) keeps rounding noise off the exception list so you only see real gaps.</p>
+        <p>A gap means the line-item feed is missing or mis-tagging something the ERP booked: a manual accrual, a reclass, a journal entry with no sub-ledger document behind it. <strong>The statement number does not move</strong> while you sort it out. There are <strong>no plugs: everything must reconcile.</strong> A gap is never force-balanced with an "uncategorized" reconciling line, and the trial balance is never bent to the detail. There is one honest path:</p>
+        <ul>
+          <li><strong>Fix upstream.</strong> Pull the missing journal entry or accrual into the feed, or correct the mapping in Account Mapping, then re-import. The gap clears on its own.</li>
+        </ul>
+        <p>Until it clears, the account stays on the <strong>exception list as a blocking "unreconciled / needs attention" flag</strong> with its dollar gap, so you can see exactly what is unexplained and how much. The statement is unchanged the whole time. Reconciliation is purely about whether the <strong>explanation</strong> is complete, never about editing the answer.</p>
+
+        <h2>Advancing the as-of</h2>
+        <p>Importing the new month is what advances the global as-of date. When the import for month N lands and clears its checks:</p>
+        <ul>
+          <li>The <strong>in-close month flips to Actual.</strong></li>
+          <li>The <strong>next month becomes the new in-close month.</strong></li>
+          <li>The <strong>Forecast horizon shrinks by one month.</strong></li>
+          <li><strong>Base reforecasts</strong> the remaining months off the new actuals. Base is the working forecast and the app default, so it keeps moving as reality comes in.</li>
+          <li><strong>Budget / Variance</strong> now compares actual month N against the locked plan.</li>
+        </ul>
+      </div>
+
+      <!-- PANEL 5: settings global as-of -->
+      <div class="panel">
+        <div class="panel-head">
+          <span class="panel-title">Settings &middot; Global as-of</span>
+          <span class="panel-sub">one boundary, every surface</span>
+        </div>
+        <div class="asof-card">
+          <span class="asof-label">As of:</span>
+          <div class="asof-selector">
+            <button>‹</button>
+            <span class="val">Jun 2026 <span class="badge close">in close</span></span>
+            <button>›</button>
+          </div>
+          <span class="asof-note">moves the close boundary for the whole app</span>
+        </div>
+      </div>
+
+      <div class="reading">
+        <p>All surfaces move together, because there is one boundary. And the one thing that does <strong>not</strong> move is the <strong>locked Budget snapshot</strong>. Budget is a frozen snapshot of the layer-2 drivers, taken at plan lock with <code>lockBudget</code> and immutable after. That is the whole point of Budget: it is the yardstick. Base chases reality; Budget holds still so variance means something.</p>
+
+        <h2>The override layer</h2>
+        <p>Sometimes you need to correct a synced record by hand (a misclassified vendor, a known-stale headcount row) before the upstream system catches up. Dogfood handles this with an <strong>override layer</strong>.</p>
+        <p>An override is a <strong>delta off the synced base</strong>, the same pattern as <code>scenario_inputs</code> (scenario adjustments off Base) and <code>flux_notes</code> (review notes on a transaction). It is <strong>flagged</strong> so it is always visible as a manual edit, and it <strong>persists across re-imports.</strong> The imported source data stays immutable underneath. Your edit layers on top, so re-importing the period does not wipe your correction, and removing the override returns the record to the synced value.</p>
+
+        <h2>Restatement, re-import, and reopen</h2>
+        <p>Three things you will do after a month is closed, and what each one touches.</p>
+        <ul>
+          <li><strong>Re-import a prior month (restatement).</strong> When your ERP restates a closed month, drop in the corrected <code>trial_balance</code> (and any corrected detail). Because the import upserts on the (<code>period</code>, <code>account_code</code>) key, this is an <strong>idempotent overwrite</strong>: the old rows for that period are replaced. Dogfood re-rolls the GL and forecast forward and recomputes Variance, but it <strong>does not move the as-of</strong>, because you are correcting history, not advancing time.</li>
+          <li><strong>Reopen a month.</strong> Move the global as-of <strong>back</strong> in Settings. Later months reclassify from Actual back to Forecast until you re-advance. No re-import is needed to reopen.</li>
+          <li><strong>Durable work survives both.</strong> Flux notes key on the stable <code>transaction_id</code> and snapshot the <code>amount_at_note</code> (the figure as it stood when the note was written). So if a restatement moves a number, the note card <strong>flags it</strong> (a flux on the flux) instead of silently going stale. If a transaction disappears in a restatement, its note is <strong>flagged orphaned and needs re-review</strong>, never quietly lost.</li>
+        </ul>
+
+        <h2>The connectors roadmap</h2>
+        <p>Today the mechanism is CSV/XLSX batch import: you export from each system and drop the files into <strong>Setup &gt; Data Import</strong>.</p>
+        <p>A live connector (Salesforce, Rippling, the ERP API) will later replace the CSV step <strong>behind the same DataStore seam</strong>, so nothing about the model above changes. The key idea: <strong>the CSV template is the contract a connector fills.</strong> A connector maps its source objects into the same columns the template defines, and upserts on the same stable id. (See <code>connectors/salesforce.md</code> for the worked example: Salesforce Account / Opportunity / Contract map into <code>customers</code> / <code>pipeline</code> / <code>contracts</code>, upserting on the Salesforce Id. Salesforce owns the sales domain only; recognized revenue, AR, and cash still come from billing and the ERP.)</p>
+        <p>So when connectors arrive, your monthly routine gets shorter, not different.</p>
+
+        <h2>Worked example: closing June 2026</h2>
+        <p>Bearing's as-of is <code>FY26 · Jun</code>, so June 2026 is in close. Here is the full roll-forward.</p>
+      </div>
+
+      <!-- CALLOUT: worked example -->
+      <div class="callout">
+        <h3>Closing June 2026, step by step</h3>
+        <ol>
+          <li><strong>Confirm the close.</strong> Your accounting team finalizes June in the ERP: every entry posted, subledgers reconciled, the books locked.</li>
+          <li><strong>Export and import.</strong> Export the June trial balance to <code>trial_balance.csv</code> and the period's AP detail to <code>expense_transactions.csv</code>, refresh any domain feeds that changed (<code>customers.csv</code>, <code>headcount.csv</code>, <code>vendors.csv</code>, the aging files), and drop them all into <strong>Setup &gt; Data Import</strong>.</li>
+          <li><strong>Validate.</strong> The importer checks the five gates: the TB foots (debits equal credits), every <code>account_code</code> is known, every account maps to one <code>statement_line</code>, one row per (<code>period</code>, <code>account_code</code>), period is <code>YYYY-MM</code> with no gaps. The footing check is the hard gate.</li>
+          <li><strong>Reconcile.</strong> For each account, the sub-ledger detail is summed and compared to the TB movement. Accounts that tie are marked reconciled. Any gap above the threshold is flagged with its dollar amount on the exception list as a blocking "unreconciled / needs attention" item. There are no plugs: you clear each one by fixing upstream and re-importing (pull the missing accrual, or correct the mapping). The statement numbers do not move while you work the list.</li>
+          <li><strong>Advance.</strong> With June clean, the as-of advances: <strong>June 2026 flips from in close to Actual, July 2026 becomes the new in-close month,</strong> the forecast horizon becomes August through December 2026, <strong>Base reforecasts</strong> Jul-Dec off the new June actuals, and the <strong>Budget snapshot stays frozen</strong> so June's actual-vs-budget variance reads true.</li>
+        </ol>
+      </div>
+
+      <div class="reading">
+        <p>The chip now reads <code>FY26 · Jul</code>, and every surface in the app agrees.</p>
+
+        <h2>Monthly close-import SOP checklist</h2>
+        <p>Run this every month, in order:</p>
+        <ul>
+          <li><strong>1. Confirm the ERP close is final</strong> for the month (books locked, nothing pending). Dogfood reads a clean close; do not import a month still open in the ERP.</li>
+          <li><strong>2. Export the trial balance</strong> to <code>trial_balance.csv</code>.</li>
+          <li><strong>3. Export the period's sub-ledger detail</strong> (<code>expense_transactions.csv</code>, plus any other document feeds you load).</li>
+          <li><strong>4. Refresh the domain feeds that changed</strong> (<code>customers.csv</code>, <code>headcount.csv</code>, <code>vendors.csv</code>, <code>ar_aging.csv</code> / <code>ap_aging.csv</code>).</li>
+          <li><strong>5. Import</strong> the files in <strong>Setup &gt; Data Import</strong>.</li>
+          <li><strong>6. Clear validation.</strong> The TB must balance (the hard gate); fix and re-export if it does not. Confirm known accounts, complete mapping, one row per (<code>period</code>, <code>account_code</code>), and <code>YYYY-MM</code> periods.</li>
+          <li><strong>7. Work the reconciliation exception list.</strong> For each flagged account, fix upstream and re-import (no plugs). Confirm the statement number never moved.</li>
+          <li><strong>8. Confirm the as-of advanced</strong> and that Base reforecast the remaining months.</li>
+          <li><strong>9. Review Budget vs Actual variance</strong> for the newly closed month against the frozen Budget snapshot.</li>
+        </ul>
+
+        <h2>Asking Scout about a new period</h2>
+        <p>Scout reads the same spine these surfaces do, so it can answer questions about where you are in the cycle and what an import did. Useful asks:</p>
+        <ul>
+          <li>"What is the current as-of date, and which months are Actual versus Forecast?"</li>
+          <li>"Which accounts are flagged in reconciliation for the latest period, and by how much?" Scout reads the per-account reconciliation status and reports the flagged gaps with their dollar amounts.</li>
+          <li>"How does June actual compare to budget now that it closed?"</li>
+          <li>"What happens to Budget when I advance the period?" Scout will explain that Base reforecasts while the locked Budget snapshot stays frozen.</li>
+        </ul>
+        <p>Scout never re-derives the books. It reads the trial-balance-driven statements and the reconciliation status, the same clean close you imported, and explains what it sees. That is Dogfood's whole posture in one line: your ERP closes the books, and Dogfood plans your next move off them.</p>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<!-- ============ FLOATING SCOUT ============ -->
+<div class="scout-panel">
+  <div class="scout-head">
+    <div class="scout-mark">✦</div>
+    <span class="nm">Scout</span>
+    <span class="x">×</span>
+  </div>
+  <div class="scout-body">
+    <div class="msg-you"><b>You</b>What changed when we closed June?</div>
+    <div class="msg-scout">June 2026 flipped from in close to Actual. Base reforecast Jul-Dec off the new actuals, the Budget snapshot stayed frozen, and June actual now reads against budget. One account is flagged in reconciliation ($3,900 unreconciled on Travel &amp; entertainment, needs a fix upstream).</div>
+    <div class="receipt">receipt · getPnL(2026-06)</div>
+  </div>
+  <div class="scout-input">
+    <span class="field">Ask about this period...</span>
+    <span class="send">↑</span>
+  </div>
+</div>
+
+</body>
+</html>

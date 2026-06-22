@@ -1,0 +1,213 @@
+<svg viewBox="0 0 1000 900" width="1000" height="900" xmlns="http://www.w3.org/2000/svg" font-family="Geist, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <defs>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="12" stdDeviation="20" flood-color="#0E1726" flood-opacity="0.14"/></filter>
+    <marker id="ah" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#94A0AD"/></marker>
+    <marker id="ahe" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#C9582E"/></marker>
+    <linearGradient id="gScout" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EC6D3F" stop-opacity="0.16"/><stop offset="1" stop-color="#E7B23A" stop-opacity="0.12"/></linearGradient>
+  </defs>
+
+  <rect x="8" y="8" width="984" height="884" rx="16" fill="#0E1726" filter="url(#soft)" opacity="0.12"/>
+  <rect x="8" y="8" width="984" height="884" rx="16" fill="#FAF7F1" stroke="#E6DECF"/>
+
+  <text x="500" y="34" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-size="19" font-weight="600" fill="#1c2530">Flux notes — the anchor model, the one card, and Scout</text>
+  <text x="500" y="53" text-anchor="middle" font-size="11" fill="#7A8694">a Dogfood write pinned to immutable ERP data by a stable key · rolls up to one right-hand card · Scout reads and writes it</text>
+
+  <!-- ============ COLUMN HEADERS ============ -->
+  <rect x="28" y="72" width="300" height="26" rx="8" fill="#EAF0F5" stroke="#5B7C99" stroke-opacity="0.4"/>
+  <text x="42" y="89" font-size="11" font-weight="700" letter-spacing="0.4" fill="#46627C">1 · IMMUTABLE SOURCE  ·  ERP CSV</text>
+  <rect x="344" y="72" width="312" height="26" rx="8" fill="#FBEFE9" stroke="#EC6D3F" stroke-opacity="0.4"/>
+  <text x="358" y="89" font-size="11" font-weight="700" letter-spacing="0.4" fill="#C9582E">2 · THE NOTE  ·  a write, pinned by a key</text>
+  <rect x="672" y="72" width="300" height="26" rx="8" fill="#FBF3DF" stroke="#B9852A" stroke-opacity="0.4"/>
+  <text x="686" y="89" font-size="11" font-weight="700" letter-spacing="0.4" fill="#9A6E1E">3 · ONE CARD  ·  three ways in</text>
+
+  <!-- ============ COLUMN 1 — IMMUTABLE SOURCE ============ -->
+  <!-- Trial balance -->
+  <rect x="28" y="108" width="300" height="80" rx="10" fill="#FFFFFF" stroke="#ECE6DB"/>
+  <rect x="28" y="108" width="5" height="80" rx="2.5" fill="#5B7C99"/>
+  <text x="46" y="128" font-size="12.5" font-weight="700" fill="#1c2530">Trial balance</text>
+  <text x="46" y="143" font-size="10" fill="#5A6B7A">account totals per period (28 accounts)</text>
+  <rect x="46" y="151" width="190" height="20" rx="6" fill="#EAF0F5" stroke="#5B7C99" stroke-opacity="0.4"/>
+  <text x="55" y="165" font-size="10" font-weight="600" fill="#46627C">key · account_code + period</text>
+  <text x="46" y="183" font-size="9" fill="#9AA4B0">the account / TB-level note pins here</text>
+
+  <!-- Sub-ledger -->
+  <rect x="28" y="200" width="300" height="80" rx="10" fill="#FFFFFF" stroke="#ECE6DB"/>
+  <rect x="28" y="200" width="5" height="80" rx="2.5" fill="#5B7C99"/>
+  <text x="46" y="220" font-size="12.5" font-weight="700" fill="#1c2530">Sub-ledger (AP detail)</text>
+  <text x="46" y="235" font-size="10" fill="#5A6B7A">one row per document · vendor bill</text>
+  <rect x="46" y="243" width="160" height="20" rx="6" fill="#EAF0F5" stroke="#5B7C99" stroke-opacity="0.4"/>
+  <text x="55" y="257" font-size="10" font-weight="600" fill="#46627C">key · transaction_id</text>
+  <text x="46" y="275" font-size="9" fill="#9AA4B0">the transaction note pins here</text>
+
+  <!-- Computed (no source) -->
+  <rect x="28" y="292" width="300" height="76" rx="10" fill="#F4F1EA" stroke="#9AA4B0" stroke-dasharray="4 3"/>
+  <text x="46" y="312" font-size="12.5" font-weight="700" fill="#46627C">Computed lines</text>
+  <text x="46" y="327" font-size="10" fill="#5A6B7A">gross profit · margins · subtotals</text>
+  <rect x="46" y="335" width="200" height="20" rx="6" fill="#FFFFFF" stroke="#9AA4B0" stroke-opacity="0.5" stroke-dasharray="4 3"/>
+  <text x="55" y="349" font-size="10" font-weight="600" fill="#46627C">key · statement_line + period</text>
+
+  <text x="28" y="388" font-size="9.5" fill="#7A8694">Uploaded as CSV · read-only. Dogfood reads a clean close and</text>
+  <text x="28" y="401" font-size="9.5" fill="#7A8694">never edits it — the note is the only thing you add.</text>
+
+  <!-- converging key arrows into the note's anchor field -->
+  <g fill="none" stroke="#94A0AD" stroke-width="1.5">
+    <path d="M328 158 C 338 160, 338 164, 342 166" marker-end="url(#ah)"/>
+    <path d="M328 250 C 338 230, 338 178, 342 172" marker-end="url(#ah)"/>
+    <path d="M328 344 C 338 300, 338 184, 342 178" marker-end="url(#ah)"/>
+  </g>
+
+  <!-- ============ COLUMN 2 — THE NOTE ============ -->
+  <rect x="344" y="108" width="312" height="150" rx="10" fill="#FFFFFF" stroke="#ECE6DB"/>
+  <rect x="344" y="108" width="5" height="150" rx="2.5" fill="#EC6D3F"/>
+  <text x="362" y="128" font-size="12.5" font-weight="700" fill="#1c2530">flux_notes  ·  the write record</text>
+  <text x="362" y="146" font-size="10" fill="#9AA4B0">id · uuid</text>
+  <text x="362" y="163" font-size="10.5" font-weight="600" fill="#46627C">anchor → transaction_id | account+period | line+period</text>
+  <text x="362" y="180" font-size="10.5" fill="#1c2530">body — the explanation</text>
+  <!-- attribution highlight -->
+  <rect x="356" y="188" width="288" height="38" rx="6" fill="#FBEFE9"/>
+  <text x="362" y="203" font-size="10.5" font-weight="700" fill="#C9582E">author — the user who wrote it</text>
+  <text x="362" y="219" font-size="10.5" font-weight="700" fill="#C9582E">source — ui | scout</text>
+  <text x="362" y="242" font-size="10" fill="#9AA4B0">amount_at_note · resolved · created_at</text>
+
+  <!-- roll-up callout -->
+  <rect x="344" y="272" width="312" height="58" rx="8" fill="#FBF3DF" stroke="#B9852A" stroke-opacity="0.4"/>
+  <text x="358" y="291" font-size="10.5" font-weight="700" fill="#9A6E1E">Roll-up</text>
+  <text x="358" y="307" font-size="10" fill="#5A6B7A">every anchor denormalizes statement_line, so a note at</text>
+  <text x="358" y="320" font-size="10" fill="#5A6B7A">any grain shows on the P&amp;L line's card.</text>
+
+  <!-- durability callout -->
+  <rect x="344" y="344" width="312" height="58" rx="8" fill="#E9F5EF" stroke="#2A8A66" stroke-opacity="0.4"/>
+  <text x="358" y="363" font-size="10.5" font-weight="700" fill="#1F7A58">Durable</text>
+  <text x="358" y="379" font-size="10" fill="#5A6B7A">keyed on the ERP id → survives re-import; amount_at_note</text>
+  <text x="358" y="392" font-size="10" fill="#5A6B7A">flags a moved number (flux-on-the-flux).</text>
+
+  <text x="344" y="425" font-size="9.5" fill="#7A8694">A delta off immutable Base (like scenario_inputs) — the note</text>
+  <text x="344" y="438" font-size="9.5" fill="#7A8694">never changes a statement number, it explains it.</text>
+
+  <!-- col2 -> col3 "surfaces on" arrow -->
+  <path d="M656 300 C 664 300, 664 320, 670 320" fill="none" stroke="#94A0AD" stroke-width="1.5" marker-end="url(#ah)"/>
+  <text x="662" y="291" font-size="9" font-style="italic" fill="#9AA4B0">surfaces on</text>
+
+  <!-- ============ COLUMN 3 — ONE CARD ============ -->
+  <rect x="672" y="108" width="300" height="28" rx="8" fill="#FFFFFF" stroke="#ECE6DB"/>
+  <text x="686" y="126" font-size="10.5" fill="#1c2530">Summary line  →  <tspan font-weight="600" fill="#C9582E">peek pane</tspan></text>
+  <rect x="672" y="142" width="300" height="28" rx="8" fill="#FFFFFF" stroke="#ECE6DB"/>
+  <text x="686" y="160" font-size="10.5" fill="#1c2530">Trial balance / Account Mapping  →  <tspan font-weight="600" fill="#C9582E">account</tspan></text>
+  <rect x="672" y="176" width="300" height="28" rx="8" fill="#FFFFFF" stroke="#ECE6DB"/>
+  <text x="686" y="194" font-size="10.5" fill="#1c2530">Transaction row  →  <tspan font-weight="600" fill="#C9582E">right-hand drawer</tspan></text>
+
+  <path d="M822 204 L822 224" fill="none" stroke="#94A0AD" stroke-width="1.5" marker-end="url(#ah)"/>
+
+  <!-- the card mock -->
+  <rect x="672" y="228" width="300" height="212" rx="10" fill="#FFFFFF" stroke="#ECE6DB"/>
+  <rect x="672" y="228" width="5" height="212" rx="2.5" fill="#E7B23A"/>
+  <text x="688" y="248" font-size="9.5" letter-spacing="0.5" fill="#9AA4B0">INSPECT</text>
+  <text x="688" y="264" font-size="12.5" font-weight="700" fill="#1c2530">Sales &amp; Marketing · May 2026</text>
+  <text x="688" y="282" font-size="10" fill="#5A6B7A">Budget $0.16M · Actual $0.20M · <tspan font-weight="700" fill="#C9582E">+$40K</tspan></text>
+  <line x1="688" y1="292" x2="956" y2="292" stroke="#ECE6DB"/>
+  <text x="688" y="308" font-size="9.5" font-weight="700" letter-spacing="0.4" fill="#7A8694">NOTES</text>
+  <!-- a thread note showing the author -->
+  <rect x="688" y="314" width="268" height="46" rx="7" fill="#FBFAF6" stroke="#ECE6DB"/>
+  <text x="698" y="330" font-size="10" font-weight="700" fill="#1c2530">Chris · CFO  <tspan font-weight="500" fill="#C9582E">· via Scout</tspan></text>
+  <text x="698" y="345" font-size="9.5" fill="#5A6B7A">Q3 campaign pull-forward, approved by VP.</text>
+  <rect x="906" y="318" width="44" height="16" rx="8" fill="#E9F5EF"/>
+  <text x="928" y="330" text-anchor="middle" font-size="8.5" font-weight="600" fill="#1F7A58">resolved</text>
+  <text x="688" y="376" font-size="9" fill="#9AA4B0">+ rolled up: 1 transaction note (Google Ads $38K)</text>
+  <!-- editor -->
+  <rect x="688" y="386" width="200" height="22" rx="6" fill="#FBFAF6" stroke="#ECE6DB"/>
+  <text x="697" y="401" font-size="9.5" fill="#9AA4B0">Add a note…</text>
+  <rect x="894" y="386" width="62" height="22" rx="6" fill="#EC6D3F"/>
+  <text x="925" y="401" text-anchor="middle" font-size="9.5" font-weight="600" fill="#FFFFFF">Save</text>
+  <text x="688" y="424" font-size="9" fill="#9AA4B0">as Chris · CFO  —  the author shows on every note</text>
+
+  <text x="672" y="458" font-size="9.5" fill="#7A8694">Same card, same editor, wherever you opened it.</text>
+
+  <!-- ============ SCOUT FOOTER ============ -->
+  <rect x="28" y="484" width="944" height="392" rx="12" fill="url(#gScout)" stroke="#EC6D3F" stroke-opacity="0.45"/>
+  <rect x="28" y="484" width="6" height="392" rx="3" fill="#EC6D3F"/>
+  <text x="48" y="512" font-size="13" font-weight="700" fill="#C9582E">SCOUT — one source, two callers · now reads AND writes notes</text>
+  <text x="48" y="529" font-size="10" fill="#7A8694">the same flux_notes feed the cards and Scout — it narrates the note AND shows the budget-vs-actual table (either or both; the table leads when nothing is explained yet)</text>
+
+  <!-- READ panel -->
+  <rect x="44" y="540" width="560" height="320" rx="9" fill="#FFFFFF" stroke="#ECE6DB"/>
+  <text x="60" y="562" font-size="10.5" font-weight="700" fill="#1F7A58">READ · getFluxNotes + getFluxDetail  (siblings — either or both)</text>
+  <text x="60" y="582" font-size="10" fill="#5A6B7A">“Why is S&amp;M over budget in May?”</text>
+
+  <text x="60" y="603" font-size="9.5" font-weight="700" fill="#1c2530">The note, when explained:</text>
+  <text x="60" y="619" font-size="10" fill="#1c2530">“S&amp;M is $40K over — the reviewer flagged the Google Ads</text>
+  <text x="60" y="633" font-size="10" fill="#1c2530">line as a Q3 campaign pull-forward.”</text>
+  <rect x="60" y="641" width="324" height="18" rx="5" fill="#E9F5EF" stroke="#2A8A66" stroke-opacity="0.4"/>
+  <text x="68" y="654" font-size="8.5" font-weight="600" fill="#1F7A58">receipt · getFluxNotes(sales_marketing, 2026-05)</text>
+
+  <line x1="60" y1="672" x2="588" y2="672" stroke="#ECE6DB"/>
+  <text x="60" y="688" font-size="9.5" font-weight="700" fill="#1c2530">The budget-vs-actual table, alongside (or leading, if no note):</text>
+
+  <!-- decomposition table -->
+  <text x="68" y="704" font-size="8.5" font-weight="700" fill="#7A8694">Item</text>
+  <text x="380" y="704" text-anchor="end" font-size="8.5" font-weight="700" fill="#7A8694">Actual</text>
+  <text x="446" y="704" text-anchor="end" font-size="8.5" font-weight="700" fill="#7A8694">Fcst</text>
+  <text x="514" y="704" text-anchor="end" font-size="8.5" font-weight="700" fill="#7A8694">Budget</text>
+  <text x="578" y="704" text-anchor="end" font-size="8.5" font-weight="700" fill="#7A8694">Var</text>
+  <line x1="60" y1="709" x2="588" y2="709" stroke="#ECE6DB"/>
+
+  <text x="68" y="724" font-size="9" fill="#1c2530">Digital ads</text>
+  <text x="380" y="724" text-anchor="end" font-size="9" fill="#1c2530">0.12</text>
+  <text x="446" y="724" text-anchor="end" font-size="9" fill="#5A6B7A">0.09</text>
+  <text x="514" y="724" text-anchor="end" font-size="9" fill="#5A6B7A">0.08</text>
+  <text x="578" y="724" text-anchor="end" font-size="9" font-weight="700" fill="#C9582E">+0.04</text>
+
+  <text x="68" y="740" font-size="9" fill="#1c2530">Events / field</text>
+  <text x="380" y="740" text-anchor="end" font-size="9" fill="#1c2530">0.05</text>
+  <text x="446" y="740" text-anchor="end" font-size="9" fill="#5A6B7A">0.05</text>
+  <text x="514" y="740" text-anchor="end" font-size="9" fill="#5A6B7A">0.05</text>
+  <text x="578" y="740" text-anchor="end" font-size="9" fill="#7A8694">0.00</text>
+
+  <text x="68" y="756" font-size="9" fill="#1c2530">Content / SEO</text>
+  <text x="380" y="756" text-anchor="end" font-size="9" fill="#1c2530">0.03</text>
+  <text x="446" y="756" text-anchor="end" font-size="9" fill="#5A6B7A">0.03</text>
+  <text x="514" y="756" text-anchor="end" font-size="9" fill="#5A6B7A">0.03</text>
+  <text x="578" y="756" text-anchor="end" font-size="9" fill="#7A8694">0.00</text>
+
+  <line x1="60" y1="764" x2="588" y2="764" stroke="#ECE6DB" stroke-dasharray="3 3"/>
+  <text x="60" y="776" font-size="8" font-style="italic" fill="#9AA4B0">unmatched — the actuals and budget don't line up:</text>
+
+  <text x="68" y="790" font-size="9" font-style="italic" fill="#5A6B7A">Sponsorship — unbudgeted</text>
+  <text x="380" y="790" text-anchor="end" font-size="9" fill="#1c2530">0.01</text>
+  <text x="446" y="790" text-anchor="end" font-size="9" fill="#9AA4B0">—</text>
+  <text x="514" y="790" text-anchor="end" font-size="9" fill="#9AA4B0">—</text>
+  <text x="578" y="790" text-anchor="end" font-size="9" font-weight="700" fill="#C9582E">+0.01</text>
+
+  <text x="68" y="806" font-size="9" font-style="italic" fill="#5A6B7A">Webinar series — no spend</text>
+  <text x="380" y="806" text-anchor="end" font-size="9" fill="#9AA4B0">—</text>
+  <text x="446" y="806" text-anchor="end" font-size="9" fill="#9AA4B0">—</text>
+  <text x="514" y="806" text-anchor="end" font-size="9" fill="#5A6B7A">0.01</text>
+  <text x="578" y="806" text-anchor="end" font-size="9" font-weight="700" fill="#1F7A58">−0.01</text>
+
+  <text x="60" y="824" font-size="8" fill="#9AA4B0">matched by variance ↓ · unmatched: actuals ↓, budget ↑ · drill a row → its transactions, then Add note</text>
+  <rect x="60" y="832" width="316" height="18" rx="5" fill="#E9F5EF" stroke="#2A8A66" stroke-opacity="0.4"/>
+  <text x="68" y="845" font-size="8.5" font-weight="600" fill="#1F7A58">receipt · getFluxDetail(sales_marketing, 2026-05)</text>
+  <text x="588" y="845" text-anchor="end" font-size="8" fill="#9AA4B0">$M · ties to the S&amp;M line</text>
+
+  <!-- WRITE panel -->
+  <rect x="620" y="540" width="336" height="320" rx="9" fill="#FFFFFF" stroke="#ECE6DB"/>
+  <text x="636" y="562" font-size="10.5" font-weight="700" fill="#C9582E">WRITE · addFluxNote  ·  Scout's first write</text>
+  <text x="636" y="582" font-size="10" fill="#5A6B7A">“For account 6200, add a note</text>
+  <text x="636" y="596" font-size="10" fill="#5A6B7A">it's the Q3 pull-forward.”</text>
+
+  <rect x="636" y="606" width="304" height="158" rx="7" fill="#FBEFE9" stroke="#EC6D3F" stroke-opacity="0.45"/>
+  <text x="648" y="626" font-size="10.5" font-weight="700" fill="#C9582E">✓ Added · account 6200</text>
+  <text x="648" y="641" font-size="10" fill="#1c2530">Sales &amp; Marketing · May 2026</text>
+  <text x="648" y="656" font-size="9" fill="#7A8694">author Chris · CFO · via Scout</text>
+  <line x1="648" y1="664" x2="928" y2="664" stroke="#EC6D3F" stroke-opacity="0.25"/>
+  <rect x="648" y="672" width="120" height="22" rx="6" fill="#FFFFFF" stroke="#C9582E" stroke-opacity="0.5"/>
+  <text x="660" y="687" font-size="9.5" font-weight="600" fill="#C9582E">↶  Undo</text>
+  <rect x="648" y="700" width="252" height="22" rx="6" fill="#FFFFFF" stroke="#C9582E" stroke-opacity="0.5"/>
+  <text x="660" y="715" font-size="9.5" font-weight="600" fill="#C9582E">↗  View note — its level + location</text>
+  <rect x="648" y="728" width="120" height="22" rx="6" fill="#FFFFFF" stroke="#C0392B" stroke-opacity="0.55"/>
+  <text x="660" y="743" font-size="9.5" font-weight="600" fill="#C0392B">✕  Delete</text>
+
+  <text x="636" y="784" font-size="9" fill="#9AA4B0">author = you · source = scout</text>
+  <text x="636" y="798" font-size="9" fill="#9AA4B0">Scout never invents the author.</text>
+  <text x="636" y="816" font-size="9" fill="#9AA4B0">Delete is always available on any note;</text>
+  <text x="636" y="830" font-size="9" fill="#9AA4B0">Scout only removes the note it just wrote.</text>
+</svg>

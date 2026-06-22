@@ -1,0 +1,99 @@
+<svg viewBox="0 0 760 792" width="760" height="792" xmlns="http://www.w3.org/2000/svg" font-family="Geist, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <defs>
+    <linearGradient id="gAv" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#EC6D3F"/><stop offset="1" stop-color="#E7B23A"/></linearGradient>
+    <linearGradient id="gScout" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#EC6D3F" stop-opacity="0.16"/><stop offset="1" stop-color="#46C99A" stop-opacity="0.10"/></linearGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="14" stdDeviation="22" flood-color="#0E1726" flood-opacity="0.18"/></filter>
+    <marker id="mE" markerWidth="9" markerHeight="9" refX="4.5" refY="4.5" orient="auto"><path d="M1 1 L8 4.5 L1 8 L3 4.5 Z" fill="#EC6D3F"/></marker>
+    <marker id="mA" markerWidth="9" markerHeight="9" refX="4.5" refY="4.5" orient="auto"><path d="M1 1 L8 4.5 L1 8 L3 4.5 Z" fill="#2FA37D"/></marker>
+    <symbol id="ic-scout" viewBox="0 0 24 24"><path d="M10 1.5 L11.4 7.6 L17.5 9 L11.4 10.4 L10 16.5 L8.6 10.4 L2.5 9 L8.6 7.6 Z" fill="currentColor"/></symbol>
+    <symbol id="ic-sliders" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="8" x2="20" y2="8"/><circle cx="9" cy="8" r="2.4"/><line x1="4" y1="16" x2="20" y2="16"/><circle cx="15" cy="16" r="2.4"/></g></symbol>
+    <symbol id="ic-lock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11 V8 a4 4 0 0 1 8 0 V11"/></g></symbol>
+  </defs>
+
+  <rect x="8" y="8" width="744" height="776" rx="16" fill="#0E1726" filter="url(#soft)" opacity="0.16"/>
+  <rect x="8" y="8" width="744" height="776" rx="16" fill="#FAF7F1" stroke="#E6DECF"/>
+
+  <!-- header -->
+  <text x="32" y="46" font-family="Fraunces, Georgia, serif" font-size="20" font-weight="600" fill="#1c2530">How every number connects</text>
+  <text x="32" y="67" font-size="11.5" fill="#7A8694">one P&amp;L line, both directions · drill down to actuals · roll up from Budget / Base / Scenario</text>
+  <text x="512" y="44" font-size="9.5" font-weight="600" fill="#9AA4B0">LENS</text>
+  <rect x="542" y="33" width="58" height="17" rx="8.5" fill="#FFFFFF" stroke="#D7CFC0"/><use href="#ic-lock" x="548" y="36.5" width="11" height="11" color="#6E7B8A"/><text x="562" y="44.5" font-size="9.5" font-weight="600" fill="#6E7B8A">Budget</text>
+  <rect x="604" y="33" width="48" height="17" rx="8.5" fill="#FBEFE9" stroke="#EC6D3F"/><circle cx="614" cy="41.5" r="2.4" fill="#EC6D3F"/><text x="621" y="44.5" font-size="9.5" font-weight="700" fill="#C9582E">Base</text>
+  <rect x="656" y="33" width="66" height="17" rx="8.5" fill="#FFFFFF" stroke="#D7CFC0"/><use href="#ic-sliders" x="662" y="36.5" width="11" height="11" color="#B9852A"/><text x="676" y="44.5" font-size="9.5" font-weight="600" fill="#B9852A">Scenario</text>
+
+  <!-- pivot P&L line -->
+  <rect x="90" y="100" width="580" height="76" rx="12" fill="#FFFFFF" stroke="#ECE6DB"/>
+  <text x="106" y="123" font-size="13" font-weight="600" fill="#1c2530">P&amp;L line · Operating expenses · June 2026</text>
+  <line x1="106" y1="131" x2="654" y2="131" stroke="#F1ECE2"/>
+  <line x1="241" y1="137" x2="241" y2="170" stroke="#F1ECE2"/><line x1="378" y1="137" x2="378" y2="170" stroke="#F1ECE2"/><line x1="515" y1="137" x2="515" y2="170" stroke="#F1ECE2"/>
+  <text x="110" y="150" font-size="9" font-weight="600" letter-spacing="0.5" fill="#5A6B7A">ACTUAL</text><text x="110" y="168" font-size="15" font-weight="600" fill="#1c2530">$312K</text>
+  <text x="245" y="150" font-size="9" font-weight="600" letter-spacing="0.5" fill="#6E7B8A">BUDGET</text><text x="245" y="168" font-size="15" font-weight="600" fill="#1c2530">$290K</text>
+  <text x="382" y="150" font-size="9" font-weight="600" letter-spacing="0.5" fill="#C9582E">BASE</text><text x="382" y="168" font-size="15" font-weight="600" fill="#1c2530">$305K</text>
+  <text x="519" y="150" font-size="9" font-weight="600" letter-spacing="0.5" fill="#B9852A">SCENARIO</text><text x="519" y="168" font-size="15" font-weight="600" fill="#1c2530">$340K</text>
+
+  <!-- direction labels -->
+  <text x="90" y="198" font-size="10" font-weight="700" letter-spacing="0.3" fill="#C9582E">↓ DRILL DOWN · actuals</text>
+  <text x="670" y="198" text-anchor="end" font-size="10" font-weight="700" letter-spacing="0.3" fill="#2C7A60">inputs ROLL UP ↑</text>
+
+  <!-- LEFT lane: 3 levels down -->
+  <line x1="170" y1="176" x2="170" y2="210" stroke="#EC6D3F" stroke-width="2" marker-end="url(#mE)"/>
+  <rect x="80" y="210" width="180" height="44" rx="10" fill="#FFFFFF" stroke="#ECE6DB"/><text x="94" y="230" font-size="11.5" font-weight="600" fill="#1c2530">GL account</text><text x="94" y="246" font-size="10" fill="#5A6B7A">6500–6900 · Opex</text>
+  <line x1="170" y1="254" x2="170" y2="276" stroke="#EC6D3F" stroke-width="2" marker-end="url(#mE)"/>
+  <rect x="80" y="276" width="180" height="46" rx="10" fill="#FFFFFF" stroke="#ECE6DB"/><text x="94" y="296" font-size="11.5" font-weight="600" fill="#1c2530">Journal entries</text><text x="94" y="312" font-size="9.5" fill="#5A6B7A">date · memo · doc ref</text>
+  <line x1="170" y1="322" x2="170" y2="344" stroke="#EC6D3F" stroke-width="2" marker-end="url(#mE)"/>
+  <rect x="80" y="344" width="180" height="46" rx="10" fill="#FFFFFF" stroke="#ECE6DB"/><text x="94" y="364" font-size="11.5" font-weight="600" fill="#1c2530">Source</text><text x="94" y="380" font-size="9.5" fill="#5A6B7A">AP bills · Payroll · Prepaid amort</text>
+  <text x="170" y="410" text-anchor="middle" font-size="9.5" fill="#7A8694">the Actual column, traced to source</text>
+
+  <!-- RIGHT lane: 3 levels up (band to band) -->
+  <!-- Band A: lenses -->
+  <rect x="300" y="210" width="106" height="46" rx="10" fill="#FFFFFF" stroke="#ECE6DB"/><use href="#ic-lock" x="310" y="220" width="14" height="14" color="#6E7B8A"/><text x="328" y="230" font-size="11" font-weight="600" fill="#1c2530">Budget</text><text x="310" y="247" font-size="9.5" fill="#6E7B8A">frozen</text>
+  <rect x="416" y="210" width="100" height="46" rx="10" fill="#FFFFFF" stroke="#ECE6DB"/><circle cx="428" cy="227" r="4" fill="#EC6D3F"/><circle cx="428" cy="227" r="7" fill="none" stroke="#EC6D3F" stroke-opacity="0.35"/><text x="440" y="230" font-size="11" font-weight="600" fill="#1c2530">Base</text><text x="428" y="247" font-size="9.5" fill="#5A6B7A">live</text>
+  <rect x="526" y="210" width="144" height="46" rx="10" fill="#FFFFFF" stroke="#ECE6DB"/><use href="#ic-sliders" x="536" y="220" width="14" height="14" color="#B9852A"/><text x="554" y="230" font-size="11" font-weight="600" fill="#1c2530">Scenario</text><text x="536" y="247" font-size="9.5" fill="#5A6B7A">sliders + overrides</text>
+  <!-- up arrows lenses -> pivot columns -->
+  <line x1="353" y1="210" x2="320" y2="178" stroke="#2FA37D" stroke-width="2" marker-end="url(#mA)"/>
+  <line x1="466" y1="210" x2="438" y2="178" stroke="#2FA37D" stroke-width="2" marker-end="url(#mA)"/>
+  <line x1="598" y1="210" x2="575" y2="178" stroke="#2FA37D" stroke-width="2" marker-end="url(#mA)"/>
+
+  <!-- Band B: driver modules -->
+  <rect x="416" y="276" width="254" height="46" rx="10" fill="#FBFAF6" stroke="#ECE6DB"/>
+  <text x="430" y="293" font-size="9" font-weight="600" letter-spacing="0.4" fill="#5A6B7A">DRIVER MODULES · with sliders</text>
+  <text x="430" y="312" font-size="11" font-weight="500" fill="#1c2530">Revenue · Personnel · Expenses</text>
+  <!-- up arrows drivers -> Base & Scenario only -->
+  <line x1="466" y1="276" x2="466" y2="258" stroke="#2FA37D" stroke-width="2" marker-end="url(#mA)"/>
+  <line x1="598" y1="276" x2="598" y2="258" stroke="#2FA37D" stroke-width="2" marker-end="url(#mA)"/>
+
+  <!-- Band C: driver inputs -->
+  <rect x="416" y="342" width="254" height="60" rx="10" fill="#FBFAF6" stroke="#ECE6DB"/>
+  <text x="430" y="359" font-size="9" font-weight="600" letter-spacing="0.4" fill="#5A6B7A">THEIR INPUTS</text>
+  <text x="430" y="376" font-size="10" fill="#5A6B7A">Revenue ← pipeline · bookings</text>
+  <text x="430" y="390" font-size="10" fill="#5A6B7A">Personnel ← headcount plan · comp</text>
+  <text x="552" y="376" font-size="10" fill="#5A6B7A">Expenses ← opex</text>
+  <text x="552" y="390" font-size="10" fill="#5A6B7A">lines · prepaid amort</text>
+  <line x1="532" y1="342" x2="532" y2="324" stroke="#2FA37D" stroke-width="2" marker-end="url(#mA)"/>
+  <text x="500" y="392" text-anchor="middle" font-size="9.5" fill="#7A8694"> </text>
+
+  <text x="498" y="412" text-anchor="middle" font-size="9.5" fill="#7A8694">drivers and their inputs roll up into Base &amp; Scenario · Budget stays frozen</text>
+
+  <!-- lens explainer band -->
+  <rect x="80" y="430" width="590" height="76" rx="12" fill="#F2EEE6" stroke="#E6DECF"/>
+  <line x1="277" y1="444" x2="277" y2="492" stroke="#E2DACB"/><line x1="474" y1="444" x2="474" y2="492" stroke="#E2DACB"/>
+  <use href="#ic-lock" x="96" y="444" width="13" height="13" color="#6E7B8A"/><text x="114" y="454" font-size="11" font-weight="700" fill="#5A6B7A">BUDGET</text>
+  <text x="96" y="472" font-size="9.5" fill="#5A6B7A">Set once, locked at approval.</text><text x="96" y="485" font-size="9.5" fill="#5A6B7A">The fixed yardstick for variance.</text>
+  <circle cx="295" cy="450" r="3.5" fill="#EC6D3F"/><text x="305" y="454" font-size="11" font-weight="700" fill="#C9582E">BASE</text>
+  <text x="291" y="472" font-size="9.5" fill="#5A6B7A">The current forecast.</text><text x="291" y="485" font-size="9.5" fill="#5A6B7A">Re-derives as actuals land.</text>
+  <use href="#ic-sliders" x="490" y="444" width="13" height="13" color="#B9852A"/><text x="508" y="454" font-size="11" font-weight="700" fill="#B9852A">SCENARIO</text>
+  <text x="490" y="472" font-size="9.5" fill="#5A6B7A">Forks you flex with sliders</text><text x="490" y="485" font-size="9.5" fill="#5A6B7A">or detailed line edits.</text>
+
+  <!-- per-statement note -->
+  <text x="80" y="534" font-size="11.5" font-weight="600" fill="#1c2530">Same two directions on every statement</text>
+  <circle cx="86" cy="552" r="2" fill="#9AA4B0"/><text x="96" y="556" font-size="10.5" fill="#5A6B7A"><tspan font-weight="600" fill="#1c2530">P&amp;L</tspan> → journal-entry detail</text>
+  <circle cx="86" cy="572" r="2" fill="#9AA4B0"/><text x="96" y="576" font-size="10.5" fill="#5A6B7A"><tspan font-weight="600" fill="#1c2530">Balance Sheet</tspan> → subledgers &amp; schedules (AR aging, prepaids, fixed assets, deferred)</text>
+  <circle cx="86" cy="592" r="2" fill="#9AA4B0"/><text x="96" y="596" font-size="10.5" fill="#5A6B7A"><tspan font-weight="600" fill="#1c2530">Cash Flow</tspan> → the forecast drivers</text>
+
+  <!-- scout tie-in -->
+  <rect x="80" y="616" width="590" height="84" rx="12" fill="url(#gScout)" stroke="#EC6D3F" stroke-opacity="0.3"/>
+  <circle cx="108" cy="648" r="14" fill="url(#gAv)"/><use href="#ic-scout" x="100" y="640" width="16" height="16" color="#F8F1E4"/>
+  <text x="134" y="642" font-size="12.5" font-weight="600" fill="#1c2530">Scout walks these links for you</text>
+  <text x="134" y="660" font-size="10.5" fill="#5A6B7A">“why is opex over budget?” → drills the Actual column down to the four entries and their source.</text>
+  <text x="134" y="677" font-size="10.5" fill="#5A6B7A">“what's driving the Scenario column?” → rolls up to the drivers and the sliders behind them.</text>
+</svg>

@@ -1,0 +1,130 @@
+<svg viewBox="0 0 1040 1200" width="1040" height="1200" xmlns="http://www.w3.org/2000/svg" font-family="Geist, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <defs>
+    <filter id="cs" x="-8%" y="-8%" width="116%" height="116%"><feDropShadow dx="0" dy="3" stdDeviation="6" flood-color="#0E1726" flood-opacity="0.07"/></filter>
+    <symbol id="ic-pane" viewBox="0 0 24 24"><rect x="1.6" y="4.5" width="20.8" height="15" rx="2.4" fill="none" stroke="currentColor" stroke-width="1.7"/><line x1="14.8" y1="4.5" x2="14.8" y2="19.5" stroke="currentColor" stroke-width="1.7"/><rect x="15.6" y="5.3" width="6" height="13.4" rx="1.4" fill="currentColor" fill-opacity="0.85"/></symbol>
+  </defs>
+  <rect x="0" y="0" width="1040" height="1200" fill="#FAF7F1"/>
+
+  <text x="40" y="54" font-family="Fraunces, Georgia, serif" font-size="28" font-weight="600" fill="#1c2530">Drilldowns · the reading surfaces</text>
+  <text x="40" y="77" font-size="12.5" fill="#6E7B8A">On Dashboard + Statements the first tap is always the right pane. An actual month peeks its <tspan fill="#2A8A66" font-weight="600">register</tspan>; a forecast month peeks its <tspan fill="#9A6E1E" font-weight="600">driver</tspan>.</text>
+
+  <!-- legend -->
+  <rect x="40" y="94" width="960" height="120" rx="12" fill="#FFFFFF" stroke="#ECE6DB" filter="url(#cs)"/>
+  <text x="56" y="116" font-size="10.5" font-weight="700" letter-spacing="0.8" fill="#C9582E">HOW TO READ</text>
+  <use href="#ic-pane" x="56" y="128" width="22" height="17" color="#EC6D3F"/>
+  <text x="86" y="141" font-size="11.5" fill="#1c2530"><tspan font-weight="600">Peek → open</tspan> <tspan fill="#6E7B8A">— right pane opens in place; “Open full ↗” then navigates to the working surface (register or driver).</tspan></text>
+  <use href="#ic-pane" x="56" y="156" width="22" height="17" color="#B9852A"/>
+  <text x="86" y="169" font-size="11.5" fill="#1c2530"><tspan font-weight="600">Pane only</tspan> <tspan fill="#6E7B8A">— a pure derived metric; the pane drills into its component lines. No register to open (the one exception to peek-then-navigate).</tspan></text>
+  <circle cx="60" cy="196" r="4" fill="#2FA37D"/><text x="72" y="200" font-size="11.5" fill="#6E7B8A"><tspan fill="#2A8A66" font-weight="600">Register</tspan> — actuals drill here (layer 1).</text>
+  <circle cx="396" cy="196" r="4" fill="#B9852A"/><text x="408" y="200" font-size="11.5" fill="#6E7B8A"><tspan fill="#9A6E1E" font-weight="600">Driver</tspan> — forecasts drill here (layer 2).</text>
+
+  <!-- ===== P&L ===== -->
+  <rect x="40" y="244" width="960" height="30" fill="#EFE9DD"/><circle cx="60" cy="259" r="4" fill="#5A6B7A"/><text x="74" y="263" font-size="11" font-weight="700" letter-spacing="0.5" fill="#1c2530">FORECASTED P&amp;L</text><text x="784" y="263" font-size="10" fill="#8A96A2" text-anchor="end">statements · layer 3</text>
+  <text x="56" y="293" font-size="9.5" font-weight="600" letter-spacing="0.4" fill="#9AA6B2">LINE</text><text x="344" y="293" font-size="9.5" font-weight="600" letter-spacing="0.4" fill="#9AA6B2">FIRST TAP</text><text x="472" y="293" font-size="9.5" font-weight="600" letter-spacing="0.4" fill="#2A8A66">ACTUAL → REGISTER</text><text x="732" y="293" font-size="9.5" font-weight="600" letter-spacing="0.4" fill="#9A6E1E">FORECAST → DRIVER</text>
+  <line x1="56" y1="301" x2="984" y2="301" stroke="#ECE6DB"/>
+
+  <g font-size="11.5">
+    <!-- r1 Subscription -->
+    <text x="56" y="322" font-size="12" fill="#1c2530">Revenue · Subscription</text>
+    <use href="#ic-pane" x="344" y="310" width="19" height="15" color="#EC6D3F"/><text x="368" y="322" fill="#C9582E" font-weight="600">Peek</text>
+    <circle cx="472" cy="318" r="3.5" fill="#2FA37D"/><text x="482" y="322" fill="#41505F">Contracts · 606 schedules</text>
+    <circle cx="732" cy="318" r="3.5" fill="#B9852A"/><text x="742" y="322" fill="#41505F">Revenue Forecast + Contracts <tspan fill="#9AA6B2">¹</tspan></text>
+    <line x1="56" y1="333" x2="984" y2="333" stroke="#F4EFE6"/>
+    <!-- r2 Services -->
+    <text x="56" y="350" font-size="12" fill="#1c2530">Revenue · Services</text>
+    <use href="#ic-pane" x="344" y="338" width="19" height="15" color="#EC6D3F"/><text x="368" y="350" fill="#C9582E" font-weight="600">Peek</text>
+    <circle cx="472" cy="346" r="3.5" fill="#2FA37D"/><text x="482" y="350" fill="#41505F">Projects · % complete / WIP</text>
+    <circle cx="732" cy="346" r="3.5" fill="#B9852A"/><text x="742" y="350" fill="#41505F">Revenue Forecast · services capacity</text>
+    <line x1="56" y1="361" x2="984" y2="361" stroke="#F4EFE6"/>
+    <!-- r3 Revenue total -->
+    <text x="56" y="378" font-size="12" fill="#1c2530">Revenue · Total</text>
+    <use href="#ic-pane" x="344" y="366" width="19" height="15" color="#EC6D3F"/><text x="368" y="378" fill="#C9582E" font-weight="600">Peek</text>
+    <circle cx="472" cy="374" r="3.5" fill="#2FA37D"/><text x="482" y="378" fill="#41505F">Recognized-revenue view <tspan fill="#9AA6B2">²</tspan></text>
+    <circle cx="732" cy="374" r="3.5" fill="#B9852A"/><text x="742" y="378" fill="#41505F">Revenue Forecast (both streams)</text>
+    <line x1="56" y1="389" x2="984" y2="389" stroke="#F4EFE6"/>
+    <!-- r4 CoR -->
+    <text x="56" y="406" font-size="12" fill="#1c2530">Cost of Revenue</text>
+    <use href="#ic-pane" x="344" y="394" width="19" height="15" color="#EC6D3F"/><text x="368" y="406" fill="#C9582E" font-weight="600">Peek</text>
+    <circle cx="472" cy="402" r="3.5" fill="#2FA37D"/><text x="482" y="406" fill="#41505F">Expense Transactions · CoR <tspan fill="#9AA6B2">³</tspan></text>
+    <circle cx="732" cy="402" r="3.5" fill="#B9852A"/><text x="742" y="406" fill="#41505F">Expense Forecast · CoR</text>
+    <line x1="56" y1="417" x2="984" y2="417" stroke="#F4EFE6"/>
+    <!-- r5 Gross profit (pane only) -->
+    <text x="56" y="434" font-size="12" fill="#1c2530">Gross profit / margin</text>
+    <use href="#ic-pane" x="344" y="422" width="19" height="15" color="#B9852A"/><text x="368" y="434" fill="#9A6E1E" font-weight="600">Pane only</text>
+    <text x="472" y="434" font-style="italic" fill="#8A96A2">pane opens to its components: Revenue − Cost of Revenue</text>
+    <line x1="56" y1="445" x2="984" y2="445" stroke="#F4EFE6"/>
+    <!-- r6 S&M -->
+    <text x="56" y="462" font-size="12" fill="#1c2530">Sales &amp; Marketing</text>
+    <use href="#ic-pane" x="344" y="450" width="19" height="15" color="#EC6D3F"/><text x="368" y="462" fill="#C9582E" font-weight="600">Peek</text>
+    <circle cx="472" cy="458" r="3.5" fill="#2FA37D"/><text x="482" y="462" fill="#41505F">Expense Transactions · S&amp;M <tspan fill="#9AA6B2">³</tspan></text>
+    <circle cx="732" cy="458" r="3.5" fill="#B9852A"/><text x="742" y="462" fill="#41505F">Expense Forecast · S&amp;M</text>
+    <line x1="56" y1="473" x2="984" y2="473" stroke="#F4EFE6"/>
+    <!-- r7 R&D -->
+    <text x="56" y="490" font-size="12" fill="#1c2530">R&amp;D</text>
+    <use href="#ic-pane" x="344" y="478" width="19" height="15" color="#EC6D3F"/><text x="368" y="490" fill="#C9582E" font-weight="600">Peek</text>
+    <circle cx="472" cy="486" r="3.5" fill="#2FA37D"/><text x="482" y="490" fill="#41505F">Expense Transactions · R&amp;D <tspan fill="#9AA6B2">³</tspan></text>
+    <circle cx="732" cy="486" r="3.5" fill="#B9852A"/><text x="742" y="490" fill="#41505F">Expense Forecast · R&amp;D</text>
+    <line x1="56" y1="501" x2="984" y2="501" stroke="#F4EFE6"/>
+    <!-- r8 G&A -->
+    <text x="56" y="518" font-size="12" fill="#1c2530">G&amp;A</text>
+    <use href="#ic-pane" x="344" y="506" width="19" height="15" color="#EC6D3F"/><text x="368" y="518" fill="#C9582E" font-weight="600">Peek</text>
+    <circle cx="472" cy="514" r="3.5" fill="#2FA37D"/><text x="482" y="518" fill="#41505F">Expense Transactions · G&amp;A <tspan fill="#9AA6B2">³</tspan></text>
+    <circle cx="732" cy="514" r="3.5" fill="#B9852A"/><text x="742" y="518" fill="#41505F">Expense Forecast · G&amp;A</text>
+    <line x1="56" y1="529" x2="984" y2="529" stroke="#F4EFE6"/>
+    <!-- r9 Depreciation -->
+    <text x="56" y="546" font-size="12" fill="#1c2530">Depreciation</text>
+    <use href="#ic-pane" x="344" y="534" width="19" height="15" color="#EC6D3F"/><text x="368" y="546" fill="#C9582E" font-weight="600">Peek</text>
+    <circle cx="472" cy="542" r="3.5" fill="#2FA37D"/><text x="482" y="546" fill="#41505F">Fixed Assets · register</text>
+    <circle cx="732" cy="542" r="3.5" fill="#B9852A"/><text x="742" y="546" fill="#41505F">Fixed Asset Budget</text>
+    <line x1="56" y1="557" x2="984" y2="557" stroke="#F4EFE6"/>
+    <!-- r10 Operating income (pane only) -->
+    <text x="56" y="574" font-size="12" fill="#1c2530">Operating income / EBITDA</text>
+    <use href="#ic-pane" x="344" y="562" width="19" height="15" color="#B9852A"/><text x="368" y="574" fill="#9A6E1E" font-weight="600">Pane only</text>
+    <text x="472" y="574" font-style="italic" fill="#8A96A2">derived; pane drills into the lines above</text>
+  </g>
+
+  <!-- ===== Balance Sheet ===== -->
+  <rect x="40" y="598" width="960" height="30" fill="#EFE9DD"/><circle cx="60" cy="613" r="4" fill="#5A6B7A"/><text x="74" y="617" font-size="11" font-weight="700" letter-spacing="0.5" fill="#1c2530">BALANCE SHEET</text><text x="784" y="617" font-size="10" fill="#8A96A2" text-anchor="end">statements · layer 3</text>
+  <text x="56" y="647" font-size="9.5" font-weight="600" letter-spacing="0.4" fill="#9AA6B2">LINE</text><text x="344" y="647" font-size="9.5" font-weight="600" letter-spacing="0.4" fill="#9AA6B2">FIRST TAP</text><text x="472" y="647" font-size="9.5" font-weight="600" letter-spacing="0.4" fill="#2A8A66">ACTUAL → REGISTER</text><text x="732" y="647" font-size="9.5" font-weight="600" letter-spacing="0.4" fill="#9A6E1E">FORECAST → DRIVER</text>
+  <line x1="56" y1="655" x2="984" y2="655" stroke="#ECE6DB"/>
+  <g font-size="11.5">
+    <text x="56" y="676" font-size="12" fill="#1c2530">Cash</text><use href="#ic-pane" x="344" y="664" width="19" height="15" color="#EC6D3F"/><text x="368" y="676" fill="#C9582E" font-weight="600">Peek</text><circle cx="472" cy="672" r="3.5" fill="#2FA37D"/><text x="482" y="676" fill="#41505F">Cash / bank · GL</text><circle cx="732" cy="672" r="3.5" fill="#B9852A"/><text x="742" y="676" fill="#41505F">Cash Flow Forecast</text>
+    <line x1="56" y1="687" x2="984" y2="687" stroke="#F4EFE6"/>
+    <text x="56" y="704" font-size="12" fill="#1c2530">Accounts Receivable</text><use href="#ic-pane" x="344" y="692" width="19" height="15" color="#EC6D3F"/><text x="368" y="704" fill="#C9582E" font-weight="600">Peek</text><circle cx="472" cy="700" r="3.5" fill="#2FA37D"/><text x="482" y="704" fill="#41505F">AR aging <tspan fill="#9AA6B2">⁴</tspan></text><circle cx="732" cy="700" r="3.5" fill="#B9852A"/><text x="742" y="704" fill="#41505F">AR Forecast · DSO</text>
+    <line x1="56" y1="715" x2="984" y2="715" stroke="#F4EFE6"/>
+    <text x="56" y="732" font-size="12" fill="#1c2530">Unbilled / WIP <tspan fill="#8A96A2" font-size="10">contract asset</tspan></text><use href="#ic-pane" x="344" y="720" width="19" height="15" color="#EC6D3F"/><text x="368" y="732" fill="#C9582E" font-weight="600">Peek</text><circle cx="472" cy="728" r="3.5" fill="#2FA37D"/><text x="482" y="732" fill="#41505F">Projects · WIP</text><circle cx="732" cy="728" r="3.5" fill="#B9852A"/><text x="742" y="732" fill="#41505F">Revenue Forecast · services</text>
+    <line x1="56" y1="743" x2="984" y2="743" stroke="#F4EFE6"/>
+    <text x="56" y="760" font-size="12" fill="#1c2530">Prepaid expenses</text><use href="#ic-pane" x="344" y="748" width="19" height="15" color="#EC6D3F"/><text x="368" y="760" fill="#C9582E" font-weight="600">Peek</text><circle cx="472" cy="756" r="3.5" fill="#2FA37D"/><text x="482" y="760" fill="#41505F">Prepaid schedule</text><circle cx="732" cy="756" r="3.5" fill="#B9852A"/><text x="742" y="760" fill="#41505F">Prepaids Budget</text>
+    <line x1="56" y1="771" x2="984" y2="771" stroke="#F4EFE6"/>
+    <text x="56" y="788" font-size="12" fill="#1c2530">Fixed assets, net</text><use href="#ic-pane" x="344" y="776" width="19" height="15" color="#EC6D3F"/><text x="368" y="788" fill="#C9582E" font-weight="600">Peek</text><circle cx="472" cy="784" r="3.5" fill="#2FA37D"/><text x="482" y="788" fill="#41505F">Fixed Assets · register</text><circle cx="732" cy="784" r="3.5" fill="#B9852A"/><text x="742" y="788" fill="#41505F">Fixed Asset Budget</text>
+    <line x1="56" y1="799" x2="984" y2="799" stroke="#F4EFE6"/>
+    <text x="56" y="816" font-size="12" fill="#1c2530">Deferred revenue <tspan fill="#8A96A2" font-size="10">contract liability</tspan></text><use href="#ic-pane" x="344" y="804" width="19" height="15" color="#EC6D3F"/><text x="368" y="816" fill="#C9582E" font-weight="600">Peek</text><circle cx="472" cy="812" r="3.5" fill="#2FA37D"/><text x="482" y="816" fill="#41505F">Contracts · deferred waterfall</text><circle cx="732" cy="812" r="3.5" fill="#B9852A"/><text x="742" y="816" fill="#41505F">Contracts + Revenue Forecast <tspan fill="#9AA6B2">¹</tspan></text>
+    <line x1="56" y1="827" x2="984" y2="827" stroke="#F4EFE6"/>
+    <text x="56" y="844" font-size="12" fill="#8A96A2">Accounts payable <tspan font-size="10">⁵</tspan></text><use href="#ic-pane" x="344" y="832" width="19" height="15" color="#C9A66A"/><text x="368" y="844" fill="#B79355" font-weight="600">Peek</text><circle cx="472" cy="840" r="3.5" fill="#8FBDA8"/><text x="482" y="844" fill="#8A96A2">Expense Transactions · AP</text><circle cx="732" cy="840" r="3.5" fill="#CDB485"/><text x="742" y="844" fill="#8A96A2">AP Forecast · DPO</text>
+  </g>
+
+  <!-- ===== Cash Flow ===== -->
+  <rect x="40" y="866" width="960" height="30" fill="#EFE9DD"/><circle cx="60" cy="881" r="4" fill="#5A6B7A"/><text x="74" y="885" font-size="11" font-weight="700" letter-spacing="0.5" fill="#1c2530">CASH FLOW FORECAST</text><text x="784" y="885" font-size="10" fill="#8A96A2" text-anchor="end">statements · layer 3 (indirect)</text>
+  <text x="56" y="915" font-size="9.5" font-weight="600" letter-spacing="0.4" fill="#9AA6B2">LINE</text><text x="344" y="915" font-size="9.5" font-weight="600" letter-spacing="0.4" fill="#9AA6B2">FIRST TAP</text><text x="472" y="915" font-size="9.5" font-weight="600" letter-spacing="0.4" fill="#2A8A66">ACTUAL → REGISTER</text><text x="732" y="915" font-size="9.5" font-weight="600" letter-spacing="0.4" fill="#9A6E1E">FORECAST → DRIVER</text>
+  <line x1="56" y1="923" x2="984" y2="923" stroke="#ECE6DB"/>
+  <g font-size="11.5">
+    <text x="56" y="944" font-size="12" fill="#1c2530">Net income</text><use href="#ic-pane" x="344" y="932" width="19" height="15" color="#EC6D3F"/><text x="368" y="944" fill="#C9582E" font-weight="600">Peek</text><text x="472" y="944" font-style="italic" fill="#8A96A2">links straight to the P&amp;L (both actual + forecast)</text>
+    <line x1="56" y1="955" x2="984" y2="955" stroke="#F4EFE6"/>
+    <text x="56" y="972" font-size="12" fill="#1c2530">Δ Accounts Receivable</text><use href="#ic-pane" x="344" y="960" width="19" height="15" color="#EC6D3F"/><text x="368" y="972" fill="#C9582E" font-weight="600">Peek</text><circle cx="472" cy="968" r="3.5" fill="#2FA37D"/><text x="482" y="972" fill="#41505F">AR aging <tspan fill="#9AA6B2">⁴</tspan></text><circle cx="732" cy="968" r="3.5" fill="#B9852A"/><text x="742" y="972" fill="#41505F">AR Forecast · DSO</text>
+    <line x1="56" y1="983" x2="984" y2="983" stroke="#F4EFE6"/>
+    <text x="56" y="1000" font-size="12" fill="#1c2530">Δ Deferred revenue</text><use href="#ic-pane" x="344" y="988" width="19" height="15" color="#EC6D3F"/><text x="368" y="1000" fill="#C9582E" font-weight="600">Peek</text><circle cx="472" cy="996" r="3.5" fill="#2FA37D"/><text x="482" y="1000" fill="#41505F">Contracts · deferred</text><circle cx="732" cy="996" r="3.5" fill="#B9852A"/><text x="742" y="1000" fill="#41505F">Contracts + Revenue Forecast <tspan fill="#9AA6B2">¹</tspan></text>
+    <line x1="56" y1="1011" x2="984" y2="1011" stroke="#F4EFE6"/>
+    <text x="56" y="1028" font-size="12" fill="#1c2530">Δ Unbilled / WIP</text><use href="#ic-pane" x="344" y="1016" width="19" height="15" color="#EC6D3F"/><text x="368" y="1028" fill="#C9582E" font-weight="600">Peek</text><circle cx="472" cy="1024" r="3.5" fill="#2FA37D"/><text x="482" y="1028" fill="#41505F">Projects · WIP</text><circle cx="732" cy="1024" r="3.5" fill="#B9852A"/><text x="742" y="1028" fill="#41505F">Revenue Forecast · services</text>
+    <line x1="56" y1="1039" x2="984" y2="1039" stroke="#F4EFE6"/>
+    <text x="56" y="1056" font-size="12" fill="#1c2530">Δ Prepaids</text><use href="#ic-pane" x="344" y="1044" width="19" height="15" color="#EC6D3F"/><text x="368" y="1056" fill="#C9582E" font-weight="600">Peek</text><circle cx="472" cy="1052" r="3.5" fill="#2FA37D"/><text x="482" y="1056" fill="#41505F">Prepaid schedule</text><circle cx="732" cy="1052" r="3.5" fill="#B9852A"/><text x="742" y="1056" fill="#41505F">Prepaids Budget</text>
+    <line x1="56" y1="1067" x2="984" y2="1067" stroke="#F4EFE6"/>
+    <text x="56" y="1084" font-size="12" fill="#1c2530">Capex <tspan fill="#8A96A2" font-size="10">investing</tspan></text><use href="#ic-pane" x="344" y="1072" width="19" height="15" color="#EC6D3F"/><text x="368" y="1084" fill="#C9582E" font-weight="600">Peek</text><circle cx="472" cy="1080" r="3.5" fill="#2FA37D"/><text x="482" y="1084" fill="#41505F">Fixed Assets · register</text><circle cx="732" cy="1080" r="3.5" fill="#B9852A"/><text x="742" y="1084" fill="#41505F">Fixed Asset Budget</text>
+  </g>
+
+  <!-- footnotes -->
+  <line x1="40" y1="1110" x2="1000" y2="1110" stroke="#E6DECF"/>
+  <text x="40" y="1130" font-size="10.5" fill="#8A96A2"><tspan fill="#6E7B8A" font-weight="600">¹</tspan> Subscription forecast = contracted (read from Contracts) + a new-business / retention assumption. The contracted wedge bridges actual and forecast.</text>
+  <text x="40" y="1148" font-size="10.5" fill="#8A96A2"><tspan fill="#6E7B8A" font-weight="600">²</tspan> Revenue · Total peeks the recognized-revenue cross-section (both streams); rows link out to Contracts / Projects.</text>
+  <text x="40" y="1166" font-size="10.5" fill="#8A96A2"><tspan fill="#6E7B8A" font-weight="600">³</tspan> Expense groups (CoR · S&amp;M · R&amp;D · G&amp;A) are defined in Settings + Account Mapping — generated from the live group set, not hardcoded.</text>
+  <text x="40" y="1184" font-size="10.5" fill="#8A96A2"><tspan fill="#6E7B8A" font-weight="600">⁴</tspan> AR aging is derived from contract billing.  <tspan fill="#6E7B8A" font-weight="600">⁵</tspan> AP / DPO row applies if accounts payable is added (recommended, not yet locked) — shown muted.</text>
+</svg>

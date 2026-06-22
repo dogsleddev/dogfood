@@ -1,0 +1,164 @@
+id,name,department_id,function,title,start_month,end_month,fte,annual_base_comp
+staff-professional-services-0,Rosa Foster,professional-services,direct,"Director, Professional Services",2024-01,,1,205200.00
+staff-professional-services-1,Zara Reyes,professional-services,direct,Implementation Consultant,2024-01,2025-05,1,84200.00
+staff-professional-services-2,Aaron Dasgupta,professional-services,direct,Senior Implementation Consultant,2024-01,,1,117200.00
+staff-professional-services-3,Yara Rahman,professional-services,direct,Implementation Consultant,2024-01,,1,72100.00
+staff-professional-services-4,Felix Iverson,professional-services,direct,Senior Implementation Consultant,2024-01,,1,129700.00
+staff-professional-services-5,Maya Underwood,professional-services,direct,Engagement Manager,2024-01,2025-04,1,174600.00
+staff-professional-services-6,Tara Greco,professional-services,direct,Implementation Consultant,2024-05,,1,89600.00
+staff-professional-services-7,Nadia Ahmed,professional-services,direct,Senior Implementation Consultant,2025-01,,1,126000.00
+staff-professional-services-8,Raj Lowe,professional-services,direct,Implementation Consultant,2025-03,,1,71000.00
+staff-professional-services-9,Avery Xu,professional-services,direct,Senior Implementation Consultant,2025-06,,1,134400.00
+staff-professional-services-10,Hassan Kowalski,professional-services,direct,Engagement Manager,2026-01,,1,155500.00
+staff-professional-services-11,Omar Diaz,professional-services,direct,Implementation Consultant,2026-03,,1,70700.00
+staff-professional-services-12,Vera Osei,professional-services,direct,Senior Implementation Consultant,2026-06,,1,130800.00
+staff-professional-services-13,Leila Bauer,professional-services,direct,Engagement Manager,2026-08,,1,153100.00
+staff-professional-services-14,Tobias Okafor,professional-services,direct,Implementation Consultant,2026-10,,1,86200.00
+staff-professional-services-bf0,Caleb Gupta,professional-services,direct,Implementation Consultant,2025-05,,1,84200.00
+staff-professional-services-bf1,Jonah Silva,professional-services,direct,Engagement Manager,2025-04,,1,174600.00
+staff-support-0,Quinn Eriksson,support,direct,Support Manager,2024-01,,1,163900.00
+staff-support-1,Yusuf Sato,support,direct,Support Engineer,2024-01,2024-11,1,48400.00
+staff-support-2,Sofia Jensen,support,direct,Senior Support Engineer,2024-01,,1,89200.00
+staff-support-3,Lucas Vargas,support,direct,Support Engineer,2024-06,,1,58500.00
+staff-support-4,Elena Haddad,support,direct,Support Engineer,2025-01,2026-05,1,52400.00
+staff-support-5,Liam Brooks,support,direct,Senior Support Engineer,2025-04,,1,104700.00
+staff-support-6,Sam Mensah,support,direct,Support Engineer,2025-09,,1,47800.00
+staff-support-7,Theo Young,support,direct,Support Engineer,2026-02,,1,61100.00
+staff-support-8,Mei Lindqvist,support,direct,Support Engineer,2026-05,,1,51300.00
+staff-support-9,Ethan Ellis,support,direct,Support Engineer,2026-07,,1,63800.00
+staff-support-10,Grace Park,support,direct,Senior Support Engineer,2026-10,,1,116900.00
+staff-support-bf0,Noor Cardoso,support,direct,Support Engineer,2024-11,,1,48400.00
+staff-support-bf1,Umar Petrov,support,direct,Support Engineer,2026-05,,1,52400.00
+staff-engineering-0,Marcus Hayes,engineering,rnd,Co-founder & CEO,2024-01,,1,235200.00
+staff-engineering-1,Hannah Tran,engineering,rnd,Senior Software Engineer,2024-01,2024-12,1,136000.00
+staff-engineering-2,Bianca Fitzgerald,engineering,rnd,Staff Software Engineer,2024-01,,1,199300.00
+staff-engineering-3,Ingrid Velasquez,engineering,rnd,Software Engineer,2024-01,,1,137800.00
+staff-engineering-4,Priya Khan,engineering,rnd,Senior Software Engineer,2024-01,2025-03,1,172600.00
+staff-engineering-5,Wesley Walsh,engineering,rnd,Engineering Manager,2024-01,,1,208500.00
+staff-engineering-6,Diego Ito,engineering,rnd,Software Engineer,2024-01,,1,114900.00
+staff-engineering-7,Aisha Chen,engineering,rnd,Senior Software Engineer,2024-01,,1,162700.00
+staff-engineering-8,Dana Nguyen,engineering,rnd,Software Engineer,2024-01,2025-08,1,115700.00
+staff-engineering-9,Kira Abbott,engineering,rnd,Senior Software Engineer,2024-03,,1,135900.00
+staff-engineering-10,Rosa Moreau,engineering,rnd,Staff Software Engineer,2024-05,,1,190000.00
+staff-engineering-11,Zara Foster,engineering,rnd,Software Engineer,2024-07,2026-01,1,139300.00
+staff-engineering-12,Aaron Reyes,engineering,rnd,Senior Software Engineer,2024-09,,1,163500.00
+staff-engineering-13,Yara Dasgupta,engineering,rnd,Engineering Manager,2024-11,,1,230800.00
+staff-engineering-14,Felix Rahman,engineering,rnd,Software Engineer,2025-01,,1,119500.00
+staff-engineering-15,Maya Iverson,engineering,rnd,Staff Software Engineer,2025-02,2025-12,1,209600.00
+staff-engineering-16,Tara Underwood,engineering,rnd,Software Engineer,2025-02,,1,141900.00
+staff-engineering-17,Nadia Greco,engineering,rnd,Senior Software Engineer,2025-03,,1,162400.00
+staff-engineering-18,Raj Ahmed,engineering,rnd,Engineering Manager,2025-04,2026-05,1,233500.00
+staff-engineering-19,Avery Lowe,engineering,rnd,Software Engineer,2025-05,,1,139300.00
+staff-engineering-20,Hassan Xu,engineering,rnd,Senior Software Engineer,2025-06,,1,159100.00
+staff-engineering-21,Omar Kowalski,engineering,rnd,Software Engineer,2025-08,,1,109600.00
+staff-engineering-22,Vera Diaz,engineering,rnd,Senior Software Engineer,2025-10,,1,165700.00
+staff-engineering-23,Leila Osei,engineering,rnd,Staff Software Engineer,2026-01,,1,203900.00
+staff-engineering-24,Tobias Bauer,engineering,rnd,Software Engineer,2026-01,,1,107700.00
+staff-engineering-25,Caleb Okafor,engineering,rnd,Senior Software Engineer,2026-02,,1,139500.00
+staff-engineering-26,Jonah Gupta,engineering,rnd,Engineering Manager,2026-03,,1,229500.00
+staff-engineering-27,Quinn Silva,engineering,rnd,Software Engineer,2026-03,,1,123800.00
+staff-engineering-28,Yusuf Eriksson,engineering,rnd,Senior Software Engineer,2026-04,,1,149300.00
+staff-engineering-29,Sofia Sato,engineering,rnd,Software Engineer,2026-05,,1,136900.00
+staff-engineering-30,Lucas Jensen,engineering,rnd,Senior Software Engineer,2026-05,,1,176400.00
+staff-engineering-31,Elena Vargas,engineering,rnd,Engineering Manager,2026-06,,1,232000.00
+staff-engineering-32,Liam Haddad,engineering,rnd,Software Engineer,2026-07,,1,143500.00
+staff-engineering-33,Sam Brooks,engineering,rnd,Senior Software Engineer,2026-07,,1,134200.00
+staff-engineering-34,Theo Mensah,engineering,rnd,VP Engineering,2026-08,,1,264200.00
+staff-engineering-35,Mei Young,engineering,rnd,Software Engineer,2026-09,,1,114400.00
+staff-engineering-36,Ethan Lindqvist,engineering,rnd,Staff Software Engineer,2026-10,,1,212100.00
+staff-engineering-37,Grace Ellis,engineering,rnd,Software Engineer,2026-10,,1,111200.00
+staff-engineering-38,Noor Park,engineering,rnd,Senior Software Engineer,2026-12,,1,173500.00
+staff-engineering-bf0,Umar Cardoso,engineering,rnd,Senior Software Engineer,2024-12,,1,136000.00
+staff-engineering-bf1,Marcus Petrov,engineering,rnd,Senior Software Engineer,2025-03,,1,172600.00
+staff-engineering-bf2,Hannah Hayes,engineering,rnd,Software Engineer,2025-08,,1,115700.00
+staff-engineering-bf3,Bianca Tran,engineering,rnd,Software Engineer,2026-01,,1,139300.00
+staff-engineering-bf4,Ingrid Fitzgerald,engineering,rnd,Staff Software Engineer,2025-12,,1,209600.00
+staff-engineering-bf5,Priya Velasquez,engineering,rnd,Engineering Manager,2026-05,,1,233500.00
+staff-product-design-0,Wesley Khan,product-design,rnd,VP Product & Design,2024-01,,1,243400.00
+staff-product-design-1,Diego Walsh,product-design,rnd,Product Manager,2024-01,2024-10,1,142100.00
+staff-product-design-2,Aisha Ito,product-design,rnd,Senior Product Manager,2024-01,,1,179400.00
+staff-product-design-3,Dana Chen,product-design,rnd,Product Designer,2024-05,,1,89500.00
+staff-product-design-4,Kira Nguyen,product-design,rnd,Product Manager,2024-11,2026-01,1,144700.00
+staff-product-design-5,Rosa Abbott,product-design,rnd,Principal Designer,2025-02,,1,212400.00
+staff-product-design-6,Zara Moreau,product-design,rnd,Product Manager,2025-05,,1,143600.00
+staff-product-design-7,Aaron Foster,product-design,rnd,Senior Product Manager,2025-10,,1,173500.00
+staff-product-design-8,Yara Reyes,product-design,rnd,Product Designer,2026-02,,1,98800.00
+staff-product-design-9,Felix Dasgupta,product-design,rnd,Product Manager,2026-04,,1,123500.00
+staff-product-design-10,Maya Rahman,product-design,rnd,Principal Designer,2026-06,,1,231200.00
+staff-product-design-11,Tara Iverson,product-design,rnd,Product Designer,2026-08,,1,87000.00
+staff-product-design-12,Nadia Underwood,product-design,rnd,Senior Product Manager,2026-10,,1,146100.00
+staff-product-design-bf0,Raj Greco,product-design,rnd,Product Manager,2024-10,,1,142100.00
+staff-product-design-bf1,Avery Ahmed,product-design,rnd,Product Manager,2026-01,,1,144700.00
+staff-sales-0,Hassan Lowe,sales,sm,VP Sales,2024-01,,1,286700.00
+staff-sales-1,Omar Xu,sales,sm,Account Executive,2024-01,2025-08,1,116900.00
+staff-sales-2,Vera Kowalski,sales,sm,Senior Account Executive,2024-01,,1,186800.00
+staff-sales-3,Leila Diaz,sales,sm,Sales Development Rep,2024-01,,1,48300.00
+staff-sales-4,Tobias Osei,sales,sm,Account Executive,2024-01,2025-08,1,126300.00
+staff-sales-5,Caleb Bauer,sales,sm,Sales Manager,2024-01,,1,242000.00
+staff-sales-6,Jonah Okafor,sales,sm,Account Executive,2024-04,,1,109500.00
+staff-sales-7,Quinn Gupta,sales,sm,Senior Account Executive,2024-08,2025-06,1,198700.00
+staff-sales-8,Yusuf Silva,sales,sm,Sales Development Rep,2024-12,,1,46600.00
+staff-sales-9,Sofia Eriksson,sales,sm,Account Executive,2025-02,,1,110300.00
+staff-sales-10,Lucas Sato,sales,sm,Senior Account Executive,2025-03,2026-04,1,161000.00
+staff-sales-11,Elena Jensen,sales,sm,Sales Development Rep,2025-05,,1,45700.00
+staff-sales-12,Liam Vargas,sales,sm,Senior Account Executive,2025-07,,1,182800.00
+staff-sales-13,Sam Haddad,sales,sm,Sales Manager,2025-12,,1,255200.00
+staff-sales-14,Theo Brooks,sales,sm,Account Executive,2026-02,,1,99700.00
+staff-sales-15,Mei Mensah,sales,sm,Senior Account Executive,2026-03,,1,193700.00
+staff-sales-16,Ethan Young,sales,sm,Sales Development Rep,2026-04,,1,57600.00
+staff-sales-17,Grace Lindqvist,sales,sm,Account Executive,2026-05,,1,117900.00
+staff-sales-18,Noor Ellis,sales,sm,Sales Manager,2026-07,,1,263800.00
+staff-sales-19,Umar Park,sales,sm,Account Executive,2026-08,,1,122300.00
+staff-sales-20,Marcus Cardoso,sales,sm,Senior Account Executive,2026-09,,1,166400.00
+staff-sales-21,Hannah Petrov,sales,sm,Sales Development Rep,2026-11,,1,51600.00
+staff-sales-bf0,Bianca Hayes,sales,sm,Account Executive,2025-08,,1,116900.00
+staff-sales-bf1,Ingrid Tran,sales,sm,Account Executive,2025-08,,1,126300.00
+staff-sales-bf2,Priya Fitzgerald,sales,sm,Senior Account Executive,2025-06,,1,198700.00
+staff-sales-bf3,Wesley Velasquez,sales,sm,Senior Account Executive,2026-04,,1,161000.00
+staff-marketing-0,Diego Khan,marketing,sm,VP Marketing,2024-01,,1,158000.00
+staff-marketing-1,Aisha Walsh,marketing,sm,Product Marketing Manager,2024-01,2025-11,1,112300.00
+staff-marketing-2,Dana Ito,marketing,sm,Senior Marketing Manager,2024-01,,1,138400.00
+staff-marketing-3,Kira Chen,marketing,sm,Marketing Associate,2024-06,2026-01,1,71800.00
+staff-marketing-4,Rosa Nguyen,marketing,sm,Demand Generation Manager,2025-02,,1,115900.00
+staff-marketing-5,Zara Abbott,marketing,sm,Senior Marketing Manager,2025-05,,1,174100.00
+staff-marketing-6,Aaron Moreau,marketing,sm,Product Marketing Manager,2026-01,,1,105000.00
+staff-marketing-7,Yara Foster,marketing,sm,Demand Generation Manager,2026-04,,1,129000.00
+staff-marketing-8,Felix Reyes,marketing,sm,Marketing Associate,2026-07,,1,78200.00
+staff-marketing-9,Maya Dasgupta,marketing,sm,Demand Generation Manager,2026-10,,1,117300.00
+staff-marketing-bf0,Tara Rahman,marketing,sm,Product Marketing Manager,2025-11,,1,112300.00
+staff-marketing-bf1,Nadia Iverson,marketing,sm,Marketing Associate,2026-01,,1,71800.00
+staff-customer-success-0,Raj Underwood,customer-success,sm,VP Customer Success,2024-01,,1,171800.00
+staff-customer-success-1,Avery Greco,customer-success,sm,Mid-Market CSM,2024-01,2025-05,1,73500.00
+staff-customer-success-2,Hassan Ahmed,customer-success,sm,Senior CSM,2024-01,,1,115800.00
+staff-customer-success-3,Omar Lowe,customer-success,sm,Mid-Market CSM,2024-01,,1,66300.00
+staff-customer-success-4,Vera Xu,customer-success,sm,Senior CSM,2024-05,2025-09,1,105400.00
+staff-customer-success-5,Leila Kowalski,customer-success,sm,Customer Success Manager,2025-01,,1,156000.00
+staff-customer-success-6,Tobias Diaz,customer-success,sm,Mid-Market CSM,2025-03,,1,63900.00
+staff-customer-success-7,Caleb Osei,customer-success,sm,Senior CSM,2025-06,,1,96200.00
+staff-customer-success-8,Jonah Bauer,customer-success,sm,Mid-Market CSM,2026-01,,1,77400.00
+staff-customer-success-9,Quinn Okafor,customer-success,sm,Mid-Market CSM,2026-03,,1,73800.00
+staff-customer-success-10,Yusuf Gupta,customer-success,sm,Customer Success Manager,2026-06,,1,136700.00
+staff-customer-success-11,Sofia Silva,customer-success,sm,Mid-Market CSM,2026-08,,1,68700.00
+staff-customer-success-12,Lucas Eriksson,customer-success,sm,Senior CSM,2026-10,,1,94700.00
+staff-customer-success-bf0,Elena Sato,customer-success,sm,Mid-Market CSM,2025-05,,1,73500.00
+staff-customer-success-bf1,Liam Jensen,customer-success,sm,Senior CSM,2025-09,,1,105400.00
+staff-finance-0,Sam Vargas,finance,ga,CFO,2024-01,,1,229600.00
+staff-finance-1,Theo Haddad,finance,ga,Financial Analyst,2024-01,2025-09,1,78000.00
+staff-finance-2,Mei Brooks,finance,ga,Senior Accountant,2024-08,,1,129200.00
+staff-finance-3,Ethan Mensah,finance,ga,Financial Analyst,2025-04,,1,88200.00
+staff-finance-4,Grace Young,finance,ga,Senior Accountant,2026-01,,1,116500.00
+staff-finance-5,Noor Lindqvist,finance,ga,Controller,2026-05,,1,194900.00
+staff-finance-6,Umar Ellis,finance,ga,Financial Analyst,2026-09,,1,73600.00
+staff-finance-bf0,Marcus Park,finance,ga,Financial Analyst,2025-09,,1,78000.00
+staff-people-0,Hannah Cardoso,people,ga,Head of People,2024-01,,1,191500.00
+staff-people-1,Bianca Petrov,people,ga,Recruiter,2024-01,2025-04,1,54900.00
+staff-people-2,Ingrid Hayes,people,ga,People Operations Manager,2025-01,,1,128500.00
+staff-people-3,Priya Tran,people,ga,Recruiter,2026-01,,1,54600.00
+staff-people-4,Wesley Fitzgerald,people,ga,People Operations Manager,2026-08,,1,120500.00
+staff-people-bf0,Diego Velasquez,people,ga,Recruiter,2025-04,,1,54900.00
+staff-ops-0,Aisha Khan,ops,ga,Head of Operations,2024-01,,1,181900.00
+staff-ops-1,Dana Walsh,ops,ga,Operations Analyst,2024-01,2025-07,1,54200.00
+staff-ops-2,Kira Ito,ops,ga,Operations Manager,2025-01,,1,106500.00
+staff-ops-3,Rosa Chen,ops,ga,Operations Analyst,2026-01,,1,59800.00
+staff-ops-4,Zara Nguyen,ops,ga,Operations Manager,2026-08,,1,122600.00
+staff-ops-bf0,Aaron Abbott,ops,ga,Operations Analyst,2025-07,,1,54200.00

@@ -1,0 +1,11 @@
+transaction_id,doc_number,period,date,due_date,account_code,expense_group,vendor,amount,status,memo
+VB-2026-05-1330,BILL-2026-1330,2026-05,2026-05-20,2026-06-19,6100,employee-expenses,One Medical,77526.50,open,Medical benefits
+VB-2026-05-1331,BILL-2026-1331,2026-05,2026-05-17,2026-06-16,6100,employee-expenses,Anthem Health,101594.82,open,Health insurance
+VB-2026-05-1332,BILL-2026-1332,2026-05,2026-05-02,2026-06-01,6100,employee-expenses,Gusto,105497.40,paid,Payroll benefits admin
+VB-2026-05-1333,BILL-2026-1333,2026-05,2026-05-14,2026-06-13,6200,sales-marketing,Salesforce,61648.35,open,CRM subscription
+VB-2026-05-1334,BILL-2026-1334,2026-05,2026-05-14,2026-06-13,6200,sales-marketing,Clearbit,51579.70,open,Data enrichment
+VB-2026-05-1335,BILL-2026-1335,2026-05,2026-05-25,2026-06-24,6200,sales-marketing,G2,54992.02,open,Review platform
+VB-2026-05-1336,BILL-2026-1336,2026-05,2026-05-22,2026-06-21,6200,sales-marketing,Webflow,38267.72,open,Website / CMS
+VB-2026-05-1337,BILL-2026-1337,2026-05,2026-05-11,2026-06-10,6200,sales-marketing,Google Ads,39643.88,open,Paid search
+VB-2026-05-1338,BILL-2026-1338,2026-05,2026-05-26,2026-06-25,6300,travel-entertainment,Amex T&E,6414.99,open,Team travel
+VB-2026-05-1339,BILL-2026-1339,2026-05,2026-05-21,2026-06-20,6300,travel-entertainment,DoorDash,3787.92,open,Team meals

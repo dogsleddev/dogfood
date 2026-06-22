@@ -1,0 +1,91 @@
+<svg viewBox="0 0 460 794" width="460" height="794" xmlns="http://www.w3.org/2000/svg" font-family="Geist, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <defs>
+    <linearGradient id="gAv" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#EC6D3F"/><stop offset="1" stop-color="#E7B23A"/></linearGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="14" stdDeviation="22" flood-color="#0E1726" flood-opacity="0.22"/></filter>
+    <clipPath id="card"><rect x="8" y="8" width="444" height="778" rx="16"/></clipPath>
+    <linearGradient id="gEdge" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0E1726" stop-opacity="0.10"/><stop offset="1" stop-color="#0E1726" stop-opacity="0"/></linearGradient>
+  </defs>
+
+  <!-- card -->
+  <rect x="8" y="8" width="444" height="778" rx="16" fill="#0E1726" filter="url(#soft)" opacity="0.16"/>
+  <rect x="8" y="8" width="444" height="778" rx="16" fill="#FBF8F3" stroke="#E6DECF"/>
+  <g clip-path="url(#card)">
+    <rect x="8" y="8" width="10" height="778" fill="url(#gEdge)"/>
+
+    <!-- header -->
+    <circle cx="52" cy="44" r="16" fill="url(#gAv)"/>
+    <g transform="translate(52,44) scale(0.92)" fill="#F8F1E4">
+      <path d="M0 -9 L1.8 -2.2 L8.5 0 L1.8 2.2 L0 9 L-1.8 2.2 L-8.5 0 L-1.8 -2.2 Z"/>
+      <path d="M6.5 -8 L7.2 -5.6 L9.6 -4.9 L7.2 -4.2 L6.5 -1.8 L5.8 -4.2 L3.4 -4.9 L5.8 -5.6 Z" opacity="0.9"/>
+    </g>
+    <text x="78" y="40" font-family="Fraunces, Georgia, serif" font-size="20" font-weight="600" fill="#1c2530">Scout</text>
+    <circle cx="80" cy="53" r="2.6" fill="#46C99A"/>
+    <text x="88" y="57" font-size="11" fill="#6E7B8A">online · finance analyst</text>
+    <path d="M412 40 l6 6 6 -6" stroke="#9AA4B0" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="8" y1="80" x2="452" y2="80" stroke="#ECE6DB"/>
+
+    <!-- context pill -->
+    <rect x="28" y="92" width="214" height="28" rx="14" fill="#F2EEE6" stroke="#E6DECF"/>
+    <circle cx="44" cy="106" r="3" fill="#EC6D3F"/>
+    <text x="55" y="110" font-size="11.5" font-weight="500" fill="#1c2530">Context:  Forecasted P&amp;L · FY26</text>
+    <text x="432" y="110" text-anchor="end" font-size="10" fill="#9AA4B0">6 tools active</text>
+
+    <!-- scrollback divider -->
+    <line x1="28" y1="332" x2="176" y2="332" stroke="#ECE6DB"/>
+    <line x1="286" y1="332" x2="432" y2="332" stroke="#ECE6DB"/>
+    <text x="231" y="336" text-anchor="middle" font-size="10" fill="#9AA4B0">Today · 9:14 AM</text>
+
+    <!-- scout opener -->
+    <circle cx="30" cy="372" r="11" fill="url(#gAv)"/>
+    <g transform="translate(30,372) scale(0.62)" fill="#F8F1E4"><path d="M0 -9 L1.8 -2.2 L8.5 0 L1.8 2.2 L0 9 L-1.8 2.2 L-8.5 0 L-1.8 -2.2 Z"/></g>
+    <text x="50" y="370" font-size="12.5" fill="#1c2530">Forecasted P&amp;L is loaded. Q3 opex steps</text>
+    <text x="50" y="387" font-size="12.5" fill="#1c2530">up ~18% over Q2. Want the breakdown?</text>
+
+    <!-- user bubble -->
+    <rect x="196" y="410" width="236" height="36" rx="12" fill="#16273A"/>
+    <text x="416" y="432" text-anchor="end" font-size="12" fill="#F4ECDD">what's driving the Q3 opex jump?</text>
+
+    <!-- scout answer -->
+    <circle cx="30" cy="472" r="11" fill="url(#gAv)"/>
+    <g transform="translate(30,472) scale(0.62)" fill="#F8F1E4"><path d="M0 -9 L1.8 -2.2 L8.5 0 L1.8 2.2 L0 9 L-1.8 2.2 L-8.5 0 L-1.8 -2.2 Z"/></g>
+    <text x="50" y="467" font-size="10" fill="#9AA4B0">ran</text>
+    <rect x="72" y="460" width="118" height="20" rx="10" fill="#EEF3F0" stroke="#DCE8E1"/>
+    <path d="M81 470 l2 2 3.4 -4" stroke="#46C99A" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="92" y="474" font-size="10" fill="#557067" font-family="ui-monospace, monospace">getForecastedPL</text>
+    <rect x="196" y="460" width="142" height="20" rx="10" fill="#EEF3F0" stroke="#DCE8E1"/>
+    <path d="M205 470 l2 2 3.4 -4" stroke="#46C99A" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="216" y="474" font-size="10" fill="#557067" font-family="ui-monospace, monospace">getPersonnelForecast</text>
+
+    <text x="50" y="497" font-size="12.5" fill="#1c2530">Mostly personnel. Three drivers:</text>
+
+    <!-- result card -->
+    <rect x="50" y="508" width="382" height="120" rx="12" fill="#FFFFFF" stroke="#ECE6DB"/>
+    <text x="66" y="528" font-size="11" font-weight="600" fill="#6E7B8A">Q3 opex Δ vs Q2</text>
+    <text x="416" y="528" text-anchor="end" font-size="12" font-weight="700" fill="#EC6D3F">+$205K</text>
+    <line x1="66" y1="536" x2="416" y2="536" stroke="#F1ECE2"/>
+    <text x="66" y="556" font-size="11.5" fill="#1c2530">3 Eng hires · Aug</text>
+    <text x="416" y="556" text-anchor="end" font-size="11.5" font-weight="500" fill="#1c2530">+$142K</text>
+    <text x="66" y="578" font-size="11.5" fill="#1c2530">Comp merit cycle · Jul</text>
+    <text x="416" y="578" text-anchor="end" font-size="11.5" font-weight="500" fill="#1c2530">+$38K</text>
+    <text x="66" y="600" font-size="11.5" fill="#1c2530">Marketing event · Sep</text>
+    <text x="416" y="600" text-anchor="end" font-size="11.5" font-weight="500" fill="#1c2530">+$25K</text>
+    <text x="66" y="618" font-size="10.5" fill="#9AA4B0" font-style="italic">Personnel is 78% of the step-up</text>
+
+    <!-- follow-up -->
+    <text x="50" y="649" font-size="12" font-weight="600" fill="#EC6D3F">Drill into the staffing plan? →</text>
+
+    <!-- suggested chips -->
+    <rect x="28" y="666" width="180" height="30" rx="15" fill="#FBEFE9" stroke="#EC6D3F" stroke-opacity="0.45"/>
+    <text x="118" y="685" text-anchor="middle" font-size="11" font-weight="500" fill="#C9582E">Show the staffing plan</text>
+    <rect x="216" y="666" width="150" height="30" rx="15" fill="#FBEFE9" stroke="#EC6D3F" stroke-opacity="0.45"/>
+    <text x="291" y="685" text-anchor="middle" font-size="11" font-weight="500" fill="#C9582E">Compare to budget</text>
+    <rect x="28" y="702" width="214" height="30" rx="15" fill="#FBEFE9" stroke="#EC6D3F" stroke-opacity="0.45"/>
+    <text x="135" y="721" text-anchor="middle" font-size="11" font-weight="500" fill="#C9582E">What if we delay the hires?</text>
+
+    <!-- composer -->
+    <rect x="28" y="744" width="352" height="44" rx="12" fill="#FFFFFF" stroke="#E6DECF"/>
+    <text x="44" y="771" font-size="12" fill="#9AA4B0">Ask Scout about the P&amp;L…</text>
+    <circle cx="410" cy="766" r="18" fill="#EC6D3F"/>
+    <path d="M404 760 L417 766 L404 772 L407 766 Z" fill="#FFFFFF"/>
+  </g>
+</svg>

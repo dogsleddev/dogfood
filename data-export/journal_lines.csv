@@ -1,0 +1,1325 @@
+entry_id,period,doc_ref,source,memo,account_id,debit,credit
+JE-2024-01-00,2024-01,2024-01-invoice,invoice,Subscription revenue recognized,2100,359991.67,0.00
+JE-2024-01-00,2024-01,2024-01-invoice,invoice,Subscription revenue recognized,4000,0.00,359991.67
+JE-2024-01-01,2024-01,2024-01-invoice,invoice,Subscription billed (annual upfront),1100,690108.33,0.00
+JE-2024-01-01,2024-01,2024-01-invoice,invoice,Subscription billed (annual upfront),2100,0.00,690108.33
+JE-2024-01-02,2024-01,2024-01-invoice,invoice,Services revenue recognized (% complete),1200,42500.00,0.00
+JE-2024-01-02,2024-01,2024-01-invoice,invoice,Services revenue recognized (% complete),4100,0.00,42500.00
+JE-2024-01-03,2024-01,2024-01-invoice,invoice,Customer collections,1000,189126.14,0.00
+JE-2024-01-03,2024-01,2024-01-invoice,invoice,Customer collections,1100,0.00,189126.14
+JE-2024-01-04,2024-01,2024-01-payroll,payroll,Payroll,5000,90375.00,0.00
+JE-2024-01-04,2024-01,2024-01-payroll,payroll,Payroll,6000,390066.67,0.00
+JE-2024-01-04,2024-01,2024-01-payroll,payroll,Payroll,1000,0.00,480441.67
+JE-2024-01-05,2024-01,2024-01-ap_bill,ap_bill,Vendor bills (CoR + OpEx),5100,71823.58,0.00
+JE-2024-01-05,2024-01,2024-01-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6100,105697.17,0.00
+JE-2024-01-05,2024-01,2024-01-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6200,56348.83,0.00
+JE-2024-01-05,2024-01,2024-01-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6300,16000.00,0.00
+JE-2024-01-05,2024-01,2024-01-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6400,13320.00,0.00
+JE-2024-01-05,2024-01,2024-01-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6500,8000.00,0.00
+JE-2024-01-05,2024-01,2024-01-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6600,10680.00,0.00
+JE-2024-01-05,2024-01,2024-01-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6700,18680.00,0.00
+JE-2024-01-05,2024-01,2024-01-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6800,4024.92,0.00
+JE-2024-01-05,2024-01,2024-01-ap_bill,ap_bill,Vendor bills (CoR + OpEx),2000,0.00,304574.50
+JE-2024-01-06,2024-01,2024-01-ap_bill,ap_bill,AP payments,2000,304172.25,0.00
+JE-2024-01-06,2024-01,2024-01-ap_bill,ap_bill,AP payments,1000,0.00,304172.25
+JE-2024-01-07,2024-01,2024-01-depreciation,depreciation,Depreciation & amortization,6900,14306.67,0.00
+JE-2024-01-07,2024-01,2024-01-depreciation,depreciation,Depreciation & amortization,1500,0.00,14306.67
+JE-2024-01-08,2024-01,2024-01-manual,manual,Stock-based compensation (ASC 718),6950,154595.00,0.00
+JE-2024-01-08,2024-01,2024-01-manual,manual,Stock-based compensation (ASC 718),3000,0.00,154595.00
+JE-2024-01-09,2024-01,2024-01-manual,manual,Capital expenditures,1500,9200.00,0.00
+JE-2024-01-09,2024-01,2024-01-manual,manual,Capital expenditures,1000,0.00,9200.00
+JE-2024-01-10,2024-01,2024-01-prepaid_amort,prepaid_amort,Prepaid expense movement,1300,126083.40,0.00
+JE-2024-01-10,2024-01,2024-01-prepaid_amort,prepaid_amort,Prepaid expense movement,1000,0.00,126083.40
+JE-2024-01-11,2024-01,2024-01-manual,manual,Interest income,1000,25000.00,0.00
+JE-2024-01-11,2024-01,2024-01-manual,manual,Interest income,7000,0.00,25000.00
+JE-2024-02-00,2024-02,2024-02-invoice,invoice,Subscription revenue recognized,2100,368037.50,0.00
+JE-2024-02-00,2024-02,2024-02-invoice,invoice,Subscription revenue recognized,4000,0.00,368037.50
+JE-2024-02-01,2024-02,2024-02-invoice,invoice,Subscription billed (annual upfront),1100,215950.00,0.00
+JE-2024-02-01,2024-02,2024-02-invoice,invoice,Subscription billed (annual upfront),2100,0.00,215950.00
+JE-2024-02-02,2024-02,2024-02-invoice,invoice,Services revenue recognized (% complete),1200,42500.00,0.00
+JE-2024-02-02,2024-02,2024-02-invoice,invoice,Services revenue recognized (% complete),4100,0.00,42500.00
+JE-2024-02-03,2024-02,2024-02-invoice,invoice,Services billed,1100,42500.00,0.00
+JE-2024-02-03,2024-02,2024-02-invoice,invoice,Services billed,1200,0.00,42500.00
+JE-2024-02-04,2024-02,2024-02-invoice,invoice,Customer collections,1000,577758.90,0.00
+JE-2024-02-04,2024-02,2024-02-invoice,invoice,Customer collections,1100,0.00,577758.90
+JE-2024-02-05,2024-02,2024-02-payroll,payroll,Payroll,5000,90375.00,0.00
+JE-2024-02-05,2024-02,2024-02-payroll,payroll,Payroll,6000,390066.67,0.00
+JE-2024-02-05,2024-02,2024-02-payroll,payroll,Payroll,1000,0.00,480441.67
+JE-2024-02-06,2024-02,2024-02-ap_bill,ap_bill,Vendor bills (CoR + OpEx),5100,73191.38,0.00
+JE-2024-02-06,2024-02,2024-02-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6100,105697.17,0.00
+JE-2024-02-06,2024-02,2024-02-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6200,57475.25,0.00
+JE-2024-02-06,2024-02,2024-02-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6300,16000.00,0.00
+JE-2024-02-06,2024-02,2024-02-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6400,13320.00,0.00
+JE-2024-02-06,2024-02,2024-02-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6500,8000.00,0.00
+JE-2024-02-06,2024-02,2024-02-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6600,10680.00,0.00
+JE-2024-02-06,2024-02,2024-02-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6700,18680.00,0.00
+JE-2024-02-06,2024-02,2024-02-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6800,4105.38,0.00
+JE-2024-02-06,2024-02,2024-02-ap_bill,ap_bill,Vendor bills (CoR + OpEx),2000,0.00,307149.17
+JE-2024-02-07,2024-02,2024-02-ap_bill,ap_bill,AP payments,2000,305879.47,0.00
+JE-2024-02-07,2024-02,2024-02-ap_bill,ap_bill,AP payments,1000,0.00,305879.47
+JE-2024-02-08,2024-02,2024-02-depreciation,depreciation,Depreciation & amortization,6900,14613.33,0.00
+JE-2024-02-08,2024-02,2024-02-depreciation,depreciation,Depreciation & amortization,1500,0.00,14613.33
+JE-2024-02-09,2024-02,2024-02-manual,manual,Stock-based compensation (ASC 718),6950,154595.00,0.00
+JE-2024-02-09,2024-02,2024-02-manual,manual,Stock-based compensation (ASC 718),3000,0.00,154595.00
+JE-2024-02-10,2024-02,2024-02-manual,manual,Capital expenditures,1500,9200.00,0.00
+JE-2024-02-10,2024-02,2024-02-manual,manual,Capital expenditures,1000,0.00,9200.00
+JE-2024-02-11,2024-02,2024-02-prepaid_amort,prepaid_amort,Prepaid expense movement,1300,793.56,0.00
+JE-2024-02-11,2024-02,2024-02-prepaid_amort,prepaid_amort,Prepaid expense movement,1000,0.00,793.56
+JE-2024-02-12,2024-02,2024-02-manual,manual,Interest income,1000,22647.43,0.00
+JE-2024-02-12,2024-02,2024-02-manual,manual,Interest income,7000,0.00,22647.43
+JE-2024-03-00,2024-03,2024-03-invoice,invoice,Subscription revenue recognized,2100,390029.17,0.00
+JE-2024-03-00,2024-03,2024-03-invoice,invoice,Subscription revenue recognized,4000,0.00,390029.17
+JE-2024-03-01,2024-03,2024-03-invoice,invoice,Subscription billed (annual upfront),1100,340600.00,0.00
+JE-2024-03-01,2024-03,2024-03-invoice,invoice,Subscription billed (annual upfront),2100,0.00,340600.00
+JE-2024-03-02,2024-03,2024-03-invoice,invoice,Services revenue recognized (% complete),1200,73250.00,0.00
+JE-2024-03-02,2024-03,2024-03-invoice,invoice,Services revenue recognized (% complete),4100,0.00,73250.00
+JE-2024-03-03,2024-03,2024-03-invoice,invoice,Services billed,1100,42500.00,0.00
+JE-2024-03-03,2024-03,2024-03-invoice,invoice,Services billed,1200,0.00,42500.00
+JE-2024-03-04,2024-03,2024-03-invoice,invoice,Customer collections,1000,428065.07,0.00
+JE-2024-03-04,2024-03,2024-03-invoice,invoice,Customer collections,1100,0.00,428065.07
+JE-2024-03-05,2024-03,2024-03-payroll,payroll,Payroll,5000,90375.00,0.00
+JE-2024-03-05,2024-03,2024-03-payroll,payroll,Payroll,6000,401391.67,0.00
+JE-2024-03-05,2024-03,2024-03-payroll,payroll,Payroll,1000,0.00,491766.67
+JE-2024-03-06,2024-03,2024-03-ap_bill,ap_bill,Vendor bills (CoR + OpEx),5100,84617.46,0.00
+JE-2024-03-06,2024-03,2024-03-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6100,108188.67,0.00
+JE-2024-03-06,2024-03,2024-03-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6200,64859.08,0.00
+JE-2024-03-06,2024-03,2024-03-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6300,16400.00,0.00
+JE-2024-03-06,2024-03,2024-03-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6400,13653.00,0.00
+JE-2024-03-06,2024-03,2024-03-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6500,8200.00,0.00
+JE-2024-03-06,2024-03,2024-03-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6600,10947.00,0.00
+JE-2024-03-06,2024-03,2024-03-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6700,19147.00,0.00
+JE-2024-03-06,2024-03,2024-03-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6800,4632.79,0.00
+JE-2024-03-06,2024-03,2024-03-ap_bill,ap_bill,Vendor bills (CoR + OpEx),2000,0.00,330645.00
+JE-2024-03-07,2024-03,2024-03-ap_bill,ap_bill,AP payments,2000,322497.11,0.00
+JE-2024-03-07,2024-03,2024-03-ap_bill,ap_bill,AP payments,1000,0.00,322497.11
+JE-2024-03-08,2024-03,2024-03-depreciation,depreciation,Depreciation & amortization,6900,15127.67,0.00
+JE-2024-03-08,2024-03,2024-03-depreciation,depreciation,Depreciation & amortization,1500,0.00,15127.67
+JE-2024-03-09,2024-03,2024-03-manual,manual,Stock-based compensation (ASC 718),6950,159370.38,0.00
+JE-2024-03-09,2024-03,2024-03-manual,manual,Stock-based compensation (ASC 718),3000,0.00,159370.38
+JE-2024-03-10,2024-03,2024-03-manual,manual,Operating lease (ASC 842),1600,12000.00,0.00
+JE-2024-03-10,2024-03,2024-03-manual,manual,Operating lease (ASC 842),2200,0.00,12000.00
+JE-2024-03-11,2024-03,2024-03-manual,manual,Capital expenditures,1500,15430.00,0.00
+JE-2024-03-11,2024-03,2024-03-manual,manual,Capital expenditures,1000,0.00,15430.00
+JE-2024-03-12,2024-03,2024-03-prepaid_amort,prepaid_amort,Prepaid expense movement,1300,5555.37,0.00
+JE-2024-03-12,2024-03,2024-03-prepaid_amort,prepaid_amort,Prepaid expense movement,1000,0.00,5555.37
+JE-2024-03-13,2024-03,2024-03-manual,manual,Interest income,1000,21994.40,0.00
+JE-2024-03-13,2024-03,2024-03-manual,manual,Interest income,7000,0.00,21994.40
+JE-2024-04-00,2024-04,2024-04-invoice,invoice,Subscription revenue recognized,2100,418683.33,0.00
+JE-2024-04-00,2024-04,2024-04-invoice,invoice,Subscription revenue recognized,4000,0.00,418683.33
+JE-2024-04-01,2024-04,2024-04-invoice,invoice,Subscription billed (annual upfront),1100,574875.00,0.00
+JE-2024-04-01,2024-04,2024-04-invoice,invoice,Subscription billed (annual upfront),2100,0.00,574875.00
+JE-2024-04-02,2024-04,2024-04-invoice,invoice,Services revenue recognized (% complete),1200,114750.00,0.00
+JE-2024-04-02,2024-04,2024-04-invoice,invoice,Services revenue recognized (% complete),4100,0.00,114750.00
+JE-2024-04-03,2024-04,2024-04-invoice,invoice,Services billed,1100,73250.00,0.00
+JE-2024-04-03,2024-04,2024-04-invoice,invoice,Services billed,1200,0.00,73250.00
+JE-2024-04-04,2024-04,2024-04-invoice,invoice,Customer collections,1000,572584.59,0.00
+JE-2024-04-04,2024-04,2024-04-invoice,invoice,Customer collections,1100,0.00,572584.59
+JE-2024-04-05,2024-04,2024-04-payroll,payroll,Payroll,5000,90375.00,0.00
+JE-2024-04-05,2024-04,2024-04-payroll,payroll,Payroll,6000,410516.67,0.00
+JE-2024-04-05,2024-04,2024-04-payroll,payroll,Payroll,1000,0.00,500891.67
+JE-2024-04-06,2024-04,2024-04-ap_bill,ap_bill,Vendor bills (CoR + OpEx),5100,99863.67,0.00
+JE-2024-04-06,2024-04,2024-04-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6100,110196.17,0.00
+JE-2024-04-06,2024-04,2024-04-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6200,74680.67,0.00
+JE-2024-04-06,2024-04,2024-04-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6300,16800.00,0.00
+JE-2024-04-06,2024-04,2024-04-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6400,13986.00,0.00
+JE-2024-04-06,2024-04,2024-04-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6500,8400.00,0.00
+JE-2024-04-06,2024-04,2024-04-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6600,11214.00,0.00
+JE-2024-04-06,2024-04,2024-04-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6700,19614.00,0.00
+JE-2024-04-06,2024-04,2024-04-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6800,5334.33,0.00
+JE-2024-04-06,2024-04,2024-04-ap_bill,ap_bill,Vendor bills (CoR + OpEx),2000,0.00,360088.83
+JE-2024-04-07,2024-04,2024-04-ap_bill,ap_bill,AP payments,2000,348754.76,0.00
+JE-2024-04-07,2024-04,2024-04-ap_bill,ap_bill,AP payments,1000,0.00,348754.76
+JE-2024-04-08,2024-04,2024-04-depreciation,depreciation,Depreciation & amortization,6900,15649.67,0.00
+JE-2024-04-08,2024-04,2024-04-depreciation,depreciation,Depreciation & amortization,1500,0.00,15649.67
+JE-2024-04-09,2024-04,2024-04-manual,manual,Stock-based compensation (ASC 718),6950,161765.69,0.00
+JE-2024-04-09,2024-04,2024-04-manual,manual,Stock-based compensation (ASC 718),3000,0.00,161765.69
+JE-2024-04-10,2024-04,2024-04-manual,manual,Operating lease (ASC 842),1600,11000.00,0.00
+JE-2024-04-10,2024-04,2024-04-manual,manual,Operating lease (ASC 842),2200,0.00,11000.00
+JE-2024-04-11,2024-04,2024-04-manual,manual,Capital expenditures,1500,15660.00,0.00
+JE-2024-04-11,2024-04,2024-04-manual,manual,Capital expenditures,1000,0.00,15660.00
+JE-2024-04-12,2024-04,2024-04-prepaid_amort,prepaid_amort,Prepaid expense movement,1300,7445.40,0.00
+JE-2024-04-12,2024-04,2024-04-prepaid_amort,prepaid_amort,Prepaid expense movement,1000,0.00,7445.40
+JE-2024-04-13,2024-04,2024-04-manual,manual,Interest income,1000,20710.44,0.00
+JE-2024-04-13,2024-04,2024-04-manual,manual,Interest income,7000,0.00,20710.44
+JE-2024-05-00,2024-05,2024-05-invoice,invoice,Subscription revenue recognized,2100,444012.50,0.00
+JE-2024-05-00,2024-05,2024-05-invoice,invoice,Subscription revenue recognized,4000,0.00,444012.50
+JE-2024-05-01,2024-05,2024-05-invoice,invoice,Subscription billed (annual upfront),1100,360312.50,0.00
+JE-2024-05-01,2024-05,2024-05-invoice,invoice,Subscription billed (annual upfront),2100,0.00,360312.50
+JE-2024-05-02,2024-05,2024-05-invoice,invoice,Services revenue recognized (% complete),1200,120250.00,0.00
+JE-2024-05-02,2024-05,2024-05-invoice,invoice,Services revenue recognized (% complete),4100,0.00,120250.00
+JE-2024-05-03,2024-05,2024-05-invoice,invoice,Services billed,1100,114750.00,0.00
+JE-2024-05-03,2024-05,2024-05-invoice,invoice,Services billed,1200,0.00,114750.00
+JE-2024-05-04,2024-05,2024-05-invoice,invoice,Customer collections,1000,480945.79,0.00
+JE-2024-05-04,2024-05,2024-05-invoice,invoice,Customer collections,1100,0.00,480945.79
+JE-2024-05-05,2024-05,2024-05-payroll,payroll,Payroll,5000,97841.67,0.00
+JE-2024-05-05,2024-05,2024-05-payroll,payroll,Payroll,6000,442591.67,0.00
+JE-2024-05-05,2024-05,2024-05-payroll,payroll,Payroll,1000,0.00,540433.33
+JE-2024-05-06,2024-05,2024-05-ap_bill,ap_bill,Vendor bills (CoR + OpEx),5100,105544.63,0.00
+JE-2024-05-06,2024-05,2024-05-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6100,118895.33,0.00
+JE-2024-05-06,2024-05,2024-05-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6200,78996.75,0.00
+JE-2024-05-06,2024-05,2024-05-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6300,18400.00,0.00
+JE-2024-05-06,2024-05,2024-05-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6400,15318.00,0.00
+JE-2024-05-06,2024-05,2024-05-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6500,9200.00,0.00
+JE-2024-05-06,2024-05,2024-05-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6600,12282.00,0.00
+JE-2024-05-06,2024-05,2024-05-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6700,21482.00,0.00
+JE-2024-05-06,2024-05,2024-05-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6800,5642.63,0.00
+JE-2024-05-06,2024-05,2024-05-ap_bill,ap_bill,Vendor bills (CoR + OpEx),2000,0.00,385761.33
+JE-2024-05-07,2024-05,2024-05-ap_bill,ap_bill,AP payments,2000,373896.73,0.00
+JE-2024-05-07,2024-05,2024-05-ap_bill,ap_bill,AP payments,1000,0.00,373896.73
+JE-2024-05-08,2024-05,2024-05-depreciation,depreciation,Depreciation & amortization,6900,16802.33,0.00
+JE-2024-05-08,2024-05,2024-05-depreciation,depreciation,Depreciation & amortization,1500,0.00,16802.33
+JE-2024-05-09,2024-05,2024-05-manual,manual,Stock-based compensation (ASC 718),6950,174783.27,0.00
+JE-2024-05-09,2024-05,2024-05-manual,manual,Stock-based compensation (ASC 718),3000,0.00,174783.27
+JE-2024-05-10,2024-05,2024-05-manual,manual,Operating lease (ASC 842),1600,46000.00,0.00
+JE-2024-05-10,2024-05,2024-05-manual,manual,Operating lease (ASC 842),2200,0.00,46000.00
+JE-2024-05-11,2024-05,2024-05-manual,manual,Capital expenditures,1500,34580.00,0.00
+JE-2024-05-11,2024-05,2024-05-manual,manual,Capital expenditures,1000,0.00,34580.00
+JE-2024-05-12,2024-05,2024-05-prepaid_amort,prepaid_amort,Prepaid expense movement,1300,9725.29,0.00
+JE-2024-05-12,2024-05,2024-05-prepaid_amort,prepaid_amort,Prepaid expense movement,1000,0.00,9725.29
+JE-2024-05-13,2024-05,2024-05-manual,manual,Interest income,1000,19778.91,0.00
+JE-2024-05-13,2024-05,2024-05-manual,manual,Interest income,7000,0.00,19778.91
+JE-2024-06-00,2024-06,2024-06-invoice,invoice,Subscription revenue recognized,2100,459450.00,0.00
+JE-2024-06-00,2024-06,2024-06-invoice,invoice,Subscription revenue recognized,4000,0.00,459450.00
+JE-2024-06-01,2024-06,2024-06-invoice,invoice,Subscription billed (annual upfront),1100,283550.00,0.00
+JE-2024-06-01,2024-06,2024-06-invoice,invoice,Subscription billed (annual upfront),2100,0.00,283550.00
+JE-2024-06-02,2024-06,2024-06-invoice,invoice,Services revenue recognized (% complete),1200,134250.00,0.00
+JE-2024-06-02,2024-06,2024-06-invoice,invoice,Services revenue recognized (% complete),4100,0.00,134250.00
+JE-2024-06-03,2024-06,2024-06-invoice,invoice,Services billed,1100,120250.00,0.00
+JE-2024-06-03,2024-06,2024-06-invoice,invoice,Services billed,1200,0.00,120250.00
+JE-2024-06-04,2024-06,2024-06-invoice,invoice,Customer collections,1000,425293.77,0.00
+JE-2024-06-04,2024-06,2024-06-invoice,invoice,Customer collections,1100,0.00,425293.77
+JE-2024-06-05,2024-06,2024-06-payroll,payroll,Payroll,5000,102716.67,0.00
+JE-2024-06-05,2024-06,2024-06-payroll,payroll,Payroll,6000,448575.00,0.00
+JE-2024-06-05,2024-06,2024-06-payroll,payroll,Payroll,1000,0.00,551291.67
+JE-2024-06-06,2024-06,2024-06-ap_bill,ap_bill,Vendor bills (CoR + OpEx),5100,111669.00,0.00
+JE-2024-06-06,2024-06,2024-06-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6100,121284.17,0.00
+JE-2024-06-06,2024-06,2024-06-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6200,83118.00,0.00
+JE-2024-06-06,2024-06,2024-06-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6300,19200.00,0.00
+JE-2024-06-06,2024-06,2024-06-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6400,15984.00,0.00
+JE-2024-06-06,2024-06,2024-06-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6500,9600.00,0.00
+JE-2024-06-06,2024-06,2024-06-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6600,12816.00,0.00
+JE-2024-06-06,2024-06,2024-06-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6700,22416.00,0.00
+JE-2024-06-06,2024-06,2024-06-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6800,5937.00,0.00
+JE-2024-06-06,2024-06,2024-06-ap_bill,ap_bill,Vendor bills (CoR + OpEx),2000,0.00,402024.17
+JE-2024-06-07,2024-06,2024-06-ap_bill,ap_bill,AP payments,2000,391441.09,0.00
+JE-2024-06-07,2024-06,2024-06-ap_bill,ap_bill,AP payments,1000,0.00,391441.09
+JE-2024-06-08,2024-06,2024-06-depreciation,depreciation,Depreciation & amortization,6900,17570.33,0.00
+JE-2024-06-08,2024-06,2024-06-depreciation,depreciation,Depreciation & amortization,1500,0.00,17570.33
+JE-2024-06-09,2024-06,2024-06-manual,manual,Stock-based compensation (ASC 718),6950,177157.53,0.00
+JE-2024-06-09,2024-06,2024-06-manual,manual,Stock-based compensation (ASC 718),3000,0.00,177157.53
+JE-2024-06-10,2024-06,2024-06-manual,manual,Operating lease (ASC 842),1600,23000.00,0.00
+JE-2024-06-10,2024-06,2024-06-manual,manual,Operating lease (ASC 842),2200,0.00,23000.00
+JE-2024-06-11,2024-06,2024-06-manual,manual,Capital expenditures,1500,23040.00,0.00
+JE-2024-06-11,2024-06,2024-06-manual,manual,Capital expenditures,1000,0.00,23040.00
+JE-2024-06-12,2024-06,2024-06-prepaid_amort,prepaid_amort,Prepaid expense movement,1300,8705.65,0.00
+JE-2024-06-12,2024-06,2024-06-prepaid_amort,prepaid_amort,Prepaid expense movement,1000,0.00,8705.65
+JE-2024-06-13,2024-06,2024-06-manual,manual,Interest income,1000,18252.54,0.00
+JE-2024-06-13,2024-06,2024-06-manual,manual,Interest income,7000,0.00,18252.54
+JE-2024-07-00,2024-07,2024-07-invoice,invoice,Subscription revenue recognized,2100,483512.50,0.00
+JE-2024-07-00,2024-07,2024-07-invoice,invoice,Subscription revenue recognized,4000,0.00,483512.50
+JE-2024-07-01,2024-07,2024-07-invoice,invoice,Subscription billed (annual upfront),1100,396333.33,0.00
+JE-2024-07-01,2024-07,2024-07-invoice,invoice,Subscription billed (annual upfront),2100,0.00,396333.33
+JE-2024-07-02,2024-07,2024-07-invoice,invoice,Services revenue recognized (% complete),1200,109000.00,0.00
+JE-2024-07-02,2024-07,2024-07-invoice,invoice,Services revenue recognized (% complete),4100,0.00,109000.00
+JE-2024-07-03,2024-07,2024-07-invoice,invoice,Services billed,1100,134250.00,0.00
+JE-2024-07-03,2024-07,2024-07-invoice,invoice,Services billed,1200,0.00,134250.00
+JE-2024-07-04,2024-07,2024-07-invoice,invoice,Customer collections,1000,519140.33,0.00
+JE-2024-07-04,2024-07,2024-07-invoice,invoice,Customer collections,1100,0.00,519140.33
+JE-2024-07-05,2024-07,2024-07-payroll,payroll,Payroll,5000,102716.67,0.00
+JE-2024-07-05,2024-07,2024-07-payroll,payroll,Payroll,6000,460183.33,0.00
+JE-2024-07-05,2024-07,2024-07-payroll,payroll,Payroll,1000,0.00,562900.00
+JE-2024-07-06,2024-07,2024-07-ap_bill,ap_bill,Vendor bills (CoR + OpEx),5100,109447.13,0.00
+JE-2024-07-06,2024-07,2024-07-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6100,123838.00,0.00
+JE-2024-07-06,2024-07,2024-07-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6200,82951.75,0.00
+JE-2024-07-06,2024-07,2024-07-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6300,19600.00,0.00
+JE-2024-07-06,2024-07,2024-07-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6400,16317.00,0.00
+JE-2024-07-06,2024-07,2024-07-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6500,9800.00,0.00
+JE-2024-07-06,2024-07,2024-07-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6600,13083.00,0.00
+JE-2024-07-06,2024-07,2024-07-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6700,22883.00,0.00
+JE-2024-07-06,2024-07,2024-07-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6800,5925.13,0.00
+JE-2024-07-06,2024-07,2024-07-ap_bill,ap_bill,Vendor bills (CoR + OpEx),2000,0.00,403845.00
+JE-2024-07-07,2024-07,2024-07-ap_bill,ap_bill,AP payments,2000,396029.10,0.00
+JE-2024-07-07,2024-07,2024-07-ap_bill,ap_bill,AP payments,1000,0.00,396029.10
+JE-2024-07-08,2024-07,2024-07-depreciation,depreciation,Depreciation & amortization,6900,18146.00,0.00
+JE-2024-07-08,2024-07,2024-07-depreciation,depreciation,Depreciation & amortization,1500,0.00,18146.00
+JE-2024-07-09,2024-07,2024-07-manual,manual,Stock-based compensation (ASC 718),6950,181626.74,0.00
+JE-2024-07-09,2024-07,2024-07-manual,manual,Stock-based compensation (ASC 718),3000,0.00,181626.74
+JE-2024-07-10,2024-07,2024-07-manual,manual,Operating lease (ASC 842),1600,12000.00,0.00
+JE-2024-07-10,2024-07,2024-07-manual,manual,Operating lease (ASC 842),2200,0.00,12000.00
+JE-2024-07-11,2024-07,2024-07-manual,manual,Capital expenditures,1500,17270.00,0.00
+JE-2024-07-11,2024-07,2024-07-manual,manual,Capital expenditures,1000,0.00,17270.00
+JE-2024-07-12,2024-07,2024-07-prepaid_amort,prepaid_amort,Prepaid expense movement,1300,6977.81,0.00
+JE-2024-07-12,2024-07,2024-07-prepaid_amort,prepaid_amort,Prepaid expense movement,1000,0.00,6977.81
+JE-2024-07-13,2024-07,2024-07-manual,manual,Interest income,1000,16482.77,0.00
+JE-2024-07-13,2024-07,2024-07-manual,manual,Interest income,7000,0.00,16482.77
+JE-2024-08-00,2024-08,2024-08-invoice,invoice,Subscription revenue recognized,2100,497029.17,0.00
+JE-2024-08-00,2024-08,2024-08-invoice,invoice,Subscription revenue recognized,4000,0.00,497029.17
+JE-2024-08-01,2024-08,2024-08-invoice,invoice,Subscription billed (annual upfront),1100,256583.33,0.00
+JE-2024-08-01,2024-08,2024-08-invoice,invoice,Subscription billed (annual upfront),2100,0.00,256583.33
+JE-2024-08-02,2024-08,2024-08-invoice,invoice,Services revenue recognized (% complete),1200,67000.00,0.00
+JE-2024-08-02,2024-08,2024-08-invoice,invoice,Services revenue recognized (% complete),4100,0.00,67000.00
+JE-2024-08-03,2024-08,2024-08-invoice,invoice,Services billed,1100,109000.00,0.00
+JE-2024-08-03,2024-08,2024-08-invoice,invoice,Services billed,1200,0.00,109000.00
+JE-2024-08-04,2024-08,2024-08-invoice,invoice,Customer collections,1000,387514.78,0.00
+JE-2024-08-04,2024-08,2024-08-invoice,invoice,Customer collections,1100,0.00,387514.78
+JE-2024-08-05,2024-08,2024-08-payroll,payroll,Payroll,5000,102716.67,0.00
+JE-2024-08-05,2024-08,2024-08-payroll,payroll,Payroll,6000,487508.33,0.00
+JE-2024-08-05,2024-08,2024-08-payroll,payroll,Payroll,1000,0.00,590225.00
+JE-2024-08-06,2024-08,2024-08-ap_bill,ap_bill,Vendor bills (CoR + OpEx),5100,101244.96,0.00
+JE-2024-08-06,2024-08,2024-08-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6100,129849.50,0.00
+JE-2024-08-06,2024-08,2024-08-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6200,78964.08,0.00
+JE-2024-08-06,2024-08,2024-08-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6300,20400.00,0.00
+JE-2024-08-06,2024-08,2024-08-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6400,16983.00,0.00
+JE-2024-08-06,2024-08,2024-08-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6500,10200.00,0.00
+JE-2024-08-06,2024-08,2024-08-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6600,13617.00,0.00
+JE-2024-08-06,2024-08,2024-08-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6700,23817.00,0.00
+JE-2024-08-06,2024-08,2024-08-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6800,5640.29,0.00
+JE-2024-08-06,2024-08,2024-08-ap_bill,ap_bill,Vendor bills (CoR + OpEx),2000,0.00,400715.83
+JE-2024-08-07,2024-08,2024-08-ap_bill,ap_bill,AP payments,2000,395239.70,0.00
+JE-2024-08-07,2024-08,2024-08-ap_bill,ap_bill,AP payments,1000,0.00,395239.70
+JE-2024-08-08,2024-08,2024-08-depreciation,depreciation,Depreciation & amortization,6900,18937.00,0.00
+JE-2024-08-08,2024-08,2024-08-depreciation,depreciation,Depreciation & amortization,1500,0.00,18937.00
+JE-2024-08-09,2024-08,2024-08-manual,manual,Stock-based compensation (ASC 718),6950,188161.97,0.00
+JE-2024-08-09,2024-08,2024-08-manual,manual,Stock-based compensation (ASC 718),3000,0.00,188161.97
+JE-2024-08-10,2024-08,2024-08-manual,manual,Operating lease (ASC 842),1600,23000.00,0.00
+JE-2024-08-10,2024-08,2024-08-manual,manual,Operating lease (ASC 842),2200,0.00,23000.00
+JE-2024-08-11,2024-08,2024-08-manual,manual,Capital expenditures,1500,23730.00,0.00
+JE-2024-08-11,2024-08,2024-08-manual,manual,Capital expenditures,1000,0.00,23730.00
+JE-2024-08-12,2024-08,2024-08-prepaid_amort,prepaid_amort,Prepaid expense movement,1300,6067.28,0.00
+JE-2024-08-12,2024-08,2024-08-prepaid_amort,prepaid_amort,Prepaid expense movement,1000,0.00,6067.28
+JE-2024-08-13,2024-08,2024-08-manual,manual,Interest income,1000,14990.92,0.00
+JE-2024-08-13,2024-08,2024-08-manual,manual,Interest income,7000,0.00,14990.92
+JE-2024-09-00,2024-09,2024-09-invoice,invoice,Subscription revenue recognized,2100,569229.17,0.00
+JE-2024-09-00,2024-09,2024-09-invoice,invoice,Subscription revenue recognized,4000,0.00,569229.17
+JE-2024-09-01,2024-09,2024-09-invoice,invoice,Subscription billed (annual upfront),1100,1121708.33,0.00
+JE-2024-09-01,2024-09,2024-09-invoice,invoice,Subscription billed (annual upfront),2100,0.00,1121708.33
+JE-2024-09-02,2024-09,2024-09-invoice,invoice,Services revenue recognized (% complete),1200,106000.00,0.00
+JE-2024-09-02,2024-09,2024-09-invoice,invoice,Services revenue recognized (% complete),4100,0.00,106000.00
+JE-2024-09-03,2024-09,2024-09-invoice,invoice,Services billed,1100,67000.00,0.00
+JE-2024-09-03,2024-09,2024-09-invoice,invoice,Services billed,1200,0.00,67000.00
+JE-2024-09-04,2024-09,2024-09-invoice,invoice,Customer collections,1000,1070457.91,0.00
+JE-2024-09-04,2024-09,2024-09-invoice,invoice,Customer collections,1100,0.00,1070457.91
+JE-2024-09-05,2024-09,2024-09-payroll,payroll,Payroll,5000,102716.67,0.00
+JE-2024-09-05,2024-09,2024-09-payroll,payroll,Payroll,6000,501133.33,0.00
+JE-2024-09-05,2024-09,2024-09-payroll,payroll,Payroll,1000,0.00,603850.00
+JE-2024-09-06,2024-09,2024-09-ap_bill,ap_bill,Vendor bills (CoR + OpEx),5100,123268.96,0.00
+JE-2024-09-06,2024-09,2024-09-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6100,132847.00,0.00
+JE-2024-09-06,2024-09,2024-09-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6200,94532.08,0.00
+JE-2024-09-06,2024-09,2024-09-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6300,20800.00,0.00
+JE-2024-09-06,2024-09,2024-09-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6400,17316.00,0.00
+JE-2024-09-06,2024-09,2024-09-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6500,10400.00,0.00
+JE-2024-09-06,2024-09,2024-09-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6600,13884.00,0.00
+JE-2024-09-06,2024-09,2024-09-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6700,24284.00,0.00
+JE-2024-09-06,2024-09,2024-09-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6800,6752.29,0.00
+JE-2024-09-06,2024-09,2024-09-ap_bill,ap_bill,Vendor bills (CoR + OpEx),2000,0.00,444084.33
+JE-2024-09-07,2024-09,2024-09-ap_bill,ap_bill,AP payments,2000,435072.40,0.00
+JE-2024-09-07,2024-09,2024-09-ap_bill,ap_bill,AP payments,1000,0.00,435072.40
+JE-2024-09-08,2024-09,2024-09-depreciation,depreciation,Depreciation & amortization,6900,19535.67,0.00
+JE-2024-09-08,2024-09,2024-09-depreciation,depreciation,Depreciation & amortization,1500,0.00,19535.67
+JE-2024-09-09,2024-09,2024-09-manual,manual,Stock-based compensation (ASC 718),6950,193157.80,0.00
+JE-2024-09-09,2024-09,2024-09-manual,manual,Stock-based compensation (ASC 718),3000,0.00,193157.80
+JE-2024-09-10,2024-09,2024-09-manual,manual,Operating lease (ASC 842),1600,12000.00,0.00
+JE-2024-09-10,2024-09,2024-09-manual,manual,Operating lease (ASC 842),2200,0.00,12000.00
+JE-2024-09-11,2024-09,2024-09-manual,manual,Capital expenditures,1500,17960.00,0.00
+JE-2024-09-11,2024-09,2024-09-manual,manual,Capital expenditures,1000,0.00,17960.00
+JE-2024-09-12,2024-09,2024-09-prepaid_amort,prepaid_amort,Prepaid expense movement,1300,7837.83,0.00
+JE-2024-09-12,2024-09,2024-09-prepaid_amort,prepaid_amort,Prepaid expense movement,1000,0.00,7837.83
+JE-2024-09-13,2024-09,2024-09-manual,manual,Interest income,1000,12948.40,0.00
+JE-2024-09-13,2024-09,2024-09-manual,manual,Interest income,7000,0.00,12948.40
+JE-2024-10-00,2024-10,2024-10-invoice,invoice,Subscription revenue recognized,2100,606004.17,0.00
+JE-2024-10-00,2024-10,2024-10-invoice,invoice,Subscription revenue recognized,4000,0.00,606004.17
+JE-2024-10-01,2024-10,2024-10-invoice,invoice,Subscription billed (annual upfront),1100,563683.33,0.00
+JE-2024-10-01,2024-10,2024-10-invoice,invoice,Subscription billed (annual upfront),2100,0.00,563683.33
+JE-2024-10-02,2024-10,2024-10-invoice,invoice,Services revenue recognized (% complete),1200,155500.00,0.00
+JE-2024-10-02,2024-10,2024-10-invoice,invoice,Services revenue recognized (% complete),4100,0.00,155500.00
+JE-2024-10-03,2024-10,2024-10-invoice,invoice,Services billed,1100,106000.00,0.00
+JE-2024-10-03,2024-10,2024-10-invoice,invoice,Services billed,1200,0.00,106000.00
+JE-2024-10-04,2024-10,2024-10-invoice,invoice,Customer collections,1000,651870.25,0.00
+JE-2024-10-04,2024-10,2024-10-invoice,invoice,Customer collections,1100,0.00,651870.25
+JE-2024-10-05,2024-10,2024-10-payroll,payroll,Payroll,5000,102716.67,0.00
+JE-2024-10-05,2024-10,2024-10-payroll,payroll,Payroll,6000,501133.33,0.00
+JE-2024-10-05,2024-10,2024-10-payroll,payroll,Payroll,1000,0.00,603850.00
+JE-2024-10-06,2024-10,2024-10-ap_bill,ap_bill,Vendor bills (CoR + OpEx),5100,141895.71,0.00
+JE-2024-10-06,2024-10,2024-10-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6100,132847.00,0.00
+JE-2024-10-06,2024-10,2024-10-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6200,106610.58,0.00
+JE-2024-10-06,2024-10,2024-10-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6300,20800.00,0.00
+JE-2024-10-06,2024-10,2024-10-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6400,17316.00,0.00
+JE-2024-10-06,2024-10,2024-10-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6500,10400.00,0.00
+JE-2024-10-06,2024-10,2024-10-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6600,13884.00,0.00
+JE-2024-10-06,2024-10,2024-10-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6700,24284.00,0.00
+JE-2024-10-06,2024-10,2024-10-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6800,7615.04,0.00
+JE-2024-10-06,2024-10,2024-10-ap_bill,ap_bill,Vendor bills (CoR + OpEx),2000,0.00,475652.33
+JE-2024-10-07,2024-10,2024-10-ap_bill,ap_bill,AP payments,2000,465329.23,0.00
+JE-2024-10-07,2024-10,2024-10-ap_bill,ap_bill,AP payments,1000,0.00,465329.23
+JE-2024-10-08,2024-10,2024-10-depreciation,depreciation,Depreciation & amortization,6900,19934.33,0.00
+JE-2024-10-08,2024-10,2024-10-depreciation,depreciation,Depreciation & amortization,1500,0.00,19934.33
+JE-2024-10-09,2024-10,2024-10-manual,manual,Stock-based compensation (ASC 718),6950,192180.86,0.00
+JE-2024-10-09,2024-10,2024-10-manual,manual,Stock-based compensation (ASC 718),3000,0.00,192180.86
+JE-2024-10-10,2024-10,2024-10-manual,manual,Capital expenditures,1500,11960.00,0.00
+JE-2024-10-10,2024-10,2024-10-manual,manual,Capital expenditures,1000,0.00,11960.00
+JE-2024-10-11,2024-10,2024-10-prepaid_amort,prepaid_amort,Prepaid expense movement,1300,7972.12,0.00
+JE-2024-10-11,2024-10,2024-10-prepaid_amort,prepaid_amort,Prepaid expense movement,1000,0.00,7972.12
+JE-2024-10-12,2024-10,2024-10-manual,manual,Interest income,1000,13010.69,0.00
+JE-2024-10-12,2024-10,2024-10-manual,manual,Interest income,7000,0.00,13010.69
+JE-2024-11-00,2024-11,2024-11-invoice,invoice,Subscription revenue recognized,2100,699745.83,0.00
+JE-2024-11-00,2024-11,2024-11-invoice,invoice,Subscription revenue recognized,4000,0.00,699745.83
+JE-2024-11-01,2024-11,2024-11-invoice,invoice,Subscription billed (annual upfront),1100,3343983.33,0.00
+JE-2024-11-01,2024-11,2024-11-invoice,invoice,Subscription billed (annual upfront),2100,0.00,3343983.33
+JE-2024-11-02,2024-11,2024-11-invoice,invoice,Services revenue recognized (% complete),1200,196000.00,0.00
+JE-2024-11-02,2024-11,2024-11-invoice,invoice,Services revenue recognized (% complete),4100,0.00,196000.00
+JE-2024-11-03,2024-11,2024-11-invoice,invoice,Services billed,1100,155500.00,0.00
+JE-2024-11-03,2024-11,2024-11-invoice,invoice,Services billed,1200,0.00,155500.00
+JE-2024-11-04,2024-11,2024-11-invoice,invoice,Customer collections,1000,3104313.23,0.00
+JE-2024-11-04,2024-11,2024-11-invoice,invoice,Customer collections,1100,0.00,3104313.23
+JE-2024-11-05,2024-11,2024-11-payroll,payroll,Payroll,5000,102716.67,0.00
+JE-2024-11-05,2024-11,2024-11-payroll,payroll,Payroll,6000,532425.00,0.00
+JE-2024-11-05,2024-11,2024-11-payroll,payroll,Payroll,1000,0.00,635141.67
+JE-2024-11-06,2024-11,2024-11-ap_bill,ap_bill,Vendor bills (CoR + OpEx),5100,167956.79,0.00
+JE-2024-11-06,2024-11,2024-11-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6100,139731.17,0.00
+JE-2024-11-06,2024-11,2024-11-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6200,125404.42,0.00
+JE-2024-11-06,2024-11,2024-11-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6300,21600.00,0.00
+JE-2024-11-06,2024-11,2024-11-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6400,17982.00,0.00
+JE-2024-11-06,2024-11,2024-11-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6500,10800.00,0.00
+JE-2024-11-06,2024-11,2024-11-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6600,14418.00,0.00
+JE-2024-11-06,2024-11,2024-11-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6700,25218.00,0.00
+JE-2024-11-06,2024-11,2024-11-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6800,8957.46,0.00
+JE-2024-11-06,2024-11,2024-11-ap_bill,ap_bill,Vendor bills (CoR + OpEx),2000,0.00,532067.83
+JE-2024-11-07,2024-11,2024-11-ap_bill,ap_bill,AP payments,2000,518563.24,0.00
+JE-2024-11-07,2024-11,2024-11-ap_bill,ap_bill,AP payments,1000,0.00,518563.24
+JE-2024-11-08,2024-11,2024-11-depreciation,depreciation,Depreciation & amortization,6900,20748.33,0.00
+JE-2024-11-08,2024-11,2024-11-depreciation,depreciation,Depreciation & amortization,1500,0.00,20748.33
+JE-2024-11-09,2024-11,2024-11-manual,manual,Stock-based compensation (ASC 718),6950,202912.74,0.00
+JE-2024-11-09,2024-11,2024-11-manual,manual,Stock-based compensation (ASC 718),3000,0.00,202912.74
+JE-2024-11-10,2024-11,2024-11-manual,manual,Operating lease (ASC 842),1600,23000.00,0.00
+JE-2024-11-10,2024-11,2024-11-manual,manual,Operating lease (ASC 842),2200,0.00,23000.00
+JE-2024-11-11,2024-11,2024-11-manual,manual,Capital expenditures,1500,24420.00,0.00
+JE-2024-11-11,2024-11,2024-11-manual,manual,Capital expenditures,1000,0.00,24420.00
+JE-2024-11-12,2024-11,2024-11-prepaid_amort,prepaid_amort,Prepaid expense movement,1300,10151.57,0.00
+JE-2024-11-12,2024-11,2024-11-prepaid_amort,prepaid_amort,Prepaid expense movement,1000,0.00,10151.57
+JE-2024-11-13,2024-11,2024-11-manual,manual,Interest income,1000,11596.59,0.00
+JE-2024-11-13,2024-11,2024-11-manual,manual,Interest income,7000,0.00,11596.59
+JE-2024-12-00,2024-12,2024-12-invoice,invoice,Subscription revenue recognized,2100,733579.17,0.00
+JE-2024-12-00,2024-12,2024-12-invoice,invoice,Subscription revenue recognized,4000,0.00,733579.17
+JE-2024-12-01,2024-12,2024-12-invoice,invoice,Subscription billed (annual upfront),1100,944450.00,0.00
+JE-2024-12-01,2024-12,2024-12-invoice,invoice,Subscription billed (annual upfront),2100,0.00,944450.00
+JE-2024-12-02,2024-12,2024-12-invoice,invoice,Services revenue recognized (% complete),1200,196000.00,0.00
+JE-2024-12-02,2024-12,2024-12-invoice,invoice,Services revenue recognized (% complete),4100,0.00,196000.00
+JE-2024-12-03,2024-12,2024-12-invoice,invoice,Services billed,1100,196000.00,0.00
+JE-2024-12-03,2024-12,2024-12-invoice,invoice,Services billed,1200,0.00,196000.00
+JE-2024-12-04,2024-12,2024-12-invoice,invoice,Customer collections,1000,1101981.30,0.00
+JE-2024-12-04,2024-12,2024-12-invoice,invoice,Customer collections,1100,0.00,1101981.30
+JE-2024-12-05,2024-12,2024-12-payroll,payroll,Payroll,5000,164346.67,0.00
+JE-2024-12-05,2024-12,2024-12-payroll,payroll,Payroll,6000,858093.33,0.00
+JE-2024-12-05,2024-12,2024-12-payroll,payroll,Payroll,1000,0.00,1022440.00
+JE-2024-12-06,2024-12,2024-12-ap_bill,ap_bill,Vendor bills (CoR + OpEx),5100,173708.46,0.00
+JE-2024-12-06,2024-12,2024-12-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6100,224936.80,0.00
+JE-2024-12-06,2024-12,2024-12-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6200,130141.08,0.00
+JE-2024-12-06,2024-12,2024-12-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6300,22000.00,0.00
+JE-2024-12-06,2024-12,2024-12-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6400,18315.00,0.00
+JE-2024-12-06,2024-12,2024-12-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6500,11000.00,0.00
+JE-2024-12-06,2024-12,2024-12-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6600,14685.00,0.00
+JE-2024-12-06,2024-12,2024-12-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6700,25685.00,0.00
+JE-2024-12-06,2024-12,2024-12-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6800,9295.79,0.00
+JE-2024-12-06,2024-12,2024-12-ap_bill,ap_bill,Vendor bills (CoR + OpEx),2000,0.00,629767.13
+JE-2024-12-07,2024-12,2024-12-ap_bill,ap_bill,AP payments,2000,610483.22,0.00
+JE-2024-12-07,2024-12,2024-12-ap_bill,ap_bill,AP payments,1000,0.00,610483.22
+JE-2024-12-08,2024-12,2024-12-depreciation,depreciation,Depreciation & amortization,6900,21370.00,0.00
+JE-2024-12-08,2024-12,2024-12-depreciation,depreciation,Depreciation & amortization,1500,0.00,21370.00
+JE-2024-12-09,2024-12,2024-12-manual,manual,Stock-based compensation (ASC 718),6950,202608.11,0.00
+JE-2024-12-09,2024-12,2024-12-manual,manual,Stock-based compensation (ASC 718),3000,0.00,202608.11
+JE-2024-12-10,2024-12,2024-12-manual,manual,Operating lease (ASC 842),1600,11000.00,0.00
+JE-2024-12-10,2024-12,2024-12-manual,manual,Operating lease (ASC 842),2200,0.00,11000.00
+JE-2024-12-11,2024-12,2024-12-manual,manual,Capital expenditures,1500,18650.00,0.00
+JE-2024-12-11,2024-12,2024-12-manual,manual,Capital expenditures,1000,0.00,18650.00
+JE-2024-12-12,2024-12,2024-12-prepaid_amort,prepaid_amort,Prepaid expense movement,1300,18536.09,0.00
+JE-2024-12-12,2024-12,2024-12-prepaid_amort,prepaid_amort,Prepaid expense movement,1000,0.00,18536.09
+JE-2024-12-13,2024-12,2024-12-manual,manual,Interest income,1000,18022.03,0.00
+JE-2024-12-13,2024-12,2024-12-manual,manual,Interest income,7000,0.00,18022.03
+JE-2025-01-00,2025-01,2025-01-invoice,invoice,Subscription revenue recognized,2100,758329.17,0.00
+JE-2025-01-00,2025-01,2025-01-invoice,invoice,Subscription revenue recognized,4000,0.00,758329.17
+JE-2025-01-01,2025-01,2025-01-invoice,invoice,Subscription billed (annual upfront),1100,724550.00,0.00
+JE-2025-01-01,2025-01,2025-01-invoice,invoice,Subscription billed (annual upfront),2100,0.00,724550.00
+JE-2025-01-02,2025-01,2025-01-invoice,invoice,Services revenue recognized (% complete),1200,224000.00,0.00
+JE-2025-01-02,2025-01,2025-01-invoice,invoice,Services revenue recognized (% complete),4100,0.00,224000.00
+JE-2025-01-03,2025-01,2025-01-invoice,invoice,Services billed,1100,196000.00,0.00
+JE-2025-01-03,2025-01,2025-01-invoice,invoice,Services billed,1200,0.00,196000.00
+JE-2025-01-04,2025-01,2025-01-invoice,invoice,Customer collections,1000,892139.38,0.00
+JE-2025-01-04,2025-01,2025-01-invoice,invoice,Customer collections,1100,0.00,892139.38
+JE-2025-01-05,2025-01,2025-01-payroll,payroll,Payroll,5000,120605.29,0.00
+JE-2025-01-05,2025-01,2025-01-payroll,payroll,Payroll,6000,591691.21,0.00
+JE-2025-01-05,2025-01,2025-01-payroll,payroll,Payroll,1000,0.00,712296.50
+JE-2025-01-06,2025-01,2025-01-ap_bill,ap_bill,Vendor bills (CoR + OpEx),5100,184915.96,0.00
+JE-2025-01-06,2025-01,2025-01-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6100,156705.23,0.00
+JE-2025-01-06,2025-01,2025-01-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6200,137526.08,0.00
+JE-2025-01-06,2025-01,2025-01-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6300,24400.00,0.00
+JE-2025-01-06,2025-01,2025-01-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6400,20313.00,0.00
+JE-2025-01-06,2025-01,2025-01-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6500,12200.00,0.00
+JE-2025-01-06,2025-01,2025-01-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6600,16287.00,0.00
+JE-2025-01-06,2025-01,2025-01-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6700,28487.00,0.00
+JE-2025-01-06,2025-01,2025-01-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6800,9823.29,0.00
+JE-2025-01-06,2025-01,2025-01-ap_bill,ap_bill,Vendor bills (CoR + OpEx),2000,0.00,590657.56
+JE-2025-01-07,2025-01,2025-01-ap_bill,ap_bill,AP payments,2000,567143.89,0.00
+JE-2025-01-07,2025-01,2025-01-ap_bill,ap_bill,AP payments,1000,0.00,567143.89
+JE-2025-01-08,2025-01,2025-01-depreciation,depreciation,Depreciation & amortization,6900,23037.67,0.00
+JE-2025-01-08,2025-01,2025-01-depreciation,depreciation,Depreciation & amortization,1500,0.00,23037.67
+JE-2025-01-09,2025-01,2025-01-manual,manual,Stock-based compensation (ASC 718),6950,214966.86,0.00
+JE-2025-01-09,2025-01,2025-01-manual,manual,Stock-based compensation (ASC 718),3000,0.00,214966.86
+JE-2025-01-10,2025-01,2025-01-manual,manual,Operating lease (ASC 842),1600,70000.00,0.00
+JE-2025-01-10,2025-01,2025-01-manual,manual,Operating lease (ASC 842),2200,0.00,70000.00
+JE-2025-01-11,2025-01,2025-01-manual,manual,Capital expenditures,1500,50030.00,0.00
+JE-2025-01-11,2025-01,2025-01-manual,manual,Capital expenditures,1000,0.00,50030.00
+JE-2025-01-12,2025-01,2025-01-prepaid_amort,prepaid_amort,Prepaid expense movement,1300,18957.88,0.00
+JE-2025-01-12,2025-01,2025-01-prepaid_amort,prepaid_amort,Prepaid expense movement,1000,0.00,18957.88
+JE-2025-01-13,2025-01,2025-01-manual,manual,Interest income,1000,16188.35,0.00
+JE-2025-01-13,2025-01,2025-01-manual,manual,Interest income,7000,0.00,16188.35
+JE-2025-02-00,2025-02,2025-02-invoice,invoice,Subscription revenue recognized,2100,772025.00,0.00
+JE-2025-02-00,2025-02,2025-02-invoice,invoice,Subscription revenue recognized,4000,0.00,772025.00
+JE-2025-02-01,2025-02,2025-02-invoice,invoice,Subscription billed (annual upfront),1100,331900.00,0.00
+JE-2025-02-01,2025-02,2025-02-invoice,invoice,Subscription billed (annual upfront),2100,0.00,331900.00
+JE-2025-02-02,2025-02,2025-02-invoice,invoice,Services revenue recognized (% complete),1200,224000.00,0.00
+JE-2025-02-02,2025-02,2025-02-invoice,invoice,Services revenue recognized (% complete),4100,0.00,224000.00
+JE-2025-02-03,2025-02,2025-02-invoice,invoice,Services billed,1100,224000.00,0.00
+JE-2025-02-03,2025-02,2025-02-invoice,invoice,Services billed,1200,0.00,224000.00
+JE-2025-02-04,2025-02,2025-02-invoice,invoice,Customer collections,1000,519228.08,0.00
+JE-2025-02-04,2025-02,2025-02-invoice,invoice,Customer collections,1100,0.00,519228.08
+JE-2025-02-05,2025-02,2025-02-payroll,payroll,Payroll,5000,120605.29,0.00
+JE-2025-02-05,2025-02,2025-02-payroll,payroll,Payroll,6000,657532.88,0.00
+JE-2025-02-05,2025-02,2025-02-payroll,payroll,Payroll,1000,0.00,778138.17
+JE-2025-02-06,2025-02,2025-02-ap_bill,ap_bill,Vendor bills (CoR + OpEx),5100,187244.25,0.00
+JE-2025-02-06,2025-02,2025-02-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6100,171190.40,0.00
+JE-2025-02-06,2025-02,2025-02-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6200,139443.50,0.00
+JE-2025-02-06,2025-02,2025-02-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6300,26400.00,0.00
+JE-2025-02-06,2025-02,2025-02-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6400,21978.00,0.00
+JE-2025-02-06,2025-02,2025-02-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6500,13200.00,0.00
+JE-2025-02-06,2025-02,2025-02-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6600,17622.00,0.00
+JE-2025-02-06,2025-02,2025-02-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6700,30822.00,0.00
+JE-2025-02-06,2025-02,2025-02-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6800,9960.25,0.00
+JE-2025-02-06,2025-02,2025-02-ap_bill,ap_bill,Vendor bills (CoR + OpEx),2000,0.00,617860.40
+JE-2025-02-07,2025-02,2025-02-ap_bill,ap_bill,AP payments,2000,592322.49,0.00
+JE-2025-02-07,2025-02,2025-02-ap_bill,ap_bill,AP payments,1000,0.00,592322.49
+JE-2025-02-08,2025-02,2025-02-depreciation,depreciation,Depreciation & amortization,6900,24543.67,0.00
+JE-2025-02-08,2025-02,2025-02-depreciation,depreciation,Depreciation & amortization,1500,0.00,24543.67
+JE-2025-02-09,2025-02,2025-02-manual,manual,Stock-based compensation (ASC 718),6950,233891.90,0.00
+JE-2025-02-09,2025-02,2025-02-manual,manual,Stock-based compensation (ASC 718),3000,0.00,233891.90
+JE-2025-02-10,2025-02,2025-02-manual,manual,Operating lease (ASC 842),1600,57000.00,0.00
+JE-2025-02-10,2025-02,2025-02-manual,manual,Operating lease (ASC 842),2200,0.00,57000.00
+JE-2025-02-11,2025-02,2025-02-manual,manual,Capital expenditures,1500,45180.00,0.00
+JE-2025-02-11,2025-02,2025-02-manual,manual,Capital expenditures,1000,0.00,45180.00
+JE-2025-02-12,2025-02,2025-02-prepaid_amort,prepaid_amort,Prepaid expense movement,1300,21551.60,0.00
+JE-2025-02-12,2025-02,2025-02-prepaid_amort,prepaid_amort,Prepaid expense movement,1000,0.00,21551.60
+JE-2025-02-13,2025-02,2025-02-manual,manual,Interest income,1000,14721.35,0.00
+JE-2025-02-13,2025-02,2025-02-manual,manual,Interest income,7000,0.00,14721.35
+JE-2025-03-00,2025-03,2025-03-invoice,invoice,Subscription revenue recognized,2100,794654.17,0.00
+JE-2025-03-00,2025-03,2025-03-invoice,invoice,Subscription revenue recognized,4000,0.00,794654.17
+JE-2025-03-01,2025-03,2025-03-invoice,invoice,Subscription billed (annual upfront),1100,624362.50,0.00
+JE-2025-03-01,2025-03,2025-03-invoice,invoice,Subscription billed (annual upfront),2100,0.00,624362.50
+JE-2025-03-02,2025-03,2025-03-invoice,invoice,Services revenue recognized (% complete),1200,252000.00,0.00
+JE-2025-03-02,2025-03,2025-03-invoice,invoice,Services revenue recognized (% complete),4100,0.00,252000.00
+JE-2025-03-03,2025-03,2025-03-invoice,invoice,Services billed,1100,224000.00,0.00
+JE-2025-03-03,2025-03,2025-03-invoice,invoice,Services billed,1200,0.00,224000.00
+JE-2025-03-04,2025-03,2025-03-invoice,invoice,Customer collections,1000,791001.37,0.00
+JE-2025-03-04,2025-03,2025-03-invoice,invoice,Customer collections,1100,0.00,791001.37
+JE-2025-03-05,2025-03,2025-03-payroll,payroll,Payroll,5000,126521.96,0.00
+JE-2025-03-05,2025-03,2025-03-payroll,payroll,Payroll,6000,689700.83,0.00
+JE-2025-03-05,2025-03,2025-03-payroll,payroll,Payroll,1000,0.00,816222.79
+JE-2025-03-06,2025-03,2025-03-ap_bill,ap_bill,Vendor bills (CoR + OpEx),5100,198091.21,0.00
+JE-2025-03-06,2025-03,2025-03-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6100,179569.01,0.00
+JE-2025-03-06,2025-03,2025-03-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6200,146531.58,0.00
+JE-2025-03-06,2025-03,2025-03-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6300,28000.00,0.00
+JE-2025-03-06,2025-03,2025-03-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6400,23310.00,0.00
+JE-2025-03-06,2025-03,2025-03-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6500,14000.00,0.00
+JE-2025-03-06,2025-03,2025-03-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6600,18690.00,0.00
+JE-2025-03-06,2025-03,2025-03-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6700,32690.00,0.00
+JE-2025-03-06,2025-03,2025-03-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6800,10466.54,0.00
+JE-2025-03-06,2025-03,2025-03-ap_bill,ap_bill,Vendor bills (CoR + OpEx),2000,0.00,651348.35
+JE-2025-03-07,2025-03,2025-03-ap_bill,ap_bill,AP payments,2000,624989.17,0.00
+JE-2025-03-07,2025-03,2025-03-ap_bill,ap_bill,AP payments,1000,0.00,624989.17
+JE-2025-03-08,2025-03,2025-03-depreciation,depreciation,Depreciation & amortization,6900,25880.33,0.00
+JE-2025-03-08,2025-03,2025-03-depreciation,depreciation,Depreciation & amortization,1500,0.00,25880.33
+JE-2025-03-09,2025-03,2025-03-manual,manual,Stock-based compensation (ASC 718),6950,240819.22,0.00
+JE-2025-03-09,2025-03,2025-03-manual,manual,Stock-based compensation (ASC 718),3000,0.00,240819.22
+JE-2025-03-10,2025-03,2025-03-manual,manual,Operating lease (ASC 842),1600,47000.00,0.00
+JE-2025-03-10,2025-03,2025-03-manual,manual,Operating lease (ASC 842),2200,0.00,47000.00
+JE-2025-03-11,2025-03,2025-03-manual,manual,Capital expenditures,1500,40100.00,0.00
+JE-2025-03-11,2025-03,2025-03-manual,manual,Capital expenditures,1000,0.00,40100.00
+JE-2025-03-12,2025-03,2025-03-prepaid_amort,prepaid_amort,Prepaid expense movement,1300,22710.09,0.00
+JE-2025-03-12,2025-03,2025-03-prepaid_amort,prepaid_amort,Prepaid expense movement,1000,0.00,22710.09
+JE-2025-03-13,2025-03,2025-03-manual,manual,Interest income,1000,11710.54,0.00
+JE-2025-03-13,2025-03,2025-03-manual,manual,Interest income,7000,0.00,11710.54
+JE-2025-03-14,2025-03,2025-03-manual,manual,Series B financing,1000,20000000.00,0.00
+JE-2025-03-14,2025-03,2025-03-manual,manual,Series B financing,3000,0.00,20000000.00
+JE-2025-04-00,2025-04,2025-04-invoice,invoice,Subscription revenue recognized,2100,822137.50,0.00
+JE-2025-04-00,2025-04,2025-04-invoice,invoice,Subscription revenue recognized,4000,0.00,822137.50
+JE-2025-04-01,2025-04,2025-04-invoice,invoice,Subscription billed (annual upfront),1100,895800.00,0.00
+JE-2025-04-01,2025-04,2025-04-invoice,invoice,Subscription billed (annual upfront),2100,0.00,895800.00
+JE-2025-04-02,2025-04,2025-04-invoice,invoice,Services revenue recognized (% complete),1200,252820.33,0.00
+JE-2025-04-02,2025-04,2025-04-invoice,invoice,Services revenue recognized (% complete),4100,0.00,252820.33
+JE-2025-04-03,2025-04,2025-04-invoice,invoice,Services billed,1100,252000.00,0.00
+JE-2025-04-03,2025-04,2025-04-invoice,invoice,Services billed,1200,0.00,252000.00
+JE-2025-04-04,2025-04,2025-04-invoice,invoice,Customer collections,1000,1086196.23,0.00
+JE-2025-04-04,2025-04,2025-04-invoice,invoice,Customer collections,1100,0.00,1086196.23
+JE-2025-04-05,2025-04,2025-04-payroll,payroll,Payroll,5000,134737.71,0.00
+JE-2025-04-05,2025-04,2025-04-payroll,payroll,Payroll,6000,716668.42,0.00
+JE-2025-04-05,2025-04,2025-04-payroll,payroll,Payroll,1000,0.00,851406.13
+JE-2025-04-06,2025-04,2025-04-ap_bill,ap_bill,Vendor bills (CoR + OpEx),5100,202968.46,0.00
+JE-2025-04-06,2025-04,2025-04-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6100,187309.35,0.00
+JE-2025-04-06,2025-04,2025-04-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6200,150494.10,0.00
+JE-2025-04-06,2025-04,2025-04-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6300,29200.00,0.00
+JE-2025-04-06,2025-04,2025-04-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6400,24309.00,0.00
+JE-2025-04-06,2025-04,2025-04-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6500,14600.00,0.00
+JE-2025-04-06,2025-04,2025-04-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6600,19491.00,0.00
+JE-2025-04-06,2025-04,2025-04-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6700,34091.00,0.00
+JE-2025-04-06,2025-04,2025-04-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6800,10749.58,0.00
+JE-2025-04-06,2025-04,2025-04-ap_bill,ap_bill,Vendor bills (CoR + OpEx),2000,0.00,673212.48
+JE-2025-04-07,2025-04,2025-04-ap_bill,ap_bill,AP payments,2000,647476.29,0.00
+JE-2025-04-07,2025-04,2025-04-ap_bill,ap_bill,AP payments,1000,0.00,647476.29
+JE-2025-04-08,2025-04,2025-04-depreciation,depreciation,Depreciation & amortization,6900,27040.00,0.00
+JE-2025-04-08,2025-04,2025-04-depreciation,depreciation,Depreciation & amortization,1500,0.00,27040.00
+JE-2025-04-09,2025-04,2025-04-manual,manual,Stock-based compensation (ASC 718),6950,248010.24,0.00
+JE-2025-04-09,2025-04,2025-04-manual,manual,Stock-based compensation (ASC 718),3000,0.00,248010.24
+JE-2025-04-10,2025-04,2025-04-manual,manual,Operating lease (ASC 842),1600,34000.00,0.00
+JE-2025-04-10,2025-04,2025-04-manual,manual,Operating lease (ASC 842),2200,0.00,34000.00
+JE-2025-04-11,2025-04,2025-04-manual,manual,Capital expenditures,1500,34790.00,0.00
+JE-2025-04-11,2025-04,2025-04-manual,manual,Capital expenditures,1000,0.00,34790.00
+JE-2025-04-12,2025-04,2025-04-prepaid_amort,prepaid_amort,Prepaid expense movement,1300,23015.77,0.00
+JE-2025-04-12,2025-04,2025-04-prepaid_amort,prepaid_amort,Prepaid expense movement,1000,0.00,23015.77
+JE-2025-04-13,2025-04,2025-04-manual,manual,Interest income,1000,76039.50,0.00
+JE-2025-04-13,2025-04,2025-04-manual,manual,Interest income,7000,0.00,76039.50
+JE-2025-05-00,2025-05,2025-05-invoice,invoice,Subscription revenue recognized,2100,863670.83,0.00
+JE-2025-05-00,2025-05,2025-05-invoice,invoice,Subscription revenue recognized,4000,0.00,863670.83
+JE-2025-05-01,2025-05,2025-05-invoice,invoice,Subscription billed (annual upfront),1100,867216.67,0.00
+JE-2025-05-01,2025-05,2025-05-invoice,invoice,Subscription billed (annual upfront),2100,0.00,867216.67
+JE-2025-05-02,2025-05,2025-05-invoice,invoice,Services revenue recognized (% complete),1200,252656.72,0.00
+JE-2025-05-02,2025-05,2025-05-invoice,invoice,Services revenue recognized (% complete),4100,0.00,252656.72
+JE-2025-05-03,2025-05,2025-05-invoice,invoice,Services billed,1100,252820.33,0.00
+JE-2025-05-03,2025-05,2025-05-invoice,invoice,Services billed,1200,0.00,252820.33
+JE-2025-05-04,2025-05,2025-05-invoice,invoice,Customer collections,1000,1040519.60,0.00
+JE-2025-05-04,2025-05,2025-05-invoice,invoice,Customer collections,1100,0.00,1040519.60
+JE-2025-05-05,2025-05,2025-05-payroll,payroll,Payroll,5000,134753.46,0.00
+JE-2025-05-05,2025-05,2025-05-payroll,payroll,Payroll,6000,759468.33,0.00
+JE-2025-05-05,2025-05,2025-05-payroll,payroll,Payroll,1000,0.00,894221.79
+JE-2025-05-06,2025-05,2025-05-ap_bill,ap_bill,Vendor bills (CoR + OpEx),5100,209988.22,0.00
+JE-2025-05-06,2025-05,2025-05-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6100,196728.79,0.00
+JE-2025-05-06,2025-05,2025-05-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6200,156285.86,0.00
+JE-2025-05-06,2025-05,2025-05-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6300,30800.00,0.00
+JE-2025-05-06,2025-05,2025-05-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6400,25641.00,0.00
+JE-2025-05-06,2025-05,2025-05-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6500,15400.00,0.00
+JE-2025-05-06,2025-05,2025-05-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6600,20559.00,0.00
+JE-2025-05-06,2025-05,2025-05-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6700,35959.00,0.00
+JE-2025-05-06,2025-05,2025-05-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6800,11163.28,0.00
+JE-2025-05-06,2025-05,2025-05-ap_bill,ap_bill,Vendor bills (CoR + OpEx),2000,0.00,702525.15
+JE-2025-05-07,2025-05,2025-05-ap_bill,ap_bill,AP payments,2000,676489.77,0.00
+JE-2025-05-07,2025-05,2025-05-ap_bill,ap_bill,AP payments,1000,0.00,676489.77
+JE-2025-05-08,2025-05,2025-05-depreciation,depreciation,Depreciation & amortization,6900,28430.33,0.00
+JE-2025-05-08,2025-05,2025-05-depreciation,depreciation,Depreciation & amortization,1500,0.00,28430.33
+JE-2025-05-09,2025-05,2025-05-manual,manual,Stock-based compensation (ASC 718),6950,257305.24,0.00
+JE-2025-05-09,2025-05,2025-05-manual,manual,Stock-based compensation (ASC 718),3000,0.00,257305.24
+JE-2025-05-10,2025-05,2025-05-manual,manual,Operating lease (ASC 842),1600,46000.00,0.00
+JE-2025-05-10,2025-05,2025-05-manual,manual,Operating lease (ASC 842),2200,0.00,46000.00
+JE-2025-05-11,2025-05,2025-05-manual,manual,Capital expenditures,1500,41710.00,0.00
+JE-2025-05-11,2025-05,2025-05-manual,manual,Capital expenditures,1000,0.00,41710.00
+JE-2025-05-12,2025-05,2025-05-prepaid_amort,prepaid_amort,Prepaid expense movement,1300,23267.97,0.00
+JE-2025-05-12,2025-05,2025-05-prepaid_amort,prepaid_amort,Prepaid expense movement,1000,0.00,23267.97
+JE-2025-05-13,2025-05,2025-05-manual,manual,Interest income,1000,74724.66,0.00
+JE-2025-05-13,2025-05,2025-05-manual,manual,Interest income,7000,0.00,74724.66
+JE-2025-06-00,2025-06,2025-06-invoice,invoice,Subscription revenue recognized,2100,920220.83,0.00
+JE-2025-06-00,2025-06,2025-06-invoice,invoice,Subscription revenue recognized,4000,0.00,920220.83
+JE-2025-06-01,2025-06,2025-06-invoice,invoice,Subscription billed (annual upfront),1100,841625.00,0.00
+JE-2025-06-01,2025-06,2025-06-invoice,invoice,Subscription billed (annual upfront),2100,0.00,841625.00
+JE-2025-06-02,2025-06,2025-06-invoice,invoice,Services revenue recognized (% complete),1200,268589.01,0.00
+JE-2025-06-02,2025-06,2025-06-invoice,invoice,Services revenue recognized (% complete),4100,0.00,268589.01
+JE-2025-06-03,2025-06,2025-06-invoice,invoice,Services billed,1100,252656.72,0.00
+JE-2025-06-03,2025-06,2025-06-invoice,invoice,Services billed,1200,0.00,252656.72
+JE-2025-06-04,2025-06,2025-06-invoice,invoice,Customer collections,1000,1009153.84,0.00
+JE-2025-06-04,2025-06,2025-06-invoice,invoice,Customer collections,1100,0.00,1009153.84
+JE-2025-06-05,2025-06,2025-06-payroll,payroll,Payroll,5000,146124.08,0.00
+JE-2025-06-05,2025-06,2025-06-payroll,payroll,Payroll,6000,780952.75,0.00
+JE-2025-06-05,2025-06,2025-06-payroll,payroll,Payroll,1000,0.00,927076.83
+JE-2025-06-06,2025-06,2025-06-ap_bill,ap_bill,Vendor bills (CoR + OpEx),5100,223584.79,0.00
+JE-2025-06-06,2025-06,2025-06-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6100,203956.90,0.00
+JE-2025-06-06,2025-06,2025-06-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6200,166433.38,0.00
+JE-2025-06-06,2025-06,2025-06-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6300,32000.00,0.00
+JE-2025-06-06,2025-06,2025-06-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6400,26640.00,0.00
+JE-2025-06-06,2025-06,2025-06-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6500,16000.00,0.00
+JE-2025-06-06,2025-06,2025-06-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6600,21360.00,0.00
+JE-2025-06-06,2025-06,2025-06-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6700,37360.00,0.00
+JE-2025-06-06,2025-06,2025-06-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6800,11888.10,0.00
+JE-2025-06-06,2025-06,2025-06-ap_bill,ap_bill,Vendor bills (CoR + OpEx),2000,0.00,739223.17
+JE-2025-06-07,2025-06,2025-06-ap_bill,ap_bill,AP payments,2000,711508.19,0.00
+JE-2025-06-07,2025-06,2025-06-ap_bill,ap_bill,AP payments,1000,0.00,711508.19
+JE-2025-06-08,2025-06,2025-06-depreciation,depreciation,Depreciation & amortization,6900,29643.67,0.00
+JE-2025-06-08,2025-06,2025-06-depreciation,depreciation,Depreciation & amortization,1500,0.00,29643.67
+JE-2025-06-09,2025-06,2025-06-manual,manual,Stock-based compensation (ASC 718),6950,263003.26,0.00
+JE-2025-06-09,2025-06,2025-06-manual,manual,Stock-based compensation (ASC 718),3000,0.00,263003.26
+JE-2025-06-10,2025-06,2025-06-manual,manual,Operating lease (ASC 842),1600,35000.00,0.00
+JE-2025-06-10,2025-06,2025-06-manual,manual,Operating lease (ASC 842),2200,0.00,35000.00
+JE-2025-06-11,2025-06,2025-06-manual,manual,Capital expenditures,1500,36400.00,0.00
+JE-2025-06-11,2025-06,2025-06-manual,manual,Capital expenditures,1000,0.00,36400.00
+JE-2025-06-12,2025-06,2025-06-prepaid_amort,prepaid_amort,Prepaid expense movement,1300,24688.57,0.00
+JE-2025-06-12,2025-06,2025-06-prepaid_amort,prepaid_amort,Prepaid expense movement,1000,0.00,24688.57
+JE-2025-06-13,2025-06,2025-06-manual,manual,Interest income,1000,72989.84,0.00
+JE-2025-06-13,2025-06,2025-06-manual,manual,Interest income,7000,0.00,72989.84
+JE-2025-07-00,2025-07,2025-07-invoice,invoice,Subscription revenue recognized,2100,945358.33,0.00
+JE-2025-07-00,2025-07,2025-07-invoice,invoice,Subscription revenue recognized,4000,0.00,945358.33
+JE-2025-07-01,2025-07,2025-07-invoice,invoice,Subscription billed (annual upfront),1100,635250.00,0.00
+JE-2025-07-01,2025-07,2025-07-invoice,invoice,Subscription billed (annual upfront),2100,0.00,635250.00
+JE-2025-07-02,2025-07,2025-07-invoice,invoice,Services revenue recognized (% complete),1200,189476.88,0.00
+JE-2025-07-02,2025-07,2025-07-invoice,invoice,Services revenue recognized (% complete),4100,0.00,189476.88
+JE-2025-07-03,2025-07,2025-07-invoice,invoice,Services billed,1100,268589.01,0.00
+JE-2025-07-03,2025-07,2025-07-invoice,invoice,Services billed,1200,0.00,268589.01
+JE-2025-07-04,2025-07,2025-07-invoice,invoice,Customer collections,1000,857821.18,0.00
+JE-2025-07-04,2025-07,2025-07-invoice,invoice,Customer collections,1100,0.00,857821.18
+JE-2025-07-05,2025-07,2025-07-payroll,payroll,Payroll,5000,146124.08,0.00
+JE-2025-07-05,2025-07,2025-07-payroll,payroll,Payroll,6000,796434.29,0.00
+JE-2025-07-05,2025-07,2025-07-payroll,payroll,Payroll,1000,0.00,942558.37
+JE-2025-07-06,2025-07,2025-07-ap_bill,ap_bill,Vendor bills (CoR + OpEx),5100,208080.14,0.00
+JE-2025-07-06,2025-07,2025-07-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6100,207362.84,0.00
+JE-2025-07-06,2025-07,2025-07-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6200,158876.93,0.00
+JE-2025-07-06,2025-07,2025-07-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6300,32400.00,0.00
+JE-2025-07-06,2025-07,2025-07-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6400,26973.00,0.00
+JE-2025-07-06,2025-07,2025-07-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6500,16200.00,0.00
+JE-2025-07-06,2025-07,2025-07-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6600,21627.00,0.00
+JE-2025-07-06,2025-07,2025-07-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6700,37827.00,0.00
+JE-2025-07-06,2025-07,2025-07-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6800,11348.35,0.00
+JE-2025-07-06,2025-07,2025-07-ap_bill,ap_bill,Vendor bills (CoR + OpEx),2000,0.00,720695.26
+JE-2025-07-07,2025-07,2025-07-ap_bill,ap_bill,AP payments,2000,694652.77,0.00
+JE-2025-07-07,2025-07,2025-07-ap_bill,ap_bill,AP payments,1000,0.00,694652.77
+JE-2025-07-08,2025-07,2025-07-depreciation,depreciation,Depreciation & amortization,6900,30464.67,0.00
+JE-2025-07-08,2025-07,2025-07-depreciation,depreciation,Depreciation & amortization,1500,0.00,30464.67
+JE-2025-07-09,2025-07,2025-07-manual,manual,Stock-based compensation (ASC 718),6950,265194.84,0.00
+JE-2025-07-09,2025-07,2025-07-manual,manual,Stock-based compensation (ASC 718),3000,0.00,265194.84
+JE-2025-07-10,2025-07,2025-07-manual,manual,Operating lease (ASC 842),1600,12000.00,0.00
+JE-2025-07-10,2025-07,2025-07-manual,manual,Operating lease (ASC 842),2200,0.00,12000.00
+JE-2025-07-11,2025-07,2025-07-manual,manual,Capital expenditures,1500,24630.00,0.00
+JE-2025-07-11,2025-07,2025-07-manual,manual,Capital expenditures,1000,0.00,24630.00
+JE-2025-07-12,2025-07,2025-07-prepaid_amort,prepaid_amort,Prepaid expense movement,1300,23914.22,0.00
+JE-2025-07-12,2025-07,2025-07-prepaid_amort,prepaid_amort,Prepaid expense movement,1000,0.00,23914.22
+JE-2025-07-13,2025-07,2025-07-manual,manual,Interest income,1000,70931.41,0.00
+JE-2025-07-13,2025-07,2025-07-manual,manual,Interest income,7000,0.00,70931.41
+JE-2025-08-00,2025-08,2025-08-invoice,invoice,Subscription revenue recognized,2100,1043475.00,0.00
+JE-2025-08-00,2025-08,2025-08-invoice,invoice,Subscription revenue recognized,4000,0.00,1043475.00
+JE-2025-08-01,2025-08,2025-08-invoice,invoice,Subscription billed (annual upfront),1100,1494400.00,0.00
+JE-2025-08-01,2025-08,2025-08-invoice,invoice,Subscription billed (annual upfront),2100,0.00,1494400.00
+JE-2025-08-02,2025-08,2025-08-invoice,invoice,Services revenue recognized (% complete),1200,277197.82,0.00
+JE-2025-08-02,2025-08,2025-08-invoice,invoice,Services revenue recognized (% complete),4100,0.00,277197.82
+JE-2025-08-03,2025-08,2025-08-invoice,invoice,Services billed,1100,189476.88,0.00
+JE-2025-08-03,2025-08,2025-08-invoice,invoice,Services billed,1200,0.00,189476.88
+JE-2025-08-04,2025-08,2025-08-invoice,invoice,Customer collections,1000,1521347.54,0.00
+JE-2025-08-04,2025-08,2025-08-invoice,invoice,Customer collections,1100,0.00,1521347.54
+JE-2025-08-05,2025-08,2025-08-payroll,payroll,Payroll,5000,146124.08,0.00
+JE-2025-08-05,2025-08,2025-08-payroll,payroll,Payroll,6000,804897.67,0.00
+JE-2025-08-05,2025-08,2025-08-payroll,payroll,Payroll,1000,0.00,951021.75
+JE-2025-08-06,2025-08,2025-08-ap_bill,ap_bill,Vendor bills (CoR + OpEx),5100,246690.21,0.00
+JE-2025-08-06,2025-08,2025-08-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6100,209224.78,0.00
+JE-2025-08-06,2025-08,2025-08-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6200,184894.20,0.00
+JE-2025-08-06,2025-08,2025-08-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6300,32800.00,0.00
+JE-2025-08-06,2025-08,2025-08-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6400,27306.00,0.00
+JE-2025-08-06,2025-08,2025-08-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6500,16400.00,0.00
+JE-2025-08-06,2025-08,2025-08-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6600,21894.00,0.00
+JE-2025-08-06,2025-08,2025-08-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6700,38294.00,0.00
+JE-2025-08-06,2025-08,2025-08-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6800,13206.73,0.00
+JE-2025-08-06,2025-08,2025-08-ap_bill,ap_bill,Vendor bills (CoR + OpEx),2000,0.00,790709.91
+JE-2025-08-07,2025-08,2025-08-ap_bill,ap_bill,AP payments,2000,758655.61,0.00
+JE-2025-08-07,2025-08,2025-08-ap_bill,ap_bill,AP payments,1000,0.00,758655.61
+JE-2025-08-08,2025-08,2025-08-depreciation,depreciation,Depreciation & amortization,6900,31293.33,0.00
+JE-2025-08-08,2025-08,2025-08-depreciation,depreciation,Depreciation & amortization,1500,0.00,31293.33
+JE-2025-08-09,2025-08,2025-08-manual,manual,Stock-based compensation (ASC 718),6950,263987.63,0.00
+JE-2025-08-09,2025-08,2025-08-manual,manual,Stock-based compensation (ASC 718),3000,0.00,263987.63
+JE-2025-08-10,2025-08,2025-08-manual,manual,Operating lease (ASC 842),1600,11000.00,0.00
+JE-2025-08-10,2025-08,2025-08-manual,manual,Operating lease (ASC 842),2200,0.00,11000.00
+JE-2025-08-11,2025-08,2025-08-manual,manual,Capital expenditures,1500,24860.00,0.00
+JE-2025-08-11,2025-08,2025-08-manual,manual,Capital expenditures,1000,0.00,24860.00
+JE-2025-08-12,2025-08,2025-08-prepaid_amort,prepaid_amort,Prepaid expense movement,1300,26799.87,0.00
+JE-2025-08-12,2025-08,2025-08-prepaid_amort,prepaid_amort,Prepaid expense movement,1000,0.00,26799.87
+JE-2025-08-13,2025-08,2025-08-manual,manual,Interest income,1000,68408.07,0.00
+JE-2025-08-13,2025-08,2025-08-manual,manual,Interest income,7000,0.00,68408.07
+JE-2025-09-00,2025-09,2025-09-invoice,invoice,Subscription revenue recognized,2100,1089016.67,0.00
+JE-2025-09-00,2025-09,2025-09-invoice,invoice,Subscription revenue recognized,4000,0.00,1089016.67
+JE-2025-09-01,2025-09,2025-09-invoice,invoice,Subscription billed (annual upfront),1100,1628341.67,0.00
+JE-2025-09-01,2025-09,2025-09-invoice,invoice,Subscription billed (annual upfront),2100,0.00,1628341.67
+JE-2025-09-02,2025-09,2025-09-invoice,invoice,Services revenue recognized (% complete),1200,278842.57,0.00
+JE-2025-09-02,2025-09,2025-09-invoice,invoice,Services revenue recognized (% complete),4100,0.00,278842.57
+JE-2025-09-03,2025-09,2025-09-invoice,invoice,Services billed,1100,277197.82,0.00
+JE-2025-09-03,2025-09,2025-09-invoice,invoice,Services billed,1200,0.00,277197.82
+JE-2025-09-04,2025-09,2025-09-invoice,invoice,Customer collections,1000,1817163.05,0.00
+JE-2025-09-04,2025-09,2025-09-invoice,invoice,Customer collections,1100,0.00,1817163.05
+JE-2025-09-05,2025-09,2025-09-payroll,payroll,Payroll,5000,150107.42,0.00
+JE-2025-09-05,2025-09,2025-09-payroll,payroll,Payroll,6000,804839.63,0.00
+JE-2025-09-05,2025-09,2025-09-payroll,payroll,Payroll,1000,0.00,954947.04
+JE-2025-09-06,2025-09,2025-09-ap_bill,ap_bill,Vendor bills (CoR + OpEx),5100,254843.48,0.00
+JE-2025-09-06,2025-09,2025-09-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6100,210088.35,0.00
+JE-2025-09-06,2025-09,2025-09-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6200,191500.29,0.00
+JE-2025-09-06,2025-09,2025-09-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6300,33200.00,0.00
+JE-2025-09-06,2025-09,2025-09-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6400,27639.00,0.00
+JE-2025-09-06,2025-09,2025-09-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6500,16600.00,0.00
+JE-2025-09-06,2025-09,2025-09-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6600,22161.00,0.00
+JE-2025-09-06,2025-09,2025-09-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6700,38761.00,0.00
+JE-2025-09-06,2025-09,2025-09-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6800,13678.59,0.00
+JE-2025-09-06,2025-09,2025-09-ap_bill,ap_bill,Vendor bills (CoR + OpEx),2000,0.00,808471.71
+JE-2025-09-07,2025-09,2025-09-ap_bill,ap_bill,AP payments,2000,778522.06,0.00
+JE-2025-09-07,2025-09,2025-09-ap_bill,ap_bill,AP payments,1000,0.00,778522.06
+JE-2025-09-08,2025-09,2025-09-depreciation,depreciation,Depreciation & amortization,6900,32129.67,0.00
+JE-2025-09-08,2025-09,2025-09-depreciation,depreciation,Depreciation & amortization,1500,0.00,32129.67
+JE-2025-09-09,2025-09,2025-09-manual,manual,Stock-based compensation (ASC 718),6950,263085.74,0.00
+JE-2025-09-09,2025-09,2025-09-manual,manual,Stock-based compensation (ASC 718),3000,0.00,263085.74
+JE-2025-09-10,2025-09,2025-09-manual,manual,Operating lease (ASC 842),1600,12000.00,0.00
+JE-2025-09-10,2025-09,2025-09-manual,manual,Operating lease (ASC 842),2200,0.00,12000.00
+JE-2025-09-11,2025-09,2025-09-manual,manual,Capital expenditures,1500,25090.00,0.00
+JE-2025-09-11,2025-09,2025-09-manual,manual,Capital expenditures,1000,0.00,25090.00
+JE-2025-09-12,2025-09,2025-09-prepaid_amort,prepaid_amort,Prepaid expense movement,1300,25513.74,0.00
+JE-2025-09-12,2025-09,2025-09-prepaid_amort,prepaid_amort,Prepaid expense movement,1000,0.00,25513.74
+JE-2025-09-13,2025-09,2025-09-manual,manual,Interest income,1000,67836.13,0.00
+JE-2025-09-13,2025-09,2025-09-manual,manual,Interest income,7000,0.00,67836.13
+JE-2025-10-00,2025-10,2025-10-invoice,invoice,Subscription revenue recognized,2100,1136945.83,0.00
+JE-2025-10-00,2025-10,2025-10-invoice,invoice,Subscription revenue recognized,4000,0.00,1136945.83
+JE-2025-10-01,2025-10,2025-10-invoice,invoice,Subscription billed (annual upfront),1100,1162787.50,0.00
+JE-2025-10-01,2025-10,2025-10-invoice,invoice,Subscription billed (annual upfront),2100,0.00,1162787.50
+JE-2025-10-02,2025-10,2025-10-invoice,invoice,Services revenue recognized (% complete),1200,234166.67,0.00
+JE-2025-10-02,2025-10,2025-10-invoice,invoice,Services revenue recognized (% complete),4100,0.00,234166.67
+JE-2025-10-03,2025-10,2025-10-invoice,invoice,Services billed,1100,278842.57,0.00
+JE-2025-10-03,2025-10,2025-10-invoice,invoice,Services billed,1200,0.00,278842.57
+JE-2025-10-04,2025-10,2025-10-invoice,invoice,Customer collections,1000,1346458.56,0.00
+JE-2025-10-04,2025-10,2025-10-invoice,invoice,Customer collections,1100,0.00,1346458.56
+JE-2025-10-05,2025-10,2025-10-payroll,payroll,Payroll,5000,150107.42,0.00
+JE-2025-10-05,2025-10,2025-10-payroll,payroll,Payroll,6000,833520.75,0.00
+JE-2025-10-05,2025-10,2025-10-payroll,payroll,Payroll,1000,0.00,983628.17
+JE-2025-10-06,2025-10,2025-10-ap_bill,ap_bill,Vendor bills (CoR + OpEx),5100,251822.46,0.00
+JE-2025-10-06,2025-10,2025-10-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6100,216398.20,0.00
+JE-2025-10-06,2025-10,2025-10-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6200,191955.75,0.00
+JE-2025-10-06,2025-10,2025-10-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6300,34000.00,0.00
+JE-2025-10-06,2025-10,2025-10-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6400,28305.00,0.00
+JE-2025-10-06,2025-10,2025-10-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6500,17000.00,0.00
+JE-2025-10-06,2025-10,2025-10-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6600,22695.00,0.00
+JE-2025-10-06,2025-10,2025-10-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6700,39695.00,0.00
+JE-2025-10-06,2025-10,2025-10-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6800,13711.12,0.00
+JE-2025-10-06,2025-10,2025-10-ap_bill,ap_bill,Vendor bills (CoR + OpEx),2000,0.00,815582.53
+JE-2025-10-07,2025-10,2025-10-ap_bill,ap_bill,AP payments,2000,787643.06,0.00
+JE-2025-10-07,2025-10,2025-10-ap_bill,ap_bill,AP payments,1000,0.00,787643.06
+JE-2025-10-08,2025-10,2025-10-depreciation,depreciation,Depreciation & amortization,6900,33181.33,0.00
+JE-2025-10-08,2025-10,2025-10-depreciation,depreciation,Depreciation & amortization,1500,0.00,33181.33
+JE-2025-10-09,2025-10,2025-10-manual,manual,Stock-based compensation (ASC 718),6950,270859.08,0.00
+JE-2025-10-09,2025-10,2025-10-manual,manual,Stock-based compensation (ASC 718),3000,0.00,270859.08
+JE-2025-10-10,2025-10,2025-10-manual,manual,Operating lease (ASC 842),1600,23000.00,0.00
+JE-2025-10-10,2025-10,2025-10-manual,manual,Operating lease (ASC 842),2200,0.00,23000.00
+JE-2025-10-11,2025-10,2025-10-manual,manual,Capital expenditures,1500,31550.00,0.00
+JE-2025-10-11,2025-10,2025-10-manual,manual,Capital expenditures,1000,0.00,31550.00
+JE-2025-10-12,2025-10,2025-10-prepaid_amort,prepaid_amort,Prepaid expense movement,1300,25205.86,0.00
+JE-2025-10-12,2025-10,2025-10-prepaid_amort,prepaid_amort,Prepaid expense movement,1000,0.00,25205.86
+JE-2025-10-13,2025-10,2025-10-manual,manual,Interest income,1000,68172.55,0.00
+JE-2025-10-13,2025-10,2025-10-manual,manual,Interest income,7000,0.00,68172.55
+JE-2025-11-00,2025-11,2025-11-invoice,invoice,Subscription revenue recognized,2100,1179441.67,0.00
+JE-2025-11-00,2025-11,2025-11-invoice,invoice,Subscription revenue recognized,4000,0.00,1179441.67
+JE-2025-11-01,2025-11,2025-11-invoice,invoice,Subscription billed (annual upfront),1100,3871987.50,0.00
+JE-2025-11-01,2025-11,2025-11-invoice,invoice,Subscription billed (annual upfront),2100,0.00,3871987.50
+JE-2025-11-02,2025-11,2025-11-invoice,invoice,Services revenue recognized (% complete),1200,280000.00,0.00
+JE-2025-11-02,2025-11,2025-11-invoice,invoice,Services revenue recognized (% complete),4100,0.00,280000.00
+JE-2025-11-03,2025-11,2025-11-invoice,invoice,Services billed,1100,234166.67,0.00
+JE-2025-11-03,2025-11,2025-11-invoice,invoice,Services billed,1200,0.00,234166.67
+JE-2025-11-04,2025-11,2025-11-invoice,invoice,Customer collections,1000,4031359.13,0.00
+JE-2025-11-04,2025-11,2025-11-invoice,invoice,Customer collections,1100,0.00,4031359.13
+JE-2025-11-05,2025-11,2025-11-payroll,payroll,Payroll,5000,150248.58,0.00
+JE-2025-11-05,2025-11,2025-11-payroll,payroll,Payroll,6000,834288.42,0.00
+JE-2025-11-05,2025-11,2025-11-payroll,payroll,Payroll,1000,0.00,984537.00
+JE-2025-11-06,2025-11,2025-11-ap_bill,ap_bill,Vendor bills (CoR + OpEx),5100,270505.08,0.00
+JE-2025-11-06,2025-11,2025-11-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6100,216598.14,0.00
+JE-2025-11-06,2025-11,2025-11-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6200,204321.83,0.00
+JE-2025-11-06,2025-11,2025-11-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6300,34000.00,0.00
+JE-2025-11-06,2025-11,2025-11-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6400,28305.00,0.00
+JE-2025-11-06,2025-11,2025-11-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6500,17000.00,0.00
+JE-2025-11-06,2025-11,2025-11-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6600,22695.00,0.00
+JE-2025-11-06,2025-11,2025-11-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6700,39695.00,0.00
+JE-2025-11-06,2025-11,2025-11-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6800,14594.42,0.00
+JE-2025-11-06,2025-11,2025-11-ap_bill,ap_bill,Vendor bills (CoR + OpEx),2000,0.00,847714.47
+JE-2025-11-07,2025-11,2025-11-ap_bill,ap_bill,AP payments,2000,821770.91,0.00
+JE-2025-11-07,2025-11,2025-11-ap_bill,ap_bill,AP payments,1000,0.00,821770.91
+JE-2025-11-08,2025-11,2025-11-depreciation,depreciation,Depreciation & amortization,6900,33833.00,0.00
+JE-2025-11-08,2025-11,2025-11-depreciation,depreciation,Depreciation & amortization,1500,0.00,33833.00
+JE-2025-11-09,2025-11,2025-11-manual,manual,Stock-based compensation (ASC 718),6950,269876.45,0.00
+JE-2025-11-09,2025-11,2025-11-manual,manual,Stock-based compensation (ASC 718),3000,0.00,269876.45
+JE-2025-11-10,2025-11,2025-11-manual,manual,Capital expenditures,1500,19550.00,0.00
+JE-2025-11-10,2025-11,2025-11-manual,manual,Capital expenditures,1000,0.00,19550.00
+JE-2025-11-11,2025-11,2025-11-prepaid_amort,prepaid_amort,Prepaid expense movement,1300,23353.24,0.00
+JE-2025-11-11,2025-11,2025-11-prepaid_amort,prepaid_amort,Prepaid expense movement,1000,0.00,23353.24
+JE-2025-11-12,2025-11,2025-11-manual,manual,Interest income,1000,66794.56,0.00
+JE-2025-11-12,2025-11,2025-11-manual,manual,Interest income,7000,0.00,66794.56
+JE-2025-12-00,2025-12,2025-12-invoice,invoice,Subscription revenue recognized,2100,1205187.50,0.00
+JE-2025-12-00,2025-12,2025-12-invoice,invoice,Subscription revenue recognized,4000,0.00,1205187.50
+JE-2025-12-01,2025-12,2025-12-invoice,invoice,Subscription billed (annual upfront),1100,1379670.83,0.00
+JE-2025-12-01,2025-12,2025-12-invoice,invoice,Subscription billed (annual upfront),2100,0.00,1379670.83
+JE-2025-12-02,2025-12,2025-12-invoice,invoice,Services revenue recognized (% complete),1200,254800.31,0.00
+JE-2025-12-02,2025-12,2025-12-invoice,invoice,Services revenue recognized (% complete),4100,0.00,254800.31
+JE-2025-12-03,2025-12,2025-12-invoice,invoice,Services billed,1100,280000.00,0.00
+JE-2025-12-03,2025-12,2025-12-invoice,invoice,Services billed,1200,0.00,280000.00
+JE-2025-12-04,2025-12,2025-12-invoice,invoice,Customer collections,1000,1595657.31,0.00
+JE-2025-12-04,2025-12,2025-12-invoice,invoice,Customer collections,1100,0.00,1595657.31
+JE-2025-12-05,2025-12,2025-12-payroll,payroll,Payroll,5000,240397.73,0.00
+JE-2025-12-05,2025-12,2025-12-payroll,payroll,Payroll,6000,1369740.27,0.00
+JE-2025-12-05,2025-12,2025-12-payroll,payroll,Payroll,1000,0.00,1610138.00
+JE-2025-12-06,2025-12,2025-12-ap_bill,ap_bill,Vendor bills (CoR + OpEx),5100,268581.95,0.00
+JE-2025-12-06,2025-12,2025-12-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6100,354230.36,0.00
+JE-2025-12-06,2025-12,2025-12-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6200,204398.29,0.00
+JE-2025-12-06,2025-12,2025-12-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6300,34400.00,0.00
+JE-2025-12-06,2025-12,2025-12-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6400,28638.00,0.00
+JE-2025-12-06,2025-12,2025-12-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6500,17200.00,0.00
+JE-2025-12-06,2025-12,2025-12-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6600,22962.00,0.00
+JE-2025-12-06,2025-12,2025-12-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6700,40162.00,0.00
+JE-2025-12-06,2025-12,2025-12-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6800,14599.88,0.00
+JE-2025-12-06,2025-12,2025-12-ap_bill,ap_bill,Vendor bills (CoR + OpEx),2000,0.00,985172.48
+JE-2025-12-07,2025-12,2025-12-ap_bill,ap_bill,AP payments,2000,955961.08,0.00
+JE-2025-12-07,2025-12,2025-12-ap_bill,ap_bill,AP payments,1000,0.00,955961.08
+JE-2025-12-08,2025-12,2025-12-depreciation,depreciation,Depreciation & amortization,6900,34692.33,0.00
+JE-2025-12-08,2025-12,2025-12-depreciation,depreciation,Depreciation & amortization,1500,0.00,34692.33
+JE-2025-12-09,2025-12,2025-12-manual,manual,Stock-based compensation (ASC 718),6950,272797.56,0.00
+JE-2025-12-09,2025-12,2025-12-manual,manual,Stock-based compensation (ASC 718),3000,0.00,272797.56
+JE-2025-12-10,2025-12,2025-12-manual,manual,Operating lease (ASC 842),1600,11000.00,0.00
+JE-2025-12-10,2025-12,2025-12-manual,manual,Operating lease (ASC 842),2200,0.00,11000.00
+JE-2025-12-11,2025-12,2025-12-manual,manual,Capital expenditures,1500,25780.00,0.00
+JE-2025-12-11,2025-12,2025-12-manual,manual,Capital expenditures,1000,0.00,25780.00
+JE-2025-12-12,2025-12,2025-12-prepaid_amort,prepaid_amort,Prepaid expense movement,1300,28551.44,0.00
+JE-2025-12-12,2025-12,2025-12-prepaid_amort,prepaid_amort,Prepaid expense movement,1000,0.00,28551.44
+JE-2025-12-13,2025-12,2025-12-manual,manual,Interest income,1000,74291.04,0.00
+JE-2025-12-13,2025-12,2025-12-manual,manual,Interest income,7000,0.00,74291.04
+JE-2026-01-00,2026-01,2026-01-invoice,invoice,Subscription revenue recognized,2100,1361029.17,0.00
+JE-2026-01-00,2026-01,2026-01-invoice,invoice,Subscription revenue recognized,4000,0.00,1361029.17
+JE-2026-01-01,2026-01,2026-01-invoice,invoice,Subscription billed (annual upfront),1100,2270300.00,0.00
+JE-2026-01-01,2026-01,2026-01-invoice,invoice,Subscription billed (annual upfront),2100,0.00,2270300.00
+JE-2026-01-02,2026-01,2026-01-invoice,invoice,Services revenue recognized (% complete),1200,259978.37,0.00
+JE-2026-01-02,2026-01,2026-01-invoice,invoice,Services revenue recognized (% complete),4100,0.00,259978.37
+JE-2026-01-03,2026-01,2026-01-invoice,invoice,Services billed,1100,254800.31,0.00
+JE-2026-01-03,2026-01,2026-01-invoice,invoice,Services billed,1200,0.00,254800.31
+JE-2026-01-04,2026-01,2026-01-invoice,invoice,Customer collections,1000,2327279.04,0.00
+JE-2026-01-04,2026-01,2026-01-invoice,invoice,Customer collections,1100,0.00,2327279.04
+JE-2026-01-05,2026-01,2026-01-payroll,payroll,Payroll,5000,166073.72,0.00
+JE-2026-01-05,2026-01,2026-01-payroll,payroll,Payroll,6000,927507.70,0.00
+JE-2026-01-05,2026-01,2026-01-payroll,payroll,Payroll,1000,0.00,1093581.43
+JE-2026-01-06,2026-01,2026-01-ap_bill,ap_bill,Vendor bills (CoR + OpEx),5100,296369.55,0.00
+JE-2026-01-06,2026-01,2026-01-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6100,240587.91,0.00
+JE-2026-01-06,2026-01,2026-01-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6200,226941.06,0.00
+JE-2026-01-06,2026-01,2026-01-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6300,37600.00,0.00
+JE-2026-01-06,2026-01,2026-01-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6400,31302.00,0.00
+JE-2026-01-06,2026-01,2026-01-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6500,18800.00,0.00
+JE-2026-01-06,2026-01,2026-01-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6600,25098.00,0.00
+JE-2026-01-06,2026-01,2026-01-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6700,43898.00,0.00
+JE-2026-01-06,2026-01,2026-01-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6800,16210.08,0.00
+JE-2026-01-06,2026-01,2026-01-ap_bill,ap_bill,Vendor bills (CoR + OpEx),2000,0.00,936806.60
+JE-2026-01-07,2026-01,2026-01-ap_bill,ap_bill,AP payments,2000,908355.99,0.00
+JE-2026-01-07,2026-01,2026-01-ap_bill,ap_bill,AP payments,1000,0.00,908355.99
+JE-2026-01-08,2026-01,2026-01-depreciation,depreciation,Depreciation & amortization,6900,37013.00,0.00
+JE-2026-01-08,2026-01,2026-01-depreciation,depreciation,Depreciation & amortization,1500,0.00,37013.00
+JE-2026-01-09,2026-01,2026-01-manual,manual,Stock-based compensation (ASC 718),6950,284970.55,0.00
+JE-2026-01-09,2026-01,2026-01-manual,manual,Stock-based compensation (ASC 718),3000,0.00,284970.55
+JE-2026-01-10,2026-01,2026-01-manual,manual,Operating lease (ASC 842),1600,93000.00,0.00
+JE-2026-01-10,2026-01,2026-01-manual,manual,Operating lease (ASC 842),2200,0.00,93000.00
+JE-2026-01-11,2026-01,2026-01-manual,manual,Capital expenditures,1500,69620.00,0.00
+JE-2026-01-11,2026-01,2026-01-manual,manual,Capital expenditures,1000,0.00,69620.00
+JE-2026-01-12,2026-01,2026-01-prepaid_amort,prepaid_amort,Prepaid expense movement,1300,25720.05,0.00
+JE-2026-01-12,2026-01,2026-01-prepaid_amort,prepaid_amort,Prepaid expense movement,1000,0.00,25720.05
+JE-2026-01-13,2026-01,2026-01-manual,manual,Interest income,1000,71122.76,0.00
+JE-2026-01-13,2026-01,2026-01-manual,manual,Interest income,7000,0.00,71122.76
+JE-2026-02-00,2026-02,2026-02-invoice,invoice,Subscription revenue recognized,2100,1384100.00,0.00
+JE-2026-02-00,2026-02,2026-02-invoice,invoice,Subscription revenue recognized,4000,0.00,1384100.00
+JE-2026-02-01,2026-02,2026-02-invoice,invoice,Subscription billed (annual upfront),1100,567679.17,0.00
+JE-2026-02-01,2026-02,2026-02-invoice,invoice,Subscription billed (annual upfront),2100,0.00,567679.17
+JE-2026-02-02,2026-02,2026-02-invoice,invoice,Services revenue recognized (% complete),1200,204733.66,0.00
+JE-2026-02-02,2026-02,2026-02-invoice,invoice,Services revenue recognized (% complete),4100,0.00,204733.66
+JE-2026-02-03,2026-02,2026-02-invoice,invoice,Services billed,1100,259978.37,0.00
+JE-2026-02-03,2026-02,2026-02-invoice,invoice,Services billed,1200,0.00,259978.37
+JE-2026-02-04,2026-02,2026-02-invoice,invoice,Customer collections,1000,794153.19,0.00
+JE-2026-02-04,2026-02,2026-02-invoice,invoice,Customer collections,1100,0.00,794153.19
+JE-2026-02-05,2026-02,2026-02-payroll,payroll,Payroll,5000,171165.39,0.00
+JE-2026-02-05,2026-02,2026-02-payroll,payroll,Payroll,6000,957367.49,0.00
+JE-2026-02-05,2026-02,2026-02-payroll,payroll,Payroll,1000,0.00,1128532.88
+JE-2026-02-06,2026-02,2026-02-ap_bill,ap_bill,Vendor bills (CoR + OpEx),5100,286480.42,0.00
+JE-2026-02-06,2026-02,2026-02-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6100,248277.23,0.00
+JE-2026-02-06,2026-02,2026-02-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6200,222436.71,0.00
+JE-2026-02-06,2026-02,2026-02-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6300,39200.00,0.00
+JE-2026-02-06,2026-02,2026-02-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6400,32634.00,0.00
+JE-2026-02-06,2026-02,2026-02-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6500,19600.00,0.00
+JE-2026-02-06,2026-02,2026-02-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6600,26166.00,0.00
+JE-2026-02-06,2026-02,2026-02-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6700,45766.00,0.00
+JE-2026-02-06,2026-02,2026-02-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6800,15888.34,0.00
+JE-2026-02-06,2026-02,2026-02-ap_bill,ap_bill,Vendor bills (CoR + OpEx),2000,0.00,936448.70
+JE-2026-02-07,2026-02,2026-02-ap_bill,ap_bill,AP payments,2000,910263.36,0.00
+JE-2026-02-07,2026-02,2026-02-ap_bill,ap_bill,AP payments,1000,0.00,910263.36
+JE-2026-02-08,2026-02,2026-02-depreciation,depreciation,Depreciation & amortization,6900,38564.33,0.00
+JE-2026-02-08,2026-02,2026-02-depreciation,depreciation,Depreciation & amortization,1500,0.00,38564.33
+JE-2026-02-09,2026-02,2026-02-manual,manual,Stock-based compensation (ASC 718),6950,292522.01,0.00
+JE-2026-02-09,2026-02,2026-02-manual,manual,Stock-based compensation (ASC 718),3000,0.00,292522.01
+JE-2026-02-10,2026-02,2026-02-manual,manual,Operating lease (ASC 842),1600,46000.00,0.00
+JE-2026-02-10,2026-02,2026-02-manual,manual,Operating lease (ASC 842),2200,0.00,46000.00
+JE-2026-02-11,2026-02,2026-02-manual,manual,Capital expenditures,1500,46540.00,0.00
+JE-2026-02-11,2026-02,2026-02-manual,manual,Capital expenditures,1000,0.00,46540.00
+JE-2026-02-12,2026-02,2026-02-prepaid_amort,prepaid_amort,Prepaid expense movement,1300,24038.59,0.00
+JE-2026-02-12,2026-02,2026-02-prepaid_amort,prepaid_amort,Prepaid expense movement,1000,0.00,24038.59
+JE-2026-02-13,2026-02,2026-02-manual,manual,Interest income,1000,72126.51,0.00
+JE-2026-02-13,2026-02,2026-02-manual,manual,Interest income,7000,0.00,72126.51
+JE-2026-03-00,2026-03,2026-03-invoice,invoice,Subscription revenue recognized,2100,1427629.17,0.00
+JE-2026-03-00,2026-03,2026-03-invoice,invoice,Subscription revenue recognized,4000,0.00,1427629.17
+JE-2026-03-01,2026-03,2026-03-invoice,invoice,Subscription billed (annual upfront),1100,1199633.33,0.00
+JE-2026-03-01,2026-03,2026-03-invoice,invoice,Subscription billed (annual upfront),2100,0.00,1199633.33
+JE-2026-03-02,2026-03,2026-03-invoice,invoice,Services revenue recognized (% complete),1200,228237.66,0.00
+JE-2026-03-02,2026-03,2026-03-invoice,invoice,Services revenue recognized (% complete),4100,0.00,228237.66
+JE-2026-03-03,2026-03,2026-03-invoice,invoice,Services billed,1100,204733.66,0.00
+JE-2026-03-03,2026-03,2026-03-invoice,invoice,Services billed,1200,0.00,204733.66
+JE-2026-03-04,2026-03,2026-03-invoice,invoice,Customer collections,1000,1335818.50,0.00
+JE-2026-03-04,2026-03,2026-03-invoice,invoice,Customer collections,1100,0.00,1335818.50
+JE-2026-03-05,2026-03,2026-03-payroll,payroll,Payroll,5000,177264.14,0.00
+JE-2026-03-05,2026-03,2026-03-payroll,payroll,Payroll,6000,1011144.12,0.00
+JE-2026-03-05,2026-03,2026-03-payroll,payroll,Payroll,1000,0.00,1188408.26
+JE-2026-03-06,2026-03,2026-03-ap_bill,ap_bill,Vendor bills (CoR + OpEx),5100,299756.37,0.00
+JE-2026-03-06,2026-03,2026-03-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6100,261449.82,0.00
+JE-2026-03-06,2026-03,2026-03-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6200,231821.36,0.00
+JE-2026-03-06,2026-03,2026-03-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6300,41200.00,0.00
+JE-2026-03-06,2026-03,2026-03-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6400,34299.00,0.00
+JE-2026-03-06,2026-03,2026-03-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6500,20600.00,0.00
+JE-2026-03-06,2026-03,2026-03-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6600,27501.00,0.00
+JE-2026-03-06,2026-03,2026-03-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6700,48101.00,0.00
+JE-2026-03-06,2026-03,2026-03-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6800,16558.67,0.00
+JE-2026-03-06,2026-03,2026-03-ap_bill,ap_bill,Vendor bills (CoR + OpEx),2000,0.00,981287.21
+JE-2026-03-07,2026-03,2026-03-ap_bill,ap_bill,AP payments,2000,954168.95,0.00
+JE-2026-03-07,2026-03,2026-03-ap_bill,ap_bill,AP payments,1000,0.00,954168.95
+JE-2026-03-08,2026-03,2026-03-depreciation,depreciation,Depreciation & amortization,6900,40354.00,0.00
+JE-2026-03-08,2026-03,2026-03-depreciation,depreciation,Depreciation & amortization,1500,0.00,40354.00
+JE-2026-03-09,2026-03,2026-03-manual,manual,Stock-based compensation (ASC 718),6950,305255.97,0.00
+JE-2026-03-09,2026-03,2026-03-manual,manual,Stock-based compensation (ASC 718),3000,0.00,305255.97
+JE-2026-03-10,2026-03,2026-03-manual,manual,Operating lease (ASC 842),1600,58000.00,0.00
+JE-2026-03-10,2026-03,2026-03-manual,manual,Operating lease (ASC 842),2200,0.00,58000.00
+JE-2026-03-11,2026-03,2026-03-manual,manual,Capital expenditures,1500,53690.00,0.00
+JE-2026-03-11,2026-03,2026-03-manual,manual,Capital expenditures,1000,0.00,53690.00
+JE-2026-03-12,2026-03,2026-03-prepaid_amort,prepaid_amort,Prepaid expense movement,1300,25016.30,0.00
+JE-2026-03-12,2026-03,2026-03-prepaid_amort,prepaid_amort,Prepaid expense movement,1000,0.00,25016.30
+JE-2026-03-13,2026-03,2026-03-manual,manual,Interest income,1000,67982.86,0.00
+JE-2026-03-13,2026-03,2026-03-manual,manual,Interest income,7000,0.00,67982.86
+JE-2026-04-00,2026-04,2026-04-invoice,invoice,Subscription revenue recognized,2100,1432512.50,0.00
+JE-2026-04-00,2026-04,2026-04-invoice,invoice,Subscription revenue recognized,4000,0.00,1432512.50
+JE-2026-04-01,2026-04,2026-04-invoice,invoice,Subscription billed (annual upfront),1100,1150129.17,0.00
+JE-2026-04-01,2026-04,2026-04-invoice,invoice,Subscription billed (annual upfront),2100,0.00,1150129.17
+JE-2026-04-02,2026-04,2026-04-invoice,invoice,Services revenue recognized (% complete),1200,236500.00,0.00
+JE-2026-04-02,2026-04,2026-04-invoice,invoice,Services revenue recognized (% complete),4100,0.00,236500.00
+JE-2026-04-03,2026-04,2026-04-invoice,invoice,Services billed,1100,228237.66,0.00
+JE-2026-04-03,2026-04,2026-04-invoice,invoice,Services billed,1200,0.00,228237.66
+JE-2026-04-04,2026-04,2026-04-invoice,invoice,Customer collections,1000,1349940.78,0.00
+JE-2026-04-04,2026-04,2026-04-invoice,invoice,Customer collections,1100,0.00,1349940.78
+JE-2026-04-05,2026-04,2026-04-payroll,payroll,Payroll,5000,178078.77,0.00
+JE-2026-04-05,2026-04,2026-04-payroll,payroll,Payroll,6000,1050386.84,0.00
+JE-2026-04-05,2026-04,2026-04-payroll,payroll,Payroll,1000,0.00,1228465.60
+JE-2026-04-06,2026-04,2026-04-ap_bill,ap_bill,Vendor bills (CoR + OpEx),5100,302652.12,0.00
+JE-2026-04-06,2026-04,2026-04-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6100,270262.43,0.00
+JE-2026-04-06,2026-04,2026-04-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6200,233661.75,0.00
+JE-2026-04-06,2026-04,2026-04-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6300,42800.00,0.00
+JE-2026-04-06,2026-04,2026-04-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6400,35631.00,0.00
+JE-2026-04-06,2026-04,2026-04-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6500,21400.00,0.00
+JE-2026-04-06,2026-04,2026-04-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6600,28569.00,0.00
+JE-2026-04-06,2026-04,2026-04-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6700,49969.00,0.00
+JE-2026-04-06,2026-04,2026-04-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6800,16690.12,0.00
+JE-2026-04-06,2026-04,2026-04-ap_bill,ap_bill,Vendor bills (CoR + OpEx),2000,0.00,1001635.43
+JE-2026-04-07,2026-04,2026-04-ap_bill,ap_bill,AP payments,2000,974641.77,0.00
+JE-2026-04-07,2026-04,2026-04-ap_bill,ap_bill,AP payments,1000,0.00,974641.77
+JE-2026-04-08,2026-04,2026-04-depreciation,depreciation,Depreciation & amortization,6900,41974.33,0.00
+JE-2026-04-08,2026-04,2026-04-depreciation,depreciation,Depreciation & amortization,1500,0.00,41974.33
+JE-2026-04-09,2026-04,2026-04-manual,manual,Stock-based compensation (ASC 718),6950,313915.83,0.00
+JE-2026-04-09,2026-04,2026-04-manual,manual,Stock-based compensation (ASC 718),3000,0.00,313915.83
+JE-2026-04-10,2026-04,2026-04-manual,manual,Operating lease (ASC 842),1600,46000.00,0.00
+JE-2026-04-10,2026-04,2026-04-manual,manual,Operating lease (ASC 842),2200,0.00,46000.00
+JE-2026-04-11,2026-04,2026-04-manual,manual,Capital expenditures,1500,48610.00,0.00
+JE-2026-04-11,2026-04,2026-04-manual,manual,Capital expenditures,1000,0.00,48610.00
+JE-2026-04-12,2026-04,2026-04-prepaid_amort,prepaid_amort,Prepaid expense movement,1300,25067.32,0.00
+JE-2026-04-12,2026-04,2026-04-prepaid_amort,prepaid_amort,Prepaid expense movement,1000,0.00,25067.32
+JE-2026-04-13,2026-04,2026-04-manual,manual,Interest income,1000,65257.92,0.00
+JE-2026-04-13,2026-04,2026-04-manual,manual,Interest income,7000,0.00,65257.92
+JE-2026-05-00,2026-05,2026-05-invoice,invoice,Subscription revenue recognized,2100,1468741.67,0.00
+JE-2026-05-00,2026-05,2026-05-invoice,invoice,Subscription revenue recognized,4000,0.00,1468741.67
+JE-2026-05-01,2026-05,2026-05-invoice,invoice,Subscription billed (annual upfront),1100,1370341.67,0.00
+JE-2026-05-01,2026-05,2026-05-invoice,invoice,Subscription billed (annual upfront),2100,0.00,1370341.67
+JE-2026-05-02,2026-05,2026-05-invoice,invoice,Services revenue recognized (% complete),1200,288750.00,0.00
+JE-2026-05-02,2026-05,2026-05-invoice,invoice,Services revenue recognized (% complete),4100,0.00,288750.00
+JE-2026-05-03,2026-05,2026-05-invoice,invoice,Services billed,1100,236500.00,0.00
+JE-2026-05-03,2026-05,2026-05-invoice,invoice,Services billed,1200,0.00,236500.00
+JE-2026-05-04,2026-05,2026-05-invoice,invoice,Customer collections,1000,1546824.65,0.00
+JE-2026-05-04,2026-05,2026-05-invoice,invoice,Customer collections,1100,0.00,1546824.65
+JE-2026-05-05,2026-05,2026-05-payroll,payroll,Payroll,5000,182717.00,0.00
+JE-2026-05-05,2026-05,2026-05-payroll,payroll,Payroll,6000,1104405.12,0.00
+JE-2026-05-05,2026-05,2026-05-payroll,payroll,Payroll,1000,0.00,1287122.11
+JE-2026-05-06,2026-05,2026-05-ap_bill,ap_bill,Vendor bills (CoR + OpEx),5100,321873.58,0.00
+JE-2026-05-06,2026-05,2026-05-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6100,283166.87,0.00
+JE-2026-05-06,2026-05,2026-05-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6200,246048.83,0.00
+JE-2026-05-06,2026-05,2026-05-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6300,44800.00,0.00
+JE-2026-05-06,2026-05,2026-05-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6400,37296.00,0.00
+JE-2026-05-06,2026-05,2026-05-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6500,22400.00,0.00
+JE-2026-05-06,2026-05,2026-05-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6600,29904.00,0.00
+JE-2026-05-06,2026-05,2026-05-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6700,52304.00,0.00
+JE-2026-05-06,2026-05,2026-05-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6800,17574.92,0.00
+JE-2026-05-06,2026-05,2026-05-ap_bill,ap_bill,Vendor bills (CoR + OpEx),2000,0.00,1055368.20
+JE-2026-05-07,2026-05,2026-05-ap_bill,ap_bill,AP payments,2000,1026367.40,0.00
+JE-2026-05-07,2026-05,2026-05-ap_bill,ap_bill,AP payments,1000,0.00,1026367.40
+JE-2026-05-08,2026-05,2026-05-depreciation,depreciation,Depreciation & amortization,6900,43833.00,0.00
+JE-2026-05-08,2026-05,2026-05-depreciation,depreciation,Depreciation & amortization,1500,0.00,43833.00
+JE-2026-05-09,2026-05,2026-05-manual,manual,Stock-based compensation (ASC 718),6950,325547.39,0.00
+JE-2026-05-09,2026-05,2026-05-manual,manual,Stock-based compensation (ASC 718),3000,0.00,325547.39
+JE-2026-05-10,2026-05,2026-05-manual,manual,Operating lease (ASC 842),1600,58000.00,0.00
+JE-2026-05-10,2026-05,2026-05-manual,manual,Operating lease (ASC 842),2200,0.00,58000.00
+JE-2026-05-11,2026-05,2026-05-manual,manual,Capital expenditures,1500,55760.00,0.00
+JE-2026-05-11,2026-05,2026-05-manual,manual,Capital expenditures,1000,0.00,55760.00
+JE-2026-05-12,2026-05,2026-05-prepaid_amort,prepaid_amort,Prepaid expense movement,1300,26406.32,0.00
+JE-2026-05-12,2026-05,2026-05-prepaid_amort,prepaid_amort,Prepaid expense movement,1000,0.00,26406.32
+JE-2026-05-13,2026-05,2026-05-manual,manual,Interest income,1000,62385.97,0.00
+JE-2026-05-13,2026-05,2026-05-manual,manual,Interest income,7000,0.00,62385.97
+JE-2026-06-00,2026-06,2026-06-invoice,invoice,Subscription revenue recognized,2100,1507937.50,0.00
+JE-2026-06-00,2026-06,2026-06-invoice,invoice,Subscription revenue recognized,4000,0.00,1507937.50
+JE-2026-06-01,2026-06,2026-06-invoice,invoice,Subscription billed (annual upfront),1100,1358325.00,0.00
+JE-2026-06-01,2026-06,2026-06-invoice,invoice,Subscription billed (annual upfront),2100,0.00,1358325.00
+JE-2026-06-02,2026-06,2026-06-invoice,invoice,Services revenue recognized (% complete),1200,291750.00,0.00
+JE-2026-06-02,2026-06,2026-06-invoice,invoice,Services revenue recognized (% complete),4100,0.00,291750.00
+JE-2026-06-03,2026-06,2026-06-invoice,invoice,Services billed,1100,288750.00,0.00
+JE-2026-06-03,2026-06,2026-06-invoice,invoice,Services billed,1200,0.00,288750.00
+JE-2026-06-04,2026-06,2026-06-invoice,invoice,Customer collections,1000,1578922.40,0.00
+JE-2026-06-04,2026-06,2026-06-invoice,invoice,Customer collections,1100,0.00,1578922.40
+JE-2026-06-05,2026-06,2026-06-payroll,payroll,Payroll,5000,194185.59,0.00
+JE-2026-06-05,2026-06,2026-06-payroll,payroll,Payroll,6000,1155720.95,0.00
+JE-2026-06-05,2026-06,2026-06-payroll,payroll,Payroll,1000,0.00,1349906.54
+JE-2026-06-06,2026-06,2026-06-ap_bill,ap_bill,Vendor bills (CoR + OpEx),5100,329286.88,0.00
+JE-2026-06-06,2026-06,2026-06-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6100,296979.44,0.00
+JE-2026-06-06,2026-06,2026-06-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6200,251956.25,0.00
+JE-2026-06-06,2026-06,2026-06-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6300,46400.00,0.00
+JE-2026-06-06,2026-06,2026-06-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6400,38628.00,0.00
+JE-2026-06-06,2026-06,2026-06-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6500,23200.00,0.00
+JE-2026-06-06,2026-06,2026-06-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6600,30972.00,0.00
+JE-2026-06-06,2026-06,2026-06-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6700,54172.00,0.00
+JE-2026-06-06,2026-06,2026-06-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6800,17996.87,0.00
+JE-2026-06-06,2026-06,2026-06-ap_bill,ap_bill,Vendor bills (CoR + OpEx),2000,0.00,1089591.44
+JE-2026-06-07,2026-06,2026-06-ap_bill,ap_bill,AP payments,2000,1060794.05,0.00
+JE-2026-06-07,2026-06,2026-06-ap_bill,ap_bill,AP payments,1000,0.00,1060794.05
+JE-2026-06-08,2026-06,2026-06-depreciation,depreciation,Depreciation & amortization,6900,45522.33,0.00
+JE-2026-06-08,2026-06,2026-06-depreciation,depreciation,Depreciation & amortization,1500,0.00,45522.33
+JE-2026-06-09,2026-06,2026-06-manual,manual,Stock-based compensation (ASC 718),6950,339518.43,0.00
+JE-2026-06-09,2026-06,2026-06-manual,manual,Stock-based compensation (ASC 718),3000,0.00,339518.43
+JE-2026-06-10,2026-06,2026-06-manual,manual,Operating lease (ASC 842),1600,46000.00,0.00
+JE-2026-06-10,2026-06,2026-06-manual,manual,Operating lease (ASC 842),2200,0.00,46000.00
+JE-2026-06-11,2026-06,2026-06-manual,manual,Capital expenditures,1500,50680.00,0.00
+JE-2026-06-11,2026-06,2026-06-manual,manual,Capital expenditures,1000,0.00,50680.00
+JE-2026-06-12,2026-06,2026-06-prepaid_amort,prepaid_amort,Prepaid expense movement,1300,26812.73,0.00
+JE-2026-06-12,2026-06,2026-06-prepaid_amort,prepaid_amort,Prepaid expense movement,1000,0.00,26812.73
+JE-2026-06-13,2026-06,2026-06-manual,manual,Interest income,1000,59764.48,0.00
+JE-2026-06-13,2026-06,2026-06-manual,manual,Interest income,7000,0.00,59764.48
+JE-2026-07-00,2026-07,2026-07-invoice,invoice,Subscription revenue recognized,2100,1635675.00,0.00
+JE-2026-07-00,2026-07,2026-07-invoice,invoice,Subscription revenue recognized,4000,0.00,1635675.00
+JE-2026-07-01,2026-07,2026-07-invoice,invoice,Subscription billed (annual upfront),1100,2207479.17,0.00
+JE-2026-07-01,2026-07,2026-07-invoice,invoice,Subscription billed (annual upfront),2100,0.00,2207479.17
+JE-2026-07-02,2026-07,2026-07-invoice,invoice,Services revenue recognized (% complete),1200,283250.00,0.00
+JE-2026-07-02,2026-07,2026-07-invoice,invoice,Services revenue recognized (% complete),4100,0.00,283250.00
+JE-2026-07-03,2026-07,2026-07-invoice,invoice,Services billed,1100,291750.00,0.00
+JE-2026-07-03,2026-07,2026-07-invoice,invoice,Services billed,1200,0.00,291750.00
+JE-2026-07-04,2026-07,2026-07-invoice,invoice,Customer collections,1000,2302537.23,0.00
+JE-2026-07-04,2026-07,2026-07-invoice,invoice,Customer collections,1100,0.00,2302537.23
+JE-2026-07-05,2026-07,2026-07-payroll,payroll,Payroll,5000,199502.26,0.00
+JE-2026-07-05,2026-07,2026-07-payroll,payroll,Payroll,6000,1208053.87,0.00
+JE-2026-07-05,2026-07,2026-07-payroll,payroll,Payroll,1000,0.00,1407556.13
+JE-2026-07-06,2026-07,2026-07-ap_bill,ap_bill,Vendor bills (CoR + OpEx),5100,348877.25,0.00
+JE-2026-07-06,2026-07,2026-07-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6100,309662.35,0.00
+JE-2026-07-06,2026-07,2026-07-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6200,268649.50,0.00
+JE-2026-07-06,2026-07,2026-07-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6300,48400.00,0.00
+JE-2026-07-06,2026-07,2026-07-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6400,40293.00,0.00
+JE-2026-07-06,2026-07,2026-07-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6500,24200.00,0.00
+JE-2026-07-06,2026-07,2026-07-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6600,32307.00,0.00
+JE-2026-07-06,2026-07,2026-07-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6700,56507.00,0.00
+JE-2026-07-06,2026-07,2026-07-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6800,19189.25,0.00
+JE-2026-07-06,2026-07,2026-07-ap_bill,ap_bill,Vendor bills (CoR + OpEx),2000,0.00,1148085.35
+JE-2026-07-07,2026-07,2026-07-ap_bill,ap_bill,AP payments,2000,1112957.40,0.00
+JE-2026-07-07,2026-07,2026-07-ap_bill,ap_bill,AP payments,1000,0.00,1112957.40
+JE-2026-07-08,2026-07,2026-07-depreciation,depreciation,Depreciation & amortization,6900,33143.33,0.00
+JE-2026-07-08,2026-07,2026-07-depreciation,depreciation,Depreciation & amortization,1500,0.00,33143.33
+JE-2026-07-09,2026-07,2026-07-manual,manual,Stock-based compensation (ASC 718),6950,351534.47,0.00
+JE-2026-07-09,2026-07,2026-07-manual,manual,Stock-based compensation (ASC 718),3000,0.00,351534.47
+JE-2026-07-10,2026-07,2026-07-manual,manual,Operating lease (ASC 842),1600,58000.00,0.00
+JE-2026-07-10,2026-07,2026-07-manual,manual,Operating lease (ASC 842),2200,0.00,58000.00
+JE-2026-07-11,2026-07,2026-07-manual,manual,Capital expenditures,1500,57830.00,0.00
+JE-2026-07-11,2026-07,2026-07-manual,manual,Capital expenditures,1000,0.00,57830.00
+JE-2026-07-12,2026-07,2026-07-prepaid_amort,prepaid_amort,Prepaid expense movement,1300,31407.45,0.00
+JE-2026-07-12,2026-07,2026-07-prepaid_amort,prepaid_amort,Prepaid expense movement,1000,0.00,31407.45
+JE-2026-07-13,2026-07,2026-07-manual,manual,Interest income,1000,56932.80,0.00
+JE-2026-07-13,2026-07,2026-07-manual,manual,Interest income,7000,0.00,56932.80
+JE-2026-08-00,2026-08,2026-08-invoice,invoice,Subscription revenue recognized,2100,1763550.00,0.00
+JE-2026-08-00,2026-08,2026-08-invoice,invoice,Subscription revenue recognized,4000,0.00,1763550.00
+JE-2026-08-01,2026-08,2026-08-invoice,invoice,Subscription billed (annual upfront),1100,3137154.17,0.00
+JE-2026-08-01,2026-08,2026-08-invoice,invoice,Subscription billed (annual upfront),2100,0.00,3137154.17
+JE-2026-08-02,2026-08,2026-08-invoice,invoice,Services revenue recognized (% complete),1200,384916.67,0.00
+JE-2026-08-02,2026-08,2026-08-invoice,invoice,Services revenue recognized (% complete),4100,0.00,384916.67
+JE-2026-08-03,2026-08,2026-08-invoice,invoice,Services billed,1100,283250.00,0.00
+JE-2026-08-03,2026-08,2026-08-invoice,invoice,Services billed,1200,0.00,283250.00
+JE-2026-08-04,2026-08,2026-08-invoice,invoice,Customer collections,1000,3206311.76,0.00
+JE-2026-08-04,2026-08,2026-08-invoice,invoice,Customer collections,1100,0.00,3206311.76
+JE-2026-08-05,2026-08,2026-08-payroll,payroll,Payroll,5000,212260.59,0.00
+JE-2026-08-05,2026-08,2026-08-payroll,payroll,Payroll,6000,1275252.02,0.00
+JE-2026-08-05,2026-08,2026-08-payroll,payroll,Payroll,1000,0.00,1487512.61
+JE-2026-08-06,2026-08,2026-08-ap_bill,ap_bill,Vendor bills (CoR + OpEx),5100,396032.67,0.00
+JE-2026-08-06,2026-08,2026-08-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6100,327252.77,0.00
+JE-2026-08-06,2026-08,2026-08-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6200,300785.33,0.00
+JE-2026-08-06,2026-08,2026-08-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6300,51200.00,0.00
+JE-2026-08-06,2026-08,2026-08-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6400,42624.00,0.00
+JE-2026-08-06,2026-08,2026-08-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6500,25600.00,0.00
+JE-2026-08-06,2026-08,2026-08-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6600,34176.00,0.00
+JE-2026-08-06,2026-08,2026-08-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6700,59776.00,0.00
+JE-2026-08-06,2026-08,2026-08-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6800,21484.67,0.00
+JE-2026-08-06,2026-08,2026-08-ap_bill,ap_bill,Vendor bills (CoR + OpEx),2000,0.00,1258931.44
+JE-2026-08-07,2026-08,2026-08-ap_bill,ap_bill,AP payments,2000,1220447.48,0.00
+JE-2026-08-07,2026-08,2026-08-ap_bill,ap_bill,AP payments,1000,0.00,1220447.48
+JE-2026-08-08,2026-08,2026-08-depreciation,depreciation,Depreciation & amortization,6900,35218.00,0.00
+JE-2026-08-08,2026-08,2026-08-depreciation,depreciation,Depreciation & amortization,1500,0.00,35218.00
+JE-2026-08-09,2026-08,2026-08-manual,manual,Stock-based compensation (ASC 718),6950,367508.22,0.00
+JE-2026-08-09,2026-08,2026-08-manual,manual,Stock-based compensation (ASC 718),3000,0.00,367508.22
+JE-2026-08-10,2026-08,2026-08-manual,manual,Operating lease (ASC 842),1600,80000.00,0.00
+JE-2026-08-10,2026-08,2026-08-manual,manual,Operating lease (ASC 842),2200,0.00,80000.00
+JE-2026-08-11,2026-08,2026-08-manual,manual,Capital expenditures,1500,71440.00,0.00
+JE-2026-08-11,2026-08,2026-08-manual,manual,Capital expenditures,1000,0.00,71440.00
+JE-2026-08-12,2026-08,2026-08-prepaid_amort,prepaid_amort,Prepaid expense movement,1300,34945.65,0.00
+JE-2026-08-12,2026-08,2026-08-prepaid_amort,prepaid_amort,Prepaid expense movement,1000,0.00,34945.65
+JE-2026-08-13,2026-08,2026-08-manual,manual,Interest income,1000,56098.53,0.00
+JE-2026-08-13,2026-08,2026-08-manual,manual,Interest income,7000,0.00,56098.53
+JE-2026-09-00,2026-09,2026-09-invoice,invoice,Subscription revenue recognized,2100,1801583.33,0.00
+JE-2026-09-00,2026-09,2026-09-invoice,invoice,Subscription revenue recognized,4000,0.00,1801583.33
+JE-2026-09-01,2026-09,2026-09-invoice,invoice,Subscription billed (annual upfront),1100,2280150.00,0.00
+JE-2026-09-01,2026-09,2026-09-invoice,invoice,Subscription billed (annual upfront),2100,0.00,2280150.00
+JE-2026-09-02,2026-09,2026-09-invoice,invoice,Services revenue recognized (% complete),1200,350666.67,0.00
+JE-2026-09-02,2026-09,2026-09-invoice,invoice,Services revenue recognized (% complete),4100,0.00,350666.67
+JE-2026-09-03,2026-09,2026-09-invoice,invoice,Services billed,1100,384916.67,0.00
+JE-2026-09-03,2026-09,2026-09-invoice,invoice,Services billed,1200,0.00,384916.67
+JE-2026-09-04,2026-09,2026-09-invoice,invoice,Customer collections,1000,2571426.33,0.00
+JE-2026-09-04,2026-09,2026-09-invoice,invoice,Customer collections,1100,0.00,2571426.33
+JE-2026-09-05,2026-09,2026-09-payroll,payroll,Payroll,5000,212400.01,0.00
+JE-2026-09-05,2026-09,2026-09-payroll,payroll,Payroll,6000,1305813.83,0.00
+JE-2026-09-05,2026-09,2026-09-payroll,payroll,Payroll,1000,0.00,1518213.84
+JE-2026-09-06,2026-09,2026-09-ap_bill,ap_bill,Vendor bills (CoR + OpEx),5100,393935.83,0.00
+JE-2026-09-06,2026-09,2026-09-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6100,334007.05,0.00
+JE-2026-09-06,2026-09,2026-09-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6200,301315.00,0.00
+JE-2026-09-06,2026-09,2026-09-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6300,52400.00,0.00
+JE-2026-09-06,2026-09,2026-09-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6400,43623.00,0.00
+JE-2026-09-06,2026-09,2026-09-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6500,26200.00,0.00
+JE-2026-09-06,2026-09,2026-09-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6600,34977.00,0.00
+JE-2026-09-06,2026-09,2026-09-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6700,61177.00,0.00
+JE-2026-09-06,2026-09,2026-09-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6800,21522.50,0.00
+JE-2026-09-06,2026-09,2026-09-ap_bill,ap_bill,Vendor bills (CoR + OpEx),2000,0.00,1269157.38
+JE-2026-09-07,2026-09,2026-09-ap_bill,ap_bill,AP payments,2000,1231292.80,0.00
+JE-2026-09-07,2026-09,2026-09-ap_bill,ap_bill,AP payments,1000,0.00,1231292.80
+JE-2026-09-08,2026-09,2026-09-depreciation,depreciation,Depreciation & amortization,6900,36308.00,0.00
+JE-2026-09-08,2026-09,2026-09-depreciation,depreciation,Depreciation & amortization,1500,0.00,36308.00
+JE-2026-09-09,2026-09,2026-09-manual,manual,Stock-based compensation (ASC 718),6950,373629.89,0.00
+JE-2026-09-09,2026-09,2026-09-manual,manual,Stock-based compensation (ASC 718),3000,0.00,373629.89
+JE-2026-09-10,2026-09,2026-09-manual,manual,Operating lease (ASC 842),1600,35000.00,0.00
+JE-2026-09-10,2026-09,2026-09-manual,manual,Operating lease (ASC 842),2200,0.00,35000.00
+JE-2026-09-11,2026-09,2026-09-manual,manual,Capital expenditures,1500,48130.00,0.00
+JE-2026-09-11,2026-09,2026-09-manual,manual,Capital expenditures,1000,0.00,48130.00
+JE-2026-09-12,2026-09,2026-09-prepaid_amort,prepaid_amort,Prepaid expense movement,1300,35243.10,0.00
+JE-2026-09-12,2026-09,2026-09-prepaid_amort,prepaid_amort,Prepaid expense movement,1000,0.00,35243.10
+JE-2026-09-13,2026-09,2026-09-manual,manual,Interest income,1000,57592.07,0.00
+JE-2026-09-13,2026-09,2026-09-manual,manual,Interest income,7000,0.00,57592.07
+JE-2026-10-00,2026-10,2026-10-invoice,invoice,Subscription revenue recognized,2100,1891358.33,0.00
+JE-2026-10-00,2026-10,2026-10-invoice,invoice,Subscription revenue recognized,4000,0.00,1891358.33
+JE-2026-10-01,2026-10,2026-10-invoice,invoice,Subscription billed (annual upfront),1100,2132983.33,0.00
+JE-2026-10-01,2026-10,2026-10-invoice,invoice,Subscription billed (annual upfront),2100,0.00,2132983.33
+JE-2026-10-02,2026-10,2026-10-invoice,invoice,Services revenue recognized (% complete),1200,420000.00,0.00
+JE-2026-10-02,2026-10,2026-10-invoice,invoice,Services revenue recognized (% complete),4100,0.00,420000.00
+JE-2026-10-03,2026-10,2026-10-invoice,invoice,Services billed,1100,350666.67,0.00
+JE-2026-10-03,2026-10,2026-10-invoice,invoice,Services billed,1200,0.00,350666.67
+JE-2026-10-04,2026-10,2026-10-invoice,invoice,Customer collections,1000,2355181.79,0.00
+JE-2026-10-04,2026-10,2026-10-invoice,invoice,Customer collections,1100,0.00,2355181.79
+JE-2026-10-05,2026-10,2026-10-payroll,payroll,Payroll,5000,229325.01,0.00
+JE-2026-10-05,2026-10,2026-10-payroll,payroll,Payroll,6000,1364015.46,0.00
+JE-2026-10-05,2026-10,2026-10-payroll,payroll,Payroll,1000,0.00,1593340.47
+JE-2026-10-06,2026-10,2026-10-ap_bill,ap_bill,Vendor bills (CoR + OpEx),5100,426530.92,0.00
+JE-2026-10-06,2026-10,2026-10-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6100,350534.90,0.00
+JE-2026-10-06,2026-10,2026-10-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6200,323590.17,0.00
+JE-2026-10-06,2026-10,2026-10-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6300,55200.00,0.00
+JE-2026-10-06,2026-10,2026-10-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6400,45954.00,0.00
+JE-2026-10-06,2026-10,2026-10-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6500,27600.00,0.00
+JE-2026-10-06,2026-10,2026-10-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6600,36846.00,0.00
+JE-2026-10-06,2026-10,2026-10-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6700,64446.00,0.00
+JE-2026-10-06,2026-10,2026-10-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6800,23113.58,0.00
+JE-2026-10-06,2026-10,2026-10-ap_bill,ap_bill,Vendor bills (CoR + OpEx),2000,0.00,1353815.57
+JE-2026-10-07,2026-10,2026-10-ap_bill,ap_bill,AP payments,2000,1309577.24,0.00
+JE-2026-10-07,2026-10,2026-10-ap_bill,ap_bill,AP payments,1000,0.00,1309577.24
+JE-2026-10-08,2026-10,2026-10-depreciation,depreciation,Depreciation & amortization,6900,38244.00,0.00
+JE-2026-10-08,2026-10,2026-10-depreciation,depreciation,Depreciation & amortization,1500,0.00,38244.00
+JE-2026-10-09,2026-10,2026-10-manual,manual,Stock-based compensation (ASC 718),6950,389594.26,0.00
+JE-2026-10-09,2026-10,2026-10-manual,manual,Stock-based compensation (ASC 718),3000,0.00,389594.26
+JE-2026-10-10,2026-10,2026-10-manual,manual,Operating lease (ASC 842),1600,81000.00,0.00
+JE-2026-10-10,2026-10,2026-10-manual,manual,Operating lease (ASC 842),2200,0.00,81000.00
+JE-2026-10-11,2026-10,2026-10-manual,manual,Capital expenditures,1500,73740.00,0.00
+JE-2026-10-11,2026-10,2026-10-manual,manual,Capital expenditures,1000,0.00,73740.00
+JE-2026-10-12,2026-10,2026-10-prepaid_amort,prepaid_amort,Prepaid expense movement,1300,39838.31,0.00
+JE-2026-10-12,2026-10,2026-10-prepaid_amort,prepaid_amort,Prepaid expense movement,1000,0.00,39838.31
+JE-2026-10-13,2026-10,2026-10-manual,manual,Interest income,1000,56912.54,0.00
+JE-2026-10-13,2026-10,2026-10-manual,manual,Interest income,7000,0.00,56912.54
+JE-2026-11-00,2026-11,2026-11-invoice,invoice,Subscription revenue recognized,2100,1890250.00,0.00
+JE-2026-11-00,2026-11,2026-11-invoice,invoice,Subscription revenue recognized,4000,0.00,1890250.00
+JE-2026-11-01,2026-11,2026-11-invoice,invoice,Subscription billed (annual upfront),1100,4265637.50,0.00
+JE-2026-11-01,2026-11,2026-11-invoice,invoice,Subscription billed (annual upfront),2100,0.00,4265637.50
+JE-2026-11-02,2026-11,2026-11-invoice,invoice,Services revenue recognized (% complete),1200,420629.86,0.00
+JE-2026-11-02,2026-11,2026-11-invoice,invoice,Services revenue recognized (% complete),4100,0.00,420629.86
+JE-2026-11-03,2026-11,2026-11-invoice,invoice,Services billed,1100,420000.00,0.00
+JE-2026-11-03,2026-11,2026-11-invoice,invoice,Services billed,1200,0.00,420000.00
+JE-2026-11-04,2026-11,2026-11-invoice,invoice,Customer collections,1000,4614194.35,0.00
+JE-2026-11-04,2026-11,2026-11-invoice,invoice,Customer collections,1100,0.00,4614194.35
+JE-2026-11-05,2026-11,2026-11-payroll,payroll,Payroll,5000,229471.12,0.00
+JE-2026-11-05,2026-11,2026-11-payroll,payroll,Payroll,6000,1369339.73,0.00
+JE-2026-11-05,2026-11,2026-11-payroll,payroll,Payroll,1000,0.00,1598810.85
+JE-2026-11-06,2026-11,2026-11-ap_bill,ap_bill,Vendor bills (CoR + OpEx),5100,426499.96,0.00
+JE-2026-11-06,2026-11,2026-11-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6100,351738.39,0.00
+JE-2026-11-06,2026-11,2026-11-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6200,323523.18,0.00
+JE-2026-11-06,2026-11,2026-11-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6300,55600.00,0.00
+JE-2026-11-06,2026-11,2026-11-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6400,46287.00,0.00
+JE-2026-11-06,2026-11,2026-11-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6500,27800.00,0.00
+JE-2026-11-06,2026-11,2026-11-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6600,37113.00,0.00
+JE-2026-11-06,2026-11,2026-11-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6700,64913.00,0.00
+JE-2026-11-06,2026-11,2026-11-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6800,23108.80,0.00
+JE-2026-11-06,2026-11,2026-11-ap_bill,ap_bill,Vendor bills (CoR + OpEx),2000,0.00,1356583.33
+JE-2026-11-07,2026-11,2026-11-ap_bill,ap_bill,AP payments,2000,1314758.49,0.00
+JE-2026-11-07,2026-11,2026-11-ap_bill,ap_bill,AP payments,1000,0.00,1314758.49
+JE-2026-11-08,2026-11,2026-11-depreciation,depreciation,Depreciation & amortization,6900,38357.00,0.00
+JE-2026-11-08,2026-11,2026-11-depreciation,depreciation,Depreciation & amortization,1500,0.00,38357.00
+JE-2026-11-09,2026-11,2026-11-manual,manual,Stock-based compensation (ASC 718),6950,390346.76,0.00
+JE-2026-11-09,2026-11,2026-11-manual,manual,Stock-based compensation (ASC 718),3000,0.00,390346.76
+JE-2026-11-10,2026-11,2026-11-manual,manual,Operating lease (ASC 842),1600,11000.00,0.00
+JE-2026-11-10,2026-11,2026-11-manual,manual,Operating lease (ASC 842),2200,0.00,11000.00
+JE-2026-11-11,2026-11,2026-11-manual,manual,Capital expenditures,1500,37970.00,0.00
+JE-2026-11-11,2026-11,2026-11-manual,manual,Capital expenditures,1000,0.00,37970.00
+JE-2026-11-12,2026-11,2026-11-prepaid_amort,prepaid_amort,Prepaid expense movement,1300,38671.12,0.00
+JE-2026-11-12,2026-11,2026-11-prepaid_amort,prepaid_amort,Prepaid expense movement,1000,0.00,38671.12
+JE-2026-11-13,2026-11,2026-11-manual,manual,Interest income,1000,54897.86,0.00
+JE-2026-11-13,2026-11,2026-11-manual,manual,Interest income,7000,0.00,54897.86
+JE-2026-12-00,2026-12,2026-12-invoice,invoice,Subscription revenue recognized,2100,2066845.83,0.00
+JE-2026-12-00,2026-12,2026-12-invoice,invoice,Subscription revenue recognized,4000,0.00,2066845.83
+JE-2026-12-01,2026-12,2026-12-invoice,invoice,Subscription billed (annual upfront),1100,3328308.33,0.00
+JE-2026-12-01,2026-12,2026-12-invoice,invoice,Subscription billed (annual upfront),2100,0.00,3328308.33
+JE-2026-12-02,2026-12,2026-12-invoice,invoice,Services revenue recognized (% complete),1200,420075.08,0.00
+JE-2026-12-02,2026-12,2026-12-invoice,invoice,Services revenue recognized (% complete),4100,0.00,420075.08
+JE-2026-12-03,2026-12,2026-12-invoice,invoice,Services billed,1100,420629.86,0.00
+JE-2026-12-03,2026-12,2026-12-invoice,invoice,Services billed,1200,0.00,420629.86
+JE-2026-12-04,2026-12,2026-12-invoice,invoice,Customer collections,1000,3491357.29,0.00
+JE-2026-12-04,2026-12,2026-12-invoice,invoice,Customer collections,1100,0.00,3491357.29
+JE-2026-12-05,2026-12,2026-12-payroll,payroll,Payroll,5000,367153.79,0.00
+JE-2026-12-05,2026-12,2026-12-payroll,payroll,Payroll,6000,2217127.93,0.00
+JE-2026-12-05,2026-12,2026-12-payroll,payroll,Payroll,1000,0.00,2584281.72
+JE-2026-12-06,2026-12,2026-12-ap_bill,ap_bill,Vendor bills (CoR + OpEx),5100,456382.56,0.00
+JE-2026-12-06,2026-12,2026-12-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6100,568541.98,0.00
+JE-2026-12-06,2026-12,2026-12-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6200,348168.93,0.00
+JE-2026-12-06,2026-12,2026-12-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6300,56000.00,0.00
+JE-2026-12-06,2026-12,2026-12-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6400,46620.00,0.00
+JE-2026-12-06,2026-12,2026-12-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6500,28000.00,0.00
+JE-2026-12-06,2026-12,2026-12-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6600,37380.00,0.00
+JE-2026-12-06,2026-12,2026-12-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6700,65380.00,0.00
+JE-2026-12-06,2026-12,2026-12-ap_bill,ap_bill,Vendor bills (CoR + OpEx),6800,24869.21,0.00
+JE-2026-12-06,2026-12,2026-12-ap_bill,ap_bill,Vendor bills (CoR + OpEx),2000,0.00,1631342.68
+JE-2026-12-07,2026-12,2026-12-ap_bill,ap_bill,AP payments,2000,1578232.80,0.00
+JE-2026-12-07,2026-12,2026-12-ap_bill,ap_bill,AP payments,1000,0.00,1578232.80
+JE-2026-12-08,2026-12,2026-12-depreciation,depreciation,Depreciation & amortization,6900,38862.33,0.00
+JE-2026-12-08,2026-12,2026-12-depreciation,depreciation,Depreciation & amortization,1500,0.00,38862.33
+JE-2026-12-09,2026-12,2026-12-manual,manual,Stock-based compensation (ASC 718),6950,394322.81,0.00
+JE-2026-12-09,2026-12,2026-12-manual,manual,Stock-based compensation (ASC 718),3000,0.00,394322.81
+JE-2026-12-10,2026-12,2026-12-manual,manual,Operating lease (ASC 842),1600,12000.00,0.00
+JE-2026-12-10,2026-12,2026-12-manual,manual,Operating lease (ASC 842),2200,0.00,12000.00
+JE-2026-12-11,2026-12,2026-12-manual,manual,Capital expenditures,1500,38200.00,0.00
+JE-2026-12-11,2026-12,2026-12-manual,manual,Capital expenditures,1000,0.00,38200.00
+JE-2026-12-12,2026-12,2026-12-prepaid_amort,prepaid_amort,Prepaid expense movement,1300,50232.28,0.00
+JE-2026-12-12,2026-12,2026-12-prepaid_amort,prepaid_amort,Prepaid expense movement,1000,0.00,50232.28
+JE-2026-12-13,2026-12,2026-12-manual,manual,Interest income,1000,60494.14,0.00
+JE-2026-12-13,2026-12,2026-12-manual,manual,Interest income,7000,0.00,60494.14

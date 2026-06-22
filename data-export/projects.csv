@@ -1,0 +1,89 @@
+id,name,customer_id,status,pct_complete,contract_value,wip,margin_pct
+svc-sub-0-0,Implementation · Brightloop,sub-0-0,complete,1.0000,136000.00,0.00,0.2898
+svc-sub-0-1,Implementation · Onspring,sub-0-1,complete,1.0000,17000.00,0.00,0.3851
+svc-sub-2-1,Implementation · Latchkey,sub-2-1,complete,1.0000,157000.00,0.00,0.3444
+svc-sub-3-0,Implementation · Cinder AI,sub-3-0,complete,1.0000,166000.00,0.00,0.3629
+svc-sub-4-0,Implementation · Synapse Compute,sub-4-0,complete,1.0000,19000.00,0.00,0.4095
+svc-sub-4-1,Implementation · Lumadel AI,sub-4-1,complete,1.0000,90000.00,0.00,0.2934
+svc-sub-4-2,Implementation · Tessera Intelligence,sub-4-2,complete,1.0000,15000.00,0.00,0.2947
+svc-sub-5-1,Implementation · Halcyon AI,sub-5-1,complete,1.0000,16000.00,0.00,0.3552
+svc-sub-5-2,Implementation · Veridian Labs,sub-5-2,complete,1.0000,12000.00,0.00,0.3819
+svc-sub-6-0,Implementation · Mesa Intelligence,sub-6-0,complete,1.0000,10000.00,0.00,0.4187
+svc-sub-6-1,Implementation · Foundry Compute,sub-6-1,complete,1.0000,104000.00,0.00,0.3039
+svc-sub-7-1,Implementation · Sferica Labs,sub-7-1,complete,1.0000,13000.00,0.00,0.4097
+svc-sub-7-2,Implementation · Keel Financial,sub-7-2,complete,1.0000,14000.00,0.00,0.2849
+svc-sub-8-0,Implementation · Mintline,sub-8-0,complete,1.0000,10000.00,0.00,0.3761
+svc-sub-8-1,Implementation · Ledgerwise,sub-8-1,complete,1.0000,369000.00,0.00,0.3061
+svc-sub-9-0,Implementation · Tradewind Capital,sub-9-0,complete,1.0000,117000.00,0.00,0.3388
+svc-sub-9-1,Implementation · Settl,sub-9-1,complete,1.0000,135000.00,0.00,0.3375
+svc-sub-10-1,Implementation · Beacon Ledger,sub-10-1,complete,1.0000,509000.00,0.00,0.2857
+svc-sub-10-2,Implementation · Vepay,sub-10-2,complete,1.0000,109000.00,0.00,0.3897
+svc-sub-11-0,Implementation · Quorum Capital,sub-11-0,complete,1.0000,86000.00,0.00,0.4185
+svc-sub-11-1,Implementation · Riverton Pay,sub-11-1,complete,1.0000,155000.00,0.00,0.3779
+svc-sub-11-2,Implementation · Standpoint Financial,sub-11-2,complete,1.0000,16000.00,0.00,0.4024
+svc-sub-12-0,Implementation · Almira Bank,sub-12-0,complete,1.0000,137000.00,0.00,0.3341
+svc-sub-12-2,Implementation · Cleardeed,sub-12-2,complete,1.0000,10000.00,0.00,0.3900
+svc-sub-13-1,Implementation · Haulwise,sub-13-1,complete,1.0000,19000.00,0.00,0.3797
+svc-sub-14-0,Implementation · Surveyor Realty AI,sub-14-0,complete,1.0000,114000.00,0.00,0.3420
+svc-sub-14-1,Implementation · Cartway,sub-14-1,complete,1.0000,14000.00,0.00,0.3857
+svc-sub-15-2,Implementation · Copperline Coffee,sub-15-2,complete,1.0000,10000.00,0.00,0.3831
+svc-sub-15-3,Implementation · Brackit,sub-15-3,complete,1.0000,114000.00,0.00,0.2907
+svc-sub-16-0,Implementation · Spindle Systems,sub-16-0,complete,1.0000,174000.00,0.00,0.3196
+svc-sub-16-3,Implementation · Tideglass,sub-16-3,complete,1.0000,18000.00,0.00,0.3240
+svc-sub-17-0,Implementation · Packetry,sub-17-0,complete,1.0000,13000.00,0.00,0.4005
+svc-sub-17-2,Implementation · Yardstick Labs,sub-17-2,complete,1.0000,179000.00,0.00,0.3650
+svc-sub-17-3,Implementation · Mossflow,sub-17-3,complete,1.0000,143000.00,0.00,0.3635
+svc-sub-18-1,Implementation · Cobaltline,sub-18-1,complete,1.0000,14000.00,0.00,0.3254
+svc-sub-18-3,Implementation · Stackmint,sub-18-3,complete,1.0000,17000.00,0.00,0.3240
+svc-sub-19-0,Implementation · Birchpoint,sub-19-0,complete,1.0000,286000.00,0.00,0.4081
+svc-sub-19-1,Implementation · Quillet,sub-19-1,complete,1.0000,142000.00,0.00,0.2885
+svc-sub-19-2,Implementation · Driftline Systems,sub-19-2,complete,1.0000,162000.00,0.00,0.3898
+svc-sub-19-3,Implementation · Pylon Software,sub-19-3,complete,1.0000,14000.00,0.00,0.3445
+svc-sub-20-0,Implementation · Crateworks,sub-20-0,complete,1.0000,10000.00,0.00,0.3753
+svc-sub-20-2,Implementation · Threadbase,sub-20-2,complete,1.0000,104000.00,0.00,0.2964
+svc-sub-20-3,Implementation · Ironwood Systems,sub-20-3,complete,1.0000,133000.00,0.00,0.3188
+svc-sub-21-0,Implementation · Lumberyard Software,sub-21-0,complete,1.0000,153000.00,0.00,0.2989
+svc-sub-21-2,Implementation · Murmur Stack,sub-21-2,complete,1.0000,16000.00,0.00,0.3501
+svc-sub-22-0,Implementation · Tinderbox Labs,sub-22-0,complete,1.0000,136000.00,0.00,0.3486
+svc-sub-22-1,Implementation · Saltbox Systems,sub-22-1,complete,1.0000,93000.00,0.00,0.3190
+svc-sub-22-2,Implementation · Glidepath Software,sub-22-2,complete,1.0000,18000.00,0.00,0.4074
+svc-sub-23-0,Implementation · Riffstack,sub-23-0,complete,1.0000,17000.00,0.00,0.3625
+svc-sub-23-3,Implementation · Outpost Software,sub-23-3,complete,1.0000,122000.00,0.00,0.3701
+svc-sub-24-0,Implementation · Kettleworks,sub-24-0,complete,1.0000,91000.00,0.00,0.3695
+svc-sub-24-1,Implementation · Snowfield Systems,sub-24-1,complete,1.0000,309000.00,0.00,0.2901
+svc-sub-25-0,Implementation · Wickline,sub-25-0,complete,1.0000,87000.00,0.00,0.3083
+svc-sub-25-1,Implementation · Plankstack,sub-25-1,complete,1.0000,15000.00,0.00,0.3056
+svc-sub-25-2,Implementation · Verdigris Systems,sub-25-2,complete,1.0000,18000.00,0.00,0.3063
+svc-sub-26-0,Implementation · Mapleline Software,sub-26-0,complete,1.0000,149000.00,0.00,0.3591
+svc-sub-26-1,Implementation · Brindle Labs,sub-26-1,complete,1.0000,180000.00,0.00,0.3023
+svc-sub-27-0,Implementation · Hollowpoint Systems,sub-27-0,complete,1.0000,19000.00,0.00,0.2965
+svc-sub-27-1,Implementation · Dunewire,sub-27-1,complete,1.0000,20000.00,0.00,0.3994
+svc-sub-27-2,Implementation · Stonefold Software,sub-27-2,complete,1.0000,19000.00,0.00,0.4151
+svc-sub-27-3,Implementation · Obsidian Compute,sub-27-3,complete,1.0000,117000.00,0.00,0.3774
+svc-sub-28-1,Implementation · Vantix Intelligence,sub-28-1,complete,1.0000,95000.00,0.00,0.2938
+svc-sub-28-2,Implementation · Quench AI,sub-28-2,complete,1.0000,179000.00,0.00,0.3422
+svc-sub-28-3,Implementation · Saffron Labs,sub-28-3,complete,1.0000,13000.00,0.00,0.2832
+svc-sub-29-0,Implementation · Meridel AI,sub-29-0,complete,1.0000,113000.00,0.00,0.3734
+svc-sub-29-2,Implementation · Thornwell AI,sub-29-2,complete,1.0000,102000.00,0.00,0.3877
+svc-sub-30-1,Implementation · Cradle AI,sub-30-1,complete,1.0000,163000.00,0.00,0.3873
+svc-sub-30-2,Implementation · Veor Compute,sub-30-2,complete,1.0000,17000.00,0.00,0.4187
+svc-sub-30-4,Implementation · Inkwell Intelligence,sub-30-4,in_progress,0.9019,495000.00,446430.95,0.3747
+svc-sub-31-0,Implementation · Talon Labs,sub-31-0,in_progress,0.7352,544000.00,399956.43,0.3252
+svc-sub-31-4,Implementation · Wavelength Labs,sub-31-4,in_progress,0.9786,161000.00,157547.45,0.3756
+svc-sub-32-0,Implementation · Solenya AI,sub-32-0,complete,1.0000,14000.00,0.00,0.3108
+svc-sub-32-1,Implementation · Bastion Intelligence,sub-32-1,complete,1.0000,16000.00,0.00,0.3579
+svc-sub-32-2,Implementation · Quill Compute,sub-32-2,in_progress,0.8528,111000.00,94663.14,0.3024
+svc-sub-33-0,Implementation · Sumledger,sub-33-0,in_progress,0.6028,150000.00,90423.16,0.3273
+svc-sub-33-1,Implementation · Tidewater Treasury,sub-33-1,in_progress,0.6028,179000.00,107904.97,0.3252
+svc-sub-33-2,Implementation · Greyrock Financial,sub-33-2,in_progress,0.6028,159000.00,95848.55,0.3735
+svc-sub-33-3,Implementation · Cobblestone Capital,sub-33-3,in_progress,0.6028,140000.00,84394.95,0.4085
+svc-sub-33-4,Implementation · Vaultline,sub-33-4,in_progress,0.9571,12000.00,11485.33,0.4163
+svc-sub-34-1,Implementation · Strand Pay,sub-34-1,in_progress,0.7490,19000.00,14231.72,0.2807
+svc-sub-34-2,Implementation · Norwell Capital,sub-34-2,in_progress,0.3745,169000.00,63293.68,0.2866
+svc-sub-34-3,Implementation · Ferrowise,sub-34-3,in_progress,0.3745,161000.00,60297.53,0.2919
+svc-sub-34-4,Implementation · Meadowlark Bank,sub-34-4,in_progress,0.7490,20000.00,14980.75,0.2965
+svc-sub-35-0,Implementation · Capstone Treasury,sub-35-0,in_progress,0.3381,16000.00,5409.33,0.3641
+svc-sub-35-1,Implementation · Driftwood Capital,sub-35-1,in_progress,0.1690,149000.00,25187.18,0.3244
+svc-sub-35-2,Implementation · Slatebridge Financial,sub-35-2,in_progress,0.1690,88000.00,14875.65,0.3312
+svc-sub-35-3,Implementation · Pennywhistle Pay,sub-35-3,in_progress,0.1690,120000.00,20284.98,0.2877
+svc-sub-35-4,Implementation · Tollgate Capital,sub-35-4,in_progress,0.1127,309000.00,34822.55,0.3132

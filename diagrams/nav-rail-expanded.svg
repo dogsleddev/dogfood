@@ -1,0 +1,136 @@
+<svg viewBox="0 0 286 1260" width="286" height="1260" xmlns="http://www.w3.org/2000/svg" font-family="Geist, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <defs>
+    <linearGradient id="gSide" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0E1726"/><stop offset="1" stop-color="#0B121E"/></linearGradient>
+    <linearGradient id="gAv" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#EC6D3F"/><stop offset="1" stop-color="#E7B23A"/></linearGradient>
+    <linearGradient id="gScout" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#EC6D3F" stop-opacity="0.18"/><stop offset="1" stop-color="#46C99A" stop-opacity="0.10"/></linearGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="14" stdDeviation="22" flood-color="#0E1726" flood-opacity="0.30"/></filter>
+    <clipPath id="panel"><rect x="8" y="8" width="270" height="1244" rx="16"/></clipPath>
+
+    <symbol id="mark" viewBox="0 0 30 30"><path d="M11 21 L18 16 L25 11" stroke="#9DB8CC" stroke-width="2" stroke-dasharray="0.5 4" stroke-linecap="round" fill="none" opacity="0.5"/><path d="M7 17 L11 21 L7 25" stroke="#F4ECDD" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 12 L18 16 L14 20" stroke="#F4ECDD" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 7 L25 11 L21 15" stroke="#EC6D3F" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="ic-scout" viewBox="0 0 24 24"><path d="M10 1.5 L11.4 7.6 L17.5 9 L11.4 10.4 L10 16.5 L8.6 10.4 L2.5 9 L8.6 7.6 Z" fill="currentColor"/></symbol>
+    <symbol id="ic-popout" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 4 H20 V11"/><path d="M20 4 L11 13"/><path d="M18 14 V19 a1 1 0 0 1 -1 1 H6 a1 1 0 0 1 -1 -1 V8 a1 1 0 0 1 1 -1 H11"/></g></symbol>
+    <symbol id="ic-dash" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="8" height="8" rx="1.6"/><rect x="13" y="3" width="8" height="8" rx="1.6"/><rect x="13" y="13" width="8" height="8" rx="1.6"/><rect x="3" y="13" width="8" height="8" rx="1.6"/></g></symbol>
+    <symbol id="ic-board" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M7 13 V10 M11 13 V7.5 M15 13 V11"/><path d="M12 16 V19 M9 19 H15"/></g></symbol>
+    <symbol id="ic-pl" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 3 V21 H21"/><path d="M7 15 L11 10 L14 13 L20 6"/></g></symbol>
+    <symbol id="ic-bs" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4 V20"/><path d="M6 20 H18"/><path d="M4 8 H20"/><path d="M4 8 L2 13 a3 2 0 0 0 4 0 Z"/><path d="M20 8 L18 13 a3 2 0 0 0 4 0 Z"/></g></symbol>
+    <symbol id="ic-cash" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="10" rx="1.8"/><circle cx="12" cy="12" r="2.3"/><line x1="6" y1="9.5" x2="6" y2="14.5"/><line x1="18" y1="9.5" x2="18" y2="14.5"/></g></symbol>
+    <symbol id="ic-projects" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 L20 7 L12 11 L4 7 Z"/><path d="M4 11 L12 15 L20 11"/><path d="M4 15 L12 19 L20 15"/></g></symbol>
+    <symbol id="ic-staff" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="14" rx="2"/><circle cx="12" cy="10.5" r="2.4"/><path d="M8.2 16.5 a3.8 3.8 0 0 1 7.6 0"/></g></symbol>
+    <symbol id="ic-txn" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="6" r="1.2"/><line x1="9" y1="6" x2="20" y2="6"/><circle cx="5" cy="12" r="1.2"/><line x1="9" y1="12" x2="20" y2="12"/><circle cx="5" cy="18" r="1.2"/><line x1="9" y1="18" x2="20" y2="18"/></g></symbol>
+    <symbol id="ic-funnel" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5 H20 L13.5 12.5 V19.5 L10.5 21 V12.5 Z"/></g></symbol>
+    <symbol id="ic-contract" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3 h7 l4 4 v13 a1 1 0 0 1 -1 1 H8 a1 1 0 0 1 -1 -1 V4 a1 1 0 0 1 1 -1 Z"/><path d="M14 3 v4 h4"/><path d="M9 11 h4 M9 14 h6"/><path d="M9 17.5 q1.2 -1.6 2.4 0 q1.2 1.6 2.4 0"/></g></symbol>
+    <symbol id="ic-building" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="11" height="18" rx="1"/><path d="M16 21 V9 h3 a1 1 0 0 1 1 1 V21"/><path d="M8.5 7 h1.5 M12 7 h1.5 M8.5 11 h1.5 M12 11 h1.5 M8.5 15 h1.5 M12 15 h1.5"/></g></symbol>
+    <symbol id="ic-renew" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12 a9 9 0 1 1 -3 -6.7 L21 8"/><path d="M21 3 v5 h-5"/></g></symbol>
+    <symbol id="ic-rev" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17 L9 11 L13 15 L21 7"/><path d="M21 7 H16 M21 7 V12"/></g></symbol>
+    <symbol id="ic-cor" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 L20 7.5 V16.5 L12 21 L4 16.5 V7.5 Z"/><path d="M12 3 V12 M12 12 L20 7.5 M12 12 L4 7.5"/></g></symbol>
+    <symbol id="ic-users" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3.5 20 a5.5 5.5 0 0 1 11 0"/><circle cx="16.5" cy="9" r="2.3"/><path d="M15.2 14.2 a5 5 0 0 1 5.3 5.8"/></g></symbol>
+    <symbol id="ic-wallet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2.2"/><line x1="3" y1="10" x2="21" y2="10"/><circle cx="16.5" cy="14.5" r="1.3"/></g></symbol>
+    <symbol id="ic-clock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7 V12 L15.5 14"/></g></symbol>
+    <symbol id="ic-cube" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 L20 7.5 V16.5 L12 21 L4 16.5 V7.5 Z"/><path d="M4 7.5 L12 12 L20 7.5"/><path d="M12 12 V21"/></g></symbol>
+    <symbol id="ic-prepaid" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="15" y2="12"/><line x1="4" y1="17" x2="10" y2="17"/></g></symbol>
+    <symbol id="ic-branch" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.3"/><circle cx="6" cy="18" r="2.3"/><circle cx="18" cy="11" r="2.3"/><path d="M6 8.3 V15.7"/><path d="M6 11 C 10 11 14 11 15.7 11"/></g></symbol>
+    <symbol id="ic-sliders" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="8" x2="20" y2="8"/><line x1="4" y1="16" x2="20" y2="16"/></g><circle cx="9" cy="8" r="2.4" fill="#0E1726" stroke="currentColor" stroke-width="1.8"/><circle cx="15" cy="16" r="2.4" fill="#0E1726" stroke="currentColor" stroke-width="1.8"/></symbol>
+    <symbol id="ic-paired" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20 V21 H21"/><rect x="6" y="11" width="2.6" height="8"/><rect x="9" y="14" width="2.6" height="5"/><rect x="14" y="8" width="2.6" height="11"/><rect x="17" y="12" width="2.6" height="7"/></g></symbol>
+    <symbol id="ic-gauge" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17 a8 8 0 0 1 16 0"/><path d="M12 17 L16.5 12.5"/><circle cx="12" cy="17" r="1.3"/></g></symbol>
+    <symbol id="ic-import" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14 v4 a1 1 0 0 0 1 1 h14 a1 1 0 0 0 1 -1 v-4"/><path d="M12 3 V15"/><path d="M8 11 L12 15 L16 11"/></g></symbol>
+    <symbol id="ic-map" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="12" r="2"/><path d="M8 6 H12 a2 2 0 0 1 2 2 V10.2"/><path d="M8 18 H12 a2 2 0 0 1 2 -2 V13.8"/></g></symbol>
+    <symbol id="ic-gear" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2.5 V5 M12 19 V21.5 M2.5 12 H5 M19 12 H21.5 M5.2 5.2 L7 7 M17 17 L18.8 18.8 M18.8 5.2 L17 7 M7 17 L5.2 18.8"/></g></symbol>
+    <symbol id="ic-doc" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3 h7 l4 4 v13 a1 1 0 0 1 -1 1 H7 a1 1 0 0 1 -1 -1 V4 a1 1 0 0 1 1 -1 Z"/><path d="M14 3 v4 h4"/><path d="M9 13 h6 M9 16 h4"/></g></symbol>
+  </defs>
+
+  <rect x="8" y="8" width="270" height="1244" rx="16" fill="#0E1726" filter="url(#soft)" opacity="0.18"/>
+  <rect x="8" y="8" width="270" height="1244" rx="16" fill="url(#gSide)" stroke="#0E1726"/>
+  <g clip-path="url(#panel)">
+    <!-- header -->
+    <use href="#mark" x="22" y="16" width="22" height="22"/>
+    <text x="50" y="34" font-family="Fraunces, Georgia, serif" font-size="16" font-weight="600" fill="#F4ECDD">dogfood<tspan fill="#9DB8CC" font-weight="500">.cafe</tspan></text>
+
+    <rect x="20" y="48" width="246" height="36" rx="9" fill="#FFFFFF" fill-opacity="0.025" stroke="#9DB8CC" stroke-opacity="0.16"/>
+    <rect x="30" y="55" width="22" height="22" rx="6" fill="url(#gAv)"/><text x="41" y="70" font-size="9.5" font-weight="700" fill="#0E1726" text-anchor="middle">BR</text>
+    <text x="60" y="64" font-size="12" font-weight="600" fill="#F4ECDD">Bearing</text><text x="60" y="77" font-size="9.5" fill="#9DB8CC">FY26 · Jun</text>
+    <path d="M250 64 l4 4 4 -4" stroke="#9DB8CC" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- OVERVIEW -->
+    <text x="24" y="104" font-size="9.5" font-weight="600" letter-spacing="0.8" fill="#8FA6BB" fill-opacity="0.55">OVERVIEW</text>
+    <use href="#ic-dash" x="28" y="106" width="17" height="17" color="#8FA6BB"/><text x="50" y="119" font-size="12" font-weight="500" fill="#BFC9D4">Dashboard</text>
+    <use href="#ic-board" x="28" y="128" width="17" height="17" color="#8FA6BB"/><text x="50" y="141" font-size="12" font-weight="500" fill="#BFC9D4">Board Package</text>
+
+    <!-- FINANCIAL STATEMENTS -->
+    <text x="24" y="161" font-size="9.5" font-weight="600" letter-spacing="0.8" fill="#8FA6BB" fill-opacity="0.55">FINANCIAL STATEMENTS</text>
+    <rect x="14" y="162" width="238" height="28" rx="9" fill="#EC6D3F" fill-opacity="0.12"/><rect x="8" y="166" width="3" height="20" rx="1.5" fill="#EC6D3F"/>
+    <use href="#ic-pl" x="28" y="163" width="17" height="17" color="#EC6D3F"/><text x="50" y="176" font-size="12" font-weight="600" fill="#F4ECDD">Forecasted P&amp;L</text>
+    <use href="#ic-bs" x="28" y="185" width="17" height="17" color="#8FA6BB"/><text x="50" y="198" font-size="12" font-weight="500" fill="#BFC9D4">Balance Sheet</text>
+    <use href="#ic-cash" x="28" y="207" width="17" height="17" color="#8FA6BB"/><text x="50" y="220" font-size="12" font-weight="500" fill="#BFC9D4">Cash Flow Forecast</text>
+
+    <!-- REPORTING -->
+    <text x="24" y="240" font-size="9.5" font-weight="600" letter-spacing="0.8" fill="#8FA6BB" fill-opacity="0.55">REPORTING</text>
+    <use href="#ic-projects" x="28" y="242" width="17" height="17" color="#8FA6BB"/><text x="50" y="255" font-size="12" font-weight="500" fill="#BFC9D4">Projects</text>
+    <use href="#ic-staff" x="28" y="264" width="17" height="17" color="#8FA6BB"/><text x="50" y="277" font-size="12" font-weight="500" fill="#BFC9D4">Staff</text>
+    <use href="#ic-txn" x="28" y="286" width="17" height="17" color="#8FA6BB"/><text x="50" y="299" font-size="12" font-weight="500" fill="#BFC9D4">Expense Transactions</text>
+
+    <!-- SALES -->
+    <text x="24" y="319" font-size="9.5" font-weight="600" letter-spacing="0.8" fill="#8FA6BB" fill-opacity="0.55">SALES</text>
+    <use href="#ic-funnel" x="28" y="321" width="17" height="17" color="#8FA6BB"/><text x="50" y="334" font-size="12" font-weight="500" fill="#BFC9D4">Pipeline</text>
+    <use href="#ic-contract" x="28" y="343" width="17" height="17" color="#8FA6BB"/><text x="50" y="356" font-size="12" font-weight="500" fill="#BFC9D4">Contracts</text>
+    <use href="#ic-building" x="28" y="365" width="17" height="17" color="#8FA6BB"/><text x="50" y="378" font-size="12" font-weight="500" fill="#BFC9D4">Customers</text>
+    <use href="#ic-renew" x="28" y="387" width="17" height="17" color="#8FA6BB"/><text x="50" y="400" font-size="12" font-weight="500" fill="#BFC9D4">Renewals</text>
+
+    <!-- FORECASTS -->
+    <text x="24" y="420" font-size="9.5" font-weight="600" letter-spacing="0.8" fill="#8FA6BB" fill-opacity="0.55">FORECASTS</text>
+    <text x="30" y="436" font-size="9.5" font-weight="600" fill="#8FA6BB" fill-opacity="0.75">P&amp;L drivers</text>
+    <line x1="38" y1="444" x2="38" y2="517" stroke="#9DB8CC" stroke-opacity="0.18"/>
+    <use href="#ic-rev" x="42" y="439" width="16" height="16" color="#8FA6BB"/><text x="62" y="451" font-size="12" font-weight="500" fill="#BFC9D4">Revenue Forecast</text>
+    <use href="#ic-cor" x="42" y="461" width="16" height="16" color="#8FA6BB"/><text x="62" y="473" font-size="12" font-weight="500" fill="#BFC9D4">Cost of Revenue</text>
+    <use href="#ic-users" x="42" y="483" width="16" height="16" color="#8FA6BB"/><text x="62" y="495" font-size="12" font-weight="500" fill="#BFC9D4">Personnel</text>
+    <use href="#ic-wallet" x="42" y="505" width="16" height="16" color="#8FA6BB"/><text x="62" y="517" font-size="12" font-weight="600" fill="#D8DEE6">Expense Forecast</text>
+    <path d="M226 510 l4 4 4 -4" stroke="#8FA6BB" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="72" y1="532" x2="72" y2="689" stroke="#9DB8CC" stroke-opacity="0.24"/>
+    <line x1="72" y1="535" x2="79" y2="535" stroke="#9DB8CC" stroke-opacity="0.24"/><text x="84" y="539" font-size="11" fill="#AEB9C6">Employee Expenses</text>
+    <line x1="72" y1="557" x2="79" y2="557" stroke="#9DB8CC" stroke-opacity="0.24"/><text x="84" y="561" font-size="11" fill="#AEB9C6">Sales &amp; Marketing</text>
+    <line x1="72" y1="579" x2="79" y2="579" stroke="#9DB8CC" stroke-opacity="0.24"/><text x="84" y="583" font-size="11" fill="#AEB9C6">Travel &amp; Entertainment</text>
+    <line x1="72" y1="601" x2="79" y2="601" stroke="#9DB8CC" stroke-opacity="0.24"/><text x="84" y="605" font-size="11" fill="#AEB9C6">IT</text>
+    <line x1="72" y1="623" x2="79" y2="623" stroke="#9DB8CC" stroke-opacity="0.24"/><text x="84" y="627" font-size="11" fill="#AEB9C6">HR</text>
+    <line x1="72" y1="645" x2="79" y2="645" stroke="#9DB8CC" stroke-opacity="0.24"/><text x="84" y="649" font-size="11" fill="#AEB9C6">Admin</text>
+    <line x1="72" y1="667" x2="79" y2="667" stroke="#9DB8CC" stroke-opacity="0.24"/><text x="84" y="671" font-size="11" fill="#AEB9C6">Facilities</text>
+    <line x1="72" y1="689" x2="79" y2="689" stroke="#9DB8CC" stroke-opacity="0.24"/><text x="84" y="693" font-size="11" fill="#AEB9C6">Insurance</text>
+    <text x="30" y="713" font-size="9.5" font-weight="600" fill="#8FA6BB" fill-opacity="0.75">Balance sheet drivers</text>
+    <line x1="38" y1="721" x2="38" y2="772" stroke="#9DB8CC" stroke-opacity="0.18"/>
+    <use href="#ic-clock" x="42" y="716" width="16" height="16" color="#8FA6BB"/><text x="62" y="728" font-size="12" font-weight="500" fill="#BFC9D4">AR Forecast</text>
+    <use href="#ic-cube" x="42" y="738" width="16" height="16" color="#8FA6BB"/><text x="62" y="750" font-size="12" font-weight="500" fill="#BFC9D4">Fixed Asset Budget</text>
+    <use href="#ic-prepaid" x="42" y="760" width="16" height="16" color="#8FA6BB"/><text x="62" y="772" font-size="12" font-weight="500" fill="#BFC9D4">Prepaids Budget</text>
+
+    <!-- SCENARIOS -->
+    <text x="24" y="792" font-size="9.5" font-weight="600" letter-spacing="0.8" fill="#8FA6BB" fill-opacity="0.55">SCENARIOS</text>
+    <use href="#ic-branch" x="28" y="794" width="17" height="17" color="#8FA6BB"/><text x="50" y="807" font-size="12" font-weight="500" fill="#BFC9D4">Scenario Manager</text>
+    <use href="#ic-sliders" x="28" y="816" width="17" height="17" color="#8FA6BB"/><text x="50" y="829" font-size="12" font-weight="500" fill="#BFC9D4">Scenario Drivers</text>
+    <use href="#ic-paired" x="28" y="838" width="17" height="17" color="#8FA6BB"/><text x="50" y="851" font-size="12" font-weight="500" fill="#BFC9D4">Scenario P&amp;L</text>
+    <use href="#ic-gauge" x="28" y="860" width="17" height="17" color="#8FA6BB"/><text x="50" y="873" font-size="12" font-weight="500" fill="#BFC9D4">Scenario Dashboard</text>
+
+    <line x1="20" y1="894" x2="266" y2="894" stroke="#9DB8CC" stroke-opacity="0.14" stroke-dasharray="2 4"/>
+
+    <!-- SETUP -->
+    <text x="24" y="912" font-size="9.5" font-weight="600" letter-spacing="0.8" fill="#8FA6BB" fill-opacity="0.5">SETUP</text>
+    <use href="#ic-import" x="28" y="914" width="17" height="17" color="#9DB8CC"/><text x="50" y="927" font-size="12" font-weight="500" fill="#BFC9D4">Data Import</text>
+    <use href="#ic-map" x="28" y="936" width="17" height="17" color="#9DB8CC"/><text x="50" y="949" font-size="12" font-weight="500" fill="#BFC9D4">Account Mapping</text>
+    <use href="#ic-gear" x="28" y="958" width="17" height="17" color="#9DB8CC"/><text x="50" y="971" font-size="12" font-weight="500" fill="#BFC9D4">Settings</text>
+    <use href="#ic-doc" x="28" y="980" width="17" height="17" color="#9DB8CC"/><text x="50" y="993" font-size="12" font-weight="600" fill="#D8DEE6">User Guides</text>
+    <path d="M226 986 l4 4 4 -4" stroke="#8FA6BB" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="60" y1="1006" x2="60" y2="1121" stroke="#9DB8CC" stroke-opacity="0.28"/>
+    <line x1="60" y1="1011" x2="67" y2="1011" stroke="#9DB8CC" stroke-opacity="0.28"/><text x="72" y="1015" font-size="11" fill="#AEB9C6">Getting started</text>
+    <line x1="60" y1="1033" x2="67" y2="1033" stroke="#9DB8CC" stroke-opacity="0.28"/><text x="72" y="1037" font-size="11" fill="#AEB9C6">Budgets &amp; forecasts</text>
+    <line x1="60" y1="1055" x2="67" y2="1055" stroke="#9DB8CC" stroke-opacity="0.28"/><text x="72" y="1059" font-size="11" fill="#AEB9C6">Updating actuals</text>
+    <line x1="60" y1="1077" x2="67" y2="1077" stroke="#9DB8CC" stroke-opacity="0.28"/><text x="72" y="1081" font-size="11" fill="#AEB9C6">Creating scenarios</text>
+    <line x1="60" y1="1099" x2="67" y2="1099" stroke="#9DB8CC" stroke-opacity="0.28"/><text x="72" y="1103" font-size="11" fill="#AEB9C6">Reading the statements</text>
+    <line x1="60" y1="1121" x2="67" y2="1121" stroke="#9DB8CC" stroke-opacity="0.28"/><text x="72" y="1125" font-size="11" fill="#AEB9C6">Asking Scout</text>
+
+    <!-- footer: account + Ask Scout launcher (bottom of rail) -->
+    <line x1="20" y1="1148" x2="266" y2="1148" stroke="#9DB8CC" stroke-opacity="0.16"/>
+    <circle cx="34" cy="1168" r="12" fill="#16273A"/><text x="34" y="1172" font-size="11" font-weight="700" fill="#F4ECDD" text-anchor="middle">C</text>
+    <text x="54" y="1164" font-size="12" font-weight="600" fill="#F4ECDD">Chris</text><text x="54" y="1176" font-size="10" fill="#9DB8CC">CFO</text>
+    <rect x="20" y="1194" width="246" height="44" rx="11" fill="url(#gScout)" stroke="#EC6D3F" stroke-opacity="0.4"/>
+    <use href="#ic-scout" x="32" y="1206" width="20" height="20" color="#EC6D3F"/>
+    <text x="58" y="1213" font-size="12.5" font-weight="600" fill="#F4ECDD">Ask Scout</text>
+    <text x="58" y="1227" font-size="9.5" fill="#9DB8CC">opens lower-right</text>
+    <use href="#ic-popout" x="238" y="1207" width="16" height="16" color="#E7B23A"/>
+  </g>
+</svg>

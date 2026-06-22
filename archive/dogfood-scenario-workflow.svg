@@ -1,0 +1,125 @@
+<svg viewBox="0 0 780 722" width="780" height="722" xmlns="http://www.w3.org/2000/svg" font-family="Geist, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <defs>
+    <linearGradient id="gAv" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#EC6D3F"/><stop offset="1" stop-color="#E7B23A"/></linearGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="14" stdDeviation="22" flood-color="#0E1726" flood-opacity="0.16"/></filter>
+    <marker id="ah" markerWidth="9" markerHeight="9" refX="4.5" refY="4.5" orient="auto"><path d="M1 1 L8 4.5 L1 8 L3 4.5 Z" fill="#EC6D3F"/></marker>
+    <marker id="aha" markerWidth="9" markerHeight="9" refX="4.5" refY="4.5" orient="auto"><path d="M1 1 L8 4.5 L1 8 L3 4.5 Z" fill="#2FA37D"/></marker>
+  </defs>
+
+  <!-- background card -->
+  <rect x="8" y="8" width="764" height="706" rx="18" fill="#0E1726" filter="url(#soft)" opacity="0.16"/>
+  <rect x="8" y="8" width="764" height="706" rx="18" fill="#F7F3EC" stroke="#E6DECF"/>
+
+  <!-- title + legend -->
+  <text x="60" y="44" font-family="Fraunces, Georgia, serif" font-size="22" font-weight="600" fill="#1c2530">Creating a scenario</text>
+  <text x="60" y="64" font-size="12.5" fill="#7A8694">fork  →  edit  →  roll up  →  save  →  compare</text>
+  <g font-size="10.5" font-weight="600">
+    <circle cx="470" cy="40" r="3.5" fill="#E7B23A"/><text x="478" y="44" fill="#B9852A">Top bar</text>
+    <circle cx="540" cy="40" r="3.5" fill="#EC6D3F"/><text x="548" y="44" fill="#C9582E">Forecasts</text>
+    <circle cx="622" cy="40" r="3.5" fill="#4F6F8F"/><text x="630" y="44" fill="#4F6F8F">Statements</text>
+    <circle cx="710" cy="40" r="3.5" fill="#2FA37D"/><text x="718" y="44" fill="#2C7A60">Scenarios</text>
+  </g>
+
+  <!-- spine arrows -->
+  <g stroke="#EC6D3F" stroke-width="2" fill="none">
+    <line x1="235" y1="140" x2="235" y2="158" marker-end="url(#ah)"/>
+    <line x1="235" y1="218" x2="235" y2="236" marker-end="url(#ah)"/>
+    <line x1="235" y1="318" x2="235" y2="336" marker-end="url(#ah)"/>
+    <line x1="235" y1="396" x2="235" y2="414" marker-end="url(#ah)"/>
+    <line x1="235" y1="474" x2="235" y2="492" marker-end="url(#ah)"/>
+  </g>
+  <line x1="235" y1="552" x2="235" y2="570" stroke="#EC6D3F" stroke-width="2" stroke-dasharray="3 3" fill="none" marker-end="url(#ah)" opacity="0.6"/>
+  <text x="244" y="565" font-size="9.5" fill="#B9852A">optional</text>
+
+  <!-- START node -->
+  <rect x="60" y="90" width="350" height="50" rx="12" fill="#FFFFFF" stroke="#ECE6DB"/>
+  <circle cx="84" cy="115" r="13" fill="#16273A"/>
+  <path d="M80 110 L88 115 L80 120 Z" fill="#F4ECDD"/>
+  <text x="108" y="111" font-size="13.5" font-weight="600" fill="#1c2530">You're on Base</text>
+  <text x="108" y="127" font-size="11" fill="#5A6B7A">Top bar shows <tspan font-weight="600" fill="#1c2530">Working: Base ▾</tspan> — every surface shows Base</text>
+
+  <!-- STEP 1 -->
+  <rect x="60" y="160" width="350" height="58" rx="12" fill="#FFFFFF" stroke="#ECE6DB"/>
+  <circle cx="84" cy="189" r="13" fill="#EC6D3F"/><text x="84" y="193.5" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text>
+  <text x="108" y="184" font-size="13.5" font-weight="600" fill="#1c2530">Fork a new scenario</text>
+  <rect x="332" y="171" width="64" height="17" rx="8.5" fill="#E7B23A" fill-opacity="0.12" stroke="#E7B23A" stroke-opacity="0.3"/>
+  <circle cx="343" cy="179.5" r="2.6" fill="#E7B23A"/><text x="352" y="183" font-size="10" font-weight="600" fill="#B9852A">Top bar</text>
+  <text x="108" y="204" font-size="11" fill="#5A6B7A">Save As → name it “Aggressive Hiring.” Copies Base, switches you onto it, marks <tspan font-style="italic">unsaved</tspan>.</text>
+
+  <!-- STEP 2 -->
+  <rect x="60" y="238" width="350" height="80" rx="12" fill="#FFFFFF" stroke="#ECE6DB"/>
+  <circle cx="84" cy="278" r="13" fill="#EC6D3F"/><text x="84" y="282.5" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">2</text>
+  <text x="108" y="262" font-size="13.5" font-weight="600" fill="#1c2530">Change the assumptions</text>
+  <rect x="322" y="249" width="74" height="17" rx="8.5" fill="#EC6D3F" fill-opacity="0.12" stroke="#EC6D3F" stroke-opacity="0.3"/>
+  <circle cx="333" cy="257.5" r="2.6" fill="#EC6D3F"/><text x="342" y="261" font-size="10" font-weight="600" fill="#C9582E">Forecasts</text>
+  <circle cx="112" cy="282" r="2" fill="#9AA4B0"/><text x="120" y="285.5" font-size="11" fill="#5A6B7A"><tspan font-weight="600" fill="#1c2530">Drivers</tspan> — growth, merit %, headcount target   <tspan fill="#9AA4B0">· Assumptions</tspan></text>
+  <circle cx="112" cy="300" r="2" fill="#9AA4B0"/><text x="120" y="303.5" font-size="11" fill="#5A6B7A"><tspan font-weight="600" fill="#1c2530">Lines</tspan> — add hires, include deals, raise spend   <tspan fill="#9AA4B0">· P&amp;L</tspan></text>
+
+  <!-- STEP 3 -->
+  <rect x="60" y="338" width="350" height="58" rx="12" fill="#FFFFFF" stroke="#ECE6DB"/>
+  <circle cx="84" cy="367" r="13" fill="#EC6D3F"/><text x="84" y="371.5" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">3</text>
+  <text x="108" y="362" font-size="13.5" font-weight="600" fill="#1c2530">Watch it roll up</text>
+  <rect x="316" y="349" width="80" height="17" rx="8.5" fill="#4F6F8F" fill-opacity="0.12" stroke="#4F6F8F" stroke-opacity="0.3"/>
+  <circle cx="327" cy="357.5" r="2.6" fill="#4F6F8F"/><text x="336" y="361" font-size="10" font-weight="600" fill="#4F6F8F">Statements</text>
+  <text x="108" y="382" font-size="11" fill="#5A6B7A">Forecasted P&amp;L updates instantly. Drill the Personnel line to confirm the change traces back.</text>
+
+  <!-- STEP 4 -->
+  <rect x="60" y="416" width="350" height="58" rx="12" fill="#FFFFFF" stroke="#ECE6DB"/>
+  <circle cx="84" cy="445" r="13" fill="#EC6D3F"/><text x="84" y="449.5" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">4</text>
+  <text x="108" y="440" font-size="13.5" font-weight="600" fill="#1c2530">Save the draft</text>
+  <rect x="332" y="427" width="64" height="17" rx="8.5" fill="#E7B23A" fill-opacity="0.12" stroke="#E7B23A" stroke-opacity="0.3"/>
+  <circle cx="343" cy="435.5" r="2.6" fill="#E7B23A"/><text x="352" y="439" font-size="10" font-weight="600" fill="#B9852A">Top bar</text>
+  <text x="108" y="460" font-size="11" fill="#5A6B7A">Save commits the working edits into the scenario. Now it's saved and you can leave it.</text>
+
+  <!-- STEP 5 -->
+  <rect x="60" y="492" width="350" height="58" rx="12" fill="#FFFFFF" stroke="#ECE6DB"/>
+  <circle cx="84" cy="521" r="13" fill="#EC6D3F"/><text x="84" y="525.5" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">5</text>
+  <text x="108" y="516" font-size="13.5" font-weight="600" fill="#1c2530">Compare</text>
+  <rect x="320" y="503" width="76" height="17" rx="8.5" fill="#2FA37D" fill-opacity="0.12" stroke="#2FA37D" stroke-opacity="0.35"/>
+  <circle cx="331" cy="511.5" r="2.6" fill="#2FA37D"/><text x="340" y="515" font-size="10" font-weight="600" fill="#2C7A60">Scenarios</text>
+  <text x="108" y="536" font-size="11" fill="#5A6B7A">Scenario Dashboard: KPI cards + deltas vs baseline. Scenario P&amp;L: columns side by side.</text>
+
+  <!-- STEP 6 -->
+  <rect x="60" y="570" width="350" height="58" rx="12" fill="#FFFFFF" stroke="#ECE6DB" stroke-dasharray="4 3"/>
+  <circle cx="84" cy="599" r="13" fill="#FFFFFF" stroke="#EC6D3F" stroke-width="1.6"/><text x="84" y="603.5" font-size="13" font-weight="700" fill="#EC6D3F" text-anchor="middle">6</text>
+  <text x="108" y="594" font-size="13.5" font-weight="600" fill="#1c2530">Lock as the plan <tspan font-weight="400" fill="#9AA4B0">(optional)</tspan></text>
+  <rect x="320" y="581" width="76" height="17" rx="8.5" fill="#2FA37D" fill-opacity="0.12" stroke="#2FA37D" stroke-opacity="0.35"/>
+  <circle cx="331" cy="589.5" r="2.6" fill="#2FA37D"/><text x="340" y="593" font-size="10" font-weight="600" fill="#2C7A60">Scenarios</text>
+  <text x="108" y="614" font-size="11" fill="#5A6B7A">Set Baseline / Lock freezes a snapshot so it won't drift when June closes.</text>
+
+  <!-- SCOUT lane -->
+  <rect x="440" y="160" width="300" height="310" rx="14" fill="#46C99A" fill-opacity="0.07" stroke="#2FA37D" stroke-opacity="0.35"/>
+  <circle cx="465" cy="188" r="13" fill="url(#gAv)"/>
+  <path d="M465 179 L466.4 185.8 L472 187 L466.4 188.2 L465 195 L463.6 188.2 L458 187 L463.6 185.8 Z" fill="#F8F1E4" transform="translate(0,0)"/>
+  <text x="486" y="184" font-size="14" font-weight="600" fill="#1c2530">Scout shortcut</text>
+  <text x="486" y="199" font-size="10.5" fill="#2C7A60">skip the clicks</text>
+
+  <rect x="456" y="214" width="268" height="56" rx="10" fill="#FFFFFF" stroke="#E2DACB"/>
+  <text x="470" y="236" font-size="11.5" fill="#1c2530">“fork Base, add 3 Eng hires in Q3,</text>
+  <text x="470" y="252" font-size="11.5" fill="#1c2530">then show runway vs Base”</text>
+
+  <text x="456" y="292" font-size="10.5" font-weight="600" fill="#5A6B7A">Scout runs</text>
+  <rect x="456" y="300" width="116" height="20" rx="10" fill="#46C99A" fill-opacity="0.12" stroke="#2FA37D" stroke-opacity="0.3"/>
+  <circle cx="467" cy="310" r="2.4" fill="#2FA37D"/><text x="476" y="314" font-size="10" fill="#2C7A60" font-family="ui-monospace, monospace">createScenario</text>
+  <rect x="578" y="300" width="84" height="20" rx="10" fill="#46C99A" fill-opacity="0.12" stroke="#2FA37D" stroke-opacity="0.3"/>
+  <circle cx="589" cy="310" r="2.4" fill="#2FA37D"/><text x="598" y="314" font-size="10" fill="#2C7A60" font-family="ui-monospace, monospace">setDriver</text>
+  <rect x="456" y="326" width="136" height="20" rx="10" fill="#46C99A" fill-opacity="0.12" stroke="#2FA37D" stroke-opacity="0.3"/>
+  <circle cx="467" cy="336" r="2.4" fill="#2FA37D"/><text x="476" y="340" font-size="10" fill="#2C7A60" font-family="ui-monospace, monospace">compareScenarios</text>
+
+  <line x1="456" y1="364" x2="724" y2="364" stroke="#2FA37D" stroke-opacity="0.2"/>
+  <text x="456" y="386" font-size="11.5" fill="#1c2530">Collapses steps 1–5 into one message,</text>
+  <text x="456" y="402" font-size="11.5" fill="#1c2530">and lands you straight at Compare.</text>
+  <rect x="456" y="420" width="268" height="32" rx="8" fill="#2FA37D" fill-opacity="0.10"/>
+  <text x="470" y="440" font-size="10.5" font-weight="600" fill="#2C7A60">Result: “Aggressive Hiring” saved and compared to Base.</text>
+
+  <!-- dashed bypass connectors -->
+  <path d="M410 112 C 428 112 432 150 458 168" stroke="#2FA37D" stroke-width="1.8" stroke-dasharray="4 3" fill="none" marker-end="url(#aha)" opacity="0.8"/>
+  <path d="M520 470 C 520 500 470 506 414 519" stroke="#2FA37D" stroke-width="1.8" stroke-dasharray="4 3" fill="none" marker-end="url(#aha)" opacity="0.8"/>
+
+  <!-- footnote -->
+  <rect x="60" y="648" width="664" height="48" rx="10" fill="#F2EEE6" stroke="#E6DECF"/>
+  <rect x="74" y="664" width="15" height="13" rx="2" fill="none" stroke="#C9582E" stroke-width="1.5"/>
+  <path d="M77 664 V661 a4.5 4.5 0 0 1 9 0 V664" fill="none" stroke="#C9582E" stroke-width="1.5"/>
+  <text x="100" y="668" font-size="10.8" fill="#5A6B7A"><tspan font-weight="600" fill="#1c2530">What's saved:</tspan> the changes off Base (deltas), not a frozen copy. Scenarios re-forecast against the latest</text>
+  <text x="100" y="684" font-size="10.8" fill="#5A6B7A">actuals each time you open them. <tspan font-weight="600" fill="#C9582E">Lock</tspan> is the one exception that freezes the numbers.</text>
+</svg>

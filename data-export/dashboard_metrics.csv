@@ -1,0 +1,20 @@
+metric_id,label,family,basis,value,prior_year,budget
+revenue,Revenue,financial,subscription + services recognized,$23.4M,$14.5M,$24.2M
+gross_profit,Gross profit,financial,Revenue − Cost of Revenue,$16.6M,$10M,$17.6M
+gross_margin_pct,Gross margin %,financial,gross profit ÷ revenue,71%,69%,73%
+operating_income,Operating income,financial,gross profit − operating expenses,-$12.7M,-$9.2M,-$11.3M
+net_income,Net income,financial,"operating income + net interest − tax (Bearing: interest income on cash, $0 tax under NOLs, so NI is less negative than OI)",-$11.9M,-$8.6M,-$10.5M
+net_margin_pct,Net margin %,financial,net income ÷ revenue,-51%,-59%,-43%
+arr_mrr,ARR / MRR,growth_retention,from contract schedules,$18.1M,$11M,$17.6M
+bookings_delta_arr,Bookings (ΔARR),growth_retention,trailing-12-mo net ΔARR (new + expansion − contraction),$7.1M,$5.5M,$7.5M
+nrr,Net revenue retention,growth_retention,i-12 cohort: cohort ARR now ÷ cohort ARR 12 mo ago (within-cohort expansion/contraction/churn; excludes new logos),109%,99%,107%
+logo_retention,Logo retention / churn,growth_retention,1 − trailing-12-mo churned logos ÷ active logos 12 mo ago,92%,93%,91%
+growth_rate,Revenue growth (FY),growth_retention,FY recognized revenue ÷ prior FY − 1 (lags ARR growth via ratable recognition),61%,97%,57%
+cac_payback,CAC per new logo,unit_economics,"trailing-12-mo S&M (payroll + programs, lagged 1 quarter) ÷ new logos (dollar CAC, not payback months)",$136.2K,$96.6K,$145.7K
+ltv_cac,LTV : CAC,unit_economics,"LTV (avg ARR × gross margin % × min(1 ÷ annual churn, 5 yr)) ÷ CAC (S&M lagged 1 quarter)",4.1x,5.1x,3.7x
+magic_number,Magic number,unit_economics,trailing-12-mo net ΔARR ÷ trailing-12-mo S&M (lagged 1 quarter),1.2x,1.5x,1.2x
+utilization,Utilization,unit_economics,trailing-12-mo avg services utilization (delivery ÷ capacity),83%,85%,71%
+net_burn,Net burn,cash_efficiency,− trailing-12-mo (operating + investing cash flow) ÷ 12 (avg monthly burn),$350K,$305.5K,$395.5K
+runway,Runway,cash_efficiency,cash ÷ net burn,49 mo,70 mo,44 mo
+rule_of_40,Rule of 40,cash_efficiency,FY revenue growth % + non-GAAP operating margin % (ex-SBC),25%,54%,26%
+burn_multiple,Burn multiple,cash_efficiency,annualized net burn ÷ trailing-12-mo net new ARR,0.6x,0.7x,0.7x

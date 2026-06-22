@@ -1,0 +1,20 @@
+file,rows,description
+customers.csv,155,"Accounts: segment, cohort, status, run-rate ARR"
+contracts.csv,155,Signed agreements (606/deferred pivot)
+pipeline.csv,46,Open opportunities (forward funnel)
+renewals.csv,152,Renewal worklist + history
+projects.csv,88,Services delivery projects
+staff.csv,163,People register (by dept + function)
+gl_accounts.csv,28,Chart of accounts + Account Mapping
+journal_lines.csv,1324,Balanced JE lines (monthly-summary GL)
+gl_account_monthly.csv,925,Per-account monthly GL activity (pivotable)
+vendor_bills.csv,1748,AP expense detail (drill + flux-note anchor)
+paychecks.csv,5852,"Salary detail, paycheck by paycheck"
+timesheets.csv,2360,"Labor detail, timesheet by timesheet"
+customer_invoices.csv,825,Customer billing detail
+cash_receipts.csv,780,Cash collections (FIFO-applied)
+revrec_by_contract.csv,2881,"Subscription 606 recognition, per contract per month"
+revrec_by_project.csv,325,"Services %-complete recognition, per project per month"
+driver_series_monthly.csv,36,All monthly driver + balance-sheet series (master pivot)
+pnl_monthly.csv,828,"Monthly P&L, every line × month, FY24-26"
+dashboard_metrics.csv,19,The 19 dashboard KPI tiles (as of Jun 2026)

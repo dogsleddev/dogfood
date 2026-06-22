@@ -1,0 +1,84 @@
+<svg viewBox="0 0 780 724" width="780" height="724" xmlns="http://www.w3.org/2000/svg" font-family="Geist, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <defs>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="12" stdDeviation="20" flood-color="#0E1726" flood-opacity="0.14"/></filter>
+    <linearGradient id="gScout" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EC6D3F" stop-opacity="0.22"/><stop offset="1" stop-color="#E7B23A" stop-opacity="0.18"/></linearGradient>
+  </defs>
+
+  <rect x="8" y="8" width="764" height="708" rx="16" fill="#0E1726" filter="url(#soft)" opacity="0.12"/>
+  <rect x="8" y="8" width="764" height="708" rx="16" fill="#FAF7F1" stroke="#E6DECF"/>
+
+  <text x="390" y="38" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-size="19" font-weight="600" fill="#1c2530">How every number connects</text>
+  <text x="390" y="56" text-anchor="middle" font-size="11" fill="#7A8694">drill down ↓ from any dashboard tile to source · roll up ↑ the same path · one spine</text>
+
+  <!-- Scenario lens bracket (layers 5..2) -->
+  <rect x="40" y="70" width="22" height="392" rx="10" fill="#FBF2E4" stroke="#B9852A" stroke-opacity="0.55"/>
+  <text x="51" y="266" transform="rotate(-90 51 266)" text-anchor="middle" font-size="10.5" font-weight="700" letter-spacing="1.5" fill="#9A6E1E">SCENARIO LENS</text>
+
+  <!-- Scout bracket (all layers) -->
+  <rect x="718" y="70" width="22" height="496" rx="10" fill="url(#gScout)" stroke="#EC6D3F" stroke-opacity="0.55"/>
+  <text x="729" y="318" transform="rotate(-90 729 318)" text-anchor="middle" font-size="11.5" font-weight="700" letter-spacing="2" fill="#C9582E">SCOUT</text>
+
+  <!-- vertical arrows between layers -->
+  <g stroke="#94A0AD" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="394" y1="148" x2="394" y2="168"/><path d="M389 153 L394 148 L399 153"/><path d="M389 163 L394 168 L399 163"/>
+    <line x1="394" y1="252" x2="394" y2="272"/><path d="M389 257 L394 252 L399 257"/><path d="M389 267 L394 272 L399 267"/>
+    <line x1="394" y1="356" x2="394" y2="376"/><path d="M389 361 L394 356 L399 361"/><path d="M389 371 L394 376 L399 371"/>
+    <line x1="394" y1="460" x2="394" y2="480"/><path d="M389 465 L394 460 L399 465"/><path d="M389 475 L394 480 L399 475"/>
+  </g>
+
+  <!-- BAND 1 SUMMARIES -->
+  <rect x="78" y="70" width="632" height="76" rx="12" fill="#FBEFE9" stroke="#EC6D3F" stroke-opacity="0.45"/>
+  <rect x="78" y="70" width="6" height="76" rx="3" fill="#EC6D3F"/>
+  <text x="100" y="98" font-size="13" font-weight="700" fill="#C9582E">SUMMARIES</text>
+  <text x="690" y="92" text-anchor="end" font-size="9" font-weight="600" letter-spacing="0.5" fill="#B79B86">LAYER 5</text>
+  <rect x="100" y="110" width="74" height="20" rx="6" fill="#EC6D3F"/><text x="137" y="124" text-anchor="middle" font-size="10.5" font-weight="600" fill="#FFFFFF">Dashboard</text>
+  <text x="186" y="124" font-size="11.5" fill="#5A6B7A">· Board Package &#160;&#160; <tspan fill="#9AA4B0" font-size="10">(the cockpit + the exportable deliverable)</tspan></text>
+
+  <!-- BAND 2 METRICS -->
+  <rect x="78" y="174" width="632" height="76" rx="12" fill="#FBF3DF" stroke="#B9852A" stroke-opacity="0.45"/>
+  <rect x="78" y="174" width="6" height="76" rx="3" fill="#B9852A"/>
+  <text x="100" y="202" font-size="13" font-weight="700" fill="#9A6E1E">METRICS</text>
+  <text x="690" y="196" text-anchor="end" font-size="9" font-weight="600" letter-spacing="0.5" fill="#C2A86F">LAYER 4 · proposed</text>
+  <text x="100" y="226" font-size="11" fill="#5A6B7A">ARR / MRR · NRR / GRR · Rule of 40 · Burn / Runway · CAC payback · Gross margin · Utilization</text>
+  <text x="100" y="241" font-size="9.5" fill="#9AA4B0">the missing rung most dashboard tiles drill into — add as an Overview surface</text>
+
+  <!-- BAND 3 STATEMENTS -->
+  <rect x="78" y="278" width="632" height="76" rx="12" fill="#E9F5EF" stroke="#2A8A66" stroke-opacity="0.4"/>
+  <rect x="78" y="278" width="6" height="76" rx="3" fill="#2A8A66"/>
+  <text x="100" y="306" font-size="13" font-weight="700" fill="#1F7A58">STATEMENTS</text>
+  <text x="690" y="300" text-anchor="end" font-size="9" font-weight="600" letter-spacing="0.5" fill="#7FB6A0">LAYER 3</text>
+  <text x="100" y="330" font-size="11.5" fill="#5A6B7A">Forecasted P&amp;L · Balance Sheet · Cash Flow Forecast</text>
+  <text x="100" y="345" font-size="9.5" fill="#9AA4B0">the tie-out · Actual / Budget / Forecast columns (variance lives here, not as a module)</text>
+
+  <!-- BAND 4 DRIVERS -->
+  <rect x="78" y="382" width="632" height="76" rx="12" fill="#EAF0F5" stroke="#5B7C99" stroke-opacity="0.4"/>
+  <rect x="78" y="382" width="6" height="76" rx="3" fill="#5B7C99"/>
+  <text x="100" y="410" font-size="13" font-weight="700" fill="#46627C">DRIVERS</text>
+  <text x="690" y="404" text-anchor="end" font-size="9" font-weight="600" letter-spacing="0.5" fill="#9DB2C5">LAYER 2</text>
+  <text x="100" y="434" font-size="11.5" fill="#5A6B7A">Revenue · Personnel · Expense · AR · Fixed Assets · Prepaids · <tspan fill="#9AA4B0">AP (to add)</tspan></text>
+  <text x="100" y="449" font-size="9.5" fill="#9AA4B0">forward assumptions that generate the forecast · scenario adjustments apply here</text>
+
+  <!-- BAND 5 SOURCE -->
+  <rect x="78" y="486" width="632" height="76" rx="12" fill="#F1ECE2" stroke="#5A6B7A" stroke-opacity="0.35"/>
+  <rect x="78" y="486" width="6" height="76" rx="3" fill="#5A6B7A"/>
+  <text x="100" y="514" font-size="13" font-weight="700" fill="#46525F">SOURCE RECORDS</text>
+  <text x="690" y="508" text-anchor="end" font-size="9" font-weight="600" letter-spacing="0.5" fill="#A6AEB7">LAYER 1</text>
+  <text x="100" y="538" font-size="11" fill="#5A6B7A">Pipeline · Bookings · Contracts · Customers · Renewals · Projects · Staff · Expense Transactions</text>
+  <text x="100" y="553" font-size="9.5" fill="#9AA4B0">the atoms Scout points at · GL / JEs underneath · shared &amp; immutable (the scenario branch point)</text>
+
+  <!-- setup feeds arrow -->
+  <g stroke="#94A0AD" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="394" y1="590" x2="394" y2="566"/><path d="M389 571 L394 566 L399 571"/>
+  </g>
+  <text x="408" y="582" font-size="9" fill="#9AA4B0">feeds</text>
+
+  <!-- SETUP foundation -->
+  <rect x="78" y="596" width="632" height="42" rx="10" fill="#0E1726" fill-opacity="0.045" stroke="#D9D0C2"/>
+  <text x="100" y="616" font-size="11" font-weight="700" fill="#46525F">SETUP</text>
+  <text x="100" y="630" font-size="10" fill="#7A8694">ERP — the one live connection (source of actuals) · Account Mapping (source → statement lines) · Data Import · Settings</text>
+
+  <!-- captions for the wrappers -->
+  <text x="40" y="664" font-size="10" fill="#5A6B7A"><tspan font-weight="700" fill="#9A6E1E">◀ Scenario lens</tspan> — applies only inside the Scenarios group; re-derives layers 2–5 from Base + adjustments. Source/actuals stay shared and immutable.</text>
+  <text x="40" y="682" font-size="10" fill="#5A6B7A"><tspan font-weight="700" fill="#C9582E">Scout ▶</tspan> — a tool-use agent over <tspan font-family="ui-monospace, monospace" font-size="9.5">lib/queries</tspan>; can walk any arrow in either direction, across every layer. Capabilities grow as modules ship.</text>
+  <text x="40" y="700" font-size="10" fill="#9AA4B0">Every dashboard tile falls through summary → metric / statement / driver → source, and rolls back up the same path.</text>
+</svg>

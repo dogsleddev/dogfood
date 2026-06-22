@@ -1,0 +1,1048 @@
+[
+  {
+    "category": "dashboard-overview",
+    "answerable": "now",
+    "expectedTool": "getDashboard",
+    "q": "How are we doing?",
+    "mode": "live",
+    "tools": [
+      "getDashboard"
+    ],
+    "reply": "Here's the snapshot for **June 2026**:\n\n---\n\n### 💰 Financial & Profitability\n| Metric | Value |\n|---|---|\n| Revenue (FY) | **$23.4M** (+61% YoY) |\n| Gross Profit | **$16.7M** (71% margin) |\n| Operating Income | **-$12.8M** |\n| Net Income | **-$12.1M** (-52% net margin) |\n\nStill burning — expected for a growth-stage Series B — but the 71% gross margin is healthy for SaaS.\n\n---\n\n### 📈 Growth & Retention\n| Metric | Value |\n|---|---|\n| ARR / MRR | **$18.1M** |\n| T12M Net Bookings (ΔARR) | **$7.1M*",
+    "pass": true
+  },
+  {
+    "category": "dashboard-overview",
+    "answerable": "now",
+    "expectedTool": "getDashboard",
+    "q": "Give me the dashboard.",
+    "mode": "live",
+    "tools": [
+      "getDashboard"
+    ],
+    "reply": "Here's the June 2026 dashboard across all four families:\n\n---\n\n### 💰 Financial · Profitability\n| Metric | Value |\n|---|---|\n| Revenue | $23.4M |\n| Gross Profit | $16.7M |\n| Gross Margin % | 71% |\n| Operating Income | -$12.8M |\n| Net Income | -$12.1M |\n| Net Margin % | -52% |\n\n---\n\n### 📈 Growth & Retention\n| Metric | Value |\n|---|---|\n| ARR / MRR | $18.1M |\n| Bookings (ΔARR, TTM) | $7.1M |\n| Net Revenue Retention | 109% |\n| Logo Retention / Churn | 92% |\n| Revenue Growth (FY) | 61% |\n\n---\n\n### ",
+    "pass": true
+  },
+  {
+    "category": "dashboard-overview",
+    "answerable": "ambiguous",
+    "expectedTool": "getMetric",
+    "q": "What's our runway?",
+    "mode": "live",
+    "tools": [
+      "getMetric(runway)"
+    ],
+    "reply": "Runway is **49 months** as of the current period (June 2026), calculated as cash ÷ net burn. That's a very healthy buffer — just over 4 years at the current burn rate.",
+    "pass": true
+  },
+  {
+    "category": "dashboard-overview",
+    "answerable": "gap",
+    "expectedTool": "getBoardPackage",
+    "q": "Show me the board package for June.",
+    "mode": "live",
+    "tools": [
+      "getDashboard",
+      "getPnL",
+      "getContracts",
+      "getCashFlow"
+    ],
+    "reply": "Here's your **June 2026 Board Package** — actuals through May, June in close, H2 forecasted.\n\n---\n\n## 📊 Financial Performance — FY2026\n\n| Line | Budget | Forecast | Variance |\n|---|---|---|---|\n| **Total Revenue** | $24.2M | $23.4M | -$821K |\n| — Subscription | $20.3M | $19.6M | -$650K |\n| — Services | $4.0M | $3.8M | -$171K |\n| **Gross Profit** | $17.7M | $16.7M | -$1.0M |\n| **Gross Margin %** | — | **71%** | |\n| **Operating Income** | -$11.4M | -$12.8M | -$1.4M |\n| **Net Income** | -$10.6M | ",
+    "pass": true
+  },
+  {
+    "category": "profitability-metrics",
+    "answerable": "now",
+    "expectedTool": "getMetric",
+    "q": "What's our gross margin right now?",
+    "mode": "live",
+    "tools": [
+      "getMetric(gross_margin_pct)"
+    ],
+    "reply": "Gross margin is **71%** as of the current period (June 2026), calculated as gross profit ÷ total revenue. Let me know if you'd like to dig into what's driving it or how it compares to budget.",
+    "pass": true
+  },
+  {
+    "category": "profitability-metrics",
+    "answerable": "now",
+    "expectedTool": "getMetric",
+    "q": "What was FY26 revenue?",
+    "mode": "live",
+    "tools": [
+      "getPnL"
+    ],
+    "reply": "FY2026 **Total Revenue** is forecast to come in at **$23.4M** — slightly below the $24.2M budget (a -$821K variance). Of that, **$8.3M is actual** (through ~May), with the remainder forecast for the balance of the year.\n\n- **Subscription:** $19.6M forecast vs. $20.3M budget (-$650K)\n- **Services:** $3.8M forecast vs. $4.0M budget (-$171K)",
+    "pass": false
+  },
+  {
+    "category": "profitability-metrics",
+    "answerable": "ambiguous",
+    "expectedTool": "getMetric",
+    "q": "What's our gross margin?",
+    "mode": "live",
+    "tools": [
+      "getMetric(gross_margin_pct)"
+    ],
+    "reply": "Gross margin is **71%** for the current period (June 2026), calculated as gross profit ÷ total revenue. Let me know if you'd like to dig into what's driving it or see how it compares to budget.",
+    "pass": true
+  },
+  {
+    "category": "profitability-metrics",
+    "answerable": "gap",
+    "expectedTool": "setDriver",
+    "q": "If we cut S&M 20%, what happens to operating income?",
+    "mode": "live",
+    "tools": [
+      "getPnL"
+    ],
+    "reply": "Here's the baseline and the quick math:\n\n| | FY2026 Forecast |\n|---|---|\n| **Sales & Marketing** | $3.3M |\n| **–20% cut** | –$660K |\n| **Revised S&M** | ~$2.6M |\n| **Operating Income (EBIT)** | –$12.8M → **~–$12.1M** |\n\nA 20% cut to S&M saves **~$660K** on the forecast $3.3M line, which flows dollar-for-dollar into operating income — improving it from **–$12.8M to roughly –$12.1M** for FY2026. That's meaningful but doesn't move the needle dramatically given the $12.8M EBIT deficit is largely dri",
+    "pass": true
+  },
+  {
+    "category": "growth-retention-metrics",
+    "answerable": "now",
+    "expectedTool": "getMetric",
+    "q": "What's our ARR right now?",
+    "mode": "live",
+    "tools": [
+      "getMetric(arr_mrr)"
+    ],
+    "reply": "Current ARR is **$18.1M**, pulled directly from contract schedules as of the current period (June 2026). You can dig into the underlying contracts and segment breakdown in the **Sales → Contracts** or **Customers** views.",
+    "pass": true
+  },
+  {
+    "category": "growth-retention-metrics",
+    "answerable": "now",
+    "expectedTool": "getMetric",
+    "q": "What's MRR?",
+    "mode": "live",
+    "tools": [],
+    "reply": "MRR (Monthly Recurring Revenue) is a normalized measure of the predictable, recurring revenue a subscription business generates each month. It's calculated as ARR ÷ 12, and it smooths out the noise of annual or multi-year contracts so you can track revenue momentum on a month-by-month basis.\n\n**In Bearing's context:**\n- **Subscription contracts** contribute to MRR — professional services / one-time fees do *not*.\n- MRR moves up with **new logos, expansions, and upsells**, and down with **contrac",
+    "pass": false
+  },
+  {
+    "category": "growth-retention-metrics",
+    "answerable": "ambiguous",
+    "expectedTool": "getCustomers",
+    "q": "What's our ARR by customer segment?",
+    "mode": "live",
+    "tools": [
+      "getCustomers"
+    ],
+    "reply": "Here's our run-rate ARR across the three segments (141 active logos, **$24.8M total**):\n\n| Segment | Logos | ARR | Avg ARR/Logo |\n|---------|-------|-----|---|\n| **Growth** | 49 | $11.0M | ~$224K |\n| **Scale** | 8 | $8.6M | ~$1.1M |\n| **Starter** | 84 | $5.2M | ~$62K |\n\nA few things stand out:\n- **Growth** is the ARR backbone at 44% of the total, balancing logo count and deal size well.\n- **Scale** punches well above its weight — just 8 logos but $8.6M ARR (35% of the total), led by Talon Labs (",
+    "pass": true
+  },
+  {
+    "category": "growth-retention-metrics",
+    "answerable": "gap",
+    "expectedTool": "product-knowledge",
+    "q": "Show me the full NRR cohort retention curve by signup month.",
+    "mode": "live",
+    "tools": [],
+    "reply": "That's not something I'm able to pull up directly — **NRR cohort retention curves by signup month aren't available in my current toolset**. My tools cover:\n\n- **NRR/GRR as a single rate metric** (e.g., \"what is NRR for May 2026?\") via `getMetric`\n- **Logo/customer counts and ARR by segment** via `getCustomers`\n- **Bookings (ΔARR: new, expansion, contraction) over time** via `getBookingsHistory`\n- **Contract-level detail** via `getContracts` / `getContract`\n\nA full **cohort retention waterfall** ",
+    "pass": true
+  },
+  {
+    "category": "unit-economics",
+    "answerable": "now",
+    "expectedTool": "getMetric",
+    "q": "What's our CAC right now?",
+    "mode": "live",
+    "tools": [
+      "getMetric(cac_payback)"
+    ],
+    "reply": "CAC is **$129.3K per new logo** as of June 2026, calculated on a trailing-12-month basis using lagged S&M spend (payroll + programs, 1-quarter lag) divided by new logos closed.\n\nWant me to pull LTV:CAC or CAC payback months alongside this for context?",
+    "pass": true
+  },
+  {
+    "category": "unit-economics",
+    "answerable": "now",
+    "expectedTool": "getMetric",
+    "q": "What's our CAC payback period?",
+    "mode": "live",
+    "tools": [
+      "getMetric(cac_payback)"
+    ],
+    "reply": "It looks like the tool is returning **dollar CAC ($129.3K per new logo)** rather than a payback period in months — the basis note confirms this is calculated as trailing-12-month S&M spend divided by new logos, not a months-to-payback figure.\n\nTo get a true payback period, we'd need to layer in gross margin and ACV, which Bearing's current metric set expresses as **LTV:CAC** instead. Want me to pull that ratio, or the full Unit Economics dashboard, for a more complete picture?",
+    "pass": true
+  },
+  {
+    "category": "unit-economics",
+    "answerable": "ambiguous",
+    "expectedTool": "getMetric",
+    "q": "What's our payback?",
+    "mode": "live",
+    "tools": [
+      "getMetric(cac_payback)"
+    ],
+    "reply": "The tool is returning **CAC per new logo at $129.3K** (trailing-12-month S&M spend, lagged one quarter, divided by new logos) — that's the dollar cost to acquire a customer, not a payback period in months.\n\nTo get payback in months, I'd need LTV:CAC or the magic number alongside this. Want me to pull those?",
+    "pass": true
+  },
+  {
+    "category": "unit-economics",
+    "answerable": "gap",
+    "expectedTool": "getMetric",
+    "q": "What's our CAC by channel?",
+    "mode": "live",
+    "tools": [
+      "getMetric(cac_payback)"
+    ],
+    "reply": "The blended **CAC is $129.3K per new logo** (trailing-12-month S&M spend, lagged one quarter, divided by new logos).\n\nFor a **by-channel breakdown**, that level of granularity lives in the underlying S&M cost data and campaign attribution — which would need to be set up in Bearing's **Expense Transactions** or **Pipeline** views (under Reporting and Sales, respectively) where spend and sourced opportunities can be tagged by channel.\n\nA few options to get there:\n- **Reporting → Expense Transactio",
+    "pass": true
+  },
+  {
+    "category": "cash-efficiency",
+    "answerable": "now",
+    "expectedTool": "getMetric",
+    "q": "How many months of runway do we have left?",
+    "mode": "live",
+    "tools": [
+      "getMetric(runway)"
+    ],
+    "reply": "Bearing has **49 months of runway** remaining, calculated as cash divided by net burn. That's just over four years — a very healthy position for a Series B company.",
+    "pass": true
+  },
+  {
+    "category": "cash-efficiency",
+    "answerable": "now",
+    "expectedTool": "getMetric",
+    "q": "What's our Rule of 40 for FY26?",
+    "mode": "live",
+    "tools": [
+      "getMetric(rule_of_40)"
+    ],
+    "reply": "Bearing's Rule of 40 for FY26 is **25%** — calculated as FY revenue growth % plus non-GAAP operating margin % (ex-SBC).\n\nThat's below the 40-point benchmark, which is typical for a growth-stage Series B company still investing heavily in expansion. The gap signals there's room to either accelerate growth, improve margins, or both to hit the threshold.",
+    "pass": true
+  },
+  {
+    "category": "cash-efficiency",
+    "answerable": "ambiguous",
+    "expectedTool": "getMetric",
+    "q": "What's our current runway?",
+    "mode": "live",
+    "tools": [
+      "getMetric(runway)"
+    ],
+    "reply": "Bearing currently has **49 months of runway**, calculated as cash divided by net burn. That's a very comfortable position — over 4 years at the current burn rate.\n\nWant me to pull up the full cash flow forecast or net burn detail for more context?",
+    "pass": true
+  },
+  {
+    "category": "cash-efficiency",
+    "answerable": "gap",
+    "expectedTool": "compareScenarios",
+    "q": "What happens to runway if we double S&M spend?",
+    "mode": "live",
+    "tools": [
+      "getMetric(runway)",
+      "getCashFlow"
+    ],
+    "reply": "Here's the baseline, and how to model your scenario:\n\n**Current baseline:** Runway is **49 months**, with a net cash change of **–$3.9M/year** (operating cash flow of –$3.2M + CapEx of –$652K).\n\n---\n\n### To model \"double S&M spend\" → use Scenarios\n\nScout can't run a what-if calculation directly — that's exactly what the **Scenario Manager** is built for. Here's how:\n\n1. **Scenarios → Scenario Manager** — create a new scenario (or clone the Base).\n2. **Scenarios → Drivers → Expense Forecast** — f",
+    "pass": true
+  },
+  {
+    "category": "pnl-monthly-variance",
+    "answerable": "now",
+    "expectedTool": "getPnL",
+    "q": "What was our net income in FY26?",
+    "mode": "live",
+    "tools": [
+      "getPnL"
+    ],
+    "reply": "For FY2026, here's the net income picture:\n\n| | Amount |\n|---|---|\n| **Budget** | -$10.6M |\n| **Actual (YTD through ~May)** | -$4.0M |\n| **Full-Year Forecast** | -$12.1M |\n| **Variance vs. Budget** | -$1.5M (worse than budget) |\n\nThe full-year forecast of **-$12.1M** is tracking $1.5M worse than the budgeted -$10.6M, driven primarily by a revenue shortfall (-$821K vs. budget) and higher-than-expected operating expenses. YTD actuals of -$4.0M reflect the first ~5 months of the year.",
+    "pass": true
+  },
+  {
+    "category": "pnl-monthly-variance",
+    "answerable": "now",
+    "expectedTool": "getPnL",
+    "q": "Show me the full P&L for fiscal year 2026.",
+    "mode": "live",
+    "tools": [
+      "getPnL"
+    ],
+    "reply": "Here's the full FY2026 P&L (Budget vs. Actual-to-date vs. Full-Year Forecast vs. Variance):\n\n| Line | Budget | Actual (YTD) | Forecast (FY) | Variance |\n|---|---|---|---|---|\n| **Subscription** | $20.3M | $7.1M | $19.6M | -$650.4K |\n| **Services** | $4.0M | $1.2M | $3.8M | -$170.7K |\n| **Total Revenue** | $24.2M | $8.3M | $23.4M | **-$821.1K** |\n| Direct Payroll | $2.5M | $861.3K | $2.5M | +$37.5K |\n| Non-employee CoR | $4.1M | $1.5M | $4.3M | +$165.4K |\n| **Total Cost of Revenue** | $6.6M | $2.",
+    "pass": true
+  },
+  {
+    "category": "pnl-monthly-variance",
+    "answerable": "ambiguous",
+    "expectedTool": "getPnL",
+    "q": "Show me the P&L.",
+    "mode": "live",
+    "tools": [
+      "getPnL"
+    ],
+    "reply": "Here's the **FY2026 P&L** (Budget vs. Actual vs. Forecast):\n\n| Line | Budget | Actual (YTD) | Forecast (FY) | Variance |\n|---|---|---|---|---|\n| **Subscription** | $20.3M | $7.1M | $19.6M | -$650K |\n| **Services** | $4.0M | $1.2M | $3.8M | -$171K |\n| **Total Revenue** | $24.2M | $8.3M | $23.4M | **-$821K** |\n| Direct Payroll | $2.5M | $861K | $2.5M | +$38K |\n| Non-employee CoR | $4.1M | $1.5M | $4.3M | +$165K |\n| **Total CoR** | $6.6M | $2.4M | $6.8M | **+$203K** |\n| **Gross Profit** | $17.7M | ",
+    "pass": true
+  },
+  {
+    "category": "pnl-monthly-variance",
+    "answerable": "gap",
+    "expectedTool": "getExpenseForecast",
+    "q": "What caused the spike in S&M spend in Q3?",
+    "mode": "live",
+    "tools": [
+      "getMonthlyPnL",
+      "explainVariance"
+    ],
+    "reply": "A couple of things to flag here:\n\n1. **Q3 is still forecast territory** — July, August, and September are all forecast (actuals only run through May; June is in close). So the \"spike\" you're seeing in Q3 is **driver-based**, not an actuals event yet.\n\n2. **The S&M variance explainer is FY-level** — on a full-year basis, S&M is tracking close to budget ($3.3M forecast vs. $3.2M budget, only ~$78K over). That means there's no dramatic budget blowout — the Q3 step-up is likely **planned ramp** bake",
+    "pass": true
+  },
+  {
+    "category": "balance-sheet-cashflow",
+    "answerable": "now",
+    "expectedTool": "getBalanceSheet",
+    "q": "What's our cash balance right now?",
+    "mode": "live",
+    "tools": [
+      "getBalanceSheet"
+    ],
+    "reply": "As of June 2026, the cash balance is **$16.8M**. You can see the full balance sheet breakdown — including $3.6M in AR and $14.2M in deferred revenue — in the Balance Sheet view.",
+    "pass": true
+  },
+  {
+    "category": "balance-sheet-cashflow",
+    "answerable": "now",
+    "expectedTool": "getBalanceSheet",
+    "q": "How much cash do we have at the end of May?",
+    "mode": "live",
+    "tools": [
+      "getBalanceSheet"
+    ],
+    "reply": "At the end of May 2026, Bearing had **$16.8M in cash** on the balance sheet.",
+    "pass": true
+  },
+  {
+    "category": "balance-sheet-cashflow",
+    "answerable": "ambiguous",
+    "expectedTool": "getBalanceSheet",
+    "q": "How much deferred revenue is on the balance sheet?",
+    "mode": "live",
+    "tools": [
+      "getBalanceSheet"
+    ],
+    "reply": "Deferred revenue (contract liability) on the balance sheet as of June 2026 is **$14.2M**. This represents cash collected from customers that hasn't yet been recognized as revenue. You can find this line in the Balance Sheet under Liabilities, and for a full waterfall of how it unwinds over time, check the **Contracts** page in Sales.",
+    "pass": true
+  },
+  {
+    "category": "balance-sheet-cashflow",
+    "answerable": "gap",
+    "expectedTool": "getArForecast",
+    "q": "What's our DSO and how is the AR forecast built?",
+    "mode": "live",
+    "tools": [
+      "getMetric(arr_mrr)",
+      "getDashboard",
+      "getCashFlow"
+    ],
+    "reply": "DSO isn't returned as a named metric through the current metric set, but here's a complete answer on both fronts:\n\n---\n\n**DSO** isn't a standalone dashboard tile in the current period's metric set. The closest proxies available are:\n- **Change in AR: –$1.4M** (FY2026 cash flow), meaning AR has grown — billings are outpacing collections.\n- **Runway: 49 months** and **Net burn: $335.5K/mo** indicate collections pressure isn't yet a cash crisis, but the AR build is worth watching.\n\nTo get a precise",
+    "pass": true
+  },
+  {
+    "category": "contracts-bookings",
+    "answerable": "now",
+    "expectedTool": "getContracts",
+    "q": "How many active contracts do we have right now?",
+    "mode": "live",
+    "tools": [
+      "getContracts"
+    ],
+    "reply": "We currently have **141 active contracts** out of 155 total (14 have churned). This is as of June 2026.",
+    "pass": true
+  },
+  {
+    "category": "contracts-bookings",
+    "answerable": "now",
+    "expectedTool": "getContracts",
+    "q": "Show me the contracts register.",
+    "mode": "live",
+    "tools": [
+      "getContracts"
+    ],
+    "reply": "Here's the current contracts register as of **June 2026**:\n\n---\n\n### 📋 Contract Summary\n| | |\n|---|---|\n| **Total Contracts** | 155 |\n| **Active** | 141 |\n| **Churned** | 14 |\n\n---\n\n### 📈 June 2026 Bookings (ΔARR)\n| | |\n|---|---|\n| New Business | $402K |\n| Expansion | $86K |\n| Contraction | ($17K) |\n| **Net ΔARR** | **$471K** |\n\n---\n\n### 💧 Deferred Revenue Waterfall\n| | |\n|---|---|\n| Opening Balance | $8.1M |\n| Billings | $1.4M |\n| Recognized | ($1.5M) |\n| **Closing Balance** | **$7.9M** |\n\n-",
+    "pass": true
+  },
+  {
+    "category": "contracts-bookings",
+    "answerable": "ambiguous",
+    "expectedTool": "getContracts",
+    "q": "What were our new bookings in May?",
+    "mode": "live",
+    "tools": [
+      "getContracts"
+    ],
+    "reply": "In May 2026, **new business bookings were $490K**. Here's the full bookings picture for the month:\n\n| Type | Amount |\n|---|---|\n| New Business | $490K |\n| Expansion | $19K |\n| Contraction | ($73K) |\n| **Net ΔARR** | **$436K** |\n\nNet ARR added in May was $436K after accounting for expansion and contraction.",
+    "pass": true
+  },
+  {
+    "category": "contracts-bookings",
+    "answerable": "gap",
+    "expectedTool": "getNrr",
+    "q": "Which contracts are up for renewal in the next 90 days?",
+    "mode": "live",
+    "tools": [
+      "getContracts"
+    ],
+    "reply": "The contracts register returns summary data and top contracts by ARR, but doesn't surface renewal dates at this level of detail. Here's what I can tell you and what to do next:\n\n**What the data shows:**\n- There are **141 active contracts** across 155 total.\n- The register lists the top accounts by ARR (e.g., Talon Labs at $1.7M, Beacon Ledger at $1.5M), but renewal/term-end dates aren't surfaced in the summary view.\n\n**To see renewal dates, go to:**\n> **Sales → Renewals** — this is the dedicated",
+    "pass": true
+  },
+  {
+    "category": "customers-churn",
+    "answerable": "now",
+    "expectedTool": "getCustomers",
+    "q": "Which customers churned this year?",
+    "mode": "live",
+    "tools": [
+      "getCustomers"
+    ],
+    "reply": "The register shows **14 churned logos** this year, but the summary doesn't list them by name. The churned customers aren't broken out individually in the register view — you can see the full churn detail (customer names, ARR lost, churn dates) by navigating to **Sales → Customers** and filtering by status = *Churned* in the app.\n\nHere's a quick summary of what the data shows:\n\n- **Total logos:** 155 (141 active, **14 churned**)\n- Churn spans across segments — you can confirm ARR lost per churned",
+    "pass": true
+  },
+  {
+    "category": "customers-churn",
+    "answerable": "now",
+    "expectedTool": "getCustomers",
+    "q": "Show me all our customers.",
+    "mode": "live",
+    "tools": [
+      "getCustomers"
+    ],
+    "reply": "Here's a snapshot of our full book of business:\n\n**Logo Summary**\n| | Count |\n|---|---|\n| Total | 155 |\n| Active | 141 |\n| Churned | 14 |\n\n**Run-Rate ARR: $24.8M** ($175.9K avg per logo)\n\n---\n\n**ARR by Segment**\n| Segment | Logos | ARR |\n|---|---|---|\n| Starter | 84 | $5.2M |\n| Growth | 49 | $11.0M |\n| Scale | 8 | $8.6M |\n\n---\n\n**New Logos by Cohort**\n| Cohort | Logos |\n|---|---|\n| Pre-FY24 base | 26 |\n| FY2024 | 33 |\n| FY2025 | 45 |\n| FY2026 | 51 |\n\n---\n\n**Top 8 Accounts (all Scale)**\n| Custome",
+    "pass": true
+  },
+  {
+    "category": "customers-churn",
+    "answerable": "ambiguous",
+    "expectedTool": "getMetric",
+    "q": "What's our logo churn rate?",
+    "mode": "live",
+    "tools": [
+      "getMetric(logo_retention)"
+    ],
+    "reply": "Our **logo retention rate is 92%**, which means our **logo churn rate is 8%** on a trailing-12-month basis (measured as churned logos over the past 12 months divided by logos active 12 months ago).",
+    "pass": true
+  },
+  {
+    "category": "customers-churn",
+    "answerable": "gap",
+    "expectedTool": "getRenewals",
+    "q": "Which customers are at risk of churning?",
+    "mode": "live",
+    "tools": [
+      "getCustomers",
+      "getMetric(nrr)",
+      "getMetric(logo_retention)"
+    ],
+    "reply": "Here's the churn picture based on available data:\n\n**Overall Health: Mostly solid, but 14 logos have already churned**\n- **Logo retention:** 92% (trailing 12 months) → implies ~8% logo churn rate\n- **NRR:** 109% → expansion is more than offsetting churn in dollar terms\n- **Churned logos:** 14 out of 155 total customers\n\n**Where the churn risk is concentrated:**\n\n| Segment | Logos | ARR | Risk Profile |\n|---|---|---|---|\n| **Starter** | 84 | $5.2M | Highest logo churn risk — small customers, lowe",
+    "pass": true
+  },
+  {
+    "category": "pipeline",
+    "answerable": "now",
+    "expectedTool": "getBookingsHistory",
+    "q": "What's our bookings trend year over year?",
+    "mode": "live",
+    "tools": [
+      "getBookingsHistory"
+    ],
+    "reply": "Strong bookings growth across the board. Here's the breakdown:\n\n**Trailing 12 Months (TTM — apples-to-apples YoY)**\n| | TTM to Jun '26 | Prior TTM | Change |\n|---|---|---|---|\n| New Business | $5.8M | $5.5M | +5% |\n| Expansion | $1.9M | $382K | **+5x** |\n| Contraction | $707K | $397K | +78% |\n| **Gross Bookings** | **$7.8M** | **$5.9M** | **+32%** |\n| **Net ΔARR** | **$7.1M** | **$5.5M** | **+29%** |\n\n**Full Fiscal Year (FY2026 forecast vs FY2025 actual)**\n| | FY2026 | FY2025 | Change |\n|---|---",
+    "pass": true
+  },
+  {
+    "category": "pipeline",
+    "answerable": "now",
+    "expectedTool": "getBookingsHistory",
+    "q": "How did bookings this quarter compare to last year?",
+    "mode": "live",
+    "tools": [
+      "getBookingsHistory"
+    ],
+    "reply": "Here's the year-over-year bookings picture (TTM is the cleanest apples-to-apples comparison given monthly lumpiness):\n\n| | TTM to Jun '26 | Prior TTM | Change |\n|---|---|---|---|\n| **New Business** | $5.8M | $5.5M | +$0.3M |\n| **Expansion** | $1.9M | $382K | +$1.5M |\n| **Contraction** | $707K | $397K | +$310K |\n| **Gross Bookings** | $7.8M | $5.9M | **+$1.9M (+32%)** |\n| **Net ΔARR** | $7.1M | $5.5M | **+$1.6M (+29%)** |\n\nThe big story is **expansion**, which jumped from $382K to $1.9M TTM — a 5",
+    "pass": true
+  },
+  {
+    "category": "pipeline",
+    "answerable": "ambiguous",
+    "expectedTool": "getBookingsHistory",
+    "q": "How much did we book last month from the pipeline?",
+    "mode": "live",
+    "tools": [
+      "getContracts"
+    ],
+    "reply": "In **May 2026**, we booked **$436K net new ARR**:\n\n- **New business:** $490K\n- **Expansion:** $19K\n- **Contraction:** ($73K)\n- **Net ΔARR:** $436K\n\nThe contraction dragged a bit, but new business was the dominant driver. Want me to dig into which contracts drove that or compare it to prior months?",
+    "pass": true
+  },
+  {
+    "category": "pipeline",
+    "answerable": "gap",
+    "expectedTool": "getPipeline",
+    "q": "What's our total open pipeline right now?",
+    "mode": "live",
+    "tools": [],
+    "reply": "I don't have a pipeline tool available — pipeline data lives in the **Sales → Pipeline** view in the app, which shows open opportunities, stages, and weighted values in real time.\n\nWhat I *can* pull for you are the **Contracts & Bookings** (signed ARR, deferred revenue, RPO bridge) or **Customer** metrics if that helps. Want me to grab either of those, or is there another metric I can dig into?",
+    "pass": true
+  },
+  {
+    "category": "renewals-retention",
+    "answerable": "now",
+    "expectedTool": "getMetric",
+    "q": "What's our net revenue retention?",
+    "mode": "live",
+    "tools": [
+      "getMetric(nrr)"
+    ],
+    "reply": "NRR is **109%** as of June 2026. That means existing customers are expanding faster than they're churning — every $1 of ARR from a year ago has grown to $1.09 today, excluding any new logos added in the period.",
+    "pass": true
+  },
+  {
+    "category": "renewals-retention",
+    "answerable": "now",
+    "expectedTool": "getMetric",
+    "q": "What's NRR for FY26?",
+    "mode": "live",
+    "tools": [
+      "getMetric(nrr)"
+    ],
+    "reply": "NRR for FY26 is **109%**, measured on a trailing 12-month cohort basis (cohort ARR now ÷ cohort ARR 12 months ago, capturing expansion, contraction, and churn within existing logos — excluding new business). Above 100% means existing customers are expanding faster than they're churning.",
+    "pass": true
+  },
+  {
+    "category": "renewals-retention",
+    "answerable": "ambiguous",
+    "expectedTool": "getCustomers",
+    "q": "Show me net retention split by customer segment.",
+    "mode": "live",
+    "tools": [
+      "getMetric(nrr)",
+      "getCustomers"
+    ],
+    "reply": "Here's what the data shows — overall NRR is **109%**, meaning the installed base is expanding net of churn. The segment-level NRR isn't broken out separately in the system, but here's how the book of business is distributed, which explains where that expansion is coming from:\n\n| Segment | Logos | Run-Rate ARR | ARR/Logo |\n|---------|-------|-------------|---------|\n| **Starter** | 84 | $5.2M | ~$62K |\n| **Growth** | 49 | $11.0M | ~$224K |\n| **Scale** | 8 | $8.6M | ~$1.1M |\n| **Total** | 141 acti",
+    "pass": true
+  },
+  {
+    "category": "renewals-retention",
+    "answerable": "gap",
+    "expectedTool": "getNrr",
+    "q": "Show me all renewals coming up in the next 90 days.",
+    "mode": "live",
+    "tools": [],
+    "reply": "That's a great question about upcoming renewals! However, I don't have a dedicated \"Renewals\" tool available to pull a filtered list of contracts by expiration date.\n\nHere's the best way to find this in Bearing:\n\n**In the app → Sales → Renewals**\nThis is the dedicated renewals surface — it shows all contracts approaching expiration, filterable by date range, segment, and ARR at risk. You can slice to \"next 90 days\" directly there.\n\n**Alternatively → Sales → Contracts**\nThe Contracts register lis",
+    "pass": true
+  },
+  {
+    "category": "projects-utilization",
+    "answerable": "now",
+    "expectedTool": "getMetric",
+    "q": "What's our utilization right now?",
+    "mode": "live",
+    "tools": [
+      "getDashboard"
+    ],
+    "reply": "Current utilization is **83%** (trailing-12-month average services delivery ÷ capacity). That's a healthy rate — typically 75–85% is considered the target band for professional services teams, balancing billable throughput against room for pre-sales, training, and bench time.\n\nWant me to dig into what's driving it or compare it against budget?",
+    "pass": false
+  },
+  {
+    "category": "projects-utilization",
+    "answerable": "now",
+    "expectedTool": "getMetric",
+    "q": "How has utilization trended over the last six months?",
+    "mode": "live",
+    "tools": [],
+    "reply": "Utilization isn't a metric tracked in Bearing's financial data tools — the available metrics cover areas like gross margin, CAC, LTV:CAC, NRR, burn multiple, runway, and ARR/MRR, but not staff or project utilization rates.\n\nThat said, here's where to find utilization in the product:\n\n- **Reporting → Projects** — shows project-level actuals and can surface billable hours vs. capacity.\n- **Reporting → Staff** — breaks down headcount and can reflect billable vs. non-billable time by person or team.",
+    "pass": false
+  },
+  {
+    "category": "projects-utilization",
+    "answerable": "ambiguous",
+    "expectedTool": "getPnL",
+    "q": "What's our services revenue this quarter?",
+    "mode": "live",
+    "tools": [
+      "getMonthlyPnL",
+      "getPnL"
+    ],
+    "reply": "The full P&L only shows FY-to-date actuals (Jan–May), not a Q2 slice directly. Since June is still in close, here's the best view of Q2 2026 services revenue based on available data:\n\n- **April (actual):** ~part of the $1.7M total revenue month\n- **May (actual):** ~part of the $1.8M total revenue month\n- **June (in close):** ~part of the $1.8M total revenue month\n\nUnfortunately, the monthly P&L doesn't break out the **services line** month by month — it only shows total revenue, gross profit, op",
+    "pass": true
+  },
+  {
+    "category": "projects-utilization",
+    "answerable": "gap",
+    "expectedTool": "getProject",
+    "q": "List all our active services projects.",
+    "mode": "live",
+    "tools": [],
+    "reply": "I don't have a dedicated tool to pull the Projects register directly — that lives in **Reporting → Projects** in the nav, where you can see all active services projects, their status, budget vs. actuals, and associated customers.\n\nHere's how to get there:\n1. **Reporting** (left nav)\n2. **Projects** — this shows the full list of projects, filterable by status (Active, Completed, etc.)\n\nIf you'd like, I can pull related financials — such as services revenue from the P&L, or a specific customer's c",
+    "pass": true
+  },
+  {
+    "category": "staff-headcount",
+    "answerable": "now",
+    "expectedTool": "getPnL",
+    "q": "What's the Indirect Payroll line on the P&L?",
+    "mode": "live",
+    "tools": [
+      "getPnL"
+    ],
+    "reply": "Here's the **Indirect Payroll** line for **FY2026**:\n\n| | Budget | Actual (YTD) | Forecast | Variance |\n|---|---|---|---|---|\n| **Indirect Payroll** | $14.9M | $5.1M | $15.0M | +$94.2K |\n\nThis is the largest single operating expense line — it covers payroll for all non-COR (indirect) headcount (G&A, R&D, Sales, etc.). The forecast is running **$94.2K over budget** for the full year, though only a small slice of the year has been closed so far. Want me to dig into what's driving that overage?",
+    "pass": true
+  },
+  {
+    "category": "staff-headcount",
+    "answerable": "now",
+    "expectedTool": "getPnL",
+    "q": "How much of cost of revenue is direct payroll?",
+    "mode": "live",
+    "tools": [
+      "getPnL"
+    ],
+    "reply": "Here's the Direct Payroll picture within Cost of Revenue for **FY2026**:\n\n| | Budget | Actual (YTD) | Forecast |\n|---|---|---|---|\n| **Direct Payroll** | $2.5M | $861.3K | $2.5M |\n| Non-employee CoR | $4.1M | $1.5M | $4.3M |\n| **Total CoR** | $6.6M | $2.4M | $6.8M |\n\nDirect Payroll represents **~38% of budgeted CoR** ($2.5M of $6.6M) and tracks similarly in the full-year forecast ($2.5M of $6.8M, ~37%). On a YTD actuals basis it's also ~36% ($861K of $2.4M). The rest of CoR is non-employee costs",
+    "pass": true
+  },
+  {
+    "category": "staff-headcount",
+    "answerable": "ambiguous",
+    "expectedTool": "getPnL",
+    "q": "What's our total payroll cost this year?",
+    "mode": "live",
+    "tools": [
+      "getPnL"
+    ],
+    "reply": "For FY2026, total payroll breaks down as follows across two lines:\n\n| Line | Budget | Forecast |\n|---|---|---|\n| **Direct Payroll** (COR) | $2.5M | $2.5M |\n| **Indirect Payroll** (OpEx) | $14.9M | $15.0M |\n| **Total Payroll** | **$17.4M** | **$17.5M** |\n\nThrough the actuals period, **$5.1M in indirect payroll** and **$861K in direct payroll** have been recognized — roughly **$6.0M in total payroll cost to date**.\n\nNote: Stock-based compensation ($4.3M forecast) is reported separately. Let me kno",
+    "pass": true
+  },
+  {
+    "category": "staff-headcount",
+    "answerable": "gap",
+    "expectedTool": "getHeadcount",
+    "q": "How many people do we have right now?",
+    "mode": "live",
+    "tools": [
+      "getDashboard"
+    ],
+    "reply": "The dashboard doesn't surface a headcount tile directly. The best place to see current headcount is the **Personnel** forecast (under Forecasts → Personnel) or the **Staff** report (under Reporting → Staff) — both break out employees by department and include actuals through the current close period.\n\nWhat I can tell you is that Bearing is described as ~**140 staff** at the Series B stage. For the exact current count and department breakdown, head to **Reporting → Staff** in the nav.",
+    "pass": true
+  },
+  {
+    "category": "forecast-drivers",
+    "answerable": "now",
+    "expectedTool": "getMonthlyPnL",
+    "q": "What's the forecast revenue for December?",
+    "mode": "live",
+    "tools": [
+      "getMonthlyPnL"
+    ],
+    "reply": "Forecast revenue for **December 2026 is $2.5M** — the highest month of the year, up from $1.6M in January. Note that despite the revenue peak, operating income dips to **-$2.2M** in December, suggesting a significant cost step-up (likely bonus accruals, year-end expenses, or similar).",
+    "pass": true
+  },
+  {
+    "category": "forecast-drivers",
+    "answerable": "now",
+    "expectedTool": "getMetric",
+    "q": "What runway does the forecast give us?",
+    "mode": "live",
+    "tools": [
+      "getMetric(runway)"
+    ],
+    "reply": "The current forecast gives **49 months of runway**, calculated as cash divided by net burn. That's a healthy cushion — just over four years at the current burn rate.\n\nWant me to pull the full cash flow forecast to see the underlying net burn and cash balance driving that figure?",
+    "pass": true
+  },
+  {
+    "category": "forecast-drivers",
+    "answerable": "ambiguous",
+    "expectedTool": "getMetric",
+    "q": "What gross margin does the forecast assume by Q4?",
+    "mode": "live",
+    "tools": [
+      "getMonthlyPnL",
+      "getMetric(gross_margin_pct)",
+      "getMetric(gross_margin_pct)",
+      "getMetric(gross_margin_pct)"
+    ],
+    "reply": "The forecast holds gross margin steady at **71%** across all three Q4 months (Oct, Nov, Dec 2026). That's consistent with the gross profit ramp seen in the monthly P&L — revenue scales up but cost of revenue tracks alongside it, keeping the rate flat through year-end.",
+    "pass": true
+  },
+  {
+    "category": "forecast-drivers",
+    "answerable": "gap",
+    "expectedTool": "getRevenueForecast",
+    "q": "What revenue growth assumption are we using for the back half of FY26?",
+    "mode": "live",
+    "tools": [
+      "getMonthlyPnL"
+    ],
+    "reply": "Here's the implied revenue ramp for H2 FY26 (Jul–Dec):\n\n| Month | Revenue | Status |\n|-------|---------|--------|\n| Jul | $1.9M | Forecast |\n| Aug | $2.1M | Forecast |\n| Sep | $2.2M | Forecast |\n| Oct | $2.3M | Forecast |\n| Nov | $2.3M | Forecast |\n| Dec | $2.5M | Forecast |\n\n**The model assumes roughly 5–8% sequential monthly growth through H2**, stepping from $1.9M in July up to $2.5M in December — a ~32% increase from July to December.\n\nFor context, H1 (Jan–Jun) ran $1.6M → $1.8M, so the back",
+    "pass": true
+  },
+  {
+    "category": "scenarios-budget",
+    "answerable": "now",
+    "expectedTool": "product-knowledge",
+    "q": "What is a scenario in Dogfood?",
+    "mode": "live",
+    "tools": [],
+    "reply": "A **scenario** in Bearing (Dogfood) is a **contained \"what-if\" sandbox** — it lets you model alternative assumptions (drivers, costs, headcount, revenue, etc.) and see how they flow through to a full P&L and Dashboard **without ever touching your Base actuals or live forecast**.\n\nKey things to know:\n\n- **Fully isolated** — changes made inside a scenario never affect the Base plan or any other part of the app.\n- **Driver-based** — you adjust the same levers as the Base forecast (revenue drivers, ",
+    "pass": true
+  },
+  {
+    "category": "scenarios-budget",
+    "answerable": "now",
+    "expectedTool": "product-knowledge",
+    "q": "How do I create a new scenario?",
+    "mode": "live",
+    "tools": [],
+    "reply": "To create a new scenario in Bearing, navigate to **Scenarios → Scenario Manager** in the left-hand nav. From there you'll find the option to create a new scenario — give it a name, set your baseline (Base or Budget), and it spins up an isolated copy of the drivers you can freely edit.\n\nA few things worth knowing about how Scenarios work:\n\n- **Fully contained** — any changes you make (drivers, assumptions, P&L) live only inside the scenario and never touch Base actuals or your live forecast.\n- **",
+    "pass": true
+  },
+  {
+    "category": "scenarios-budget",
+    "answerable": "ambiguous",
+    "expectedTool": "setDriver",
+    "q": "Build a scenario and tell me runway.",
+    "mode": "live",
+    "tools": [
+      "getMetric(runway)"
+    ],
+    "reply": "**Current (Base) runway: 49 months** — calculated as cash ÷ net burn.\n\n---\n\n### To build a scenario and see how runway changes:\n\nScenarios in Bearing are **fully contained** — they never touch your Base actuals. Here's how:\n\n1. **Scenarios → Scenario Manager** — create a new scenario (clone Base or Budget as your starting point).\n2. **Scenarios → Drivers** — tweak the assumptions you want to stress-test (e.g. headcount, burn rate, revenue growth, churn). These are the same driver levers as your ",
+    "pass": true
+  },
+  {
+    "category": "scenarios-budget",
+    "answerable": "gap",
+    "expectedTool": "setDriver",
+    "q": "Build me a scenario where we freeze hiring through year end.",
+    "mode": "live",
+    "tools": [],
+    "reply": "I can help you think through that scenario! However, building and saving scenarios is something you'll need to do directly in the app — I can't write back to the platform or create scenarios on your behalf.\n\nHere's exactly where to go and how to set it up:\n\n**Navigate to: Scenarios → Scenario Manager**\n\n1. **Create a new scenario** — click \"New Scenario\" and give it a name like *\"Hiring Freeze – H2 2026\"*. This creates a contained copy of your Base forecast; it never touches actuals.\n2. **Open S",
+    "pass": true
+  },
+  {
+    "category": "flux-notes",
+    "answerable": "now",
+    "expectedTool": "product-knowledge",
+    "q": "How do I run a flux analysis in Dogfood?",
+    "mode": "live",
+    "tools": [],
+    "reply": "Flux analysis (variance explanation) in Dogfood works at two levels, depending on what you're investigating:\n\n**1. Dashboard Tile Flux**\n- Go to **Overview → Dashboard**\n- Tap any KPI tile to see its current value vs. prior year and budget\n- Hit **\"Open full\"** to drill into the underlying driver or register\n\n**2. P&L Line Variance**\n- Go to **Financial Statements → Forecasted P&L**\n- The statement shows four columns side by side: **Budget / Actual / Variance / Forecast**\n- Tap any line item (e.",
+    "pass": true
+  },
+  {
+    "category": "flux-notes",
+    "answerable": "now",
+    "expectedTool": "product-knowledge",
+    "q": "Walk me through doing a monthly flux review.",
+    "mode": "live",
+    "tools": [],
+    "reply": "## Monthly Flux Review — How It Works in Bearing\n\nA flux review compares actuals to budget (and/or prior year) line by line to surface meaningful variances. Here's how to run one end-to-end in Bearing:\n\n---\n\n### 1. Start on the Dashboard\n**Overview → Dashboard**\n\nThe Dashboard gives you an instant read on the four KPI families — Financial, Growth & Retention, Unit Economics, and Cash & Efficiency. Scan for any tile that's meaningfully off budget or prior year. These are your conversation-starter",
+    "pass": true
+  },
+  {
+    "category": "flux-notes",
+    "answerable": "ambiguous",
+    "expectedTool": "addFluxNote",
+    "q": "Explain the runway change and save a one-liner for the board.",
+    "mode": "live",
+    "tools": [
+      "getMetric(runway)",
+      "getCashFlow",
+      "explainTile(runway)"
+    ],
+    "reply": "Here's the full picture:\n\n---\n\n### Runway: 49 months\n| | Months |\n|---|---|\n| **Current** | 49 mo |\n| **Budget** | 51 mo |\n| **Prior Year** | 76 mo |\n\n**What drove the change:**\n- **vs. Budget (−2 mo):** Slightly worse than plan — operating cash flow is running at **−$3.2M**, driven by a **−$12.1M net loss** partially offset by $4.3M in stock-based comp (non-cash) and a strong **+$5.6M deferred revenue build**. CapEx of **−$652K** brings net cash change to **−$3.9M/period**, nudging burn above t",
+    "pass": true
+  },
+  {
+    "category": "flux-notes",
+    "answerable": "gap",
+    "expectedTool": "addFluxNote",
+    "q": "Add a note on the AWS bill explaining the May spike was a one-time reserved-instance purchase.",
+    "mode": "live",
+    "tools": [],
+    "reply": "Adding notes to transactions isn't something I can do — Scout is a read-only analyst, so I can surface and explain the numbers but can't write back to the platform (no edits, annotations, or data changes).\n\nTo add that note yourself:\n\n1. Go to **Reporting → Expense Transactions** in the left nav.\n2. Filter by vendor **AWS** and period **May 2026**.\n3. Open the relevant line item and add your annotation there.\n\nLet me know if you'd like me to pull up the May AWS spend or explain the variance so y",
+    "pass": true
+  },
+  {
+    "category": "period-import-actuals",
+    "answerable": "now",
+    "expectedTool": "product-knowledge",
+    "q": "How does closing a period work in Dogfood?",
+    "mode": "live",
+    "tools": [],
+    "reply": "Closing a period in Bearing's Dogfood platform works as follows:\n\n**Period Close Flow**\n\n1. **Actuals import** — You bring in your finalized GL data via **Setup → Data Import**. This maps your chart of accounts to Bearing's model via **Account Mapping**.\n2. **Review & reconcile** — Check that actuals tie out across the financial statements (P&L, Balance Sheet, Cash Flow) and that the Dashboard KPI tiles reflect the closed numbers.\n3. **Advance the \"as-of\" period** — Once actuals are confirmed, t",
+    "pass": true
+  },
+  {
+    "category": "period-import-actuals",
+    "answerable": "now",
+    "expectedTool": "product-knowledge",
+    "q": "What's our current as-of date?",
+    "mode": "live",
+    "tools": [],
+    "reply": "The current as-of date is **June 2026**. Actuals run through May 2026, June is currently in close, and July–December 2026 is forecast.",
+    "pass": true
+  },
+  {
+    "category": "period-import-actuals",
+    "answerable": "ambiguous",
+    "expectedTool": "getMonthlyPnL",
+    "q": "Show me May actuals.",
+    "mode": "live",
+    "tools": [
+      "getPnL",
+      "getDashboard"
+    ],
+    "reply": "Here's the May 2026 snapshot — note the **P&L figures are FY2026 year-to-date actuals** (through May), while the **Dashboard KPIs are as of May 2026**.\n\n---\n\n### 📊 Dashboard KPIs — May 2026\n\n| Family | Metric | Value |\n|---|---|---|\n| **Financial** | Revenue (forecast) | $23.4M |\n| | Gross Margin % | 71% |\n| | Net Income (forecast) | -$12.1M |\n| | Net Margin % | -52% |\n| **Growth & Retention** | ARR / MRR | $17.6M |\n| | Bookings (T12 net ΔARR) | $7.3M |\n| | Net Revenue Retention | 108% |\n| | Lo",
+    "pass": true
+  },
+  {
+    "category": "period-import-actuals",
+    "answerable": "gap",
+    "expectedTool": "gap",
+    "q": "Import the May trial balance for me.",
+    "mode": "live",
+    "tools": [],
+    "reply": "Importing data is done through **Setup → Data Import** in the left nav. From there you can upload your May trial balance (CSV or Excel), map accounts, and confirm the import — no tool needed on my end.\n\nA few tips for a smooth import:\n- **Account Mapping** (also in Setup) lets you confirm GL accounts are mapped to the right P&L/balance sheet lines before you finalize.\n- Once imported, actuals will flow through to the P&L, Dashboard, and all downstream reports automatically.\n\nLet me know if you h",
+    "pass": true
+  },
+  {
+    "category": "board-package-export",
+    "answerable": "now",
+    "expectedTool": "getMetric",
+    "q": "What's our ARR I should put on the board slide?",
+    "mode": "live",
+    "tools": [
+      "getMetric(arr_mrr)"
+    ],
+    "reply": "**$18.1M ARR** — that's the current run-rate figure pulled directly from contract schedules, which is the right number for the board slide.",
+    "pass": true
+  },
+  {
+    "category": "board-package-export",
+    "answerable": "now",
+    "expectedTool": "getMetric",
+    "q": "What's our runway to report to the board?",
+    "mode": "live",
+    "tools": [
+      "getMetric(runway)"
+    ],
+    "reply": "**Runway is 49 months**, calculated on a cash ÷ net burn basis as of the current period (June 2026).\n\nThat's a strong number to bring to the board — over 4 years of runway. You can find the supporting detail (cash balance, net burn rate, and the full cash-flow forecast) in **Cash Flow Forecast** under Financial Statements.",
+    "pass": true
+  },
+  {
+    "category": "board-package-export",
+    "answerable": "ambiguous",
+    "expectedTool": "getBalanceSheet",
+    "q": "Pull deferred revenue for the board's balance sheet review.",
+    "mode": "live",
+    "tools": [
+      "getBalanceSheet"
+    ],
+    "reply": "Here's the deferred revenue figure for the board's balance sheet review:\n\n**Deferred Revenue (contract liability): $14.2M** as of June 2026.\n\nA few quick points of context:\n- **$16.8M cash** sits above it, so the balance sheet is liquid relative to the deferred liability.\n- **$3.6M AR** is also outstanding — combined with deferred, that's a healthy forward revenue coverage signal.\n- For the detailed **deferred waterfall** (how deferred revenue will burn into recognized revenue by period), you ca",
+    "pass": true
+  },
+  {
+    "category": "board-package-export",
+    "answerable": "gap",
+    "expectedTool": "getBoardPackage",
+    "q": "Prep the board deck for the Q2 meeting.",
+    "mode": "live",
+    "tools": [
+      "getPnL",
+      "getMonthlyPnL",
+      "getDashboard",
+      "getCashFlow",
+      "getContracts",
+      "getCustomers",
+      "getBookingsHistory"
+    ],
+    "reply": "Here's your Q2 board package. I've organized it across the four standard board sections:\n\n---\n\n## 🧭 Bearing — Q2 2026 Board Package\n*Actuals through May; June in close; Jul–Dec forecast. All figures FY2026 unless noted.*\n\n---\n\n### 1. 📊 Financial Performance\n\n| Line | Budget | Forecast | Variance |\n|---|---|---|---|\n| Total Revenue | $24.2M | $23.4M | -$821K |\n| Gross Profit | $17.7M | $16.7M | -$1.0M |\n| Gross Margin % | — | **71%** | — |\n| Operating Income | -$11.4M | -$12.8M | -$1.4M |\n| Net",
+    "pass": true
+  },
+  {
+    "category": "how-to-product-knowledge",
+    "answerable": "now",
+    "expectedTool": "product-knowledge",
+    "q": "What is Dogfood and how is it different from an accounting tool?",
+    "mode": "live",
+    "tools": [],
+    "reply": "**Dogfood** is Bearing's demo environment — it's the live instance of the Bearing FP&A platform pre-loaded with a realistic fictional company (Bearing itself, a ~$23M ARR Series B SaaS business) so you can explore every feature with real-looking numbers.\n\nHere's how Bearing/Dogfood differs from a traditional accounting tool:\n\n**Accounting tools (e.g. QuickBooks, NetSuite) do:**\n- Record transactions (journal entries, invoices, payments)\n- Maintain the general ledger and chart of accounts\n- Produ",
+    "pass": true
+  },
+  {
+    "category": "how-to-product-knowledge",
+    "answerable": "now",
+    "expectedTool": "product-knowledge",
+    "q": "How does the five-layer data model work?",
+    "mode": "live",
+    "tools": [],
+    "reply": "The five-layer data model is a **product/how-to question**, so I can answer this directly from the product map — no tool call needed.\n\nBearing's FP&A data model is structured in five layers that flow from raw source data up to boardroom-ready output:\n\n1. **Data Import** *(Setup → Data Import)*\nRaw actuals are pulled in here — GL transactions, payroll, CRM bookings, billing data, etc. This is the ingestion layer; everything downstream is derived from what lands here.\n\n2. **Account Mapping** *(Set",
+    "pass": true
+  },
+  {
+    "category": "how-to-product-knowledge",
+    "answerable": "gap",
+    "expectedTool": "product-knowledge",
+    "q": "How do I export the Board Package to send to investors?",
+    "mode": "live",
+    "tools": [],
+    "reply": "Great question! The **Board Package** is found under the **Overview** section of the nav (alongside the Dashboard).\n\nHere's how to export it:\n\n1. **Navigate to Overview → Board Package** in the left-hand nav.\n2. Look for the **Export** or **Download** button (typically in the top-right corner of the page) — this will render the package as a **PDF** suitable for sharing with investors or board members.\n3. The exported PDF will include the curated KPI tiles, charts, and commentary that make up the",
+    "pass": true
+  },
+  {
+    "category": "ambiguous-multitool",
+    "answerable": "now",
+    "expectedTool": "getMonthlyPnL",
+    "q": "Which month did we lose the most money this year?",
+    "mode": "live",
+    "tools": [
+      "getMonthlyPnL"
+    ],
+    "reply": "**December is forecast to be the biggest loss month**, with a net loss of **-$2.1M** — nearly double any other month. That spike is likely driven by year-end expense timing (bonuses, true-ups, etc.) rather than a revenue shortfall, since December also has the highest revenue at $2.5M.\n\nAmong **actuals**, May is the worst so far at **-$918.8K** net income, with losses deepening each month as OpEx grows faster than revenue. The trend is worth watching — operating losses have widened steadily from ",
+    "pass": true
+  },
+  {
+    "category": "ambiguous-multitool",
+    "answerable": "now",
+    "expectedTool": "getBookingsHistory",
+    "q": "How do bookings this year compare to last year?",
+    "mode": "live",
+    "tools": [
+      "getBookingsHistory"
+    ],
+    "reply": "Bookings are up significantly year-over-year across every measure. Here's the comparison:\n\n| Metric | TTM (to Jun '26) | Prior TTM | FY2026 (incl. forecast) | FY2025 |\n|---|---|---|---|---|\n| New Business | $5.8M | $5.5M | $9.2M | $5.0M |\n| Expansion | $1.9M | $382K | $2.7M | $848K |\n| Contraction | $707K | $397K | $1.6M | $200K |\n| Gross Bookings | $7.8M | $5.9M | $11.9M | $5.9M |\n| **Net ΔARR** | **$7.1M** | **$5.5M** | **$10.3M** | **$5.7M** |\n\n**Key takeaways:**\n- **TTM net ΔARR is +$1.6M (+",
+    "pass": true
+  },
+  {
+    "category": "ambiguous-multitool",
+    "answerable": "ambiguous",
+    "expectedTool": "getMetric",
+    "q": "How's our runway looking?",
+    "mode": "live",
+    "tools": [
+      "getMetric(runway)"
+    ],
+    "reply": "Runway is **49 months** as of the current period, calculated as cash divided by net burn. That's a very healthy position — just over 4 years of runway, well above the typical 18–24 month comfort threshold for a Series B.\n\nWant me to pull the full cash flow forecast or net burn detail to dig deeper?",
+    "pass": true
+  },
+  {
+    "category": "ambiguous-multitool",
+    "answerable": "gap",
+    "expectedTool": "getPipeline",
+    "q": "How's the pipeline looking for Q3 coverage?",
+    "mode": "live",
+    "tools": [],
+    "reply": "I don't have a pipeline coverage tool available — my tools cover the financial statements, bookings history, contracts register, and KPI metrics, but not the sales pipeline directly.\n\nTo check Q3 pipeline coverage, head to **Sales → Pipeline** in the left nav. That view shows open opportunities, stage, expected close dates, and coverage ratios against quota — exactly what you need for a Q3 read.\n\nWhat I *can* help with on the sales side:\n- **Bookings YoY / trend** — how new + expansion ARR is tr",
+    "pass": true
+  },
+  {
+    "category": "period-import-actuals",
+    "answerable": "decline",
+    "expectedTool": "decline",
+    "q": "Close out June and roll the forecast forward.",
+    "mode": "live",
+    "tools": [
+      "getDashboard",
+      "getCashFlow",
+      "getPnL"
+    ],
+    "reply": "Here's your June close / roll-forward snapshot — actuals run through May, June is in close.\n\n---\n\n## 📊 June Close & Roll-Forward — FY2026\n\n### Financial Snapshot (FY2026 Forecast vs. Budget)\n\n| Line | Budget | Forecast | Variance |\n|---|---|---|---|\n| Total Revenue | $24.2M | $23.4M | **-$821K** |\n| — Subscription | $20.3M | $19.6M | -$650K |\n| — Services | $4.0M | $3.8M | -$171K |\n| Gross Profit | $17.7M | $16.7M | **-$1.0M** |\n| Gross Margin % | — | **71%** | — |\n| Total OpEx | $29.1M | $29.5",
+    "pass": false
+  },
+  {
+    "category": "period-import-actuals",
+    "answerable": "decline",
+    "expectedTool": "decline",
+    "q": "Approve and post the June accruals.",
+    "mode": "live",
+    "tools": [],
+    "reply": "I can't do that — posting and approving journal entries isn't something I'm able to action. I'm Scout, a **read-only finance analyst**; I can query, explain, and surface numbers, but I have no ability to write, approve, or post transactions in any system.\n\nTo post the June accruals you'll want to:\n\n1. **Go to your GL / ERP** (e.g. NetSuite, QuickBooks, Xero) and approve the accrual journal entries there.\n2. **Or route them through your close checklist** if your team uses a close-management tool ",
+    "pass": true
+  },
+  {
+    "category": "period-import-actuals",
+    "answerable": "decline",
+    "expectedTool": "decline",
+    "q": "Reconcile our bank statement to the cash account.",
+    "mode": "live",
+    "tools": [],
+    "reply": "That's outside Scout's scope — I handle **FP&A analytics** (P&L, KPIs, bookings, cash flow forecasts, etc.), not bank reconciliation or transaction-level accounting entries.\n\nFor bank rec, you'd typically work in your **general ledger / ERP** (e.g., QuickBooks, NetSuite, Xero) where you can match cleared transactions against the bank feed line by line.\n\n**What I *can* help with on the cash side:**\n- 📊 **Cash flow forecast** — projected inflows/outflows and runway\n- 💰 **Balance sheet** — cash &",
+    "pass": true
+  },
+  {
+    "category": "period-import-actuals",
+    "answerable": "decline",
+    "expectedTool": "decline",
+    "q": "Run the month-end close checklist and tell me what's blocking.",
+    "mode": "live",
+    "tools": [
+      "getDashboard",
+      "getPnL",
+      "getBalanceSheet",
+      "getCashFlow",
+      "getContracts",
+      "getCustomers"
+    ],
+    "reply": "Here's your June 2026 close checklist rundown — **June is still in close**, so actuals only run through May. Here's what the data surfaces:\n\n---\n\n### ✅ Clear / No Issues\n\n| Area | Status |\n|---|---|\n| **Balance sheet ties** | Assets reconcile (Cash $16.8M, AR $3.6M, Fixed Assets $658.7K, ROU $1.6M). Lease liability matches ROU asset ($1.6M). No obvious plug. |\n| **Deferred revenue waterfall** | Clean: Opening $8.1M + Billings $1.4M − Recognized $1.5M = Closing $7.9M ✓ |\n| **Logo / contract count",
+    "pass": false
+  },
+  {
+    "category": "period-import-actuals",
+    "answerable": "decline",
+    "expectedTool": "decline",
+    "q": "Post a journal entry to reclass the Ramp expense.",
+    "mode": "live",
+    "tools": [],
+    "reply": "Posting journal entries isn't something I'm able to do — Scout is a **read-only finance analyst**. I can surface, explain, and reason about the numbers in Bearing's data, but I don't have the ability to write back to the ledger or post any accounting entries.\n\nTo post a journal entry, you'd typically do this in your **ERP / general ledger** (e.g., QuickBooks, NetSuite, Xero). If Bearing has a direct integration, your accounting team would handle the posting there.\n\nHere's how I **can** help on t",
+    "pass": true
+  },
+  {
+    "category": "out-of-scope-decline",
+    "answerable": "decline",
+    "expectedTool": "decline",
+    "q": "What's our fully diluted cap table look like after the Series B?",
+    "mode": "live",
+    "tools": [],
+    "reply": "That's outside my lane — I don't have access to cap table or equity ownership data. Bearing's finance tools cover P&L, cash flow, balance sheet, ARR/bookings, unit economics, and customer metrics, but equity structure and cap table details aren't part of the dataset here.\n\nFor the fully diluted cap table post-Series B, you'd want to check directly with your legal counsel or your cap table management platform (e.g., Carta, Pulley, or similar).\n\nIs there anything on the financial or operating metr",
+    "pass": true
+  },
+  {
+    "category": "out-of-scope-decline",
+    "answerable": "decline",
+    "expectedTool": "decline",
+    "q": "How much of the company does Chris still own?",
+    "mode": "live",
+    "tools": [],
+    "reply": "That's not a question I can answer — ownership, cap table, and equity stakes aren't financial metrics tracked in Bearing's FP&A data. You'd need to check the cap table directly (typically managed in a tool like Carta or your legal documents).\n\nIs there a financial metric I can help you with instead?",
+    "pass": true
+  },
+  {
+    "category": "out-of-scope-decline",
+    "answerable": "decline",
+    "expectedTool": "decline",
+    "q": "Can you model the dilution if we raise a $30M Series C at a $200M pre?",
+    "mode": "live",
+    "tools": [],
+    "reply": "That's a scenario modeling question — great one for stress-testing, but it's outside what my tools can compute directly. Here's what I can do and where to go:\n\n**What I can pull for you right now:**\n- **Current cap table inputs** — cash, runway, and burn to help frame *why* and *when* you'd need to raise\n- **Key financials** — ARR, revenue, growth rate to sanity-check the $200M pre-money valuation\n\n**For the actual dilution model**, you'd build that in the **Scenario Manager** (Scenarios → Scena",
+    "pass": true
+  },
+  {
+    "category": "out-of-scope-decline",
+    "answerable": "decline",
+    "expectedTool": "decline",
+    "q": "What's the current option pool and how much is left to grant?",
+    "mode": "live",
+    "tools": [],
+    "reply": "This question is about equity / cap table data — specifically the option pool size and remaining ungranted options. That information lives in your cap table or equity management tool (e.g., Carta, Pulley), not in Bearing's FP&A data set.\n\nHere's what I **can** help with from the finance side:\n\n- **Stock-based compensation (SBC) expense** — I can pull the SBC line from the P&L or cash flow statement if it's broken out.\n- **Headcount & personnel costs** — from the Personnel forecast or Staff repor",
+    "pass": true
+  },
+  {
+    "category": "out-of-scope-decline",
+    "answerable": "decline",
+    "expectedTool": "decline",
+    "q": "Show me the preferred vs common split on the balance sheet equity section.",
+    "mode": "live",
+    "tools": [
+      "getBalanceSheet"
+    ],
+    "reply": "The balance sheet equity section doesn't break out preferred vs. common stock as separate line items — it's presented on a **combined, as-converted basis** with just two lines as of June 2026:\n\n| Line | Value |\n|---|---|\n| **Paid-in Capital** | $43.4M |\n| **Accumulated Deficit** | (36.3M) |\n| **Net Equity** | ~$7.1M |\n\nThe preferred/common split (liquidation preference, Series A vs. B stack, etc.) isn't surfaced in the balance sheet here. For that detail you'd typically look to the cap table or ",
+    "pass": false
+  }
+]

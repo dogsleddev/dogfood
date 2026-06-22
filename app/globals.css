@@ -1,0 +1,179 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Dogfood brand system ("Midnight" rail + parchment content) — CLAUDE.md §19.
+ * shadcn semantic tokens (--background, --primary, …) are remapped to the brand
+ * palette below so every shadcn/ui component themes on-brand automatically.
+ * The raw brand tokens (--brand-*) are also exposed as Tailwind color utilities
+ * (bg-ember, text-ink, border-parchment-line, …) via the @theme block.
+ */
+
+@theme inline {
+  /* shadcn semantic tokens */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* brand palette as utilities */
+  --color-ember: var(--brand-ember);
+  --color-ember-deep: var(--brand-ember-deep);
+  --color-ember-tint: var(--brand-ember-tint);
+  --color-amber: var(--brand-amber);
+  --color-amber-deep: var(--brand-amber-deep);
+  --color-sage: var(--brand-sage);
+  --color-sage-deep: var(--brand-sage-deep);
+  --color-sage-deeper: var(--brand-sage-deeper);
+  --color-frost: var(--brand-frost);
+  --color-steel: var(--brand-steel);
+  --color-ink: var(--brand-ink);
+  --color-parchment: var(--brand-parchment);
+  --color-parchment-2: var(--brand-parchment-2);
+  --color-surface: var(--brand-card);
+  --color-surface-2: var(--brand-card-2);
+  --color-parchment-line: var(--brand-border);
+  --color-midnight: var(--brand-midnight);
+  --color-midnight-2: var(--brand-midnight-2);
+
+  /* fonts — Fraunces (titles) + Geist (body) + Geist Mono, wired in layout.tsx */
+  --font-sans: var(--font-sans);
+  --font-heading: var(--font-heading);
+  --font-mono: var(--font-mono);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+}
+
+:root {
+  /* raw brand tokens (§19) */
+  --brand-ember: #ec6d3f;
+  --brand-ember-deep: #c9582e;
+  --brand-ember-tint: #fbefe9;
+  --brand-amber: #e7b23a;
+  --brand-amber-deep: #b9852a;
+  --brand-sage: #46c99a;
+  --brand-sage-deep: #2fa37d;
+  --brand-sage-deeper: #2a8a66;
+  --brand-frost: #9db8cc;
+  --brand-steel: #5a6b7a;
+  --brand-ink: #1c2530;
+  --brand-parchment: #faf7f1;
+  --brand-parchment-2: #f7f3ec;
+  --brand-card: #ffffff;
+  --brand-card-2: #fbfaf6;
+  --brand-border: #ece6db;
+  --brand-midnight: #0e1726;
+  --brand-midnight-2: #0b121e;
+
+  --radius: 0.625rem;
+
+  /* content surfaces (light) — shadcn tokens mapped to parchment/ink/ember */
+  --background: var(--brand-parchment);
+  --foreground: var(--brand-ink);
+  --card: var(--brand-card);
+  --card-foreground: var(--brand-ink);
+  --popover: var(--brand-card);
+  --popover-foreground: var(--brand-ink);
+  --primary: var(--brand-ember);
+  --primary-foreground: #ffffff;
+  --secondary: var(--brand-parchment-2);
+  --secondary-foreground: var(--brand-ink);
+  --muted: var(--brand-parchment-2);
+  --muted-foreground: var(--brand-steel);
+  --accent: var(--brand-ember-tint);
+  --accent-foreground: var(--brand-ember-deep);
+  --destructive: #c0392b;
+  --border: var(--brand-border);
+  --input: var(--brand-border);
+  --ring: var(--brand-ember);
+
+  /* chart ramp follows the brand families (Financial/Growth/Unit/Cash) */
+  --chart-1: var(--brand-ember);
+  --chart-2: var(--brand-amber);
+  --chart-3: var(--brand-sage-deep);
+  --chart-4: var(--brand-frost);
+  --chart-5: var(--brand-steel);
+
+  /* the Midnight rail */
+  --sidebar: var(--brand-midnight);
+  --sidebar-foreground: #bfc9d4;
+  --sidebar-primary: var(--brand-ember);
+  --sidebar-primary-foreground: var(--brand-parchment);
+  --sidebar-accent: #16273a;
+  --sidebar-accent-foreground: var(--brand-parchment);
+  --sidebar-border: #1a2738;
+  --sidebar-ring: var(--brand-ember);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}
+
+/*
+ * Sidebar nav scrollbar — low contrast against the Midnight rail (§19). The track is
+ * transparent so it reads as the rail background; the thumb is a muted lighter shade of
+ * that background so it looks like a scrollbar without popping out. Firefox uses
+ * scrollbar-color (thumb track); WebKit/Chromium uses the ::-webkit-scrollbar rules.
+ */
+.nav-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #243348 transparent;
+}
+.nav-scrollbar::-webkit-scrollbar {
+  width: 10px;
+}
+.nav-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.nav-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #243348;
+  border-radius: 9999px;
+  /* transparent border + padding-box clip insets the thumb so it reads as a slim pill */
+  border: 3px solid transparent;
+  background-clip: padding-box;
+}
+.nav-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: #30435c;
+}

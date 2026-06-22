@@ -1,0 +1,7 @@
+customer_id,name,segment,start_month,status,arr
+C-0001,Talon Labs,scale,2026-08,active,1715000
+C-0002,Beacon Ledger,scale,2024-11,active,1464000
+C-0003,Inkwell Intelligence,scale,2026-07,active,1100000
+C-0004,Northwind Cloud,growth,2024-06,active,285000
+C-0005,Cinder AI,starter,2025-09,active,64000
+C-0006,Birchpoint,scale,2025-08,churned,0

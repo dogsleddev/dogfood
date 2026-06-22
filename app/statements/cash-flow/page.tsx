@@ -1,0 +1,93 @@
+import { getCashFlow, getRunway } from "@/lib/queries";
+import { month, monthIndex, monthYear } from "@/lib/types/period";
+import { formatMoney } from "@/lib/types/money";
+import type { CashFlowLineId, Runway } from "@/lib/types/statements";
+import { CashFlowTable } from "@/components/statements/cash-flow-table";
+import { StatementInspectPane } from "@/components/statements/statement-inspect-pane";
+import { CF_DRILL, CF_NOTE } from "@/components/statements/bs-cf-drill";
+import { addLineFluxNoteAction, resolveCfFluxNoteAction, deleteCfFluxNoteAction } from "./actions";
+
+const ACTUAL_LABEL = "Actual YTD";
+const FORECAST_LABEL = "Forecast FY26";
+
+const MONTH_ABBR = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+function RunwayStrip({ runway }: { runway: Runway }) {
+  // Runway reads cash as-of the current (in-close) month to match the dashboard tile; label it so it
+  // reconciles with the Balance Sheet's "Actual · close" cash, which is the last CLOSED month.
+  const asOf = `${MONTH_ABBR[monthIndex(runway.asOf) - 1]} ${monthYear(runway.asOf)}`;
+  const stats: readonly { label: string; value: string; tone?: string }[] = [
+    { label: `Cash on hand · ${asOf}`, value: formatMoney(runway.cash, { compact: true }) },
+    { label: "Net burn / mo (TTM)", value: formatMoney(runway.netBurn, { compact: true }), tone: "text-ember-deep" },
+    {
+      label: "Runway",
+      value: runway.months === null ? "Cash-flow positive" : `${Math.round(runway.months)} months`,
+      tone: "text-sage-deep",
+    },
+  ];
+  return (
+    <div className="mb-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
+      {stats.map((s) => (
+        <div key={s.label} className="rounded-xl border border-parchment-line bg-surface px-4 py-3">
+          <div className="text-xs uppercase tracking-wide text-steel">{s.label}</div>
+          <div className={`mt-1 font-heading text-2xl tabular-nums ${s.tone ?? "text-ink"}`}>{s.value}</div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export default async function CashFlowPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ inspect?: string }>;
+}) {
+  const { inspect } = await searchParams;
+  const period = month(2026, 6);
+  const [cf, runway] = await Promise.all([getCashFlow(period), getRunway(period)]);
+  const inspectId = (inspect && cf.lines.some((l) => l.id === inspect) ? inspect : undefined) as
+    | CashFlowLineId
+    | undefined;
+  const line = inspectId ? cf.lines.find((l) => l.id === inspectId) : undefined;
+
+  return (
+    <div className="mx-auto max-w-6xl px-8 py-8">
+      <header className="mb-6">
+        <div className="mb-1 text-xs font-semibold uppercase tracking-wider text-ember-deep">
+          Financial Statements · Layer 3
+        </div>
+        <div className="flex flex-wrap items-baseline justify-between gap-2">
+          <h1 className="font-heading text-3xl text-ink">Cash Flow Forecast</h1>
+          <span className="text-sm text-steel">FY2026 · as of June 2026</span>
+        </div>
+        <p className="mt-2 max-w-2xl text-sm text-steel">
+          Indirect method, from Net income through the working-capital deltas to the net change in
+          cash. Tap any number to peek its driver in the pane (§6). Reads the seed; net income ties to
+          the P&amp;L and the net change ties to the Balance Sheet cash line by construction.
+        </p>
+      </header>
+
+      <RunwayStrip runway={runway} />
+
+      <div className="flex items-start gap-6">
+        <div className="min-w-0 flex-1">
+          <CashFlowTable cf={cf} inspect={inspectId} actualLabel={ACTUAL_LABEL} forecastLabel={FORECAST_LABEL} />
+        </div>
+        {line && (
+          <StatementInspectPane
+            lineId={line.id}
+            label={line.label}
+            actualLabel={ACTUAL_LABEL}
+            forecastLabel={FORECAST_LABEL}
+            actual={line.values.actual}
+            forecast={line.values.forecast}
+            drill={CF_DRILL[line.id]}
+            note={CF_NOTE[line.id]}
+            closeHref="/statements/cash-flow"
+            fluxActions={{ add: addLineFluxNoteAction, resolve: resolveCfFluxNoteAction, remove: deleteCfFluxNoteAction }}
+          />
+        )}
+      </div>
+    </div>
+  );
+}

@@ -1,0 +1,47 @@
+id,customer_name,kind,stream,stage,arr,owner,expected_close,probability
+deal-0,Halford Treasury,new_logo,subscription,lead,34000.00,Sam Haddad,2026-12,0.08840585950762034
+deal-1,Castlepoint Financial,new_logo,subscription,lead,252000.00,Hassan Ahmed,2026-11,0.04339243102818728
+deal-2,Brightmark Pay,new_logo,subscription,lead,49000.00,Raj Underwood,2026-12,0.037596583217382434
+deal-3,Brindle Labs,expansion,subscription,proposal,69000.00,Dana Ito,2026-11,0.5183670657128095
+deal-4,Almira Bank,expansion,subscription,proposal,62000.00,Yusuf Silva,2026-07,0.4602357745170593
+deal-5,Sterlinghaus,new_logo,subscription,qualified,170000.00,Noor Ellis,2026-09,0.2887418743595481
+deal-6,Onyx Capital,new_logo,subscription,lead,57000.00,Mei Mensah,2026-11,0.1550390483811498
+deal-7,Wellspring Health AI,new_logo,subscription,qualified,66000.00,Felix Reyes,2026-09,0.19791607089340685
+deal-8,Stagecoach Logistics,new_logo,subscription,qualified,132000.00,Maya Dasgupta,2026-10,0.175137332752347
+deal-9,Lumadel AI,expansion,subscription,qualified,159000.00,Hassan Lowe,2026-09,0.17240146588534117
+deal-10,Deedline,new_logo,subscription,lead,36000.00,Caleb Bauer,2026-12,0.08188939336687327
+deal-11,Casework AI,new_logo,subscription,negotiation,56000.00,Liam Jensen,2026-07,0.7249556016176939
+deal-12,Cinder AI,expansion,subscription,proposal,260000.00,Quinn Okafor,2026-08,0.47226184356957673
+deal-13,Quench AI,expansion,subscription,qualified,47000.00,Hassan Lowe,2026-12,0.2723467845469713
+deal-14,Plotbound Realty,new_logo,subscription,negotiation,845000.00,Liam Jensen,2026-08,0.8029412775114179
+deal-15,Freightcove,new_logo,subscription,lead,35000.00,Hassan Ahmed,2026-11,0.051805768720805646
+deal-16,Chartwell Health,new_logo,subscription,lead,71000.00,Caleb Bauer,2026-08,0.03
+deal-17,Tidewater Treasury,expansion,subscription,qualified,999000.00,Wesley Velasquez,2026-09,0.30875887248665096
+deal-18,Statute AI,new_logo,subscription,qualified,222000.00,Dana Ito,2026-11,0.21860319294035435
+deal-19,Lumberyard Software,expansion,subscription,lead,49000.00,Nadia Iverson,2026-10,0.03
+deal-20,Gridline,expansion,subscription,qualified,56000.00,Aaron Moreau,2026-07,0.2023540113121271
+deal-21,Cobblepath,expansion,services,proposal,34000.00,Sam Haddad,2026-08,0.5372196624800563
+deal-22,Capstone Treasury,expansion,subscription,lead,43000.00,Liam Vargas,2026-12,0.17958715762943028
+deal-23,Acrewise,new_logo,subscription,proposal,133000.00,Yusuf Gupta,2026-08,0.5660477005690336
+deal-24,Gridline,expansion,services,qualified,36000.00,Hassan Lowe,2026-12,0.2220915823057294
+deal-25,Penmark Pay,expansion,services,lead,243000.00,Maya Dasgupta,2026-10,0.06101129554212094
+deal-26,Palletworks,new_logo,subscription,qualified,166000.00,Jonah Bauer,2026-11,0.19364347886294125
+deal-27,Vitalpath Health,new_logo,subscription,negotiation,67000.00,Priya Fitzgerald,2026-10,0.7017566909268499
+deal-28,Cartway,expansion,subscription,lead,68000.00,Hassan Ahmed,2026-11,0.15842350989580156
+deal-29,Birchwood Ceramics,new_logo,subscription,proposal,35000.00,Wesley Velasquez,2026-07,0.4942822614684701
+deal-30,Kettleworks,expansion,subscription,proposal,202000.00,Priya Fitzgerald,2026-07,0.5553943035379052
+deal-31,Granite Peak Apparel,new_logo,services,qualified,70000.00,Caleb Bauer,2026-12,0.17649224635213612
+deal-32,Lantern Bay Roasters,new_logo,subscription,proposal,68000.00,Zara Abbott,2026-08,0.5689955798909068
+deal-33,Snowfield Systems,expansion,subscription,proposal,61000.00,Leila Kowalski,2026-08,0.4675967013090849
+deal-34,Foxglove Press,new_logo,subscription,proposal,148000.00,Dana Ito,2026-11,0.4821439205110073
+deal-35,Ironwell Distillery,new_logo,services,proposal,184000.00,Ethan Young,2026-07,0.42338296983391044
+deal-36,Halford Treasury,new_logo,subscription,proposal,60000.00,Lucas Eriksson,2026-09,0.5754861336573959
+deal-37,Trellix Stack,expansion,subscription,qualified,124000.00,Grace Lindqvist,2026-10,0.32579825069755314
+deal-38,Parallax Labs,expansion,subscription,qualified,70000.00,Sofia Eriksson,2026-08,0.2794988464936614
+deal-39,Castlepoint Financial,new_logo,subscription,negotiation,148000.00,Caleb Osei,2026-07,0.7100906155258417
+deal-40,Fernwood Labs,expansion,subscription,qualified,50000.00,Hassan Ahmed,2026-08,0.24698121447116136
+deal-41,Padlock,expansion,subscription,negotiation,36000.00,Sofia Eriksson,2026-07,0.7903573248162865
+deal-42,Plumb,expansion,subscription,lead,36000.00,Priya Fitzgerald,2026-10,0.050842634774744516
+deal-43,Brightmark Pay,new_logo,subscription,lead,50000.00,Sofia Silva,2026-11,0.13600798413157464
+deal-44,Larkspur AI,expansion,subscription,proposal,217000.00,Felix Reyes,2026-07,0.4443459917232394
+deal-45,Cobblestone Capital,expansion,subscription,qualified,64000.00,Felix Reyes,2026-08,0.1981545988842845

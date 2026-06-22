@@ -1,0 +1,326 @@
+project_id,project_name,period,recognized
+svc-sub-0-0,Implementation · Brightloop,2024-01,34000.00
+svc-sub-0-0,Implementation · Brightloop,2024-02,34000.00
+svc-sub-0-0,Implementation · Brightloop,2024-03,34000.00
+svc-sub-0-0,Implementation · Brightloop,2024-04,34000.00
+svc-sub-0-1,Implementation · Onspring,2024-01,8500.00
+svc-sub-0-1,Implementation · Onspring,2024-02,8500.00
+svc-sub-2-1,Implementation · Latchkey,2024-03,39250.00
+svc-sub-2-1,Implementation · Latchkey,2024-04,39250.00
+svc-sub-2-1,Implementation · Latchkey,2024-05,39250.00
+svc-sub-2-1,Implementation · Latchkey,2024-06,39250.00
+svc-sub-3-0,Implementation · Cinder AI,2024-04,41500.00
+svc-sub-3-0,Implementation · Cinder AI,2024-05,41500.00
+svc-sub-3-0,Implementation · Cinder AI,2024-06,41500.00
+svc-sub-3-0,Implementation · Cinder AI,2024-07,41500.00
+svc-sub-4-0,Implementation · Synapse Compute,2024-05,9500.00
+svc-sub-4-0,Implementation · Synapse Compute,2024-06,9500.00
+svc-sub-4-1,Implementation · Lumadel AI,2024-05,22500.00
+svc-sub-4-1,Implementation · Lumadel AI,2024-06,22500.00
+svc-sub-4-1,Implementation · Lumadel AI,2024-07,22500.00
+svc-sub-4-1,Implementation · Lumadel AI,2024-08,22500.00
+svc-sub-4-2,Implementation · Tessera Intelligence,2024-05,7500.00
+svc-sub-4-2,Implementation · Tessera Intelligence,2024-06,7500.00
+svc-sub-5-1,Implementation · Halcyon AI,2024-06,8000.00
+svc-sub-5-1,Implementation · Halcyon AI,2024-07,8000.00
+svc-sub-5-2,Implementation · Veridian Labs,2024-06,6000.00
+svc-sub-5-2,Implementation · Veridian Labs,2024-07,6000.00
+svc-sub-6-0,Implementation · Mesa Intelligence,2024-07,5000.00
+svc-sub-6-0,Implementation · Mesa Intelligence,2024-08,5000.00
+svc-sub-6-1,Implementation · Foundry Compute,2024-07,26000.00
+svc-sub-6-1,Implementation · Foundry Compute,2024-08,26000.00
+svc-sub-6-1,Implementation · Foundry Compute,2024-09,26000.00
+svc-sub-6-1,Implementation · Foundry Compute,2024-10,26000.00
+svc-sub-7-1,Implementation · Sferica Labs,2024-08,6500.00
+svc-sub-7-1,Implementation · Sferica Labs,2024-09,6500.00
+svc-sub-7-2,Implementation · Keel Financial,2024-08,7000.00
+svc-sub-7-2,Implementation · Keel Financial,2024-09,7000.00
+svc-sub-8-0,Implementation · Mintline,2024-09,5000.00
+svc-sub-8-0,Implementation · Mintline,2024-10,5000.00
+svc-sub-8-1,Implementation · Ledgerwise,2024-09,61500.00
+svc-sub-8-1,Implementation · Ledgerwise,2024-10,61500.00
+svc-sub-8-1,Implementation · Ledgerwise,2024-11,50950.33
+svc-sub-8-1,Implementation · Ledgerwise,2024-12,39542.92
+svc-sub-8-1,Implementation · Ledgerwise,2025-01,40036.81
+svc-sub-8-1,Implementation · Ledgerwise,2025-02,40102.73
+svc-sub-8-1,Implementation · Ledgerwise,2025-03,45883.51
+svc-sub-8-1,Implementation · Ledgerwise,2025-04,24531.88
+svc-sub-8-1,Implementation · Ledgerwise,2025-05,4951.81
+svc-sub-9-0,Implementation · Tradewind Capital,2024-10,29250.00
+svc-sub-9-0,Implementation · Tradewind Capital,2024-11,24232.48
+svc-sub-9-0,Implementation · Tradewind Capital,2024-12,18807.00
+svc-sub-9-0,Implementation · Tradewind Capital,2025-01,19041.90
+svc-sub-9-0,Implementation · Tradewind Capital,2025-02,16737.92
+svc-sub-9-0,Implementation · Tradewind Capital,2025-03,6662.96
+svc-sub-9-0,Implementation · Tradewind Capital,2025-04,2267.75
+svc-sub-9-1,Implementation · Settl,2024-10,33750.00
+svc-sub-9-1,Implementation · Settl,2024-11,27960.55
+svc-sub-9-1,Implementation · Settl,2024-12,21700.38
+svc-sub-9-1,Implementation · Settl,2025-01,21971.42
+svc-sub-9-1,Implementation · Settl,2025-02,19312.98
+svc-sub-9-1,Implementation · Settl,2025-03,7688.03
+svc-sub-9-1,Implementation · Settl,2025-04,2616.63
+svc-sub-10-1,Implementation · Beacon Ledger,2024-11,70281.08
+svc-sub-10-1,Implementation · Beacon Ledger,2024-12,54545.65
+svc-sub-10-1,Implementation · Beacon Ledger,2025-01,55226.93
+svc-sub-10-1,Implementation · Beacon Ledger,2025-02,55317.86
+svc-sub-10-1,Implementation · Beacon Ledger,2025-03,63291.88
+svc-sub-10-1,Implementation · Beacon Ledger,2025-04,70585.50
+svc-sub-10-1,Implementation · Beacon Ledger,2025-05,78152.16
+svc-sub-10-1,Implementation · Beacon Ledger,2025-06,61598.93
+svc-sub-10-2,Implementation · Vepay,2024-11,22575.55
+svc-sub-10-2,Implementation · Vepay,2024-12,17521.05
+svc-sub-10-2,Implementation · Vepay,2025-01,17739.89
+svc-sub-10-2,Implementation · Vepay,2025-02,17769.10
+svc-sub-10-2,Implementation · Vepay,2025-03,20330.50
+svc-sub-10-2,Implementation · Vepay,2025-04,10869.82
+svc-sub-10-2,Implementation · Vepay,2025-05,2194.10
+svc-sub-11-0,Implementation · Quorum Capital,2024-12,13823.95
+svc-sub-11-0,Implementation · Quorum Capital,2025-01,13996.61
+svc-sub-11-0,Implementation · Quorum Capital,2025-02,14019.65
+svc-sub-11-0,Implementation · Quorum Capital,2025-03,16040.58
+svc-sub-11-0,Implementation · Quorum Capital,2025-04,17889.06
+svc-sub-11-0,Implementation · Quorum Capital,2025-05,9424.47
+svc-sub-11-0,Implementation · Quorum Capital,2025-06,805.69
+svc-sub-11-1,Implementation · Riverton Pay,2024-12,24915.25
+svc-sub-11-1,Implementation · Riverton Pay,2025-01,25226.45
+svc-sub-11-1,Implementation · Riverton Pay,2025-02,25267.98
+svc-sub-11-1,Implementation · Riverton Pay,2025-03,28910.34
+svc-sub-11-1,Implementation · Riverton Pay,2025-04,32241.90
+svc-sub-11-1,Implementation · Riverton Pay,2025-05,16985.96
+svc-sub-11-1,Implementation · Riverton Pay,2025-06,1452.12
+svc-sub-11-2,Implementation · Standpoint Financial,2024-12,5143.79
+svc-sub-11-2,Implementation · Standpoint Financial,2025-01,5208.04
+svc-sub-11-2,Implementation · Standpoint Financial,2025-02,3683.04
+svc-sub-11-2,Implementation · Standpoint Financial,2025-03,1466.13
+svc-sub-11-2,Implementation · Standpoint Financial,2025-04,415.19
+svc-sub-11-2,Implementation · Standpoint Financial,2025-05,83.81
+svc-sub-12-0,Implementation · Almira Bank,2025-01,22296.92
+svc-sub-12-0,Implementation · Almira Bank,2025-02,22333.63
+svc-sub-12-0,Implementation · Almira Bank,2025-03,25553.01
+svc-sub-12-0,Implementation · Almira Bank,2025-04,28497.68
+svc-sub-12-0,Implementation · Almira Bank,2025-05,31552.59
+svc-sub-12-0,Implementation · Almira Bank,2025-06,6766.16
+svc-sub-12-2,Implementation · Cleardeed,2025-01,3255.03
+svc-sub-12-2,Implementation · Cleardeed,2025-02,3260.38
+svc-sub-12-2,Implementation · Cleardeed,2025-03,2599.76
+svc-sub-12-2,Implementation · Cleardeed,2025-04,736.22
+svc-sub-12-2,Implementation · Cleardeed,2025-05,148.61
+svc-sub-13-1,Implementation · Haulwise,2025-02,6194.73
+svc-sub-13-1,Implementation · Haulwise,2025-03,7087.70
+svc-sub-13-1,Implementation · Haulwise,2025-04,4757.30
+svc-sub-13-1,Implementation · Haulwise,2025-05,960.27
+svc-sub-14-0,Implementation · Surveyor Realty AI,2025-03,21263.09
+svc-sub-14-0,Implementation · Surveyor Realty AI,2025-04,23713.40
+svc-sub-14-0,Implementation · Surveyor Realty AI,2025-05,26255.44
+svc-sub-14-0,Implementation · Surveyor Realty AI,2025-06,28500.00
+svc-sub-14-0,Implementation · Surveyor Realty AI,2025-07,14268.07
+svc-sub-14-1,Implementation · Cartway,2025-03,5222.51
+svc-sub-14-1,Implementation · Cartway,2025-04,5824.34
+svc-sub-14-1,Implementation · Cartway,2025-05,2720.56
+svc-sub-14-1,Implementation · Cartway,2025-06,232.58
+svc-sub-15-2,Implementation · Copperline Coffee,2025-04,4160.25
+svc-sub-15-2,Implementation · Copperline Coffee,2025-05,4606.22
+svc-sub-15-2,Implementation · Copperline Coffee,2025-06,1233.54
+svc-sub-15-3,Implementation · Brackit,2025-04,23713.40
+svc-sub-15-3,Implementation · Brackit,2025-05,26255.44
+svc-sub-15-3,Implementation · Brackit,2025-06,28500.00
+svc-sub-15-3,Implementation · Brackit,2025-07,28500.00
+svc-sub-15-3,Implementation · Brackit,2025-08,7031.16
+svc-sub-16-0,Implementation · Spindle Systems,2025-05,40074.09
+svc-sub-16-0,Implementation · Spindle Systems,2025-06,43500.00
+svc-sub-16-0,Implementation · Spindle Systems,2025-07,43500.00
+svc-sub-16-0,Implementation · Spindle Systems,2025-08,43500.00
+svc-sub-16-0,Implementation · Spindle Systems,2025-09,3425.91
+svc-sub-16-3,Implementation · Tideglass,2025-05,8291.19
+svc-sub-16-3,Implementation · Tideglass,2025-06,9000.00
+svc-sub-16-3,Implementation · Tideglass,2025-07,708.81
+svc-sub-17-0,Implementation · Packetry,2025-06,6500.00
+svc-sub-17-0,Implementation · Packetry,2025-07,6500.00
+svc-sub-17-2,Implementation · Yardstick Labs,2025-06,44750.00
+svc-sub-17-2,Implementation · Yardstick Labs,2025-07,44750.00
+svc-sub-17-2,Implementation · Yardstick Labs,2025-08,44750.00
+svc-sub-17-2,Implementation · Yardstick Labs,2025-09,44750.00
+svc-sub-17-3,Implementation · Mossflow,2025-06,35750.00
+svc-sub-17-3,Implementation · Mossflow,2025-07,35750.00
+svc-sub-17-3,Implementation · Mossflow,2025-08,35750.00
+svc-sub-17-3,Implementation · Mossflow,2025-09,35750.00
+svc-sub-18-1,Implementation · Cobaltline,2025-07,7000.00
+svc-sub-18-1,Implementation · Cobaltline,2025-08,7000.00
+svc-sub-18-3,Implementation · Stackmint,2025-07,8500.00
+svc-sub-18-3,Implementation · Stackmint,2025-08,8500.00
+svc-sub-19-0,Implementation · Birchpoint,2025-08,47666.67
+svc-sub-19-0,Implementation · Birchpoint,2025-09,47666.67
+svc-sub-19-0,Implementation · Birchpoint,2025-10,47666.67
+svc-sub-19-0,Implementation · Birchpoint,2025-11,45179.13
+svc-sub-19-0,Implementation · Birchpoint,2025-12,47666.67
+svc-sub-19-0,Implementation · Birchpoint,2026-01,47666.67
+svc-sub-19-0,Implementation · Birchpoint,2026-02,2487.54
+svc-sub-19-1,Implementation · Quillet,2025-08,35500.00
+svc-sub-19-1,Implementation · Quillet,2025-09,35500.00
+svc-sub-19-1,Implementation · Quillet,2025-10,35500.00
+svc-sub-19-1,Implementation · Quillet,2025-11,33647.39
+svc-sub-19-1,Implementation · Quillet,2025-12,1852.61
+svc-sub-19-2,Implementation · Driftline Systems,2025-08,40500.00
+svc-sub-19-2,Implementation · Driftline Systems,2025-09,40500.00
+svc-sub-19-2,Implementation · Driftline Systems,2025-10,40500.00
+svc-sub-19-2,Implementation · Driftline Systems,2025-11,38386.46
+svc-sub-19-2,Implementation · Driftline Systems,2025-12,2113.54
+svc-sub-19-3,Implementation · Pylon Software,2025-08,7000.00
+svc-sub-19-3,Implementation · Pylon Software,2025-09,7000.00
+svc-sub-20-0,Implementation · Crateworks,2025-09,5000.00
+svc-sub-20-0,Implementation · Crateworks,2025-10,5000.00
+svc-sub-20-2,Implementation · Threadbase,2025-09,26000.00
+svc-sub-20-2,Implementation · Threadbase,2025-10,26000.00
+svc-sub-20-2,Implementation · Threadbase,2025-11,24643.16
+svc-sub-20-2,Implementation · Threadbase,2025-12,26000.00
+svc-sub-20-2,Implementation · Threadbase,2026-01,1356.84
+svc-sub-20-3,Implementation · Ironwood Systems,2025-09,33250.00
+svc-sub-20-3,Implementation · Ironwood Systems,2025-10,33250.00
+svc-sub-20-3,Implementation · Ironwood Systems,2025-11,31514.81
+svc-sub-20-3,Implementation · Ironwood Systems,2025-12,33250.00
+svc-sub-20-3,Implementation · Ironwood Systems,2026-01,1735.19
+svc-sub-21-0,Implementation · Lumberyard Software,2025-10,38250.00
+svc-sub-21-0,Implementation · Lumberyard Software,2025-11,36253.88
+svc-sub-21-0,Implementation · Lumberyard Software,2025-12,38250.00
+svc-sub-21-0,Implementation · Lumberyard Software,2026-01,38250.00
+svc-sub-21-0,Implementation · Lumberyard Software,2026-02,1996.12
+svc-sub-21-2,Implementation · Murmur Stack,2025-10,8000.00
+svc-sub-21-2,Implementation · Murmur Stack,2025-11,7582.51
+svc-sub-21-2,Implementation · Murmur Stack,2025-12,417.49
+svc-sub-22-0,Implementation · Tinderbox Labs,2025-11,32225.67
+svc-sub-22-0,Implementation · Tinderbox Labs,2025-12,34000.00
+svc-sub-22-0,Implementation · Tinderbox Labs,2026-01,34000.00
+svc-sub-22-0,Implementation · Tinderbox Labs,2026-02,34000.00
+svc-sub-22-0,Implementation · Tinderbox Labs,2026-03,1774.33
+svc-sub-22-1,Implementation · Saltbox Systems,2025-11,22036.67
+svc-sub-22-1,Implementation · Saltbox Systems,2025-12,23250.00
+svc-sub-22-1,Implementation · Saltbox Systems,2026-01,23250.00
+svc-sub-22-1,Implementation · Saltbox Systems,2026-02,23250.00
+svc-sub-22-1,Implementation · Saltbox Systems,2026-03,1213.33
+svc-sub-22-2,Implementation · Glidepath Software,2025-11,8530.32
+svc-sub-22-2,Implementation · Glidepath Software,2025-12,9000.00
+svc-sub-22-2,Implementation · Glidepath Software,2026-01,469.68
+svc-sub-23-0,Implementation · Riffstack,2025-12,8500.00
+svc-sub-23-0,Implementation · Riffstack,2026-01,8500.00
+svc-sub-23-3,Implementation · Outpost Software,2025-12,30500.00
+svc-sub-23-3,Implementation · Outpost Software,2026-01,30500.00
+svc-sub-23-3,Implementation · Outpost Software,2026-02,30500.00
+svc-sub-23-3,Implementation · Outpost Software,2026-03,30500.00
+svc-sub-24-0,Implementation · Kettleworks,2026-01,22750.00
+svc-sub-24-0,Implementation · Kettleworks,2026-02,22750.00
+svc-sub-24-0,Implementation · Kettleworks,2026-03,22750.00
+svc-sub-24-0,Implementation · Kettleworks,2026-04,22750.00
+svc-sub-24-1,Implementation · Snowfield Systems,2026-01,51500.00
+svc-sub-24-1,Implementation · Snowfield Systems,2026-02,51500.00
+svc-sub-24-1,Implementation · Snowfield Systems,2026-03,51500.00
+svc-sub-24-1,Implementation · Snowfield Systems,2026-04,51500.00
+svc-sub-24-1,Implementation · Snowfield Systems,2026-05,51500.00
+svc-sub-24-1,Implementation · Snowfield Systems,2026-06,51500.00
+svc-sub-25-0,Implementation · Wickline,2026-02,21750.00
+svc-sub-25-0,Implementation · Wickline,2026-03,21750.00
+svc-sub-25-0,Implementation · Wickline,2026-04,21750.00
+svc-sub-25-0,Implementation · Wickline,2026-05,21750.00
+svc-sub-25-1,Implementation · Plankstack,2026-02,7500.00
+svc-sub-25-1,Implementation · Plankstack,2026-03,7500.00
+svc-sub-25-2,Implementation · Verdigris Systems,2026-02,9000.00
+svc-sub-25-2,Implementation · Verdigris Systems,2026-03,9000.00
+svc-sub-26-0,Implementation · Mapleline Software,2026-03,37250.00
+svc-sub-26-0,Implementation · Mapleline Software,2026-04,37250.00
+svc-sub-26-0,Implementation · Mapleline Software,2026-05,37250.00
+svc-sub-26-0,Implementation · Mapleline Software,2026-06,37250.00
+svc-sub-26-1,Implementation · Brindle Labs,2026-03,45000.00
+svc-sub-26-1,Implementation · Brindle Labs,2026-04,45000.00
+svc-sub-26-1,Implementation · Brindle Labs,2026-05,45000.00
+svc-sub-26-1,Implementation · Brindle Labs,2026-06,45000.00
+svc-sub-27-0,Implementation · Hollowpoint Systems,2026-04,9500.00
+svc-sub-27-0,Implementation · Hollowpoint Systems,2026-05,9500.00
+svc-sub-27-1,Implementation · Dunewire,2026-04,10000.00
+svc-sub-27-1,Implementation · Dunewire,2026-05,10000.00
+svc-sub-27-2,Implementation · Stonefold Software,2026-04,9500.00
+svc-sub-27-2,Implementation · Stonefold Software,2026-05,9500.00
+svc-sub-27-3,Implementation · Obsidian Compute,2026-04,29250.00
+svc-sub-27-3,Implementation · Obsidian Compute,2026-05,29250.00
+svc-sub-27-3,Implementation · Obsidian Compute,2026-06,29250.00
+svc-sub-27-3,Implementation · Obsidian Compute,2026-07,29250.00
+svc-sub-28-1,Implementation · Vantix Intelligence,2026-05,23750.00
+svc-sub-28-1,Implementation · Vantix Intelligence,2026-06,23750.00
+svc-sub-28-1,Implementation · Vantix Intelligence,2026-07,23750.00
+svc-sub-28-1,Implementation · Vantix Intelligence,2026-08,23750.00
+svc-sub-28-2,Implementation · Quench AI,2026-05,44750.00
+svc-sub-28-2,Implementation · Quench AI,2026-06,44750.00
+svc-sub-28-2,Implementation · Quench AI,2026-07,44750.00
+svc-sub-28-2,Implementation · Quench AI,2026-08,44750.00
+svc-sub-28-3,Implementation · Saffron Labs,2026-05,6500.00
+svc-sub-28-3,Implementation · Saffron Labs,2026-06,6500.00
+svc-sub-29-0,Implementation · Meridel AI,2026-06,28250.00
+svc-sub-29-0,Implementation · Meridel AI,2026-07,28250.00
+svc-sub-29-0,Implementation · Meridel AI,2026-08,28250.00
+svc-sub-29-0,Implementation · Meridel AI,2026-09,28250.00
+svc-sub-29-2,Implementation · Thornwell AI,2026-06,25500.00
+svc-sub-29-2,Implementation · Thornwell AI,2026-07,25500.00
+svc-sub-29-2,Implementation · Thornwell AI,2026-08,25500.00
+svc-sub-29-2,Implementation · Thornwell AI,2026-09,25500.00
+svc-sub-30-1,Implementation · Cradle AI,2026-07,40750.00
+svc-sub-30-1,Implementation · Cradle AI,2026-08,40750.00
+svc-sub-30-1,Implementation · Cradle AI,2026-09,40750.00
+svc-sub-30-1,Implementation · Cradle AI,2026-10,37213.26
+svc-sub-30-1,Implementation · Cradle AI,2026-11,3536.74
+svc-sub-30-2,Implementation · Veor Compute,2026-07,8500.00
+svc-sub-30-2,Implementation · Veor Compute,2026-08,8500.00
+svc-sub-30-4,Implementation · Inkwell Intelligence,2026-07,82500.00
+svc-sub-30-4,Implementation · Inkwell Intelligence,2026-08,82500.00
+svc-sub-30-4,Implementation · Inkwell Intelligence,2026-09,82500.00
+svc-sub-30-4,Implementation · Inkwell Intelligence,2026-10,75339.74
+svc-sub-30-4,Implementation · Inkwell Intelligence,2026-11,67807.52
+svc-sub-30-4,Implementation · Inkwell Intelligence,2026-12,55783.69
+svc-sub-31-0,Implementation · Talon Labs,2026-08,90666.67
+svc-sub-31-0,Implementation · Talon Labs,2026-09,90666.67
+svc-sub-31-0,Implementation · Talon Labs,2026-10,82797.61
+svc-sub-31-0,Implementation · Talon Labs,2026-11,74519.78
+svc-sub-31-0,Implementation · Talon Labs,2026-12,61305.71
+svc-sub-31-4,Implementation · Wavelength Labs,2026-08,40250.00
+svc-sub-31-4,Implementation · Wavelength Labs,2026-09,40250.00
+svc-sub-31-4,Implementation · Wavelength Labs,2026-10,36756.66
+svc-sub-31-4,Implementation · Wavelength Labs,2026-11,33081.85
+svc-sub-31-4,Implementation · Wavelength Labs,2026-12,7208.94
+svc-sub-32-0,Implementation · Solenya AI,2026-09,7000.00
+svc-sub-32-0,Implementation · Solenya AI,2026-10,6392.46
+svc-sub-32-0,Implementation · Solenya AI,2026-11,499.34
+svc-sub-32-0,Implementation · Solenya AI,2026-12,108.20
+svc-sub-32-1,Implementation · Bastion Intelligence,2026-09,8000.00
+svc-sub-32-1,Implementation · Bastion Intelligence,2026-10,7305.67
+svc-sub-32-1,Implementation · Bastion Intelligence,2026-11,570.68
+svc-sub-32-1,Implementation · Bastion Intelligence,2026-12,123.65
+svc-sub-32-2,Implementation · Quill Compute,2026-09,27750.00
+svc-sub-32-2,Implementation · Quill Compute,2026-10,25341.55
+svc-sub-32-2,Implementation · Quill Compute,2026-11,22807.98
+svc-sub-32-2,Implementation · Quill Compute,2026-12,18763.60
+svc-sub-33-0,Implementation · Sumledger,2026-10,34245.33
+svc-sub-33-0,Implementation · Sumledger,2026-11,30821.60
+svc-sub-33-0,Implementation · Sumledger,2026-12,25356.22
+svc-sub-33-1,Implementation · Tidewater Treasury,2026-10,40866.10
+svc-sub-33-1,Implementation · Tidewater Treasury,2026-11,36780.44
+svc-sub-33-1,Implementation · Tidewater Treasury,2026-12,30258.43
+svc-sub-33-2,Implementation · Greyrock Financial,2026-10,36300.05
+svc-sub-33-2,Implementation · Greyrock Financial,2026-11,32670.90
+svc-sub-33-2,Implementation · Greyrock Financial,2026-12,26877.60
+svc-sub-33-3,Implementation · Cobblestone Capital,2026-10,31962.31
+svc-sub-33-3,Implementation · Cobblestone Capital,2026-11,28766.83
+svc-sub-33-3,Implementation · Cobblestone Capital,2026-12,23665.81
+svc-sub-33-4,Implementation · Vaultline,2026-10,5479.25
+svc-sub-33-4,Implementation · Vaultline,2026-11,4931.46
+svc-sub-33-4,Implementation · Vaultline,2026-12,1074.62
+svc-sub-34-1,Implementation · Strand Pay,2026-11,7808.14
+svc-sub-34-1,Implementation · Strand Pay,2026-12,6423.58
+svc-sub-34-2,Implementation · Norwell Capital,2026-11,34725.67
+svc-sub-34-2,Implementation · Norwell Capital,2026-12,28568.01
+svc-sub-34-3,Implementation · Ferrowise,2026-11,33081.85
+svc-sub-34-3,Implementation · Ferrowise,2026-12,27215.68
+svc-sub-34-4,Implementation · Meadowlark Bank,2026-11,8219.09
+svc-sub-34-4,Implementation · Meadowlark Bank,2026-12,6761.66
+svc-sub-35-0,Implementation · Capstone Treasury,2026-12,5409.33
+svc-sub-35-1,Implementation · Driftwood Capital,2026-12,25187.18
+svc-sub-35-2,Implementation · Slatebridge Financial,2026-12,14875.65
+svc-sub-35-3,Implementation · Pennywhistle Pay,2026-12,20284.98
+svc-sub-35-4,Implementation · Tollgate Capital,2026-12,34822.55

@@ -1,0 +1,536 @@
+[
+    {
+        "category":  "dashboard-overview",
+        "answerable":  "now",
+        "expectedTool":  "getDashboard",
+        "q":  "How are we doing?"
+    },
+    {
+        "category":  "dashboard-overview",
+        "answerable":  "now",
+        "expectedTool":  "getDashboard",
+        "q":  "Give me the dashboard."
+    },
+    {
+        "category":  "dashboard-overview",
+        "answerable":  "ambiguous",
+        "expectedTool":  "getMetric",
+        "q":  "What\u0027s our runway?"
+    },
+    {
+        "category":  "dashboard-overview",
+        "answerable":  "gap",
+        "expectedTool":  "getBoardPackage",
+        "q":  "Show me the board package for June."
+    },
+    {
+        "category":  "profitability-metrics",
+        "answerable":  "now",
+        "expectedTool":  "getMetric",
+        "q":  "What\u0027s our gross margin right now?"
+    },
+    {
+        "category":  "profitability-metrics",
+        "answerable":  "now",
+        "expectedTool":  "getMetric",
+        "q":  "What was FY26 revenue?"
+    },
+    {
+        "category":  "profitability-metrics",
+        "answerable":  "ambiguous",
+        "expectedTool":  "getMetric",
+        "q":  "What\u0027s our gross margin?"
+    },
+    {
+        "category":  "profitability-metrics",
+        "answerable":  "gap",
+        "expectedTool":  "setDriver",
+        "q":  "If we cut S\u0026M 20%, what happens to operating income?"
+    },
+    {
+        "category":  "growth-retention-metrics",
+        "answerable":  "now",
+        "expectedTool":  "getMetric",
+        "q":  "What\u0027s our ARR right now?"
+    },
+    {
+        "category":  "growth-retention-metrics",
+        "answerable":  "now",
+        "expectedTool":  "getMetric",
+        "q":  "What\u0027s MRR?"
+    },
+    {
+        "category":  "growth-retention-metrics",
+        "answerable":  "ambiguous",
+        "expectedTool":  "getCustomers",
+        "q":  "What\u0027s our ARR by customer segment?"
+    },
+    {
+        "category":  "growth-retention-metrics",
+        "answerable":  "gap",
+        "expectedTool":  "product-knowledge",
+        "q":  "Show me the full NRR cohort retention curve by signup month."
+    },
+    {
+        "category":  "unit-economics",
+        "answerable":  "now",
+        "expectedTool":  "getMetric",
+        "q":  "What\u0027s our CAC right now?"
+    },
+    {
+        "category":  "unit-economics",
+        "answerable":  "now",
+        "expectedTool":  "getMetric",
+        "q":  "What\u0027s our CAC payback period?"
+    },
+    {
+        "category":  "unit-economics",
+        "answerable":  "ambiguous",
+        "expectedTool":  "getMetric",
+        "q":  "What\u0027s our payback?"
+    },
+    {
+        "category":  "unit-economics",
+        "answerable":  "gap",
+        "expectedTool":  "getMetric",
+        "q":  "What\u0027s our CAC by channel?"
+    },
+    {
+        "category":  "cash-efficiency",
+        "answerable":  "now",
+        "expectedTool":  "getMetric",
+        "q":  "How many months of runway do we have left?"
+    },
+    {
+        "category":  "cash-efficiency",
+        "answerable":  "now",
+        "expectedTool":  "getMetric",
+        "q":  "What\u0027s our Rule of 40 for FY26?"
+    },
+    {
+        "category":  "cash-efficiency",
+        "answerable":  "ambiguous",
+        "expectedTool":  "getMetric",
+        "q":  "What\u0027s our current runway?"
+    },
+    {
+        "category":  "cash-efficiency",
+        "answerable":  "gap",
+        "expectedTool":  "compareScenarios",
+        "q":  "What happens to runway if we double S\u0026M spend?"
+    },
+    {
+        "category":  "pnl-monthly-variance",
+        "answerable":  "now",
+        "expectedTool":  "getPnL",
+        "q":  "What was our net income in FY26?"
+    },
+    {
+        "category":  "pnl-monthly-variance",
+        "answerable":  "now",
+        "expectedTool":  "getPnL",
+        "q":  "Show me the full P\u0026L for fiscal year 2026."
+    },
+    {
+        "category":  "pnl-monthly-variance",
+        "answerable":  "ambiguous",
+        "expectedTool":  "getPnL",
+        "q":  "Show me the P\u0026L."
+    },
+    {
+        "category":  "pnl-monthly-variance",
+        "answerable":  "gap",
+        "expectedTool":  "getExpenseForecast",
+        "q":  "What caused the spike in S\u0026M spend in Q3?"
+    },
+    {
+        "category":  "balance-sheet-cashflow",
+        "answerable":  "now",
+        "expectedTool":  "getBalanceSheet",
+        "q":  "What\u0027s our cash balance right now?"
+    },
+    {
+        "category":  "balance-sheet-cashflow",
+        "answerable":  "now",
+        "expectedTool":  "getBalanceSheet",
+        "q":  "How much cash do we have at the end of May?"
+    },
+    {
+        "category":  "balance-sheet-cashflow",
+        "answerable":  "ambiguous",
+        "expectedTool":  "getBalanceSheet",
+        "q":  "How much deferred revenue is on the balance sheet?"
+    },
+    {
+        "category":  "balance-sheet-cashflow",
+        "answerable":  "gap",
+        "expectedTool":  "getArForecast",
+        "q":  "What\u0027s our DSO and how is the AR forecast built?"
+    },
+    {
+        "category":  "contracts-bookings",
+        "answerable":  "now",
+        "expectedTool":  "getContracts",
+        "q":  "How many active contracts do we have right now?"
+    },
+    {
+        "category":  "contracts-bookings",
+        "answerable":  "now",
+        "expectedTool":  "getContracts",
+        "q":  "Show me the contracts register."
+    },
+    {
+        "category":  "contracts-bookings",
+        "answerable":  "ambiguous",
+        "expectedTool":  "getContracts",
+        "q":  "What were our new bookings in May?"
+    },
+    {
+        "category":  "contracts-bookings",
+        "answerable":  "gap",
+        "expectedTool":  "getNrr",
+        "q":  "Which contracts are up for renewal in the next 90 days?"
+    },
+    {
+        "category":  "customers-churn",
+        "answerable":  "now",
+        "expectedTool":  "getCustomers",
+        "q":  "Which customers churned this year?"
+    },
+    {
+        "category":  "customers-churn",
+        "answerable":  "now",
+        "expectedTool":  "getCustomers",
+        "q":  "Show me all our customers."
+    },
+    {
+        "category":  "customers-churn",
+        "answerable":  "ambiguous",
+        "expectedTool":  "getMetric",
+        "q":  "What\u0027s our logo churn rate?"
+    },
+    {
+        "category":  "customers-churn",
+        "answerable":  "gap",
+        "expectedTool":  "getRenewals",
+        "q":  "Which customers are at risk of churning?"
+    },
+    {
+        "category":  "pipeline",
+        "answerable":  "now",
+        "expectedTool":  "getBookingsHistory",
+        "q":  "What\u0027s our bookings trend year over year?"
+    },
+    {
+        "category":  "pipeline",
+        "answerable":  "now",
+        "expectedTool":  "getBookingsHistory",
+        "q":  "How did bookings this quarter compare to last year?"
+    },
+    {
+        "category":  "pipeline",
+        "answerable":  "ambiguous",
+        "expectedTool":  "getBookingsHistory",
+        "q":  "How much did we book last month from the pipeline?"
+    },
+    {
+        "category":  "pipeline",
+        "answerable":  "gap",
+        "expectedTool":  "getPipeline",
+        "q":  "What\u0027s our total open pipeline right now?"
+    },
+    {
+        "category":  "renewals-retention",
+        "answerable":  "now",
+        "expectedTool":  "getMetric",
+        "q":  "What\u0027s our net revenue retention?"
+    },
+    {
+        "category":  "renewals-retention",
+        "answerable":  "now",
+        "expectedTool":  "getMetric",
+        "q":  "What\u0027s NRR for FY26?"
+    },
+    {
+        "category":  "renewals-retention",
+        "answerable":  "ambiguous",
+        "expectedTool":  "getCustomers",
+        "q":  "Show me net retention split by customer segment."
+    },
+    {
+        "category":  "renewals-retention",
+        "answerable":  "gap",
+        "expectedTool":  "getNrr",
+        "q":  "Show me all renewals coming up in the next 90 days."
+    },
+    {
+        "category":  "projects-utilization",
+        "answerable":  "now",
+        "expectedTool":  "getMetric",
+        "q":  "What\u0027s our utilization right now?"
+    },
+    {
+        "category":  "projects-utilization",
+        "answerable":  "now",
+        "expectedTool":  "getMetric",
+        "q":  "How has utilization trended over the last six months?"
+    },
+    {
+        "category":  "projects-utilization",
+        "answerable":  "ambiguous",
+        "expectedTool":  "getPnL",
+        "q":  "What\u0027s our services revenue this quarter?"
+    },
+    {
+        "category":  "projects-utilization",
+        "answerable":  "gap",
+        "expectedTool":  "getProject",
+        "q":  "List all our active services projects."
+    },
+    {
+        "category":  "staff-headcount",
+        "answerable":  "now",
+        "expectedTool":  "getPnL",
+        "q":  "What\u0027s the Indirect Payroll line on the P\u0026L?"
+    },
+    {
+        "category":  "staff-headcount",
+        "answerable":  "now",
+        "expectedTool":  "getPnL",
+        "q":  "How much of cost of revenue is direct payroll?"
+    },
+    {
+        "category":  "staff-headcount",
+        "answerable":  "ambiguous",
+        "expectedTool":  "getPnL",
+        "q":  "What\u0027s our total payroll cost this year?"
+    },
+    {
+        "category":  "staff-headcount",
+        "answerable":  "gap",
+        "expectedTool":  "getHeadcount",
+        "q":  "How many people do we have right now?"
+    },
+    {
+        "category":  "forecast-drivers",
+        "answerable":  "now",
+        "expectedTool":  "getMonthlyPnL",
+        "q":  "What\u0027s the forecast revenue for December?"
+    },
+    {
+        "category":  "forecast-drivers",
+        "answerable":  "now",
+        "expectedTool":  "getMetric",
+        "q":  "What runway does the forecast give us?"
+    },
+    {
+        "category":  "forecast-drivers",
+        "answerable":  "ambiguous",
+        "expectedTool":  "getMetric",
+        "q":  "What gross margin does the forecast assume by Q4?"
+    },
+    {
+        "category":  "forecast-drivers",
+        "answerable":  "gap",
+        "expectedTool":  "getRevenueForecast",
+        "q":  "What revenue growth assumption are we using for the back half of FY26?"
+    },
+    {
+        "category":  "scenarios-budget",
+        "answerable":  "now",
+        "expectedTool":  "product-knowledge",
+        "q":  "What is a scenario in Dogfood?"
+    },
+    {
+        "category":  "scenarios-budget",
+        "answerable":  "now",
+        "expectedTool":  "product-knowledge",
+        "q":  "How do I create a new scenario?"
+    },
+    {
+        "category":  "scenarios-budget",
+        "answerable":  "ambiguous",
+        "expectedTool":  "setDriver",
+        "q":  "Build a scenario and tell me runway."
+    },
+    {
+        "category":  "scenarios-budget",
+        "answerable":  "gap",
+        "expectedTool":  "setDriver",
+        "q":  "Build me a scenario where we freeze hiring through year end."
+    },
+    {
+        "category":  "flux-notes",
+        "answerable":  "now",
+        "expectedTool":  "product-knowledge",
+        "q":  "How do I run a flux analysis in Dogfood?"
+    },
+    {
+        "category":  "flux-notes",
+        "answerable":  "now",
+        "expectedTool":  "product-knowledge",
+        "q":  "Walk me through doing a monthly flux review."
+    },
+    {
+        "category":  "flux-notes",
+        "answerable":  "ambiguous",
+        "expectedTool":  "addFluxNote",
+        "q":  "Explain the runway change and save a one-liner for the board."
+    },
+    {
+        "category":  "flux-notes",
+        "answerable":  "gap",
+        "expectedTool":  "addFluxNote",
+        "q":  "Add a note on the AWS bill explaining the May spike was a one-time reserved-instance purchase."
+    },
+    {
+        "category":  "period-import-actuals",
+        "answerable":  "now",
+        "expectedTool":  "product-knowledge",
+        "q":  "How does closing a period work in Dogfood?"
+    },
+    {
+        "category":  "period-import-actuals",
+        "answerable":  "now",
+        "expectedTool":  "product-knowledge",
+        "q":  "What\u0027s our current as-of date?"
+    },
+    {
+        "category":  "period-import-actuals",
+        "answerable":  "ambiguous",
+        "expectedTool":  "getMonthlyPnL",
+        "q":  "Show me May actuals."
+    },
+    {
+        "category":  "period-import-actuals",
+        "answerable":  "gap",
+        "expectedTool":  "gap",
+        "q":  "Import the May trial balance for me."
+    },
+    {
+        "category":  "board-package-export",
+        "answerable":  "now",
+        "expectedTool":  "getMetric",
+        "q":  "What\u0027s our ARR I should put on the board slide?"
+    },
+    {
+        "category":  "board-package-export",
+        "answerable":  "now",
+        "expectedTool":  "getMetric",
+        "q":  "What\u0027s our runway to report to the board?"
+    },
+    {
+        "category":  "board-package-export",
+        "answerable":  "ambiguous",
+        "expectedTool":  "getBalanceSheet",
+        "q":  "Pull deferred revenue for the board\u0027s balance sheet review."
+    },
+    {
+        "category":  "board-package-export",
+        "answerable":  "gap",
+        "expectedTool":  "getBoardPackage",
+        "q":  "Prep the board deck for the Q2 meeting."
+    },
+    {
+        "category":  "how-to-product-knowledge",
+        "answerable":  "now",
+        "expectedTool":  "product-knowledge",
+        "q":  "What is Dogfood and how is it different from an accounting tool?"
+    },
+    {
+        "category":  "how-to-product-knowledge",
+        "answerable":  "now",
+        "expectedTool":  "product-knowledge",
+        "q":  "How does the five-layer data model work?"
+    },
+    {
+        "category":  "how-to-product-knowledge",
+        "answerable":  "gap",
+        "expectedTool":  "product-knowledge",
+        "q":  "How do I export the Board Package to send to investors?"
+    },
+    {
+        "category":  "ambiguous-multitool",
+        "answerable":  "now",
+        "expectedTool":  "getMonthlyPnL",
+        "q":  "Which month did we lose the most money this year?"
+    },
+    {
+        "category":  "ambiguous-multitool",
+        "answerable":  "now",
+        "expectedTool":  "getBookingsHistory",
+        "q":  "How do bookings this year compare to last year?"
+    },
+    {
+        "category":  "ambiguous-multitool",
+        "answerable":  "ambiguous",
+        "expectedTool":  "getMetric",
+        "q":  "How\u0027s our runway looking?"
+    },
+    {
+        "category":  "ambiguous-multitool",
+        "answerable":  "gap",
+        "expectedTool":  "getPipeline",
+        "q":  "How\u0027s the pipeline looking for Q3 coverage?"
+    },
+    {
+        "category":  "period-import-actuals",
+        "answerable":  "decline",
+        "expectedTool":  "decline",
+        "q":  "Close out June and roll the forecast forward."
+    },
+    {
+        "category":  "period-import-actuals",
+        "answerable":  "decline",
+        "expectedTool":  "decline",
+        "q":  "Approve and post the June accruals."
+    },
+    {
+        "category":  "period-import-actuals",
+        "answerable":  "decline",
+        "expectedTool":  "decline",
+        "q":  "Reconcile our bank statement to the cash account."
+    },
+    {
+        "category":  "period-import-actuals",
+        "answerable":  "decline",
+        "expectedTool":  "decline",
+        "q":  "Run the month-end close checklist and tell me what\u0027s blocking."
+    },
+    {
+        "category":  "period-import-actuals",
+        "answerable":  "decline",
+        "expectedTool":  "decline",
+        "q":  "Post a journal entry to reclass the Ramp expense."
+    },
+    {
+        "category":  "out-of-scope-decline",
+        "answerable":  "decline",
+        "expectedTool":  "decline",
+        "q":  "What\u0027s our fully diluted cap table look like after the Series B?"
+    },
+    {
+        "category":  "out-of-scope-decline",
+        "answerable":  "decline",
+        "expectedTool":  "decline",
+        "q":  "How much of the company does Chris still own?"
+    },
+    {
+        "category":  "out-of-scope-decline",
+        "answerable":  "decline",
+        "expectedTool":  "decline",
+        "q":  "Can you model the dilution if we raise a $30M Series C at a $200M pre?"
+    },
+    {
+        "category":  "out-of-scope-decline",
+        "answerable":  "decline",
+        "expectedTool":  "decline",
+        "q":  "What\u0027s the current option pool and how much is left to grant?"
+    },
+    {
+        "category":  "out-of-scope-decline",
+        "answerable":  "decline",
+        "expectedTool":  "decline",
+        "q":  "Show me the preferred vs common split on the balance sheet equity section."
+    }
+]

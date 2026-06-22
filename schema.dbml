@@ -1,0 +1,232 @@
+// Bearing / Dogfood — database schema (base tables).
+// Paste into https://dbdiagram.io to render the ERD. Derived views (statements, metrics,
+// recognition splits, series) are computed from these + the drivers and are not stored.
+// Money = USD minor units (cents) in the app; exported as decimal major units.
+
+Project bearing {
+  database_type: 'PostgreSQL'
+  Note: 'AI-native FP&A demo. GL is the spine; gl_accounts.statement_line is the Account Mapping.'
+}
+
+Table firm {
+  id text [pk]
+  name text
+  short_code text
+}
+
+Table settings {
+  currency text
+  fiscal_year_start_month int
+  close_through text [note: 'YYYY-MM — last closed month (the global as-of)']
+  in_close_month text
+  forecast_horizon_start text
+  forecast_horizon_end text
+}
+
+Table departments {
+  id text [pk]
+  name text
+  function text [note: 'direct | rnd | sm | ga']
+}
+
+Table expense_groups {
+  id text [pk]
+  label text
+  classification text [note: 'cost_of_revenue | operating_expense']
+  function text
+  order int
+}
+
+Table gl_accounts {
+  code text [pk]
+  name text
+  account_type text [note: 'asset|liability|equity|contra_equity|revenue|cost_of_revenue|operating_expense|other_income|tax']
+  classification text
+  function text
+  statement_line text [note: 'Account Mapping: P&L/BS line this account rolls up to']
+}
+
+Table customers {
+  id text [pk]
+  name text
+  segment text [note: 'starter | growth | scale']
+  start_month text
+  status text [note: 'active | churned']
+  arr decimal
+}
+
+Table contracts {
+  id text [pk]
+  customer_id text [ref: > customers.id]
+  customer_name text
+  stream text [note: 'subscription | services']
+  plan_tier text
+  arr decimal
+  start_month text
+  term_months int
+  status text [note: 'active | pending | churned']
+  booking_type text [note: 'new | expansion | contraction']
+}
+
+Table pipeline {
+  id text [pk]
+  customer_name text
+  stream text
+  stage text [note: 'lead|qualified|proposal|negotiation|closed_won|closed_lost']
+  arr decimal
+  owner text
+  expected_close text
+  probability decimal
+}
+
+Table renewals {
+  id text [pk]
+  contract_id text [ref: > contracts.id]
+  customer_id text [ref: > customers.id]
+  due_month text
+  arr_up_for_renewal decimal
+  status text [note: 'open|renewed|expanded|contracted|churned']
+}
+
+Table projects {
+  id text [pk]
+  name text
+  customer_id text [ref: > customers.id]
+  status text [note: 'not_started|in_progress|complete|on_hold']
+  pct_complete decimal
+  contract_value decimal
+  wip decimal
+  margin_pct decimal
+}
+
+Table staff {
+  id text [pk]
+  name text
+  department_id text [ref: > departments.id]
+  function text
+  title text
+  start_month text
+  end_month text [note: 'null if active']
+  fte decimal
+  annual_base_comp decimal
+}
+
+Table journal_entries {
+  id text [pk]
+  period text
+  memo text
+  doc_ref text
+  source text [note: 'invoice|payroll|ap_bill|depreciation|prepaid_amort|manual']
+}
+
+Table journal_lines {
+  entry_id text [ref: > journal_entries.id]
+  account_id text [ref: > gl_accounts.code]
+  debit decimal
+  credit decimal
+}
+
+Table vendor_bills {
+  id text [pk, note: 'stable id — flux-note anchor']
+  doc_number text
+  period text
+  date text
+  due_date text
+  account_id text [ref: > gl_accounts.code]
+  group_id text [ref: > expense_groups.id]
+  function text
+  vendor text
+  amount decimal
+  status text [note: 'open | paid']
+  memo text
+}
+
+Table paychecks {
+  id text [pk]
+  doc_number text
+  staff_id text [ref: > staff.id]
+  period text
+  date text
+  gross_pay decimal
+  employee_taxes decimal
+  benefits decimal
+  net_pay decimal
+}
+
+Table timesheets {
+  id text [pk]
+  doc_number text
+  staff_id text [ref: > staff.id]
+  project_id text [ref: > projects.id]
+  period text
+  date text
+  hours decimal
+  bill_rate decimal
+  cost_rate decimal
+  billable_value decimal
+  labor_cost decimal
+}
+
+Table customer_invoices {
+  id text [pk]
+  doc_number text
+  customer_id text [ref: > customers.id]
+  contract_id text [ref: > contracts.id]
+  project_id text [ref: > projects.id]
+  period text
+  date text
+  due_date text
+  status text
+  stream text
+  kind text
+  amount decimal
+}
+
+Table cash_receipts {
+  id text [pk]
+  doc_number text
+  customer_id text [ref: > customers.id]
+  period text
+  date text
+  applied_invoice_id text [ref: > customer_invoices.id]
+  amount decimal
+}
+
+// ── planned write tables (not yet built) ──
+
+Table flux_notes {
+  id text [pk]
+  transaction_id text [ref: > vendor_bills.id, note: 'stable txn id; survives re-import']
+  statement_line text
+  period text
+  author text
+  body text
+  amount_at_note decimal [note: 'snapshot — flags flux-on-the-flux after a restatement']
+  created_at text
+  resolved boolean
+}
+
+Table scenarios {
+  id text [pk]
+  name text
+  baseline text [note: 'base | budget']
+}
+
+Table scenario_inputs {
+  id text [pk]
+  scenario_id text [ref: > scenarios.id]
+  lever text
+  magnitude decimal
+  start_month text
+  end_month text
+  shape text [note: 'step | ramp']
+}
+
+Table budget_snapshots {
+  id text [pk]
+  locked_at text
+  sourced_from text [note: 'base | scenario']
+  statement_line text
+  period text
+  amount decimal
+}

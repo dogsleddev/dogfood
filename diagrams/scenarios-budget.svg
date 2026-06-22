@@ -1,0 +1,169 @@
+<svg viewBox="0 0 1080 1152" width="1080" height="1152" xmlns="http://www.w3.org/2000/svg" font-family="Geist, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <defs>
+    <filter id="cs2" x="-8%" y="-8%" width="116%" height="116%"><feDropShadow dx="0" dy="3" stdDeviation="6" flood-color="#0E1726" flood-opacity="0.07"/></filter>
+    <symbol id="s-branch" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.3"/><circle cx="6" cy="18" r="2.3"/><circle cx="18" cy="11" r="2.3"/><path d="M6 8.3 V15.7"/><path d="M6 11 C 10 11 14 11 15.7 11"/></g></symbol>
+    <symbol id="s-sliders" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="8" x2="20" y2="8"/><line x1="4" y1="16" x2="20" y2="16"/></g><circle cx="9" cy="8" r="2.5" fill="#FFFFFF" stroke="currentColor" stroke-width="1.9"/><circle cx="15" cy="16" r="2.5" fill="#FFFFFF" stroke="currentColor" stroke-width="1.9"/></symbol>
+    <symbol id="s-paired" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20 V21 H21"/><rect x="6" y="11" width="2.6" height="8"/><rect x="9.5" y="14" width="2.6" height="5"/><rect x="14" y="8" width="2.6" height="11"/><rect x="17.4" y="12" width="2.6" height="7"/></g></symbol>
+    <symbol id="s-gauge" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17 a8 8 0 0 1 16 0"/><path d="M12 17 L16.5 12.5"/><circle cx="12" cy="17" r="1.4"/></g></symbol>
+  </defs>
+  <rect x="0" y="0" width="1080" height="1152" fill="#FAF7F1"/>
+
+  <text x="40" y="54" font-family="Fraunces, Georgia, serif" font-size="28" font-weight="600" fill="#1c2530">Scenarios &amp; budget · the model in detail</text>
+  <text x="40" y="77" font-size="12.5" fill="#6E7B8A">Budget, Base, scenarios and actuals are versions of one plan. The engine is deterministic; Base is never mutated.</text>
+
+  <!-- ===== S1 PLAN VERSIONS ===== -->
+  <text x="40" y="112" font-size="11" font-weight="700" letter-spacing="0.8" fill="#C9582E">PLAN VERSIONS · budget · base · scenarios · actuals</text>
+
+  <rect x="40" y="128" width="242" height="96" rx="12" fill="#FFFFFF" stroke="#ECE6DB" filter="url(#cs2)"/>
+  <rect x="52" y="144" width="3" height="64" rx="1.5" fill="#E7B23A"/>
+  <text x="64" y="152" font-size="13" font-weight="700" fill="#9A6E1E">Budget</text>
+  <rect x="220" y="139" width="46" height="16" rx="8" fill="#F7EFD9" stroke="#E7B23A" stroke-opacity="0.6"/><text x="243" y="150" font-size="8.5" fill="#9A6E1E" text-anchor="middle">locked</text>
+  <text x="64" y="172" font-size="10" fill="#6E7B8A">Drivers snapshotted,</text><text x="64" y="187" font-size="10" fill="#6E7B8A">locked · the approved</text><text x="64" y="202" font-size="10" fill="#6E7B8A">plan and yardstick.</text>
+
+  <rect x="298" y="128" width="242" height="96" rx="12" fill="#FFFFFF" stroke="#ECE6DB" filter="url(#cs2)"/>
+  <rect x="310" y="144" width="3" height="64" rx="1.5" fill="#5A6B7A"/>
+  <text x="322" y="152" font-size="13" font-weight="700" fill="#3C566B">Base</text>
+  <rect x="476" y="139" width="54" height="16" rx="8" fill="#EAF0F4" stroke="#9DB8CC" stroke-opacity="0.7"/><text x="503" y="150" font-size="8.5" fill="#3C566B" text-anchor="middle">working</text>
+  <text x="322" y="172" font-size="10" fill="#6E7B8A">The live drivers,</text><text x="322" y="187" font-size="10" fill="#6E7B8A">reforecast as actuals</text><text x="322" y="202" font-size="10" fill="#6E7B8A">close. The default.</text>
+
+  <rect x="556" y="128" width="242" height="96" rx="12" fill="#FFFFFF" stroke="#ECE6DB" filter="url(#cs2)"/>
+  <rect x="568" y="144" width="3" height="64" rx="1.5" fill="#EC6D3F"/>
+  <text x="580" y="152" font-size="13" font-weight="700" fill="#C9582E">Scenario</text>
+  <rect x="732" y="139" width="54" height="16" rx="8" fill="#FBEAE1" stroke="#EC6D3F" stroke-opacity="0.6"/><text x="759" y="150" font-size="8.5" fill="#C9582E" text-anchor="middle">what-if</text>
+  <text x="580" y="172" font-size="10" fill="#6E7B8A">Base + typed</text><text x="580" y="187" font-size="10" fill="#6E7B8A">adjustment deltas.</text><text x="580" y="202" font-size="10" fill="#6E7B8A">Compared to either.</text>
+
+  <rect x="814" y="128" width="224" height="96" rx="12" fill="#FFFFFF" stroke="#ECE6DB" filter="url(#cs2)"/>
+  <rect x="826" y="144" width="3" height="64" rx="1.5" fill="#46C99A"/>
+  <text x="838" y="152" font-size="13" font-weight="700" fill="#1F6B50">Actuals</text>
+  <rect x="966" y="139" width="64" height="16" rx="8" fill="#E4F3EC" stroke="#46C99A" stroke-opacity="0.7"/><text x="998" y="150" font-size="8.5" fill="#1F6B50" text-anchor="middle">immutable</text>
+  <text x="838" y="172" font-size="10" fill="#6E7B8A">The recorded</text><text x="838" y="187" font-size="10" fill="#6E7B8A">result, shared by</text><text x="838" y="202" font-size="10" fill="#6E7B8A">every version.</text>
+
+  <text x="40" y="243" font-size="11" fill="#8A96A2"><tspan fill="#41505F" font-weight="600">Variance</tspan> · the Forecasted P&amp;L shows Budget, Actual, Variance and Forecast side by side.</text>
+  <text x="40" y="259" font-size="11" fill="#8A96A2"><tspan fill="#41505F" font-weight="600">Lifecycle</tspan> · lock a working plan (or an approved scenario) to set the Budget; reforecasting moves Base, never the Budget.</text>
+
+  <!-- ===== S2 ENGINE ===== -->
+  <text x="40" y="294" font-size="11" font-weight="700" letter-spacing="0.8" fill="#C9582E">THE ENGINE</text>
+
+  <rect x="40" y="310" width="250" height="122" rx="12" fill="#FFFFFF" stroke="#ECE6DB" filter="url(#cs2)"/>
+  <text x="56" y="332" font-size="11" font-weight="700" fill="#1c2530">BASELINE</text>
+  <rect x="56" y="342" width="218" height="32" rx="7" fill="#F1ECE2" stroke="#9DB8CC" stroke-opacity="0.6"/><text x="68" y="362" font-size="11" fill="#3C566B" font-weight="600">Base · working forecast</text><text x="258" y="362" font-size="11" fill="#9AA6B2" text-anchor="end">▾</text>
+  <rect x="56" y="382" width="218" height="32" rx="7" fill="#E4F3EC" stroke="#46C99A" stroke-opacity="0.7"/><text x="68" y="402" font-size="11" fill="#1F6B50" font-weight="600">Actuals · shared, immutable</text>
+
+  <text x="306" y="388" font-size="22" font-weight="700" fill="#9AA6B2" text-anchor="middle">+</text>
+
+  <rect x="322" y="344" width="196" height="74" rx="12" fill="#FBEAE1" stroke="#EC6D3F" stroke-opacity="0.55"/>
+  <text x="334" y="368" font-size="10.5" font-weight="700" letter-spacing="0.4" fill="#C9582E">SCENARIO ADJUSTMENTS</text>
+  <text x="334" y="388" font-size="10.5" fill="#9A6E1E">typed deltas · see below</text>
+  <text x="334" y="404" font-size="10" fill="#A9836A">Scout proposes within set</text>
+
+  <line x1="519" y1="381" x2="552" y2="381" stroke="#8A96A2" stroke-width="2"/><path d="M552 376 l7 5 -7 5" fill="none" stroke="#8A96A2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="560" y="344" width="180" height="74" rx="12" fill="#FFFFFF" stroke="#ECE6DB" filter="url(#cs2)"/>
+  <text x="572" y="368" font-size="10.5" font-weight="700" letter-spacing="0.4" fill="#1c2530">DETERMINISTIC ENGINE</text>
+  <text x="572" y="387" font-size="10" fill="#6E7B8A">baseline + active adj</text>
+  <text x="572" y="401" font-size="10" fill="#6E7B8A">→ recompute</text>
+
+  <line x1="741" y1="381" x2="774" y2="381" stroke="#8A96A2" stroke-width="2"/><path d="M774 376 l7 5 -7 5" fill="none" stroke="#8A96A2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="782" y="310" width="256" height="122" rx="12" fill="#FFFFFF" stroke="#ECE6DB" filter="url(#cs2)"/>
+  <text x="798" y="332" font-size="11" font-weight="700" fill="#1c2530">RE-DERIVED · layers 2–5</text>
+  <rect x="798" y="342" width="224" height="32" rx="7" fill="#EAF0F4" stroke="#9DB8CC" stroke-opacity="0.7"/><text x="810" y="362" font-size="11" fill="#3C566B" font-weight="600">Scenario P&amp;L</text>
+  <rect x="798" y="382" width="224" height="32" rx="7" fill="#EAF0F4" stroke="#9DB8CC" stroke-opacity="0.7"/><text x="810" y="402" font-size="11" fill="#3C566B" font-weight="600">Scenario Dashboard</text>
+
+  <text x="40" y="452" font-size="11" fill="#8A96A2">Only layers 2–5 re-derive; actuals are shared and immutable. There is no global switcher; Dashboard, P&amp;L and statements stay on <tspan fill="#41505F" font-weight="600">Base + actuals</tspan>.</text>
+  <text x="40" y="468" font-size="11" fill="#8A96A2">Each scenario chooses its comparison baseline: <tspan fill="#3C566B" font-weight="600">Base</tspan> (the working forecast) or <tspan fill="#9A6E1E" font-weight="600">Budget</tspan> (the locked plan).</text>
+
+  <!-- ===== S3 ANATOMY + LEVER SET ===== -->
+  <text x="40" y="504" font-size="11" font-weight="700" letter-spacing="0.8" fill="#C9582E">ANATOMY OF AN ADJUSTMENT</text>
+  <text x="692" y="504" font-size="11" font-weight="700" letter-spacing="0.8" fill="#C9582E">THE LEVER SET · closed union</text>
+
+  <rect x="40" y="520" width="636" height="188" rx="12" fill="#FFFFFF" stroke="#ECE6DB" filter="url(#cs2)"/>
+  <text x="56" y="544" font-size="11.5" fill="#1c2530">one adjustment <tspan fill="#9AA6B2">=</tspan> <tspan font-weight="600">lever + magnitude + window + shape</tspan></text>
+  <text x="56" y="565" font-size="8.5" font-weight="600" letter-spacing="0.4" fill="#9AA6B2">LEVER</text>
+  <rect x="56" y="570" width="170" height="26" rx="6" fill="#F6F2EA" stroke="#E6DECF"/><text x="67" y="587" font-size="11" fill="#1c2530">Personnel ▸ Sales</text>
+  <text x="250" y="565" font-size="8.5" font-weight="600" letter-spacing="0.4" fill="#9AA6B2">SHAPE</text>
+  <rect x="250" y="570" width="150" height="26" rx="6" fill="#F6F2EA" stroke="#E6DECF"/><text x="261" y="587" font-size="11" fill="#1c2530">Step | Ramp</text>
+  <text x="56" y="611" font-size="8.5" font-weight="600" letter-spacing="0.4" fill="#9AA6B2">MAGNITUDE</text>
+  <rect x="56" y="616" width="170" height="26" rx="6" fill="#F6F2EA" stroke="#E6DECF"/><text x="67" y="633" font-size="11" fill="#1c2530">hiring freeze</text>
+  <text x="250" y="611" font-size="8.5" font-weight="600" letter-spacing="0.4" fill="#9AA6B2">GRANULARITY</text>
+  <rect x="250" y="616" width="150" height="26" rx="6" fill="#F6F2EA" stroke="#E6DECF"/><text x="261" y="633" font-size="11" fill="#1c2530">monthly</text>
+  <text x="56" y="657" font-size="8.5" font-weight="600" letter-spacing="0.4" fill="#9AA6B2">WINDOW</text>
+  <rect x="56" y="662" width="170" height="26" rx="6" fill="#F6F2EA" stroke="#E6DECF"/><text x="67" y="679" font-size="11" fill="#1c2530">Jul 2026 → open</text>
+  <text x="250" y="657" font-size="8.5" font-weight="600" letter-spacing="0.4" fill="#9AA6B2">SEMANTICS</text>
+  <rect x="250" y="662" width="150" height="26" rx="6" fill="#F6F2EA" stroke="#E6DECF"/><text x="261" y="679" font-size="11" fill="#1c2530">rate vs level</text>
+  <rect x="430" y="558" width="230" height="138" rx="8" fill="#FCFAF6" stroke="#F0EADF"/>
+  <text x="446" y="576" font-size="9.5" font-weight="600" fill="#6E7B8A">shape over months</text>
+  <line x1="456" y1="590" x2="456" y2="670" stroke="#C3CBD3"/><line x1="456" y1="670" x2="648" y2="670" stroke="#C3CBD3"/>
+  <line x1="540" y1="590" x2="540" y2="676" stroke="#9AA6B2" stroke-width="1" stroke-dasharray="2 3"/>
+  <text x="540" y="688" font-size="8.5" fill="#9AA6B2" text-anchor="middle">start</text>
+  <path d="M456 664 L540 664 L540 602 L648 602" fill="none" stroke="#EC6D3F" stroke-width="2.4" stroke-linejoin="round"/>
+  <path d="M456 664 L540 664 L648 602" fill="none" stroke="#B9852A" stroke-width="2.2" stroke-dasharray="4 3" stroke-linejoin="round"/>
+  <text x="566" y="600" font-size="9.5" fill="#C9582E" font-weight="600">Step</text>
+  <text x="600" y="648" font-size="9.5" fill="#9A6E1E" font-weight="600">Ramp</text>
+
+  <rect x="692" y="520" width="346" height="188" rx="12" fill="#FFFFFF" stroke="#ECE6DB" filter="url(#cs2)"/>
+  <g font-size="11">
+    <circle cx="710" cy="547" r="3.3" fill="#EC6D3F"/><text x="722" y="551" fill="#1c2530">Revenue ▸ stream <tspan fill="#8A96A2">(Subscription / Services)</tspan></text>
+    <circle cx="710" cy="571" r="3.3" fill="#EC6D3F"/><text x="722" y="575" fill="#1c2530">Personnel ▸ department <tspan fill="#8A96A2">(incl. freeze)</tspan></text>
+    <circle cx="710" cy="595" r="3.3" fill="#EC6D3F"/><text x="722" y="599" fill="#1c2530">Expense ▸ group <tspan fill="#8A96A2">(from the live group set)</tspan></text>
+    <circle cx="710" cy="619" r="3.3" fill="#EC6D3F"/><text x="722" y="623" fill="#1c2530">Direct cost <tspan fill="#8A96A2">(Cost of Revenue)</tspan></text>
+    <circle cx="710" cy="643" r="3.3" fill="#EC6D3F"/><text x="722" y="647" fill="#1c2530">AR ▸ DSO <tspan fill="#8A96A2">(days)</tspan></text>
+    <circle cx="710" cy="667" r="3.3" fill="#EC6D3F"/><text x="722" y="671" fill="#1c2530">AP ▸ DPO <tspan fill="#8A96A2">(days · if AP added)</tspan></text>
+  </g>
+  <line x1="708" y1="684" x2="1022" y2="684" stroke="#F0EADF"/>
+  <text x="708" y="699" font-size="10" fill="#8A96A2">A typed contract · the editor &amp; Scout build only within this set. Locked in the Harness.</text>
+
+  <!-- ===== S4 COMPOSITION + VALIDATION ===== -->
+  <text x="40" y="740" font-size="11" font-weight="700" letter-spacing="0.8" fill="#C9582E">COMPOSITION &amp; PRECEDENCE</text>
+  <text x="692" y="740" font-size="11" font-weight="700" letter-spacing="0.8" fill="#C9582E">VALIDATION · rejects</text>
+
+  <rect x="40" y="756" width="636" height="128" rx="12" fill="#FFFFFF" stroke="#ECE6DB" filter="url(#cs2)"/>
+  <text x="56" y="778" font-size="10.5" fill="#6E7B8A">two adjustments, <tspan fill="#1c2530" font-weight="600">same lever</tspan> (Personnel ▸ Sales):</text>
+  <rect x="56" y="788" width="300" height="18" rx="4" fill="#F7EFD9" stroke="#B9852A" stroke-opacity="0.6"/><text x="66" y="801" font-size="9.5" fill="#7A5A12">Window A · Jul–Dec · −10%</text>
+  <rect x="196" y="812" width="320" height="18" rx="4" fill="#FBEAE1" stroke="#EC6D3F" stroke-opacity="0.6"/><text x="206" y="825" font-size="9.5" fill="#9A3D1C">Window B · Oct–Mar · −20%</text>
+  <rect x="196" y="784" width="160" height="50" rx="4" fill="none" stroke="#5A6B7A" stroke-width="1" stroke-dasharray="3 3"/>
+  <text x="276" y="848" font-size="9" fill="#5A6B7A" text-anchor="middle">overlap → B wins</text>
+  <text x="56" y="872" font-size="10.5" fill="#8A96A2">A later window <tspan fill="#41505F" font-weight="600">overrides</tspan> the earlier in the overlap; separate levers compose independently.</text>
+
+  <rect x="692" y="756" width="346" height="128" rx="12" fill="#FFFFFF" stroke="#ECE6DB" filter="url(#cs2)"/>
+  <g font-size="11">
+    <text x="708" y="806" fill="#C0503A" font-weight="700">✕</text><text x="726" y="806" fill="#41505F">end before start</text>
+    <text x="708" y="828" fill="#C0503A" font-weight="700">✕</text><text x="726" y="828" fill="#41505F">magnitude out of range</text>
+    <text x="708" y="850" fill="#C0503A" font-weight="700">✕</text><text x="726" y="850" fill="#41505F">lever not in the set</text>
+    <text x="708" y="872" fill="#C0503A" font-weight="700">✕</text><text x="726" y="872" fill="#41505F">window outside the horizon</text>
+  </g>
+
+  <!-- ===== S5 SURFACES ===== -->
+  <text x="40" y="916" font-size="11" font-weight="700" letter-spacing="0.8" fill="#C9582E">THE FOUR SURFACES · contained group</text>
+
+  <rect x="40" y="932" width="242" height="130" rx="12" fill="#FFFFFF" stroke="#ECE6DB" filter="url(#cs2)"/>
+  <use href="#s-branch" x="56" y="948" width="20" height="20" color="#EC6D3F"/>
+  <text x="56" y="992" font-size="12.5" font-weight="600" fill="#1c2530">Scenario Manager</text>
+  <text x="56" y="1011" font-size="10.5" fill="#6E7B8A">Create · duplicate · reset.</text>
+  <text x="56" y="1027" font-size="10.5" fill="#6E7B8A">Saved scenarios and</text>
+  <text x="56" y="1043" font-size="10.5" fill="#6E7B8A">presets live here.</text>
+
+  <rect x="298" y="932" width="242" height="130" rx="12" fill="#FFFFFF" stroke="#ECE6DB" filter="url(#cs2)"/>
+  <use href="#s-sliders" x="314" y="948" width="20" height="20" color="#EC6D3F"/>
+  <text x="314" y="992" font-size="12.5" font-weight="600" fill="#1c2530">Scenario Drivers</text>
+  <text x="314" y="1011" font-size="10.5" fill="#6E7B8A">The adjustment editor;</text>
+  <text x="314" y="1027" font-size="10.5" fill="#6E7B8A">build levers across the</text>
+  <text x="314" y="1043" font-size="10.5" fill="#6E7B8A">forecast months.</text>
+
+  <rect x="556" y="932" width="242" height="130" rx="12" fill="#FFFFFF" stroke="#ECE6DB" filter="url(#cs2)"/>
+  <use href="#s-paired" x="572" y="948" width="20" height="20" color="#EC6D3F"/>
+  <text x="572" y="992" font-size="12.5" font-weight="600" fill="#1c2530">Scenario P&amp;L</text>
+  <text x="572" y="1011" font-size="10.5" fill="#6E7B8A">Scenario result vs the</text>
+  <text x="572" y="1027" font-size="10.5" fill="#6E7B8A">chosen baseline, monthly.</text>
+
+  <rect x="814" y="932" width="224" height="130" rx="12" fill="#FFFFFF" stroke="#ECE6DB" filter="url(#cs2)"/>
+  <use href="#s-gauge" x="830" y="948" width="20" height="20" color="#EC6D3F"/>
+  <text x="830" y="992" font-size="12.5" font-weight="600" fill="#1c2530">Scenario Dashboard</text>
+  <text x="830" y="1011" font-size="10.5" fill="#6E7B8A">Compare 2–3 scenarios</text>
+  <text x="830" y="1027" font-size="10.5" fill="#6E7B8A">(and Budget) side by side.</text>
+
+  <text x="40" y="1086" font-size="11" fill="#8A96A2"><tspan fill="#41505F" font-weight="600">Presets</tspan> · 25% Profit, Capacity, Breakeven · saved bundles of adjustments (editable starting points, not the model).</text>
+
+  <rect x="40" y="1102" width="998" height="34" rx="8" fill="#EFE9DD"/>
+  <text x="56" y="1123" font-size="10.5" fill="#5A4A36"><tspan font-weight="700" fill="#7A5A12">Containment</tspan> · scenarios wrap layers 2–5; the spine carries an optional scenarioId, deltas live in a scenario_inputs table, actuals stay shared. Everything outside this group is Base + actuals.</text>
+</svg>

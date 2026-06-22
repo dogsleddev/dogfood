@@ -1,0 +1,29 @@
+account_code,account_name,account_type,statement_line,classification,function
+1000,Cash,asset,cash,,
+1100,Accounts Receivable,asset,accounts_receivable,,
+1200,Unbilled WIP,asset,unbilled_wip,,
+1300,Prepaid Expenses,asset,prepaid_expenses,,
+1500,"Fixed Assets, net",asset,fixed_assets_net,,
+1600,Right-of-Use Asset,asset,rou_asset,,
+2000,Accounts Payable,liability,accounts_payable,,
+2100,Deferred Revenue,liability,deferred_revenue,,
+2200,Lease Liability,liability,lease_liability,,
+3000,Paid-in Capital,equity,paid_in_capital,,
+3100,Accumulated Deficit,contra_equity,accumulated_deficit,,
+4000,Subscription Revenue,revenue,subscription,,
+4100,Services Revenue,revenue,services,,
+5000,Direct Payroll,cost_of_revenue,direct_payroll,cost_of_revenue,direct
+5100,Non-employee Cost of Revenue,cost_of_revenue,non_employee_cor,cost_of_revenue,direct
+6000,Indirect Payroll,operating_expense,indirect_payroll,operating_expense,
+6100,Employee Expenses,operating_expense,employee_expenses,operating_expense,ga
+6200,Sales & Marketing,operating_expense,sales_marketing,operating_expense,sm
+6300,Travel & Entertainment,operating_expense,travel_entertainment,operating_expense,ga
+6400,IT,operating_expense,it,operating_expense,ga
+6500,HR,operating_expense,hr,operating_expense,ga
+6600,Admin,operating_expense,admin,operating_expense,ga
+6700,Facilities,operating_expense,facilities,operating_expense,ga
+6800,Insurance,operating_expense,insurance,operating_expense,ga
+6950,Stock-based Compensation,operating_expense,stock_based_comp,operating_expense,
+6900,Depreciation & Amortization,operating_expense,depreciation_amortization,operating_expense,ga
+7000,Interest Income,other_income,interest_other,,
+7100,Income Tax,tax,taxes,,

@@ -1,0 +1,80 @@
+<svg viewBox="0 0 1040 1020" width="1040" height="1020" xmlns="http://www.w3.org/2000/svg" font-family="Geist, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <defs>
+    <symbol id="ic-pane" viewBox="0 0 24 24"><rect x="1.6" y="4.5" width="20.8" height="15" rx="2.4" fill="none" stroke="currentColor" stroke-width="1.7"/><line x1="14.8" y1="4.5" x2="14.8" y2="19.5" stroke="currentColor" stroke-width="1.7"/><rect x="15.6" y="5.3" width="6" height="13.4" rx="1.4" fill="currentColor" fill-opacity="0.85"/></symbol>
+  </defs>
+  <rect x="0" y="0" width="1040" height="1020" fill="#FAF7F1"/>
+
+  <text x="40" y="52" font-family="Fraunces, Georgia, serif" font-size="28" font-weight="600" fill="#1c2530">Drilldowns · the Dashboard</text>
+  <text x="40" y="75" font-size="12.5" fill="#6E7B8A">Tiles are the <tspan fill="#41505F" font-weight="600">Metrics layer</tspan> surfaced here. Register-backed tiles peek then open; pure metrics stay in the pane.</text>
+
+  <!-- inline legend -->
+  <use href="#ic-pane" x="40" y="92" width="20" height="16" color="#EC6D3F"/><text x="66" y="105" font-size="11.5" fill="#1c2530"><tspan font-weight="600">Peek → open</tspan></text>
+  <use href="#ic-pane" x="196" y="92" width="20" height="16" color="#B9852A"/><text x="222" y="105" font-size="11.5" fill="#1c2530"><tspan font-weight="600">Pane only</tspan> <tspan fill="#8A96A2">(pure metric)</tspan></text>
+  <text x="430" y="105" font-size="11" fill="#8A96A2">register-backed tiles carry “Open full ↗”; pure metrics drill into their components in the pane.</text>
+
+  <!-- FINANCIAL -->
+  <rect x="40" y="134" width="960" height="28" fill="#EFE9DD"/><circle cx="60" cy="148" r="4" fill="#EC6D3F"/><text x="74" y="152" font-size="11" font-weight="700" letter-spacing="0.5" fill="#1c2530">FINANCIAL · profitability</text><text x="984" y="152" font-size="10" fill="#8A96A2" text-anchor="end">metrics family</text>
+  <text x="56" y="180" font-size="9.5" font-weight="600" letter-spacing="0.4" fill="#9AA6B2">TILE</text><text x="330" y="180" font-size="9.5" font-weight="600" letter-spacing="0.4" fill="#9AA6B2">FIRST TAP</text><text x="468" y="180" font-size="9.5" font-weight="600" letter-spacing="0.4" fill="#2A8A66">OPEN FULL →</text><text x="720" y="180" font-size="9.5" font-weight="600" letter-spacing="0.4" fill="#9AA6B2">BASIS</text>
+  <line x1="56" y1="188" x2="984" y2="188" stroke="#ECE6DB"/>
+  <g font-size="12">
+    <text x="56" y="208" fill="#1c2530">Revenue</text><use href="#ic-pane" x="330" y="196" width="19" height="15" color="#EC6D3F"/><text x="354" y="208" font-size="11.5" fill="#C9582E" font-weight="600">Peek → open</text><circle cx="468" cy="204" r="3.5" fill="#2FA37D"/><text x="478" y="208" font-size="11.5" fill="#41505F">Contracts · Projects ↗</text><text x="720" y="208" font-size="11.5" fill="#8A96A2">subscription + services recognized</text>
+    <line x1="56" y1="219" x2="984" y2="219" stroke="#F4EFE6"/>
+    <text x="56" y="236" fill="#1c2530">Gross profit</text><use href="#ic-pane" x="330" y="224" width="19" height="15" color="#B9852A"/><text x="354" y="236" font-size="11.5" fill="#9A6E1E" font-weight="600">Pane only</text><text x="468" y="236" font-size="11.5" fill="#C3CBD3">—</text><text x="720" y="236" font-size="11.5" fill="#8A96A2">Revenue − Cost of Revenue</text>
+    <line x1="56" y1="247" x2="984" y2="247" stroke="#F4EFE6"/>
+    <text x="56" y="264" fill="#1c2530">Gross margin %</text><use href="#ic-pane" x="330" y="252" width="19" height="15" color="#B9852A"/><text x="354" y="264" font-size="11.5" fill="#9A6E1E" font-weight="600">Pane only</text><text x="468" y="264" font-size="11.5" fill="#C3CBD3">—</text><text x="720" y="264" font-size="11.5" fill="#8A96A2">gross profit ÷ revenue</text>
+    <line x1="56" y1="275" x2="984" y2="275" stroke="#F4EFE6"/>
+    <text x="56" y="292" fill="#1c2530">Operating income</text><use href="#ic-pane" x="330" y="280" width="19" height="15" color="#B9852A"/><text x="354" y="292" font-size="11.5" fill="#9A6E1E" font-weight="600">Pane only</text><text x="468" y="292" font-size="11.5" fill="#C3CBD3">—</text><text x="720" y="292" font-size="11.5" fill="#8A96A2">gross profit − operating expenses</text>
+    <line x1="56" y1="303" x2="984" y2="303" stroke="#F4EFE6"/>
+    <text x="56" y="320" fill="#1c2530">Net income</text><use href="#ic-pane" x="330" y="308" width="19" height="15" color="#B9852A"/><text x="354" y="320" font-size="11.5" fill="#9A6E1E" font-weight="600">Pane only</text><text x="468" y="320" font-size="11.5" fill="#C3CBD3">—</text><text x="720" y="320" font-size="11.5" fill="#8A96A2">operating income − interest &amp; tax</text>
+    <line x1="56" y1="331" x2="984" y2="331" stroke="#F4EFE6"/>
+    <text x="56" y="348" fill="#1c2530">Net margin %</text><use href="#ic-pane" x="330" y="336" width="19" height="15" color="#B9852A"/><text x="354" y="348" font-size="11.5" fill="#9A6E1E" font-weight="600">Pane only</text><text x="468" y="348" font-size="11.5" fill="#C3CBD3">—</text><text x="720" y="348" font-size="11.5" fill="#8A96A2">net income ÷ revenue</text>
+  </g>
+
+  <!-- GROWTH & RETENTION -->
+  <rect x="40" y="372" width="960" height="28" fill="#EFE9DD"/><circle cx="60" cy="386" r="4" fill="#2FA37D"/><text x="74" y="390" font-size="11" font-weight="700" letter-spacing="0.5" fill="#1c2530">GROWTH &amp; RETENTION</text><text x="984" y="390" font-size="10" fill="#8A96A2" text-anchor="end">metrics family</text>
+  <text x="56" y="418" font-size="9.5" font-weight="600" letter-spacing="0.4" fill="#9AA6B2">TILE</text><text x="330" y="418" font-size="9.5" font-weight="600" letter-spacing="0.4" fill="#9AA6B2">FIRST TAP</text><text x="468" y="418" font-size="9.5" font-weight="600" letter-spacing="0.4" fill="#2A8A66">OPEN FULL →</text><text x="720" y="418" font-size="9.5" font-weight="600" letter-spacing="0.4" fill="#9AA6B2">BASIS</text>
+  <line x1="56" y1="426" x2="984" y2="426" stroke="#ECE6DB"/>
+  <g font-size="12">
+    <text x="56" y="446" fill="#1c2530">ARR / MRR</text><use href="#ic-pane" x="330" y="434" width="19" height="15" color="#EC6D3F"/><text x="354" y="446" font-size="11.5" fill="#C9582E" font-weight="600">Peek → open</text><circle cx="468" cy="442" r="3.5" fill="#2FA37D"/><text x="478" y="446" font-size="11.5" fill="#41505F">Contracts · the book ↗</text><text x="720" y="446" font-size="11.5" fill="#8A96A2">from contract schedules</text>
+    <line x1="56" y1="457" x2="984" y2="457" stroke="#F4EFE6"/>
+    <text x="56" y="474" fill="#1c2530">Bookings (ΔARR)</text><use href="#ic-pane" x="330" y="462" width="19" height="15" color="#EC6D3F"/><text x="354" y="474" font-size="11.5" fill="#C9582E" font-weight="600">Peek → open</text><circle cx="468" cy="470" r="3.5" fill="#2FA37D"/><text x="478" y="474" font-size="11.5" fill="#41505F">Contracts · Bookings view ↗</text><text x="720" y="474" font-size="11.5" fill="#8A96A2">new / expansion / contraction</text>
+    <line x1="56" y1="485" x2="984" y2="485" stroke="#F4EFE6"/>
+    <text x="56" y="502" fill="#1c2530">Net revenue retention</text><use href="#ic-pane" x="330" y="490" width="19" height="15" color="#EC6D3F"/><text x="354" y="502" font-size="11.5" fill="#C9582E" font-weight="600">Peek → open</text><circle cx="468" cy="498" r="3.5" fill="#2FA37D"/><text x="478" y="502" font-size="11.5" fill="#41505F">Renewals · Customers ↗</text><text x="720" y="502" font-size="11.5" fill="#8A96A2">retention bridge</text>
+    <line x1="56" y1="513" x2="984" y2="513" stroke="#F4EFE6"/>
+    <text x="56" y="530" fill="#1c2530">Logo retention / churn</text><use href="#ic-pane" x="330" y="518" width="19" height="15" color="#EC6D3F"/><text x="354" y="530" font-size="11.5" fill="#C9582E" font-weight="600">Peek → open</text><circle cx="468" cy="526" r="3.5" fill="#2FA37D"/><text x="478" y="530" font-size="11.5" fill="#41505F">Customers · Renewals ↗</text><text x="720" y="530" font-size="11.5" fill="#8A96A2">logos in / out</text>
+    <line x1="56" y1="541" x2="984" y2="541" stroke="#F4EFE6"/>
+    <text x="56" y="558" fill="#1c2530">Growth rate</text><use href="#ic-pane" x="330" y="546" width="19" height="15" color="#B9852A"/><text x="354" y="558" font-size="11.5" fill="#9A6E1E" font-weight="600">Pane only</text><text x="468" y="558" font-size="11.5" fill="#C3CBD3">—</text><text x="720" y="558" font-size="11.5" fill="#8A96A2">derived from Revenue</text>
+  </g>
+
+  <!-- UNIT ECONOMICS -->
+  <rect x="40" y="582" width="960" height="28" fill="#EFE9DD"/><circle cx="60" cy="596" r="4" fill="#B9852A"/><text x="74" y="600" font-size="11" font-weight="700" letter-spacing="0.5" fill="#1c2530">UNIT ECONOMICS</text><text x="984" y="600" font-size="10" fill="#8A96A2" text-anchor="end">metrics family</text>
+  <text x="56" y="628" font-size="9.5" font-weight="600" letter-spacing="0.4" fill="#9AA6B2">TILE</text><text x="330" y="628" font-size="9.5" font-weight="600" letter-spacing="0.4" fill="#9AA6B2">FIRST TAP</text><text x="468" y="628" font-size="9.5" font-weight="600" letter-spacing="0.4" fill="#2A8A66">OPEN FULL →</text><text x="720" y="628" font-size="9.5" font-weight="600" letter-spacing="0.4" fill="#9AA6B2">BASIS</text>
+  <line x1="56" y1="636" x2="984" y2="636" stroke="#ECE6DB"/>
+  <g font-size="12">
+    <text x="56" y="656" fill="#1c2530">CAC / payback</text><use href="#ic-pane" x="330" y="644" width="19" height="15" color="#B9852A"/><text x="354" y="656" font-size="11.5" fill="#9A6E1E" font-weight="600">Pane only</text><text x="468" y="656" font-size="11.5" fill="#C3CBD3">—</text><text x="720" y="656" font-size="11.5" fill="#8A96A2">S&amp;M ÷ new logos</text>
+    <line x1="56" y1="667" x2="984" y2="667" stroke="#F4EFE6"/>
+    <text x="56" y="684" fill="#1c2530">LTV : CAC</text><use href="#ic-pane" x="330" y="672" width="19" height="15" color="#B9852A"/><text x="354" y="684" font-size="11.5" fill="#9A6E1E" font-weight="600">Pane only</text><text x="468" y="684" font-size="11.5" fill="#C3CBD3">—</text><text x="720" y="684" font-size="11.5" fill="#8A96A2">lifetime value ÷ CAC</text>
+    <line x1="56" y1="695" x2="984" y2="695" stroke="#F4EFE6"/>
+    <text x="56" y="712" fill="#1c2530">Magic number</text><use href="#ic-pane" x="330" y="700" width="19" height="15" color="#B9852A"/><text x="354" y="712" font-size="11.5" fill="#9A6E1E" font-weight="600">Pane only</text><text x="468" y="712" font-size="11.5" fill="#C3CBD3">—</text><text x="720" y="712" font-size="11.5" fill="#8A96A2">net new ARR ÷ S&amp;M</text>
+    <line x1="56" y1="723" x2="984" y2="723" stroke="#F4EFE6"/>
+    <text x="56" y="740" fill="#1c2530">Utilization</text><use href="#ic-pane" x="330" y="728" width="19" height="15" color="#EC6D3F"/><text x="354" y="740" font-size="11.5" fill="#C9582E" font-weight="600">Peek → open</text><circle cx="468" cy="736" r="3.5" fill="#2FA37D"/><text x="478" y="740" font-size="11.5" fill="#41505F">Projects · Staff ↗</text><text x="720" y="740" font-size="11.5" fill="#8A96A2">services capacity</text>
+  </g>
+
+  <!-- CASH & EFFICIENCY -->
+  <rect x="40" y="764" width="960" height="28" fill="#EFE9DD"/><circle cx="60" cy="778" r="4" fill="#5A6B7A"/><text x="74" y="782" font-size="11" font-weight="700" letter-spacing="0.5" fill="#1c2530">CASH &amp; EFFICIENCY</text><text x="984" y="782" font-size="10" fill="#8A96A2" text-anchor="end">metrics family</text>
+  <text x="56" y="810" font-size="9.5" font-weight="600" letter-spacing="0.4" fill="#9AA6B2">TILE</text><text x="330" y="810" font-size="9.5" font-weight="600" letter-spacing="0.4" fill="#9AA6B2">FIRST TAP</text><text x="468" y="810" font-size="9.5" font-weight="600" letter-spacing="0.4" fill="#2A8A66">OPEN FULL →</text><text x="720" y="810" font-size="9.5" font-weight="600" letter-spacing="0.4" fill="#9AA6B2">BASIS</text>
+  <line x1="56" y1="818" x2="984" y2="818" stroke="#ECE6DB"/>
+  <g font-size="12">
+    <text x="56" y="838" fill="#1c2530">Net burn</text><use href="#ic-pane" x="330" y="826" width="19" height="15" color="#B9852A"/><text x="354" y="838" font-size="11.5" fill="#9A6E1E" font-weight="600">Pane only</text><text x="468" y="838" font-size="11.5" fill="#C3CBD3">—</text><text x="720" y="838" font-size="11.5" fill="#8A96A2">Cash Flow + P&amp;L</text>
+    <line x1="56" y1="849" x2="984" y2="849" stroke="#F4EFE6"/>
+    <text x="56" y="866" fill="#1c2530">Runway</text><use href="#ic-pane" x="330" y="854" width="19" height="15" color="#B9852A"/><text x="354" y="866" font-size="11.5" fill="#9A6E1E" font-weight="600">Pane only</text><text x="468" y="866" font-size="11.5" fill="#C3CBD3">—</text><text x="720" y="866" font-size="11.5" fill="#8A96A2">cash ÷ net burn</text>
+    <line x1="56" y1="877" x2="984" y2="877" stroke="#F4EFE6"/>
+    <text x="56" y="894" fill="#1c2530">Rule of 40</text><use href="#ic-pane" x="330" y="882" width="19" height="15" color="#B9852A"/><text x="354" y="894" font-size="11.5" fill="#9A6E1E" font-weight="600">Pane only</text><text x="468" y="894" font-size="11.5" fill="#C3CBD3">—</text><text x="720" y="894" font-size="11.5" fill="#8A96A2">growth % + margin %</text>
+    <line x1="56" y1="905" x2="984" y2="905" stroke="#F4EFE6"/>
+    <text x="56" y="922" fill="#1c2530">Burn multiple</text><use href="#ic-pane" x="330" y="910" width="19" height="15" color="#B9852A"/><text x="354" y="922" font-size="11.5" fill="#9A6E1E" font-weight="600">Pane only</text><text x="468" y="922" font-size="11.5" fill="#C3CBD3">—</text><text x="720" y="922" font-size="11.5" fill="#8A96A2">net burn ÷ net new ARR</text>
+  </g>
+
+  <line x1="40" y1="950" x2="1000" y2="950" stroke="#E6DECF"/>
+  <text x="40" y="972" font-size="11" fill="#8A96A2"><tspan fill="#C9582E" font-weight="600">Revenue</tspan> peeks the recognized-revenue view (subscription + services), whose rows link to Contracts / Projects. Every other Financial tile is a <tspan fill="#9A6E1E" font-weight="600">pure metric</tspan> off the P&amp;L.</text>
+  <text x="40" y="990" font-size="11" fill="#8A96A2">Pure metrics are pane-only: the pane breaks them into the lines that compose them, each of which then drills per the statement rules — the main exception to peek-then-navigate.</text>
+</svg>

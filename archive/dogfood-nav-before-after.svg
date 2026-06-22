@@ -1,0 +1,138 @@
+<svg viewBox="0 0 660 760" width="660" height="760" xmlns="http://www.w3.org/2000/svg" font-family="Geist, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <defs>
+    <linearGradient id="gSide" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0E1726"/><stop offset="1" stop-color="#0B121E"/></linearGradient>
+    <linearGradient id="gScout" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#EC6D3F" stop-opacity="0.16"/><stop offset="1" stop-color="#46C99A" stop-opacity="0.10"/></linearGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="14" stdDeviation="22" flood-color="#0E1726" flood-opacity="0.22"/></filter>
+
+    <symbol id="mark" viewBox="0 0 30 30">
+      <path d="M11 21 L18 16 L25 11" stroke="#9DB8CC" stroke-width="2" stroke-dasharray="0.5 4" stroke-linecap="round" fill="none" opacity="0.5"/>
+      <path d="M7 17 L11 21 L7 25" stroke="#F4ECDD" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M14 12 L18 16 L14 20" stroke="#F4ECDD" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M21 7 L25 11 L21 15" stroke="#EC6D3F" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="ic-scout" viewBox="0 0 24 24"><path d="M10 1.5 L11.4 7.6 L17.5 9 L11.4 10.4 L10 16.5 L8.6 10.4 L2.5 9 L8.6 7.6 Z" fill="currentColor"/><path d="M16 1 L16.6 3.1 L18.7 3.7 L16.6 4.3 L16 6.4 L15.4 4.3 L13.3 3.7 L15.4 3.1 Z" fill="currentColor" opacity="0.85"/></symbol>
+    <symbol id="ic-dash" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="8" height="8" rx="1.6"/><rect x="13" y="3" width="8" height="8" rx="1.6"/><rect x="13" y="13" width="8" height="8" rx="1.6"/><rect x="3" y="13" width="8" height="8" rx="1.6"/></g></symbol>
+    <symbol id="ic-close" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2.2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="8" y1="2.5" x2="8" y2="6"/><line x1="16" y1="2.5" x2="16" y2="6"/><path d="M8.5 14.5 l2.4 2.4 4.6 -5"/></g></symbol>
+    <symbol id="ic-je" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3 h7.5 L19 8.5 V20 a1 1 0 0 1 -1 1 H6 a1 1 0 0 1 -1 -1 V4 a1 1 0 0 1 1 -1 Z"/><path d="M13.5 3 V8.5 H19"/><path d="M8.5 14.5 l2 2 4 -4.5"/></g></symbol>
+    <symbol id="ic-flux" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12 h3.5 L9.5 5 L14 19 L16.5 12 H21"/></g></symbol>
+    <symbol id="ic-rev" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3 H18 V20 L15.6 18.6 L13.2 20 L10.8 18.6 L8.4 20 L6 18.6 Z"/><line x1="9" y1="8.5" x2="15" y2="8.5"/><line x1="9" y1="12.5" x2="15" y2="12.5"/></g></symbol>
+    <symbol id="ic-lease" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="1.4"/><path d="M9 7 h2 M13 7 h2 M9 11 h2 M13 11 h2 M9 15 h2 M13 15 h2"/><path d="M10 21 v-3 h4 v3"/></g></symbol>
+    <symbol id="ic-fx" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="3" y1="12" x2="21" y2="12"/><path d="M12 3 a13 13 0 0 1 0 18 a13 13 0 0 1 0 -18"/></g></symbol>
+    <symbol id="ic-freight" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6 h13 v10 H2 Z"/><path d="M15 9 h4 l3 3 v4 h-7 Z"/><circle cx="6.5" cy="18.5" r="1.9"/><circle cx="17.5" cy="18.5" r="1.9"/></g></symbol>
+    <symbol id="ic-ar" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8 H16"/><path d="M13 5 L16 8 L13 11"/><path d="M18 16 H8"/><path d="M11 13 L8 16 L11 19"/></g></symbol>
+    <symbol id="ic-cash" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="10" rx="1.8"/><circle cx="12" cy="12" r="2.3"/><line x1="6" y1="9.5" x2="6" y2="14.5"/><line x1="18" y1="9.5" x2="18" y2="14.5"/></g></symbol>
+    <symbol id="ic-bva" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4 V20 H20"/><rect x="7" y="12" width="3.4" height="6" rx="0.6"/><rect x="12.3" y="8" width="3.4" height="10" rx="0.6"/><rect x="17" y="14" width="3" height="4" rx="0.6"/></g></symbol>
+    <symbol id="ic-staff" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3.5 20 a5.5 5.5 0 0 1 11 0"/><circle cx="16.5" cy="9" r="2.3"/><path d="M15.2 14.2 a5 5 0 0 1 5.3 5.8"/></g></symbol>
+    <symbol id="ic-indirect" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2.2"/><line x1="3" y1="10" x2="21" y2="10"/><circle cx="16.5" cy="14.5" r="1.3"/></g></symbol>
+  </defs>
+
+  <!-- background card -->
+  <rect x="8" y="8" width="644" height="744" rx="18" fill="#0E1726" filter="url(#soft)" opacity="0.18"/>
+  <rect x="4" y="4" width="652" height="748" rx="18" fill="#F7F3EC" stroke="#E7E0D4"/>
+
+  <!-- column headers -->
+  <text x="165" y="36" text-anchor="middle" font-size="13" font-weight="700" letter-spacing="1.5" fill="#1c2530">BEFORE</text>
+  <text x="165" y="54" text-anchor="middle" font-size="10.5" fill="#7A8694">FP&amp;A framing · 8 modules · ungrouped</text>
+  <text x="495" y="36" text-anchor="middle" font-size="13" font-weight="700" letter-spacing="1.5" fill="#1c2530">AFTER</text>
+  <text x="495" y="54" text-anchor="middle" font-size="10.5" fill="#7A8694">Close platform · 13 modules · 5 groups</text>
+
+  <!-- ===== BEFORE RAIL ===== -->
+  <rect x="40" y="66" width="250" height="656" rx="14" fill="url(#gSide)" stroke="#0E1726"/>
+  <use href="#mark" x="46" y="76" width="22" height="22"/>
+  <text x="74" y="94" font-family="Fraunces, Georgia, serif" font-size="13.5" font-weight="600" fill="#F4ECDD">dogfood<tspan fill="#9DB8CC" font-weight="500">.cafe</tspan></text>
+
+  <use href="#ic-dash" x="52" y="121" width="18" height="18" color="#8FA6BB"/>
+  <text x="78" y="134.5" font-size="12.5" font-weight="500" fill="#BFC9D4">Dashboard</text>
+  <use href="#ic-cash" x="52" y="152" width="18" height="18" color="#8FA6BB"/>
+  <text x="78" y="165.5" font-size="12.5" font-weight="500" fill="#BFC9D4">Cash Flow</text>
+  <use href="#ic-ar" x="52" y="183" width="18" height="18" color="#8FA6BB"/>
+  <text x="78" y="196.5" font-size="12.5" font-weight="500" fill="#BFC9D4">AR Reconciliation</text>
+  <use href="#ic-freight" x="52" y="214" width="18" height="18" color="#8FA6BB"/>
+  <text x="78" y="227.5" font-size="12.5" font-weight="500" fill="#BFC9D4">Freight Accrual</text>
+  <use href="#ic-staff" x="52" y="245" width="18" height="18" color="#8FA6BB"/>
+  <text x="78" y="258.5" font-size="12.5" font-weight="500" fill="#BFC9D4">Staff Budget</text>
+  <use href="#ic-indirect" x="52" y="276" width="18" height="18" color="#8FA6BB"/>
+  <text x="78" y="289.5" font-size="12.5" font-weight="500" fill="#BFC9D4">Indirect Expenses</text>
+  <use href="#ic-bva" x="52" y="307" width="18" height="18" color="#8FA6BB"/>
+  <text x="78" y="320.5" font-size="12.5" font-weight="500" fill="#BFC9D4">Budget vs Actuals</text>
+  <use href="#ic-flux" x="52" y="338" width="18" height="18" color="#8FA6BB"/>
+  <text x="78" y="351.5" font-size="12.5" font-weight="500" fill="#BFC9D4">Flux &amp; Variance</text>
+
+  <line x1="52" y1="368" x2="278" y2="368" stroke="#9DB8CC" stroke-opacity="0.12"/>
+  <use href="#ic-scout" x="52" y="377" width="18" height="18" color="#EC6D3F"/>
+  <text x="78" y="390.5" font-size="12.5" font-weight="500" fill="#BFC9D4">Scout</text>
+  <text x="52" y="412" font-size="10" fill="#6E7B8A" font-style="italic">just another item</text>
+
+  <!-- ===== CENTER ===== -->
+  <text x="330" y="382" text-anchor="middle" font-size="9.5" font-weight="600" fill="#B9852A">+5 modules</text>
+  <path d="M300 394 H350" stroke="#B9852A" stroke-width="2" fill="none"/>
+  <path d="M350 394 l-7 -4.5 v9 Z" fill="#B9852A"/>
+  <text x="330" y="410" text-anchor="middle" font-size="9.5" font-weight="600" fill="#B9852A">regrouped</text>
+
+  <!-- ===== AFTER RAIL ===== -->
+  <rect x="370" y="66" width="250" height="656" rx="14" fill="url(#gSide)" stroke="#0E1726"/>
+  <use href="#mark" x="376" y="76" width="22" height="22"/>
+  <text x="404" y="94" font-family="Fraunces, Georgia, serif" font-size="13.5" font-weight="600" fill="#F4ECDD">dogfood<tspan fill="#9DB8CC" font-weight="500">.cafe</tspan></text>
+
+  <!-- Scout pinned -->
+  <rect x="382" y="106" width="226" height="42" rx="11" fill="url(#gScout)" stroke="#EC6D3F" stroke-opacity="0.35"/>
+  <use href="#ic-scout" x="394" y="116" width="20" height="20" color="#EC6D3F"/>
+  <text x="420" y="130" font-size="13" font-weight="600" fill="#F4ECDD">Ask Scout</text>
+  <text x="420" y="143" font-size="9.5" fill="#9DB8CC">Across every module</text>
+
+  <!-- OVERVIEW -->
+  <text x="394" y="181" font-size="10" font-weight="600" letter-spacing="0.8" fill="#8FA6BB" fill-opacity="0.6">OVERVIEW</text>
+  <use href="#ic-dash" x="384" y="197" width="18" height="18" color="#8FA6BB"/>
+  <text x="410" y="210.5" font-size="12.5" font-weight="500" fill="#BFC9D4">Dashboard</text>
+
+  <!-- CLOSE -->
+  <text x="394" y="237" font-size="10" font-weight="600" letter-spacing="0.8" fill="#8FA6BB" fill-opacity="0.6">CLOSE</text>
+  <circle cx="376" cy="262" r="2.6" fill="#EC6D3F"/>
+  <use href="#ic-close" x="384" y="253" width="18" height="18" color="#8FA6BB"/>
+  <text x="410" y="266.5" font-size="12.5" font-weight="500" fill="#BFC9D4">Period Close</text>
+  <circle cx="376" cy="290" r="2.6" fill="#EC6D3F"/>
+  <use href="#ic-je" x="384" y="281" width="18" height="18" color="#8FA6BB"/>
+  <text x="410" y="294.5" font-size="12.5" font-weight="500" fill="#BFC9D4">JE Approvals</text>
+  <use href="#ic-flux" x="384" y="309" width="18" height="18" color="#8FA6BB"/>
+  <text x="410" y="322.5" font-size="12.5" font-weight="500" fill="#BFC9D4">Flux &amp; Variance</text>
+
+  <!-- ACCOUNTING -->
+  <text x="394" y="349" font-size="10" font-weight="600" letter-spacing="0.8" fill="#8FA6BB" fill-opacity="0.6">ACCOUNTING</text>
+  <circle cx="376" cy="374" r="2.6" fill="#EC6D3F"/>
+  <use href="#ic-rev" x="384" y="365" width="18" height="18" color="#8FA6BB"/>
+  <text x="410" y="378.5" font-size="12.5" font-weight="500" fill="#BFC9D4">Revenue</text>
+  <rect x="560" y="366" width="32" height="16" rx="5" fill="#8FA6BB" fill-opacity="0.14"/>
+  <text x="576" y="377.5" font-size="10" font-weight="600" fill="#9DB8CC" text-anchor="middle" font-family="ui-monospace, monospace">606</text>
+  <circle cx="376" cy="402" r="2.6" fill="#EC6D3F"/>
+  <use href="#ic-lease" x="384" y="393" width="18" height="18" color="#8FA6BB"/>
+  <text x="410" y="406.5" font-size="12.5" font-weight="500" fill="#BFC9D4">Leases</text>
+  <rect x="560" y="394" width="32" height="16" rx="5" fill="#8FA6BB" fill-opacity="0.14"/>
+  <text x="576" y="405.5" font-size="10" font-weight="600" fill="#9DB8CC" text-anchor="middle" font-family="ui-monospace, monospace">842</text>
+  <circle cx="376" cy="430" r="2.6" fill="#EC6D3F"/>
+  <use href="#ic-fx" x="384" y="421" width="18" height="18" color="#8FA6BB"/>
+  <text x="410" y="434.5" font-size="12.5" font-weight="500" fill="#BFC9D4">Foreign Currency</text>
+  <rect x="560" y="422" width="32" height="16" rx="5" fill="#8FA6BB" fill-opacity="0.14"/>
+  <text x="576" y="433.5" font-size="10" font-weight="600" fill="#9DB8CC" text-anchor="middle" font-family="ui-monospace, monospace">830</text>
+  <use href="#ic-freight" x="384" y="449" width="18" height="18" color="#8FA6BB"/>
+  <text x="410" y="462.5" font-size="12.5" font-weight="500" fill="#BFC9D4">Freight Accrual</text>
+  <use href="#ic-ar" x="384" y="477" width="18" height="18" color="#8FA6BB"/>
+  <text x="410" y="490.5" font-size="12.5" font-weight="500" fill="#BFC9D4">AR Reconciliation</text>
+
+  <!-- REPORTING -->
+  <text x="394" y="517" font-size="10" font-weight="600" letter-spacing="0.8" fill="#8FA6BB" fill-opacity="0.6">REPORTING</text>
+  <use href="#ic-cash" x="384" y="533" width="18" height="18" color="#8FA6BB"/>
+  <text x="410" y="546.5" font-size="12.5" font-weight="500" fill="#BFC9D4">Cash Flow</text>
+  <use href="#ic-bva" x="384" y="561" width="18" height="18" color="#8FA6BB"/>
+  <text x="410" y="574.5" font-size="12.5" font-weight="500" fill="#BFC9D4">Budget vs Actuals</text>
+
+  <!-- PLANNING -->
+  <text x="394" y="601" font-size="10" font-weight="600" letter-spacing="0.8" fill="#8FA6BB" fill-opacity="0.6">PLANNING</text>
+  <use href="#ic-staff" x="384" y="617" width="18" height="18" color="#8FA6BB"/>
+  <text x="410" y="630.5" font-size="12.5" font-weight="500" fill="#BFC9D4">Staff Budget</text>
+  <use href="#ic-indirect" x="384" y="645" width="18" height="18" color="#8FA6BB"/>
+  <text x="410" y="658.5" font-size="12.5" font-weight="500" fill="#BFC9D4">Indirect Expenses</text>
+
+  <!-- legend -->
+  <circle cx="48" cy="741" r="2.6" fill="#EC6D3F"/>
+  <text x="60" y="745" font-size="10" fill="#7A8694">ember dot = newly added module</text>
+</svg>

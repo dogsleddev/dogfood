@@ -1,0 +1,156 @@
+id,customer_id,customer_name,stream,plan_tier,arr,start_month,term_months,status,booking_type
+C-sub-init-0,sub-init-0,Northwind Cloud,subscription,growth,324100.00,2023-12,24,active,new
+C-sub-init-1,sub-init-1,Helix AI,subscription,growth,381050.00,2023-11,12,active,new
+C-sub-init-2,sub-init-2,Atlas Data,subscription,starter,64650.00,2023-10,12,active,new
+C-sub-init-3,sub-init-3,Cedar Security,subscription,growth,182050.00,2023-09,24,churned,new
+C-sub-init-4,sub-init-4,Mariner Analytics,subscription,starter,58500.00,2023-08,12,active,new
+C-sub-init-5,sub-init-5,Pinnacle Health AI,subscription,starter,87600.00,2023-07,12,active,new
+C-sub-init-6,sub-init-6,Tensil,subscription,starter,95050.00,2023-06,12,churned,new
+C-sub-init-7,sub-init-7,Nodeform,subscription,starter,38500.00,2023-05,12,active,new
+C-sub-init-8,sub-init-8,Quillstack,subscription,starter,61200.00,2023-04,12,active,new
+C-sub-init-9,sub-init-9,Bramble,subscription,starter,41700.00,2023-03,12,active,new
+C-sub-init-10,sub-init-10,Sublayer,subscription,starter,61450.00,2023-02,12,churned,new
+C-sub-init-11,sub-init-11,Coilbase,subscription,growth,257650.00,2023-01,12,active,new
+C-sub-init-12,sub-init-12,Driftwork,subscription,starter,44900.00,2023-12,12,active,new
+C-sub-init-13,sub-init-13,Padlock,subscription,scale,1055700.00,2023-11,36,active,new
+C-sub-init-14,sub-init-14,Fernwood Labs,subscription,starter,123000.00,2023-10,12,active,new
+C-sub-init-15,sub-init-15,Pinegrid,subscription,starter,44150.00,2023-09,12,active,new
+C-sub-init-16,sub-init-16,Slatewire,subscription,starter,108350.00,2023-08,12,active,new
+C-sub-init-17,sub-init-17,Hexpoint,subscription,starter,100700.00,2023-07,12,active,new
+C-sub-init-18,sub-init-18,Caldera Systems,subscription,starter,46950.00,2023-06,12,active,new
+C-sub-init-19,sub-init-19,Stitchroom,subscription,starter,49350.00,2023-05,12,active,new
+C-sub-init-20,sub-init-20,Plumb,subscription,growth,208200.00,2023-04,12,active,new
+C-sub-init-21,sub-init-21,Gridline,subscription,starter,52300.00,2023-03,12,active,new
+C-sub-init-22,sub-init-22,Forklift Software,subscription,starter,71850.00,2023-02,12,active,new
+C-sub-init-23,sub-init-23,Marble,subscription,growth,248950.00,2023-01,12,churned,new
+C-sub-init-24,sub-init-24,Tovala Systems,subscription,growth,307050.00,2023-12,24,active,new
+C-sub-init-25,sub-init-25,Quanta Stack,subscription,scale,779700.00,2023-11,36,active,new
+C-sub-0-0,sub-0-0,Brightloop,subscription,growth,211200.00,2024-01,12,active,new
+C-sub-0-1,sub-0-1,Onspring,subscription,starter,72950.00,2024-01,12,active,new
+C-sub-1-0,sub-1-0,Vellum Data,subscription,starter,103250.00,2024-02,12,active,new
+C-sub-1-1,sub-1-1,Cobblestone Labs,subscription,starter,87900.00,2024-02,12,active,new
+C-sub-2-0,sub-2-0,Switchboard,subscription,starter,51250.00,2024-03,12,active,new
+C-sub-2-1,sub-2-1,Latchkey,subscription,growth,242850.00,2024-03,12,churned,new
+C-sub-3-0,sub-3-0,Cinder AI,subscription,growth,293200.00,2024-04,12,active,new
+C-sub-3-1,sub-3-1,Parallax Labs,subscription,starter,51450.00,2024-04,12,active,new
+C-sub-3-2,sub-3-2,Numina AI,subscription,starter,44200.00,2024-04,12,active,new
+C-sub-4-0,sub-4-0,Synapse Compute,subscription,starter,72850.00,2024-05,12,active,new
+C-sub-4-1,sub-4-1,Lumadel AI,subscription,growth,177950.00,2024-05,24,active,new
+C-sub-4-2,sub-4-2,Tessera Intelligence,subscription,starter,72800.00,2024-05,12,active,new
+C-sub-5-0,sub-5-0,Cortexa,subscription,starter,70950.00,2024-06,12,churned,new
+C-sub-5-1,sub-5-1,Halcyon AI,subscription,starter,60650.00,2024-06,12,active,new
+C-sub-5-2,sub-5-2,Veridian Labs,subscription,starter,54950.00,2024-06,12,active,new
+C-sub-6-0,sub-6-0,Mesa Intelligence,subscription,starter,52700.00,2024-07,12,active,new
+C-sub-6-1,sub-6-1,Foundry Compute,subscription,growth,161600.00,2024-07,24,active,new
+C-sub-6-2,sub-6-2,Aperture AI,subscription,starter,61950.00,2024-07,12,active,new
+C-sub-7-0,sub-7-0,Norvane AI,subscription,starter,63400.00,2024-08,12,active,new
+C-sub-7-1,sub-7-1,Sferica Labs,subscription,starter,105400.00,2024-08,12,churned,new
+C-sub-7-2,sub-7-2,Keel Financial,subscription,starter,73300.00,2024-08,12,active,new
+C-sub-8-0,sub-8-0,Mintline,subscription,starter,44150.00,2024-09,12,active,new
+C-sub-8-1,sub-8-1,Ledgerwise,subscription,scale,1060800.00,2024-09,24,active,new
+C-sub-8-2,sub-8-2,Cardamom Pay,subscription,starter,72250.00,2024-09,12,active,new
+C-sub-9-0,sub-9-0,Tradewind Capital,subscription,growth,262300.00,2024-10,12,active,new
+C-sub-9-1,sub-9-1,Settl,subscription,growth,210050.00,2024-10,24,active,new
+C-sub-9-2,sub-9-2,Northkey Financial,subscription,starter,87050.00,2024-10,12,active,new
+C-sub-10-0,sub-10-0,Fathom Treasury,subscription,starter,81650.00,2024-11,12,active,new
+C-sub-10-1,sub-10-1,Beacon Ledger,subscription,scale,1464750.00,2024-11,24,active,new
+C-sub-10-2,sub-10-2,Vepay,subscription,growth,186150.00,2024-11,12,active,new
+C-sub-11-0,sub-11-0,Quorum Capital,subscription,growth,143250.00,2024-12,12,active,new
+C-sub-11-1,sub-11-1,Riverton Pay,subscription,growth,240400.00,2024-12,24,active,new
+C-sub-11-2,sub-11-2,Standpoint Financial,subscription,starter,69000.00,2024-12,12,active,new
+C-sub-12-0,sub-12-0,Almira Bank,subscription,growth,212750.00,2025-01,12,active,new
+C-sub-12-1,sub-12-1,Vellum Health,subscription,starter,82050.00,2025-01,12,active,new
+C-sub-12-2,sub-12-2,Cleardeed,subscription,starter,37200.00,2025-01,12,active,new
+C-sub-13-0,sub-13-0,Palette Health,subscription,starter,40850.00,2025-02,12,active,new
+C-sub-13-1,sub-13-1,Haulwise,subscription,starter,68550.00,2025-02,12,churned,new
+C-sub-13-2,sub-13-2,Lexwell,subscription,starter,67450.00,2025-02,12,active,new
+C-sub-14-0,sub-14-0,Surveyor Realty AI,subscription,growth,225300.00,2025-03,12,active,new
+C-sub-14-1,sub-14-1,Cartway,subscription,starter,54100.00,2025-03,12,active,new
+C-sub-14-2,sub-14-2,Glasshouse Studio,subscription,starter,81950.00,2025-03,12,active,new
+C-sub-15-0,sub-15-0,Tallwater Brewing,subscription,starter,58300.00,2025-04,12,active,new
+C-sub-15-1,sub-15-1,Meridian Outfitters,subscription,starter,86800.00,2025-04,12,active,new
+C-sub-15-2,sub-15-2,Copperline Coffee,subscription,starter,39000.00,2025-04,12,active,new
+C-sub-15-3,sub-15-3,Brackit,subscription,growth,177300.00,2025-04,12,active,new
+C-sub-16-0,sub-16-0,Spindle Systems,subscription,growth,270000.00,2025-05,24,active,new
+C-sub-16-1,sub-16-1,Querybird,subscription,starter,67200.00,2025-05,12,churned,new
+C-sub-16-2,sub-16-2,Loamwork,subscription,starter,54400.00,2025-05,12,active,new
+C-sub-16-3,sub-16-3,Tideglass,subscription,starter,129950.00,2025-05,12,active,new
+C-sub-17-0,sub-17-0,Packetry,subscription,starter,48500.00,2025-06,12,active,new
+C-sub-17-1,sub-17-1,Sundeck Software,subscription,starter,84200.00,2025-06,12,active,new
+C-sub-17-2,sub-17-2,Yardstick Labs,subscription,growth,433500.00,2025-06,24,active,new
+C-sub-17-3,sub-17-3,Mossflow,subscription,growth,325550.00,2025-06,12,active,new
+C-sub-18-0,sub-18-0,Trellix Stack,subscription,starter,80900.00,2025-07,12,active,new
+C-sub-18-1,sub-18-1,Cobaltline,subscription,starter,54150.00,2025-07,12,churned,new
+C-sub-18-2,sub-18-2,Heronworks,subscription,starter,60400.00,2025-07,12,active,new
+C-sub-18-3,sub-18-3,Stackmint,subscription,starter,66350.00,2025-07,12,active,new
+C-sub-19-0,sub-19-0,Birchpoint,subscription,scale,681050.00,2025-08,24,churned,new
+C-sub-19-1,sub-19-1,Quillet,subscription,growth,220700.00,2025-08,12,active,new
+C-sub-19-2,sub-19-2,Driftline Systems,subscription,growth,298000.00,2025-08,12,active,new
+C-sub-19-3,sub-19-3,Pylon Software,subscription,starter,64250.00,2025-08,12,active,new
+C-sub-20-0,sub-20-0,Crateworks,subscription,starter,36400.00,2025-09,12,active,new
+C-sub-20-1,sub-20-1,Sandbar Labs,subscription,starter,39400.00,2025-09,12,active,new
+C-sub-20-2,sub-20-2,Threadbase,subscription,growth,144000.00,2025-09,24,active,new
+C-sub-20-3,sub-20-3,Ironwood Systems,subscription,growth,205750.00,2025-09,12,active,new
+C-sub-21-0,sub-21-0,Lumberyard Software,subscription,growth,237100.00,2025-10,12,active,new
+C-sub-21-1,sub-21-1,Flintgrid,subscription,starter,61500.00,2025-10,12,churned,new
+C-sub-21-2,sub-21-2,Murmur Stack,subscription,starter,62350.00,2025-10,12,active,new
+C-sub-21-3,sub-21-3,Cobblepath,subscription,starter,69400.00,2025-10,12,active,new
+C-sub-22-0,sub-22-0,Tinderbox Labs,subscription,growth,210500.00,2025-11,24,active,new
+C-sub-22-1,sub-22-1,Saltbox Systems,subscription,growth,165150.00,2025-11,12,active,new
+C-sub-22-2,sub-22-2,Glidepath Software,subscription,starter,67500.00,2025-11,12,active,new
+C-sub-22-3,sub-22-3,Anchorpoint,subscription,starter,39500.00,2025-11,12,active,new
+C-sub-23-0,sub-23-0,Riffstack,subscription,starter,64750.00,2025-12,12,active,new
+C-sub-23-1,sub-23-1,Bramblewire,subscription,starter,56050.00,2025-12,12,active,new
+C-sub-23-2,sub-23-2,Cedarflow,subscription,starter,57950.00,2025-12,12,churned,new
+C-sub-23-3,sub-23-3,Outpost Software,subscription,growth,188600.00,2025-12,12,active,new
+C-sub-24-0,sub-24-0,Kettleworks,subscription,growth,131550.00,2026-01,12,active,new
+C-sub-24-1,sub-24-1,Snowfield Systems,subscription,scale,686900.00,2026-01,36,active,new
+C-sub-24-2,sub-24-2,Tarpaulin Labs,subscription,starter,51600.00,2026-01,12,active,new
+C-sub-25-0,sub-25-0,Wickline,subscription,growth,125500.00,2026-02,12,active,new
+C-sub-25-1,sub-25-1,Plankstack,subscription,starter,65150.00,2026-02,12,active,new
+C-sub-25-2,sub-25-2,Verdigris Systems,subscription,starter,63100.00,2026-02,12,active,new
+C-sub-26-0,sub-26-0,Mapleline Software,subscription,growth,215900.00,2026-03,12,active,new
+C-sub-26-1,sub-26-1,Brindle Labs,subscription,growth,261200.00,2026-03,24,active,new
+C-sub-26-2,sub-26-2,Cloverstack,subscription,starter,39450.00,2026-03,12,active,new
+C-sub-27-0,sub-27-0,Hollowpoint Systems,subscription,starter,67900.00,2026-04,12,churned,new
+C-sub-27-1,sub-27-1,Dunewire,subscription,starter,70250.00,2026-04,12,active,new
+C-sub-27-2,sub-27-2,Stonefold Software,subscription,starter,67050.00,2026-04,12,active,new
+C-sub-27-3,sub-27-3,Obsidian Compute,subscription,growth,169650.00,2026-04,12,active,new
+C-sub-28-0,sub-28-0,Larkspur AI,subscription,starter,44600.00,2026-05,12,active,new
+C-sub-28-1,sub-28-1,Vantix Intelligence,subscription,growth,137050.00,2026-05,12,active,new
+C-sub-28-2,sub-28-2,Quench AI,subscription,growth,259750.00,2026-05,12,active,new
+C-sub-28-3,sub-28-3,Saffron Labs,subscription,starter,48100.00,2026-05,12,active,new
+C-sub-29-0,sub-29-0,Meridel AI,subscription,growth,205100.00,2026-06,12,active,new
+C-sub-29-1,sub-29-1,Cobalt Compute,subscription,starter,52700.00,2026-06,12,active,new
+C-sub-29-2,sub-29-2,Thornwell AI,subscription,growth,147850.00,2026-06,24,active,new
+C-sub-29-3,sub-29-3,Periscope Intelligence,subscription,starter,45450.00,2026-06,12,active,new
+C-sub-30-0,sub-30-0,Nimbex Labs,subscription,starter,50800.00,2026-07,12,active,new
+C-sub-30-1,sub-30-1,Cradle AI,subscription,growth,305250.00,2026-07,24,active,new
+C-sub-30-2,sub-30-2,Veor Compute,subscription,starter,62200.00,2026-07,12,active,new
+C-sub-30-3,sub-30-3,Sablefield AI,subscription,starter,39250.00,2026-07,12,active,new
+C-sub-30-4,sub-30-4,Inkwell Intelligence,subscription,scale,1100200.00,2026-07,36,active,new
+C-sub-31-0,sub-31-0,Talon Labs,subscription,scale,1714600.00,2026-08,24,active,new
+C-sub-31-1,sub-31-1,Marrow AI,subscription,starter,43850.00,2026-08,12,active,new
+C-sub-31-2,sub-31-2,Cendric Compute,subscription,starter,51700.00,2026-08,12,active,new
+C-sub-31-3,sub-31-3,Florin AI,subscription,starter,56700.00,2026-08,12,active,new
+C-sub-31-4,sub-31-4,Wavelength Labs,subscription,growth,233050.00,2026-08,12,active,new
+C-sub-32-0,sub-32-0,Solenya AI,subscription,starter,48900.00,2026-09,12,active,new
+C-sub-32-1,sub-32-1,Bastion Intelligence,subscription,starter,57650.00,2026-09,12,active,new
+C-sub-32-2,sub-32-2,Quill Compute,subscription,growth,160350.00,2026-09,12,active,new
+C-sub-32-3,sub-32-3,Holloway Capital,subscription,starter,38250.00,2026-09,12,active,new
+C-sub-32-4,sub-32-4,Penmark Pay,subscription,starter,58600.00,2026-09,12,active,new
+C-sub-33-0,sub-33-0,Sumledger,subscription,growth,217700.00,2026-10,12,active,new
+C-sub-33-1,sub-33-1,Tidewater Treasury,subscription,growth,259500.00,2026-10,24,active,new
+C-sub-33-2,sub-33-2,Greyrock Financial,subscription,growth,230500.00,2026-10,12,active,new
+C-sub-33-3,sub-33-3,Cobblestone Capital,subscription,growth,202750.00,2026-10,12,active,new
+C-sub-33-4,sub-33-4,Vaultline,subscription,starter,44250.00,2026-10,12,active,new
+C-sub-34-0,sub-34-0,Aldercross Financial,subscription,starter,68400.00,2026-11,12,active,new
+C-sub-34-1,sub-34-1,Strand Pay,subscription,starter,69100.00,2026-11,12,active,new
+C-sub-34-2,sub-34-2,Norwell Capital,subscription,growth,292700.00,2026-11,24,active,new
+C-sub-34-3,sub-34-3,Ferrowise,subscription,growth,292400.00,2026-11,12,active,new
+C-sub-34-4,sub-34-4,Meadowlark Bank,subscription,starter,69950.00,2026-11,12,active,new
+C-sub-35-0,sub-35-0,Capstone Treasury,subscription,starter,58050.00,2026-12,12,active,new
+C-sub-35-1,sub-35-1,Driftwood Capital,subscription,growth,215450.00,2026-12,12,active,new
+C-sub-35-2,sub-35-2,Slatebridge Financial,subscription,growth,127650.00,2026-12,12,active,new
+C-sub-35-3,sub-35-3,Pennywhistle Pay,subscription,growth,174100.00,2026-12,24,active,new
+C-sub-35-4,sub-35-4,Tollgate Capital,subscription,scale,687700.00,2026-12,24,active,new

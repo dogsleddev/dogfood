@@ -1,0 +1,141 @@
+<svg viewBox="0 0 286 884" width="286" height="884" xmlns="http://www.w3.org/2000/svg" font-family="Geist, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <defs>
+    <linearGradient id="gSide" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0E1726"/><stop offset="1" stop-color="#0B121E"/></linearGradient>
+    <linearGradient id="gAv" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#EC6D3F"/><stop offset="1" stop-color="#E7B23A"/></linearGradient>
+    <linearGradient id="gScout" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#EC6D3F" stop-opacity="0.16"/><stop offset="1" stop-color="#46C99A" stop-opacity="0.10"/></linearGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="14" stdDeviation="22" flood-color="#0E1726" flood-opacity="0.30"/></filter>
+    <clipPath id="panel"><rect x="8" y="8" width="270" height="868" rx="16"/></clipPath>
+
+    <symbol id="mark" viewBox="0 0 30 30">
+      <path d="M11 21 L18 16 L25 11" stroke="#9DB8CC" stroke-width="2" stroke-dasharray="0.5 4" stroke-linecap="round" fill="none" opacity="0.5"/>
+      <path d="M7 17 L11 21 L7 25" stroke="#F4ECDD" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M14 12 L18 16 L14 20" stroke="#F4ECDD" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M21 7 L25 11 L21 15" stroke="#EC6D3F" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="ic-scout" viewBox="0 0 24 24"><path d="M10 1.5 L11.4 7.6 L17.5 9 L11.4 10.4 L10 16.5 L8.6 10.4 L2.5 9 L8.6 7.6 Z" fill="currentColor"/></symbol>
+    <symbol id="ic-dash" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="8" height="8" rx="1.6"/><rect x="13" y="3" width="8" height="8" rx="1.6"/><rect x="13" y="13" width="8" height="8" rx="1.6"/><rect x="3" y="13" width="8" height="8" rx="1.6"/></g></symbol>
+    <symbol id="ic-board" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M7 13 V10 M11 13 V7.5 M15 13 V11"/><path d="M12 16 V19 M9 19 H15"/></g></symbol>
+    <symbol id="ic-pl" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 3 V21 H21"/><path d="M7 15 L11 10 L14 13 L20 6"/></g></symbol>
+    <symbol id="ic-bs" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4 V20"/><path d="M6 20 H18"/><path d="M4 8 H20"/><path d="M4 8 L2 13 a3 2 0 0 0 4 0 Z"/><path d="M20 8 L18 13 a3 2 0 0 0 4 0 Z"/></g></symbol>
+    <symbol id="ic-cash" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="10" rx="1.8"/><circle cx="12" cy="12" r="2.3"/><line x1="6" y1="9.5" x2="6" y2="14.5"/><line x1="18" y1="9.5" x2="18" y2="14.5"/></g></symbol>
+    <symbol id="ic-txn" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="6" r="1.2"/><line x1="9" y1="6" x2="20" y2="6"/><circle cx="5" cy="12" r="1.2"/><line x1="9" y1="12" x2="20" y2="12"/><circle cx="5" cy="18" r="1.2"/><line x1="9" y1="18" x2="20" y2="18"/></g></symbol>
+    <symbol id="ic-rev" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17 L9 11 L13 15 L21 7"/><path d="M21 7 H16 M21 7 V12"/></g></symbol>
+    <symbol id="ic-users" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3.5 20 a5.5 5.5 0 0 1 11 0"/><circle cx="16.5" cy="9" r="2.3"/><path d="M15.2 14.2 a5 5 0 0 1 5.3 5.8"/></g></symbol>
+    <symbol id="ic-wallet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2.2"/><line x1="3" y1="10" x2="21" y2="10"/><circle cx="16.5" cy="14.5" r="1.3"/></g></symbol>
+    <symbol id="ic-clock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7 V12 L15.5 14"/></g></symbol>
+    <symbol id="ic-waterfall" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5 H8 V11 H13 V16 H18 V20"/></g></symbol>
+    <symbol id="ic-cube" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 L20 7.5 V16.5 L12 21 L4 16.5 V7.5 Z"/><path d="M4 7.5 L12 12 L20 7.5"/><path d="M12 12 V21"/></g></symbol>
+    <symbol id="ic-waves" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9 q3 -3 6 0 t6 0 t6 0"/><path d="M3 15 q3 -3 6 0 t6 0 t6 0"/></g></symbol>
+    <symbol id="ic-sliders" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="8" x2="20" y2="8"/><circle cx="9" cy="8" r="2.2"/><line x1="4" y1="16" x2="20" y2="16"/><circle cx="15" cy="16" r="2.2"/></g></symbol>
+    <symbol id="ic-branch" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.3"/><circle cx="6" cy="18" r="2.3"/><circle cx="18" cy="11" r="2.3"/><path d="M6 8.3 V15.7"/><path d="M6 11 C 10 11 14 11 15.7 11"/></g></symbol>
+    <symbol id="ic-paired" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20 V21 H21"/><rect x="6" y="11" width="2.6" height="8"/><rect x="9" y="14" width="2.6" height="5"/><rect x="14" y="8" width="2.6" height="11"/><rect x="17" y="12" width="2.6" height="7"/></g></symbol>
+    <symbol id="ic-gauge" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17 a8 8 0 0 1 16 0"/><path d="M12 17 L16.5 12.5"/><circle cx="12" cy="17" r="1.3"/><path d="M5 17 H6.5 M17.5 17 H19 M12 9 V7.5"/></g></symbol>
+    <symbol id="ic-ledger" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4 h11 a1 1 0 0 1 1 1 v15 H8 a2 2 0 0 1 -2 -2 Z"/><path d="M6 18 a2 2 0 0 0 2 2 H18"/><path d="M9 8 h6 M9 11 h6"/></g></symbol>
+    <symbol id="ic-gear" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2.5 V5 M12 19 V21.5 M2.5 12 H5 M19 12 H21.5 M5.2 5.2 L7 7 M17 17 L18.8 18.8 M18.8 5.2 L17 7 M7 17 L5.2 18.8"/></g></symbol>
+  </defs>
+
+  <rect x="8" y="8" width="270" height="868" rx="16" fill="#0E1726" filter="url(#soft)" opacity="0.18"/>
+  <rect x="8" y="8" width="270" height="868" rx="16" fill="url(#gSide)" stroke="#0E1726"/>
+  <g clip-path="url(#panel)">
+
+    <!-- brand -->
+    <use href="#mark" x="22" y="20" width="22" height="22"/>
+    <text x="50" y="38" font-family="Fraunces, Georgia, serif" font-size="16" font-weight="600" fill="#F4ECDD">dogfood<tspan fill="#9DB8CC" font-weight="500">.cafe</tspan></text>
+
+    <!-- company switcher -->
+    <rect x="20" y="58" width="246" height="42" rx="10" fill="#FFFFFF" fill-opacity="0.025" stroke="#9DB8CC" stroke-opacity="0.16"/>
+    <rect x="32" y="67" width="24" height="24" rx="7" fill="url(#gAv)"/>
+    <text x="44" y="83" font-size="10.5" font-weight="700" fill="#0E1726" text-anchor="middle">BD</text>
+    <text x="66" y="77" font-size="12.5" font-weight="600" fill="#F4ECDD">Beacon Devices</text>
+    <circle cx="68" cy="89" r="2.4" fill="#E7B23A"/>
+    <text x="76" y="92.5" font-size="10" fill="#9DB8CC">FY26 · Jun · forecasting</text>
+    <path d="M250 77 l4 4 4 -4" stroke="#9DB8CC" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- Scout pinned -->
+    <rect x="20" y="112" width="246" height="44" rx="11" fill="url(#gScout)" stroke="#EC6D3F" stroke-opacity="0.35"/>
+    <use href="#ic-scout" x="32" y="124" width="20" height="20" color="#EC6D3F"/>
+    <text x="60" y="130" font-size="13" font-weight="600" fill="#F4ECDD">Ask Scout</text>
+    <text x="60" y="146" font-size="10" fill="#9DB8CC">module-aware</text>
+    <rect x="222" y="125" width="32" height="18" rx="6" fill="none" stroke="#9DB8CC" stroke-opacity="0.25"/>
+    <text x="238" y="138" font-size="10" fill="#9DB8CC" text-anchor="middle">⌘K</text>
+
+    <!-- OVERVIEW -->
+    <text x="24" y="180" font-size="10" font-weight="600" letter-spacing="0.8" fill="#8FA6BB" fill-opacity="0.55">OVERVIEW</text>
+    <use href="#ic-dash" x="30" y="187" width="18" height="18" color="#8FA6BB"/>
+    <text x="52" y="200.5" font-size="12.5" font-weight="500" fill="#BFC9D4">Dashboard</text>
+    <use href="#ic-board" x="30" y="216" width="18" height="18" color="#8FA6BB"/>
+    <text x="52" y="229.5" font-size="12.5" font-weight="500" fill="#BFC9D4">Board Package</text>
+
+    <!-- FINANCIAL STATEMENTS -->
+    <text x="24" y="251" font-size="10" font-weight="600" letter-spacing="0.8" fill="#8FA6BB" fill-opacity="0.55">FINANCIAL STATEMENTS</text>
+    <rect x="14" y="256" width="258" height="34" rx="9" fill="#EC6D3F" fill-opacity="0.12"/>
+    <rect x="8" y="260" width="3" height="26" rx="1.5" fill="#EC6D3F"/>
+    <use href="#ic-pl" x="30" y="264" width="18" height="18" color="#EC6D3F"/>
+    <text x="52" y="277.5" font-size="12.5" font-weight="600" fill="#F4ECDD">Forecasted P&amp;L</text>
+    <use href="#ic-bs" x="30" y="293" width="18" height="18" color="#8FA6BB"/>
+    <text x="52" y="306.5" font-size="12.5" font-weight="500" fill="#BFC9D4">Balance Sheet</text>
+    <use href="#ic-cash" x="30" y="322" width="18" height="18" color="#8FA6BB"/>
+    <text x="52" y="335.5" font-size="12.5" font-weight="500" fill="#BFC9D4">Cash Flow</text>
+    <use href="#ic-txn" x="30" y="351" width="18" height="18" color="#8FA6BB"/>
+    <text x="52" y="364.5" font-size="12.5" font-weight="500" fill="#BFC9D4">Transaction Details</text>
+
+    <!-- FORECASTS -->
+    <text x="24" y="385" font-size="10" font-weight="600" letter-spacing="0.8" fill="#8FA6BB" fill-opacity="0.55">FORECASTS</text>
+    <text x="30" y="405" font-size="10" font-weight="600" fill="#8FA6BB" fill-opacity="0.75">P&amp;L</text>
+    <line x1="38" y1="412" x2="38" y2="488" stroke="#9DB8CC" stroke-opacity="0.18"/>
+    <use href="#ic-rev" x="44" y="413" width="18" height="18" color="#8FA6BB"/>
+    <text x="66" y="426.5" font-size="12.5" font-weight="500" fill="#BFC9D4">Revenue</text>
+    <use href="#ic-users" x="44" y="441" width="18" height="18" color="#8FA6BB"/>
+    <text x="66" y="454.5" font-size="12.5" font-weight="500" fill="#BFC9D4">Personnel</text>
+    <use href="#ic-wallet" x="44" y="469" width="18" height="18" color="#8FA6BB"/>
+    <text x="66" y="482.5" font-size="12.5" font-weight="500" fill="#BFC9D4">Expenses</text>
+    <text x="30" y="503" font-size="10" font-weight="600" fill="#8FA6BB" fill-opacity="0.75">Balance Sheet</text>
+    <line x1="38" y1="510" x2="38" y2="614" stroke="#9DB8CC" stroke-opacity="0.18"/>
+    <use href="#ic-clock" x="44" y="509" width="18" height="18" color="#8FA6BB"/>
+    <text x="66" y="522.5" font-size="12.5" font-weight="500" fill="#BFC9D4">AR Forecast</text>
+    <use href="#ic-waterfall" x="44" y="537" width="18" height="18" color="#8FA6BB"/>
+    <text x="66" y="550.5" font-size="12.5" font-weight="500" fill="#BFC9D4">Waterfall Revenue Fcst</text>
+    <use href="#ic-cube" x="44" y="565" width="18" height="18" color="#8FA6BB"/>
+    <text x="66" y="578.5" font-size="12.5" font-weight="500" fill="#BFC9D4">Fixed Asset Budget</text>
+    <use href="#ic-waves" x="44" y="593" width="18" height="18" color="#8FA6BB"/>
+    <text x="66" y="606.5" font-size="12.5" font-weight="500" fill="#BFC9D4">Operating Cash Fcst</text>
+    <use href="#ic-sliders" x="30" y="619" width="18" height="18" color="#8FA6BB"/>
+    <text x="52" y="632.5" font-size="12.5" font-weight="500" fill="#BFC9D4">Assumptions</text>
+
+    <!-- SCENARIOS (new) -->
+    <text x="24" y="653" font-size="10" font-weight="600" letter-spacing="0.8" fill="#8FA6BB" fill-opacity="0.55">SCENARIOS</text>
+    <use href="#ic-branch" x="30" y="662" width="18" height="18" color="#8FA6BB"/>
+    <text x="52" y="675.5" font-size="12.5" font-weight="500" fill="#BFC9D4">Scenario Manager</text>
+    <use href="#ic-paired" x="30" y="691" width="18" height="18" color="#8FA6BB"/>
+    <text x="52" y="704.5" font-size="12.5" font-weight="500" fill="#BFC9D4">Scenario P&amp;L</text>
+    <use href="#ic-gauge" x="30" y="720" width="18" height="18" color="#8FA6BB"/>
+    <text x="52" y="733.5" font-size="12.5" font-weight="500" fill="#BFC9D4">Scenario Dashboard</text>
+
+    <!-- ACCOUNTING (collapsed stub) -->
+    <g opacity="0.5">
+      <use href="#ic-ledger" x="30" y="751" width="18" height="18" color="#8FA6BB"/>
+      <text x="52" y="758" font-size="12.5" font-weight="500" fill="#BFC9D4">Accounting</text>
+      <text x="52" y="772" font-size="9.5" fill="#8FA6BB">Close · subledgers · standards · 15</text>
+      <path d="M252 756 l4 4 -4 4" stroke="#9DB8CC" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+    <rect x="222" y="748" width="36" height="16" rx="8" fill="#E7B23A" fill-opacity="0.10" stroke="#E7B23A" stroke-opacity="0.3"/>
+    <text x="240" y="760" font-size="9" font-weight="600" fill="#E7B23A" text-anchor="middle" opacity="0.7">soon</text>
+
+    <!-- SYSTEM (collapsed stub) -->
+    <g opacity="0.5">
+      <use href="#ic-gear" x="30" y="789" width="18" height="18" color="#8FA6BB"/>
+      <text x="52" y="802.5" font-size="12.5" font-weight="500" fill="#BFC9D4">System</text>
+      <path d="M252 794 l4 4 -4 4" stroke="#9DB8CC" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+    <rect x="222" y="790" width="36" height="16" rx="8" fill="#E7B23A" fill-opacity="0.10" stroke="#E7B23A" stroke-opacity="0.3"/>
+    <text x="240" y="802" font-size="9" font-weight="600" fill="#E7B23A" text-anchor="middle" opacity="0.7">soon</text>
+
+    <!-- footer -->
+    <line x1="20" y1="826" x2="266" y2="826" stroke="#9DB8CC" stroke-opacity="0.16"/>
+    <circle cx="36" cy="852" r="14" fill="#16273A"/>
+    <text x="36" y="856" font-size="12" font-weight="700" fill="#F4ECDD" text-anchor="middle">C</text>
+    <text x="58" y="848" font-size="12.5" font-weight="600" fill="#F4ECDD">Chris</text>
+    <text x="58" y="862" font-size="10.5" fill="#9DB8CC">Controller</text>
+    <use href="#ic-gear" x="242" y="844" width="16" height="16" color="#8FA6BB"/>
+  </g>
+</svg>

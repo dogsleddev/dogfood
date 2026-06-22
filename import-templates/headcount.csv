@@ -1,0 +1,8 @@
+employee_id,name,department,function,title,start_month,end_month,fte,annual_base_comp
+E-0001,Ava Brooks,engineering,rnd,Staff Software Engineer,2024-02,,1,196000
+E-0002,Daniel Okafor,sales,sm,Account Executive,2024-05,,1,135000
+E-0003,Priya Nair,professional-services,direct,Implementation Consultant,2024-03,,1,128000
+E-0004,Marcus Reed,customer-success,sm,CSM,2025-01,,1,118000
+E-0005,Lena Fischer,finance,ga,FP&A Manager,2024-09,,1,152000
+E-0006,Tomas Vega,marketing,sm,Demand Gen Lead,2025-04,2026-02,1,142000
+E-0007,Sora Mitchell,product-design,rnd,Product Designer,2025-06,,0.8,128000

@@ -1,0 +1,829 @@
+period,fiscal_year,status,line_id,line_label,level,amount
+2024-01,2024,actual,subscription,Subscription,1,359991.67
+2024-02,2024,actual,subscription,Subscription,1,368037.50
+2024-03,2024,actual,subscription,Subscription,1,390029.17
+2024-04,2024,actual,subscription,Subscription,1,418683.33
+2024-05,2024,actual,subscription,Subscription,1,444012.50
+2024-06,2024,actual,subscription,Subscription,1,459450.00
+2024-07,2024,actual,subscription,Subscription,1,483512.50
+2024-08,2024,actual,subscription,Subscription,1,497029.17
+2024-09,2024,actual,subscription,Subscription,1,569229.17
+2024-10,2024,actual,subscription,Subscription,1,606004.17
+2024-11,2024,actual,subscription,Subscription,1,699745.83
+2024-12,2024,actual,subscription,Subscription,1,733579.17
+2024-01,2024,actual,services,Services,1,42500.00
+2024-02,2024,actual,services,Services,1,42500.00
+2024-03,2024,actual,services,Services,1,73250.00
+2024-04,2024,actual,services,Services,1,114750.00
+2024-05,2024,actual,services,Services,1,120250.00
+2024-06,2024,actual,services,Services,1,134250.00
+2024-07,2024,actual,services,Services,1,109000.00
+2024-08,2024,actual,services,Services,1,67000.00
+2024-09,2024,actual,services,Services,1,106000.00
+2024-10,2024,actual,services,Services,1,155500.00
+2024-11,2024,actual,services,Services,1,196000.00
+2024-12,2024,actual,services,Services,1,196000.00
+2024-01,2024,actual,total_revenue,Total Revenue,0,402491.67
+2024-02,2024,actual,total_revenue,Total Revenue,0,410537.50
+2024-03,2024,actual,total_revenue,Total Revenue,0,463279.17
+2024-04,2024,actual,total_revenue,Total Revenue,0,533433.33
+2024-05,2024,actual,total_revenue,Total Revenue,0,564262.50
+2024-06,2024,actual,total_revenue,Total Revenue,0,593700.00
+2024-07,2024,actual,total_revenue,Total Revenue,0,592512.50
+2024-08,2024,actual,total_revenue,Total Revenue,0,564029.17
+2024-09,2024,actual,total_revenue,Total Revenue,0,675229.17
+2024-10,2024,actual,total_revenue,Total Revenue,0,761504.17
+2024-11,2024,actual,total_revenue,Total Revenue,0,895745.83
+2024-12,2024,actual,total_revenue,Total Revenue,0,929579.17
+2024-01,2024,actual,direct_payroll,Direct Payroll,1,90375.00
+2024-02,2024,actual,direct_payroll,Direct Payroll,1,90375.00
+2024-03,2024,actual,direct_payroll,Direct Payroll,1,90375.00
+2024-04,2024,actual,direct_payroll,Direct Payroll,1,90375.00
+2024-05,2024,actual,direct_payroll,Direct Payroll,1,97841.67
+2024-06,2024,actual,direct_payroll,Direct Payroll,1,102716.67
+2024-07,2024,actual,direct_payroll,Direct Payroll,1,102716.67
+2024-08,2024,actual,direct_payroll,Direct Payroll,1,102716.67
+2024-09,2024,actual,direct_payroll,Direct Payroll,1,102716.67
+2024-10,2024,actual,direct_payroll,Direct Payroll,1,102716.67
+2024-11,2024,actual,direct_payroll,Direct Payroll,1,102716.67
+2024-12,2024,actual,direct_payroll,Direct Payroll,1,164346.67
+2024-01,2024,actual,non_employee_cor,Non-employee Cost of Revenue,1,71823.58
+2024-02,2024,actual,non_employee_cor,Non-employee Cost of Revenue,1,73191.38
+2024-03,2024,actual,non_employee_cor,Non-employee Cost of Revenue,1,84617.46
+2024-04,2024,actual,non_employee_cor,Non-employee Cost of Revenue,1,99863.67
+2024-05,2024,actual,non_employee_cor,Non-employee Cost of Revenue,1,105544.63
+2024-06,2024,actual,non_employee_cor,Non-employee Cost of Revenue,1,111669.00
+2024-07,2024,actual,non_employee_cor,Non-employee Cost of Revenue,1,109447.13
+2024-08,2024,actual,non_employee_cor,Non-employee Cost of Revenue,1,101244.96
+2024-09,2024,actual,non_employee_cor,Non-employee Cost of Revenue,1,123268.96
+2024-10,2024,actual,non_employee_cor,Non-employee Cost of Revenue,1,141895.71
+2024-11,2024,actual,non_employee_cor,Non-employee Cost of Revenue,1,167956.79
+2024-12,2024,actual,non_employee_cor,Non-employee Cost of Revenue,1,173708.46
+2024-01,2024,actual,total_cor,Total Cost of Revenue,0,162198.58
+2024-02,2024,actual,total_cor,Total Cost of Revenue,0,163566.38
+2024-03,2024,actual,total_cor,Total Cost of Revenue,0,174992.46
+2024-04,2024,actual,total_cor,Total Cost of Revenue,0,190238.67
+2024-05,2024,actual,total_cor,Total Cost of Revenue,0,203386.29
+2024-06,2024,actual,total_cor,Total Cost of Revenue,0,214385.67
+2024-07,2024,actual,total_cor,Total Cost of Revenue,0,212163.79
+2024-08,2024,actual,total_cor,Total Cost of Revenue,0,203961.63
+2024-09,2024,actual,total_cor,Total Cost of Revenue,0,225985.63
+2024-10,2024,actual,total_cor,Total Cost of Revenue,0,244612.37
+2024-11,2024,actual,total_cor,Total Cost of Revenue,0,270673.46
+2024-12,2024,actual,total_cor,Total Cost of Revenue,0,338055.13
+2024-01,2024,actual,gross_profit,Gross Profit,0,240293.08
+2024-02,2024,actual,gross_profit,Gross Profit,0,246971.13
+2024-03,2024,actual,gross_profit,Gross Profit,0,288286.71
+2024-04,2024,actual,gross_profit,Gross Profit,0,343194.67
+2024-05,2024,actual,gross_profit,Gross Profit,0,360876.21
+2024-06,2024,actual,gross_profit,Gross Profit,0,379314.33
+2024-07,2024,actual,gross_profit,Gross Profit,0,380348.71
+2024-08,2024,actual,gross_profit,Gross Profit,0,360067.54
+2024-09,2024,actual,gross_profit,Gross Profit,0,449243.54
+2024-10,2024,actual,gross_profit,Gross Profit,0,516891.79
+2024-11,2024,actual,gross_profit,Gross Profit,0,625072.38
+2024-12,2024,actual,gross_profit,Gross Profit,0,591524.04
+2024-01,2024,actual,indirect_payroll,Indirect Payroll,1,390066.67
+2024-02,2024,actual,indirect_payroll,Indirect Payroll,1,390066.67
+2024-03,2024,actual,indirect_payroll,Indirect Payroll,1,401391.67
+2024-04,2024,actual,indirect_payroll,Indirect Payroll,1,410516.67
+2024-05,2024,actual,indirect_payroll,Indirect Payroll,1,442591.67
+2024-06,2024,actual,indirect_payroll,Indirect Payroll,1,448575.00
+2024-07,2024,actual,indirect_payroll,Indirect Payroll,1,460183.33
+2024-08,2024,actual,indirect_payroll,Indirect Payroll,1,487508.33
+2024-09,2024,actual,indirect_payroll,Indirect Payroll,1,501133.33
+2024-10,2024,actual,indirect_payroll,Indirect Payroll,1,501133.33
+2024-11,2024,actual,indirect_payroll,Indirect Payroll,1,532425.00
+2024-12,2024,actual,indirect_payroll,Indirect Payroll,1,858093.33
+2024-01,2024,actual,employee_expenses,Employee Expenses,1,105697.17
+2024-02,2024,actual,employee_expenses,Employee Expenses,1,105697.17
+2024-03,2024,actual,employee_expenses,Employee Expenses,1,108188.67
+2024-04,2024,actual,employee_expenses,Employee Expenses,1,110196.17
+2024-05,2024,actual,employee_expenses,Employee Expenses,1,118895.33
+2024-06,2024,actual,employee_expenses,Employee Expenses,1,121284.17
+2024-07,2024,actual,employee_expenses,Employee Expenses,1,123838.00
+2024-08,2024,actual,employee_expenses,Employee Expenses,1,129849.50
+2024-09,2024,actual,employee_expenses,Employee Expenses,1,132847.00
+2024-10,2024,actual,employee_expenses,Employee Expenses,1,132847.00
+2024-11,2024,actual,employee_expenses,Employee Expenses,1,139731.17
+2024-12,2024,actual,employee_expenses,Employee Expenses,1,224936.80
+2024-01,2024,actual,sales_marketing,Sales & Marketing,1,56348.83
+2024-02,2024,actual,sales_marketing,Sales & Marketing,1,57475.25
+2024-03,2024,actual,sales_marketing,Sales & Marketing,1,64859.08
+2024-04,2024,actual,sales_marketing,Sales & Marketing,1,74680.67
+2024-05,2024,actual,sales_marketing,Sales & Marketing,1,78996.75
+2024-06,2024,actual,sales_marketing,Sales & Marketing,1,83118.00
+2024-07,2024,actual,sales_marketing,Sales & Marketing,1,82951.75
+2024-08,2024,actual,sales_marketing,Sales & Marketing,1,78964.08
+2024-09,2024,actual,sales_marketing,Sales & Marketing,1,94532.08
+2024-10,2024,actual,sales_marketing,Sales & Marketing,1,106610.58
+2024-11,2024,actual,sales_marketing,Sales & Marketing,1,125404.42
+2024-12,2024,actual,sales_marketing,Sales & Marketing,1,130141.08
+2024-01,2024,actual,travel_entertainment,Travel & Entertainment,1,16000.00
+2024-02,2024,actual,travel_entertainment,Travel & Entertainment,1,16000.00
+2024-03,2024,actual,travel_entertainment,Travel & Entertainment,1,16400.00
+2024-04,2024,actual,travel_entertainment,Travel & Entertainment,1,16800.00
+2024-05,2024,actual,travel_entertainment,Travel & Entertainment,1,18400.00
+2024-06,2024,actual,travel_entertainment,Travel & Entertainment,1,19200.00
+2024-07,2024,actual,travel_entertainment,Travel & Entertainment,1,19600.00
+2024-08,2024,actual,travel_entertainment,Travel & Entertainment,1,20400.00
+2024-09,2024,actual,travel_entertainment,Travel & Entertainment,1,20800.00
+2024-10,2024,actual,travel_entertainment,Travel & Entertainment,1,20800.00
+2024-11,2024,actual,travel_entertainment,Travel & Entertainment,1,21600.00
+2024-12,2024,actual,travel_entertainment,Travel & Entertainment,1,22000.00
+2024-01,2024,actual,it,IT,1,13320.00
+2024-02,2024,actual,it,IT,1,13320.00
+2024-03,2024,actual,it,IT,1,13653.00
+2024-04,2024,actual,it,IT,1,13986.00
+2024-05,2024,actual,it,IT,1,15318.00
+2024-06,2024,actual,it,IT,1,15984.00
+2024-07,2024,actual,it,IT,1,16317.00
+2024-08,2024,actual,it,IT,1,16983.00
+2024-09,2024,actual,it,IT,1,17316.00
+2024-10,2024,actual,it,IT,1,17316.00
+2024-11,2024,actual,it,IT,1,17982.00
+2024-12,2024,actual,it,IT,1,18315.00
+2024-01,2024,actual,hr,HR,1,8000.00
+2024-02,2024,actual,hr,HR,1,8000.00
+2024-03,2024,actual,hr,HR,1,8200.00
+2024-04,2024,actual,hr,HR,1,8400.00
+2024-05,2024,actual,hr,HR,1,9200.00
+2024-06,2024,actual,hr,HR,1,9600.00
+2024-07,2024,actual,hr,HR,1,9800.00
+2024-08,2024,actual,hr,HR,1,10200.00
+2024-09,2024,actual,hr,HR,1,10400.00
+2024-10,2024,actual,hr,HR,1,10400.00
+2024-11,2024,actual,hr,HR,1,10800.00
+2024-12,2024,actual,hr,HR,1,11000.00
+2024-01,2024,actual,admin,Admin,1,10680.00
+2024-02,2024,actual,admin,Admin,1,10680.00
+2024-03,2024,actual,admin,Admin,1,10947.00
+2024-04,2024,actual,admin,Admin,1,11214.00
+2024-05,2024,actual,admin,Admin,1,12282.00
+2024-06,2024,actual,admin,Admin,1,12816.00
+2024-07,2024,actual,admin,Admin,1,13083.00
+2024-08,2024,actual,admin,Admin,1,13617.00
+2024-09,2024,actual,admin,Admin,1,13884.00
+2024-10,2024,actual,admin,Admin,1,13884.00
+2024-11,2024,actual,admin,Admin,1,14418.00
+2024-12,2024,actual,admin,Admin,1,14685.00
+2024-01,2024,actual,facilities,Facilities,1,18680.00
+2024-02,2024,actual,facilities,Facilities,1,18680.00
+2024-03,2024,actual,facilities,Facilities,1,19147.00
+2024-04,2024,actual,facilities,Facilities,1,19614.00
+2024-05,2024,actual,facilities,Facilities,1,21482.00
+2024-06,2024,actual,facilities,Facilities,1,22416.00
+2024-07,2024,actual,facilities,Facilities,1,22883.00
+2024-08,2024,actual,facilities,Facilities,1,23817.00
+2024-09,2024,actual,facilities,Facilities,1,24284.00
+2024-10,2024,actual,facilities,Facilities,1,24284.00
+2024-11,2024,actual,facilities,Facilities,1,25218.00
+2024-12,2024,actual,facilities,Facilities,1,25685.00
+2024-01,2024,actual,insurance,Insurance,1,4024.92
+2024-02,2024,actual,insurance,Insurance,1,4105.38
+2024-03,2024,actual,insurance,Insurance,1,4632.79
+2024-04,2024,actual,insurance,Insurance,1,5334.33
+2024-05,2024,actual,insurance,Insurance,1,5642.63
+2024-06,2024,actual,insurance,Insurance,1,5937.00
+2024-07,2024,actual,insurance,Insurance,1,5925.13
+2024-08,2024,actual,insurance,Insurance,1,5640.29
+2024-09,2024,actual,insurance,Insurance,1,6752.29
+2024-10,2024,actual,insurance,Insurance,1,7615.04
+2024-11,2024,actual,insurance,Insurance,1,8957.46
+2024-12,2024,actual,insurance,Insurance,1,9295.79
+2024-01,2024,actual,stock_based_comp,Stock-based Compensation,1,154595.00
+2024-02,2024,actual,stock_based_comp,Stock-based Compensation,1,154595.00
+2024-03,2024,actual,stock_based_comp,Stock-based Compensation,1,159370.38
+2024-04,2024,actual,stock_based_comp,Stock-based Compensation,1,161765.69
+2024-05,2024,actual,stock_based_comp,Stock-based Compensation,1,174783.27
+2024-06,2024,actual,stock_based_comp,Stock-based Compensation,1,177157.53
+2024-07,2024,actual,stock_based_comp,Stock-based Compensation,1,181626.74
+2024-08,2024,actual,stock_based_comp,Stock-based Compensation,1,188161.97
+2024-09,2024,actual,stock_based_comp,Stock-based Compensation,1,193157.80
+2024-10,2024,actual,stock_based_comp,Stock-based Compensation,1,192180.86
+2024-11,2024,actual,stock_based_comp,Stock-based Compensation,1,202912.74
+2024-12,2024,actual,stock_based_comp,Stock-based Compensation,1,202608.11
+2024-01,2024,actual,depreciation_amortization,Depreciation & Amortization,1,14306.67
+2024-02,2024,actual,depreciation_amortization,Depreciation & Amortization,1,14613.33
+2024-03,2024,actual,depreciation_amortization,Depreciation & Amortization,1,15127.67
+2024-04,2024,actual,depreciation_amortization,Depreciation & Amortization,1,15649.67
+2024-05,2024,actual,depreciation_amortization,Depreciation & Amortization,1,16802.33
+2024-06,2024,actual,depreciation_amortization,Depreciation & Amortization,1,17570.33
+2024-07,2024,actual,depreciation_amortization,Depreciation & Amortization,1,18146.00
+2024-08,2024,actual,depreciation_amortization,Depreciation & Amortization,1,18937.00
+2024-09,2024,actual,depreciation_amortization,Depreciation & Amortization,1,19535.67
+2024-10,2024,actual,depreciation_amortization,Depreciation & Amortization,1,19934.33
+2024-11,2024,actual,depreciation_amortization,Depreciation & Amortization,1,20748.33
+2024-12,2024,actual,depreciation_amortization,Depreciation & Amortization,1,21370.00
+2024-01,2024,actual,total_opex,Total Operating Expenses,0,791719.25
+2024-02,2024,actual,total_opex,Total Operating Expenses,0,793232.79
+2024-03,2024,actual,total_opex,Total Operating Expenses,0,821917.25
+2024-04,2024,actual,total_opex,Total Operating Expenses,0,848157.19
+2024-05,2024,actual,total_opex,Total Operating Expenses,0,914393.98
+2024-06,2024,actual,total_opex,Total Operating Expenses,0,933658.03
+2024-07,2024,actual,total_opex,Total Operating Expenses,0,954353.94
+2024-08,2024,actual,total_opex,Total Operating Expenses,0,994078.17
+2024-09,2024,actual,total_opex,Total Operating Expenses,0,1034642.17
+2024-10,2024,actual,total_opex,Total Operating Expenses,0,1047005.15
+2024-11,2024,actual,total_opex,Total Operating Expenses,0,1120197.11
+2024-12,2024,actual,total_opex,Total Operating Expenses,0,1538130.12
+2024-01,2024,actual,operating_income,Operating Income (EBIT),0,-551426.17
+2024-02,2024,actual,operating_income,Operating Income (EBIT),0,-546261.67
+2024-03,2024,actual,operating_income,Operating Income (EBIT),0,-533630.54
+2024-04,2024,actual,operating_income,Operating Income (EBIT),0,-504962.52
+2024-05,2024,actual,operating_income,Operating Income (EBIT),0,-553517.77
+2024-06,2024,actual,operating_income,Operating Income (EBIT),0,-554343.69
+2024-07,2024,actual,operating_income,Operating Income (EBIT),0,-574005.24
+2024-08,2024,actual,operating_income,Operating Income (EBIT),0,-634010.63
+2024-09,2024,actual,operating_income,Operating Income (EBIT),0,-585398.63
+2024-10,2024,actual,operating_income,Operating Income (EBIT),0,-530113.36
+2024-11,2024,actual,operating_income,Operating Income (EBIT),0,-495124.74
+2024-12,2024,actual,operating_income,Operating Income (EBIT),0,-946606.08
+2024-01,2024,actual,interest_other,Interest / Other,1,25000.00
+2024-02,2024,actual,interest_other,Interest / Other,1,22647.43
+2024-03,2024,actual,interest_other,Interest / Other,1,21994.40
+2024-04,2024,actual,interest_other,Interest / Other,1,20710.44
+2024-05,2024,actual,interest_other,Interest / Other,1,19778.91
+2024-06,2024,actual,interest_other,Interest / Other,1,18252.54
+2024-07,2024,actual,interest_other,Interest / Other,1,16482.77
+2024-08,2024,actual,interest_other,Interest / Other,1,14990.92
+2024-09,2024,actual,interest_other,Interest / Other,1,12948.40
+2024-10,2024,actual,interest_other,Interest / Other,1,13010.69
+2024-11,2024,actual,interest_other,Interest / Other,1,11596.59
+2024-12,2024,actual,interest_other,Interest / Other,1,18022.03
+2024-01,2024,actual,taxes,Taxes,1,0.00
+2024-02,2024,actual,taxes,Taxes,1,0.00
+2024-03,2024,actual,taxes,Taxes,1,0.00
+2024-04,2024,actual,taxes,Taxes,1,0.00
+2024-05,2024,actual,taxes,Taxes,1,0.00
+2024-06,2024,actual,taxes,Taxes,1,0.00
+2024-07,2024,actual,taxes,Taxes,1,0.00
+2024-08,2024,actual,taxes,Taxes,1,0.00
+2024-09,2024,actual,taxes,Taxes,1,0.00
+2024-10,2024,actual,taxes,Taxes,1,0.00
+2024-11,2024,actual,taxes,Taxes,1,0.00
+2024-12,2024,actual,taxes,Taxes,1,0.00
+2024-01,2024,actual,net_income,Net Income,0,-526426.17
+2024-02,2024,actual,net_income,Net Income,0,-523614.24
+2024-03,2024,actual,net_income,Net Income,0,-511636.14
+2024-04,2024,actual,net_income,Net Income,0,-484252.08
+2024-05,2024,actual,net_income,Net Income,0,-533738.86
+2024-06,2024,actual,net_income,Net Income,0,-536091.15
+2024-07,2024,actual,net_income,Net Income,0,-557522.47
+2024-08,2024,actual,net_income,Net Income,0,-619019.71
+2024-09,2024,actual,net_income,Net Income,0,-572450.23
+2024-10,2024,actual,net_income,Net Income,0,-517102.67
+2024-11,2024,actual,net_income,Net Income,0,-483528.15
+2024-12,2024,actual,net_income,Net Income,0,-928584.04
+2025-01,2025,actual,subscription,Subscription,1,758329.17
+2025-02,2025,actual,subscription,Subscription,1,772025.00
+2025-03,2025,actual,subscription,Subscription,1,794654.17
+2025-04,2025,actual,subscription,Subscription,1,822137.50
+2025-05,2025,actual,subscription,Subscription,1,863670.83
+2025-06,2025,actual,subscription,Subscription,1,920220.83
+2025-07,2025,actual,subscription,Subscription,1,945358.33
+2025-08,2025,actual,subscription,Subscription,1,1043475.00
+2025-09,2025,actual,subscription,Subscription,1,1089016.67
+2025-10,2025,actual,subscription,Subscription,1,1136945.83
+2025-11,2025,actual,subscription,Subscription,1,1179441.67
+2025-12,2025,actual,subscription,Subscription,1,1205187.50
+2025-01,2025,actual,services,Services,1,224000.00
+2025-02,2025,actual,services,Services,1,224000.00
+2025-03,2025,actual,services,Services,1,252000.00
+2025-04,2025,actual,services,Services,1,252820.33
+2025-05,2025,actual,services,Services,1,252656.72
+2025-06,2025,actual,services,Services,1,268589.01
+2025-07,2025,actual,services,Services,1,189476.88
+2025-08,2025,actual,services,Services,1,277197.82
+2025-09,2025,actual,services,Services,1,278842.57
+2025-10,2025,actual,services,Services,1,234166.67
+2025-11,2025,actual,services,Services,1,280000.00
+2025-12,2025,actual,services,Services,1,254800.31
+2025-01,2025,actual,total_revenue,Total Revenue,0,982329.17
+2025-02,2025,actual,total_revenue,Total Revenue,0,996025.00
+2025-03,2025,actual,total_revenue,Total Revenue,0,1046654.17
+2025-04,2025,actual,total_revenue,Total Revenue,0,1074957.83
+2025-05,2025,actual,total_revenue,Total Revenue,0,1116327.55
+2025-06,2025,actual,total_revenue,Total Revenue,0,1188809.84
+2025-07,2025,actual,total_revenue,Total Revenue,0,1134835.21
+2025-08,2025,actual,total_revenue,Total Revenue,0,1320672.82
+2025-09,2025,actual,total_revenue,Total Revenue,0,1367859.24
+2025-10,2025,actual,total_revenue,Total Revenue,0,1371112.50
+2025-11,2025,actual,total_revenue,Total Revenue,0,1459441.67
+2025-12,2025,actual,total_revenue,Total Revenue,0,1459987.81
+2025-01,2025,actual,direct_payroll,Direct Payroll,1,120605.29
+2025-02,2025,actual,direct_payroll,Direct Payroll,1,120605.29
+2025-03,2025,actual,direct_payroll,Direct Payroll,1,126521.96
+2025-04,2025,actual,direct_payroll,Direct Payroll,1,134737.71
+2025-05,2025,actual,direct_payroll,Direct Payroll,1,134753.46
+2025-06,2025,actual,direct_payroll,Direct Payroll,1,146124.08
+2025-07,2025,actual,direct_payroll,Direct Payroll,1,146124.08
+2025-08,2025,actual,direct_payroll,Direct Payroll,1,146124.08
+2025-09,2025,actual,direct_payroll,Direct Payroll,1,150107.42
+2025-10,2025,actual,direct_payroll,Direct Payroll,1,150107.42
+2025-11,2025,actual,direct_payroll,Direct Payroll,1,150248.58
+2025-12,2025,actual,direct_payroll,Direct Payroll,1,240397.73
+2025-01,2025,actual,non_employee_cor,Non-employee Cost of Revenue,1,184915.96
+2025-02,2025,actual,non_employee_cor,Non-employee Cost of Revenue,1,187244.25
+2025-03,2025,actual,non_employee_cor,Non-employee Cost of Revenue,1,198091.21
+2025-04,2025,actual,non_employee_cor,Non-employee Cost of Revenue,1,202968.46
+2025-05,2025,actual,non_employee_cor,Non-employee Cost of Revenue,1,209988.22
+2025-06,2025,actual,non_employee_cor,Non-employee Cost of Revenue,1,223584.79
+2025-07,2025,actual,non_employee_cor,Non-employee Cost of Revenue,1,208080.14
+2025-08,2025,actual,non_employee_cor,Non-employee Cost of Revenue,1,246690.21
+2025-09,2025,actual,non_employee_cor,Non-employee Cost of Revenue,1,254843.48
+2025-10,2025,actual,non_employee_cor,Non-employee Cost of Revenue,1,251822.46
+2025-11,2025,actual,non_employee_cor,Non-employee Cost of Revenue,1,270505.08
+2025-12,2025,actual,non_employee_cor,Non-employee Cost of Revenue,1,268581.95
+2025-01,2025,actual,total_cor,Total Cost of Revenue,0,305521.25
+2025-02,2025,actual,total_cor,Total Cost of Revenue,0,307849.54
+2025-03,2025,actual,total_cor,Total Cost of Revenue,0,324613.17
+2025-04,2025,actual,total_cor,Total Cost of Revenue,0,337706.17
+2025-05,2025,actual,total_cor,Total Cost of Revenue,0,344741.68
+2025-06,2025,actual,total_cor,Total Cost of Revenue,0,369708.88
+2025-07,2025,actual,total_cor,Total Cost of Revenue,0,354204.22
+2025-08,2025,actual,total_cor,Total Cost of Revenue,0,392814.29
+2025-09,2025,actual,total_cor,Total Cost of Revenue,0,404950.89
+2025-10,2025,actual,total_cor,Total Cost of Revenue,0,401929.88
+2025-11,2025,actual,total_cor,Total Cost of Revenue,0,420753.67
+2025-12,2025,actual,total_cor,Total Cost of Revenue,0,508979.68
+2025-01,2025,actual,gross_profit,Gross Profit,0,676807.92
+2025-02,2025,actual,gross_profit,Gross Profit,0,688175.46
+2025-03,2025,actual,gross_profit,Gross Profit,0,722041.00
+2025-04,2025,actual,gross_profit,Gross Profit,0,737251.67
+2025-05,2025,actual,gross_profit,Gross Profit,0,771585.87
+2025-06,2025,actual,gross_profit,Gross Profit,0,819100.96
+2025-07,2025,actual,gross_profit,Gross Profit,0,780630.99
+2025-08,2025,actual,gross_profit,Gross Profit,0,927858.54
+2025-09,2025,actual,gross_profit,Gross Profit,0,962908.35
+2025-10,2025,actual,gross_profit,Gross Profit,0,969182.62
+2025-11,2025,actual,gross_profit,Gross Profit,0,1038688.00
+2025-12,2025,actual,gross_profit,Gross Profit,0,951008.12
+2025-01,2025,actual,indirect_payroll,Indirect Payroll,1,591691.21
+2025-02,2025,actual,indirect_payroll,Indirect Payroll,1,657532.88
+2025-03,2025,actual,indirect_payroll,Indirect Payroll,1,689700.83
+2025-04,2025,actual,indirect_payroll,Indirect Payroll,1,716668.42
+2025-05,2025,actual,indirect_payroll,Indirect Payroll,1,759468.33
+2025-06,2025,actual,indirect_payroll,Indirect Payroll,1,780952.75
+2025-07,2025,actual,indirect_payroll,Indirect Payroll,1,796434.29
+2025-08,2025,actual,indirect_payroll,Indirect Payroll,1,804897.67
+2025-09,2025,actual,indirect_payroll,Indirect Payroll,1,804839.63
+2025-10,2025,actual,indirect_payroll,Indirect Payroll,1,833520.75
+2025-11,2025,actual,indirect_payroll,Indirect Payroll,1,834288.42
+2025-12,2025,actual,indirect_payroll,Indirect Payroll,1,1369740.27
+2025-01,2025,actual,employee_expenses,Employee Expenses,1,156705.23
+2025-02,2025,actual,employee_expenses,Employee Expenses,1,171190.40
+2025-03,2025,actual,employee_expenses,Employee Expenses,1,179569.01
+2025-04,2025,actual,employee_expenses,Employee Expenses,1,187309.35
+2025-05,2025,actual,employee_expenses,Employee Expenses,1,196728.79
+2025-06,2025,actual,employee_expenses,Employee Expenses,1,203956.90
+2025-07,2025,actual,employee_expenses,Employee Expenses,1,207362.84
+2025-08,2025,actual,employee_expenses,Employee Expenses,1,209224.78
+2025-09,2025,actual,employee_expenses,Employee Expenses,1,210088.35
+2025-10,2025,actual,employee_expenses,Employee Expenses,1,216398.20
+2025-11,2025,actual,employee_expenses,Employee Expenses,1,216598.14
+2025-12,2025,actual,employee_expenses,Employee Expenses,1,354230.36
+2025-01,2025,actual,sales_marketing,Sales & Marketing,1,137526.08
+2025-02,2025,actual,sales_marketing,Sales & Marketing,1,139443.50
+2025-03,2025,actual,sales_marketing,Sales & Marketing,1,146531.58
+2025-04,2025,actual,sales_marketing,Sales & Marketing,1,150494.10
+2025-05,2025,actual,sales_marketing,Sales & Marketing,1,156285.86
+2025-06,2025,actual,sales_marketing,Sales & Marketing,1,166433.38
+2025-07,2025,actual,sales_marketing,Sales & Marketing,1,158876.93
+2025-08,2025,actual,sales_marketing,Sales & Marketing,1,184894.20
+2025-09,2025,actual,sales_marketing,Sales & Marketing,1,191500.29
+2025-10,2025,actual,sales_marketing,Sales & Marketing,1,191955.75
+2025-11,2025,actual,sales_marketing,Sales & Marketing,1,204321.83
+2025-12,2025,actual,sales_marketing,Sales & Marketing,1,204398.29
+2025-01,2025,actual,travel_entertainment,Travel & Entertainment,1,24400.00
+2025-02,2025,actual,travel_entertainment,Travel & Entertainment,1,26400.00
+2025-03,2025,actual,travel_entertainment,Travel & Entertainment,1,28000.00
+2025-04,2025,actual,travel_entertainment,Travel & Entertainment,1,29200.00
+2025-05,2025,actual,travel_entertainment,Travel & Entertainment,1,30800.00
+2025-06,2025,actual,travel_entertainment,Travel & Entertainment,1,32000.00
+2025-07,2025,actual,travel_entertainment,Travel & Entertainment,1,32400.00
+2025-08,2025,actual,travel_entertainment,Travel & Entertainment,1,32800.00
+2025-09,2025,actual,travel_entertainment,Travel & Entertainment,1,33200.00
+2025-10,2025,actual,travel_entertainment,Travel & Entertainment,1,34000.00
+2025-11,2025,actual,travel_entertainment,Travel & Entertainment,1,34000.00
+2025-12,2025,actual,travel_entertainment,Travel & Entertainment,1,34400.00
+2025-01,2025,actual,it,IT,1,20313.00
+2025-02,2025,actual,it,IT,1,21978.00
+2025-03,2025,actual,it,IT,1,23310.00
+2025-04,2025,actual,it,IT,1,24309.00
+2025-05,2025,actual,it,IT,1,25641.00
+2025-06,2025,actual,it,IT,1,26640.00
+2025-07,2025,actual,it,IT,1,26973.00
+2025-08,2025,actual,it,IT,1,27306.00
+2025-09,2025,actual,it,IT,1,27639.00
+2025-10,2025,actual,it,IT,1,28305.00
+2025-11,2025,actual,it,IT,1,28305.00
+2025-12,2025,actual,it,IT,1,28638.00
+2025-01,2025,actual,hr,HR,1,12200.00
+2025-02,2025,actual,hr,HR,1,13200.00
+2025-03,2025,actual,hr,HR,1,14000.00
+2025-04,2025,actual,hr,HR,1,14600.00
+2025-05,2025,actual,hr,HR,1,15400.00
+2025-06,2025,actual,hr,HR,1,16000.00
+2025-07,2025,actual,hr,HR,1,16200.00
+2025-08,2025,actual,hr,HR,1,16400.00
+2025-09,2025,actual,hr,HR,1,16600.00
+2025-10,2025,actual,hr,HR,1,17000.00
+2025-11,2025,actual,hr,HR,1,17000.00
+2025-12,2025,actual,hr,HR,1,17200.00
+2025-01,2025,actual,admin,Admin,1,16287.00
+2025-02,2025,actual,admin,Admin,1,17622.00
+2025-03,2025,actual,admin,Admin,1,18690.00
+2025-04,2025,actual,admin,Admin,1,19491.00
+2025-05,2025,actual,admin,Admin,1,20559.00
+2025-06,2025,actual,admin,Admin,1,21360.00
+2025-07,2025,actual,admin,Admin,1,21627.00
+2025-08,2025,actual,admin,Admin,1,21894.00
+2025-09,2025,actual,admin,Admin,1,22161.00
+2025-10,2025,actual,admin,Admin,1,22695.00
+2025-11,2025,actual,admin,Admin,1,22695.00
+2025-12,2025,actual,admin,Admin,1,22962.00
+2025-01,2025,actual,facilities,Facilities,1,28487.00
+2025-02,2025,actual,facilities,Facilities,1,30822.00
+2025-03,2025,actual,facilities,Facilities,1,32690.00
+2025-04,2025,actual,facilities,Facilities,1,34091.00
+2025-05,2025,actual,facilities,Facilities,1,35959.00
+2025-06,2025,actual,facilities,Facilities,1,37360.00
+2025-07,2025,actual,facilities,Facilities,1,37827.00
+2025-08,2025,actual,facilities,Facilities,1,38294.00
+2025-09,2025,actual,facilities,Facilities,1,38761.00
+2025-10,2025,actual,facilities,Facilities,1,39695.00
+2025-11,2025,actual,facilities,Facilities,1,39695.00
+2025-12,2025,actual,facilities,Facilities,1,40162.00
+2025-01,2025,actual,insurance,Insurance,1,9823.29
+2025-02,2025,actual,insurance,Insurance,1,9960.25
+2025-03,2025,actual,insurance,Insurance,1,10466.54
+2025-04,2025,actual,insurance,Insurance,1,10749.58
+2025-05,2025,actual,insurance,Insurance,1,11163.28
+2025-06,2025,actual,insurance,Insurance,1,11888.10
+2025-07,2025,actual,insurance,Insurance,1,11348.35
+2025-08,2025,actual,insurance,Insurance,1,13206.73
+2025-09,2025,actual,insurance,Insurance,1,13678.59
+2025-10,2025,actual,insurance,Insurance,1,13711.12
+2025-11,2025,actual,insurance,Insurance,1,14594.42
+2025-12,2025,actual,insurance,Insurance,1,14599.88
+2025-01,2025,actual,stock_based_comp,Stock-based Compensation,1,214966.86
+2025-02,2025,actual,stock_based_comp,Stock-based Compensation,1,233891.90
+2025-03,2025,actual,stock_based_comp,Stock-based Compensation,1,240819.22
+2025-04,2025,actual,stock_based_comp,Stock-based Compensation,1,248010.24
+2025-05,2025,actual,stock_based_comp,Stock-based Compensation,1,257305.24
+2025-06,2025,actual,stock_based_comp,Stock-based Compensation,1,263003.26
+2025-07,2025,actual,stock_based_comp,Stock-based Compensation,1,265194.84
+2025-08,2025,actual,stock_based_comp,Stock-based Compensation,1,263987.63
+2025-09,2025,actual,stock_based_comp,Stock-based Compensation,1,263085.74
+2025-10,2025,actual,stock_based_comp,Stock-based Compensation,1,270859.08
+2025-11,2025,actual,stock_based_comp,Stock-based Compensation,1,269876.45
+2025-12,2025,actual,stock_based_comp,Stock-based Compensation,1,272797.56
+2025-01,2025,actual,depreciation_amortization,Depreciation & Amortization,1,23037.67
+2025-02,2025,actual,depreciation_amortization,Depreciation & Amortization,1,24543.67
+2025-03,2025,actual,depreciation_amortization,Depreciation & Amortization,1,25880.33
+2025-04,2025,actual,depreciation_amortization,Depreciation & Amortization,1,27040.00
+2025-05,2025,actual,depreciation_amortization,Depreciation & Amortization,1,28430.33
+2025-06,2025,actual,depreciation_amortization,Depreciation & Amortization,1,29643.67
+2025-07,2025,actual,depreciation_amortization,Depreciation & Amortization,1,30464.67
+2025-08,2025,actual,depreciation_amortization,Depreciation & Amortization,1,31293.33
+2025-09,2025,actual,depreciation_amortization,Depreciation & Amortization,1,32129.67
+2025-10,2025,actual,depreciation_amortization,Depreciation & Amortization,1,33181.33
+2025-11,2025,actual,depreciation_amortization,Depreciation & Amortization,1,33833.00
+2025-12,2025,actual,depreciation_amortization,Depreciation & Amortization,1,34692.33
+2025-01,2025,actual,total_opex,Total Operating Expenses,0,1235437.34
+2025-02,2025,actual,total_opex,Total Operating Expenses,0,1346584.58
+2025-03,2025,actual,total_opex,Total Operating Expenses,0,1409657.52
+2025-04,2025,actual,total_opex,Total Operating Expenses,0,1461962.68
+2025-05,2025,actual,total_opex,Total Operating Expenses,0,1537740.83
+2025-06,2025,actual,total_opex,Total Operating Expenses,0,1589238.05
+2025-07,2025,actual,total_opex,Total Operating Expenses,0,1604708.92
+2025-08,2025,actual,total_opex,Total Operating Expenses,0,1644198.34
+2025-09,2025,actual,total_opex,Total Operating Expenses,0,1653683.27
+2025-10,2025,actual,total_opex,Total Operating Expenses,0,1701321.23
+2025-11,2025,actual,total_opex,Total Operating Expenses,0,1715207.26
+2025-12,2025,actual,total_opex,Total Operating Expenses,0,2393820.69
+2025-01,2025,actual,operating_income,Operating Income (EBIT),0,-558629.42
+2025-02,2025,actual,operating_income,Operating Income (EBIT),0,-658409.13
+2025-03,2025,actual,operating_income,Operating Income (EBIT),0,-687616.52
+2025-04,2025,actual,operating_income,Operating Income (EBIT),0,-724711.01
+2025-05,2025,actual,operating_income,Operating Income (EBIT),0,-766154.96
+2025-06,2025,actual,operating_income,Operating Income (EBIT),0,-770137.09
+2025-07,2025,actual,operating_income,Operating Income (EBIT),0,-824077.93
+2025-08,2025,actual,operating_income,Operating Income (EBIT),0,-716339.81
+2025-09,2025,actual,operating_income,Operating Income (EBIT),0,-690774.92
+2025-10,2025,actual,operating_income,Operating Income (EBIT),0,-732138.61
+2025-11,2025,actual,operating_income,Operating Income (EBIT),0,-676519.26
+2025-12,2025,actual,operating_income,Operating Income (EBIT),0,-1442812.57
+2025-01,2025,actual,interest_other,Interest / Other,1,16188.35
+2025-02,2025,actual,interest_other,Interest / Other,1,14721.35
+2025-03,2025,actual,interest_other,Interest / Other,1,11710.54
+2025-04,2025,actual,interest_other,Interest / Other,1,76039.50
+2025-05,2025,actual,interest_other,Interest / Other,1,74724.66
+2025-06,2025,actual,interest_other,Interest / Other,1,72989.84
+2025-07,2025,actual,interest_other,Interest / Other,1,70931.41
+2025-08,2025,actual,interest_other,Interest / Other,1,68408.07
+2025-09,2025,actual,interest_other,Interest / Other,1,67836.13
+2025-10,2025,actual,interest_other,Interest / Other,1,68172.55
+2025-11,2025,actual,interest_other,Interest / Other,1,66794.56
+2025-12,2025,actual,interest_other,Interest / Other,1,74291.04
+2025-01,2025,actual,taxes,Taxes,1,0.00
+2025-02,2025,actual,taxes,Taxes,1,0.00
+2025-03,2025,actual,taxes,Taxes,1,0.00
+2025-04,2025,actual,taxes,Taxes,1,0.00
+2025-05,2025,actual,taxes,Taxes,1,0.00
+2025-06,2025,actual,taxes,Taxes,1,0.00
+2025-07,2025,actual,taxes,Taxes,1,0.00
+2025-08,2025,actual,taxes,Taxes,1,0.00
+2025-09,2025,actual,taxes,Taxes,1,0.00
+2025-10,2025,actual,taxes,Taxes,1,0.00
+2025-11,2025,actual,taxes,Taxes,1,0.00
+2025-12,2025,actual,taxes,Taxes,1,0.00
+2025-01,2025,actual,net_income,Net Income,0,-542441.08
+2025-02,2025,actual,net_income,Net Income,0,-643687.78
+2025-03,2025,actual,net_income,Net Income,0,-675905.99
+2025-04,2025,actual,net_income,Net Income,0,-648671.51
+2025-05,2025,actual,net_income,Net Income,0,-691430.30
+2025-06,2025,actual,net_income,Net Income,0,-697147.25
+2025-07,2025,actual,net_income,Net Income,0,-753146.52
+2025-08,2025,actual,net_income,Net Income,0,-647931.74
+2025-09,2025,actual,net_income,Net Income,0,-622938.79
+2025-10,2025,actual,net_income,Net Income,0,-663966.06
+2025-11,2025,actual,net_income,Net Income,0,-609724.69
+2025-12,2025,actual,net_income,Net Income,0,-1368521.53
+2026-01,2026,actual,subscription,Subscription,1,1361029.17
+2026-02,2026,actual,subscription,Subscription,1,1384100.00
+2026-03,2026,actual,subscription,Subscription,1,1427629.17
+2026-04,2026,actual,subscription,Subscription,1,1432512.50
+2026-05,2026,actual,subscription,Subscription,1,1468741.67
+2026-06,2026,in_close,subscription,Subscription,1,1507937.50
+2026-07,2026,forecast,subscription,Subscription,1,1635675.00
+2026-08,2026,forecast,subscription,Subscription,1,1763550.00
+2026-09,2026,forecast,subscription,Subscription,1,1801583.33
+2026-10,2026,forecast,subscription,Subscription,1,1891358.33
+2026-11,2026,forecast,subscription,Subscription,1,1890250.00
+2026-12,2026,forecast,subscription,Subscription,1,2066845.83
+2026-01,2026,actual,services,Services,1,259978.37
+2026-02,2026,actual,services,Services,1,204733.66
+2026-03,2026,actual,services,Services,1,228237.66
+2026-04,2026,actual,services,Services,1,236500.00
+2026-05,2026,actual,services,Services,1,288750.00
+2026-06,2026,in_close,services,Services,1,291750.00
+2026-07,2026,forecast,services,Services,1,283250.00
+2026-08,2026,forecast,services,Services,1,384916.67
+2026-09,2026,forecast,services,Services,1,350666.67
+2026-10,2026,forecast,services,Services,1,420000.00
+2026-11,2026,forecast,services,Services,1,420629.86
+2026-12,2026,forecast,services,Services,1,420075.08
+2026-01,2026,actual,total_revenue,Total Revenue,0,1621007.54
+2026-02,2026,actual,total_revenue,Total Revenue,0,1588833.66
+2026-03,2026,actual,total_revenue,Total Revenue,0,1655866.83
+2026-04,2026,actual,total_revenue,Total Revenue,0,1669012.50
+2026-05,2026,actual,total_revenue,Total Revenue,0,1757491.67
+2026-06,2026,in_close,total_revenue,Total Revenue,0,1799687.50
+2026-07,2026,forecast,total_revenue,Total Revenue,0,1918925.00
+2026-08,2026,forecast,total_revenue,Total Revenue,0,2148466.67
+2026-09,2026,forecast,total_revenue,Total Revenue,0,2152250.00
+2026-10,2026,forecast,total_revenue,Total Revenue,0,2311358.33
+2026-11,2026,forecast,total_revenue,Total Revenue,0,2310879.86
+2026-12,2026,forecast,total_revenue,Total Revenue,0,2486920.91
+2026-01,2026,actual,direct_payroll,Direct Payroll,1,166073.72
+2026-02,2026,actual,direct_payroll,Direct Payroll,1,171165.39
+2026-03,2026,actual,direct_payroll,Direct Payroll,1,177264.14
+2026-04,2026,actual,direct_payroll,Direct Payroll,1,178078.77
+2026-05,2026,actual,direct_payroll,Direct Payroll,1,182717.00
+2026-06,2026,in_close,direct_payroll,Direct Payroll,1,194185.59
+2026-07,2026,forecast,direct_payroll,Direct Payroll,1,199502.26
+2026-08,2026,forecast,direct_payroll,Direct Payroll,1,212260.59
+2026-09,2026,forecast,direct_payroll,Direct Payroll,1,212400.01
+2026-10,2026,forecast,direct_payroll,Direct Payroll,1,229325.01
+2026-11,2026,forecast,direct_payroll,Direct Payroll,1,229471.12
+2026-12,2026,forecast,direct_payroll,Direct Payroll,1,367153.79
+2026-01,2026,actual,non_employee_cor,Non-employee Cost of Revenue,1,296369.55
+2026-02,2026,actual,non_employee_cor,Non-employee Cost of Revenue,1,286480.42
+2026-03,2026,actual,non_employee_cor,Non-employee Cost of Revenue,1,299756.37
+2026-04,2026,actual,non_employee_cor,Non-employee Cost of Revenue,1,302652.12
+2026-05,2026,actual,non_employee_cor,Non-employee Cost of Revenue,1,321873.58
+2026-06,2026,in_close,non_employee_cor,Non-employee Cost of Revenue,1,329286.88
+2026-07,2026,forecast,non_employee_cor,Non-employee Cost of Revenue,1,348877.25
+2026-08,2026,forecast,non_employee_cor,Non-employee Cost of Revenue,1,396032.67
+2026-09,2026,forecast,non_employee_cor,Non-employee Cost of Revenue,1,393935.83
+2026-10,2026,forecast,non_employee_cor,Non-employee Cost of Revenue,1,426530.92
+2026-11,2026,forecast,non_employee_cor,Non-employee Cost of Revenue,1,426499.96
+2026-12,2026,forecast,non_employee_cor,Non-employee Cost of Revenue,1,456382.56
+2026-01,2026,actual,total_cor,Total Cost of Revenue,0,462443.28
+2026-02,2026,actual,total_cor,Total Cost of Revenue,0,457645.81
+2026-03,2026,actual,total_cor,Total Cost of Revenue,0,477020.51
+2026-04,2026,actual,total_cor,Total Cost of Revenue,0,480730.89
+2026-05,2026,actual,total_cor,Total Cost of Revenue,0,504590.58
+2026-06,2026,in_close,total_cor,Total Cost of Revenue,0,523472.47
+2026-07,2026,forecast,total_cor,Total Cost of Revenue,0,548379.51
+2026-08,2026,forecast,total_cor,Total Cost of Revenue,0,608293.26
+2026-09,2026,forecast,total_cor,Total Cost of Revenue,0,606335.84
+2026-10,2026,forecast,total_cor,Total Cost of Revenue,0,655855.93
+2026-11,2026,forecast,total_cor,Total Cost of Revenue,0,655971.08
+2026-12,2026,forecast,total_cor,Total Cost of Revenue,0,823536.35
+2026-01,2026,actual,gross_profit,Gross Profit,0,1158564.26
+2026-02,2026,actual,gross_profit,Gross Profit,0,1131187.86
+2026-03,2026,actual,gross_profit,Gross Profit,0,1178846.31
+2026-04,2026,actual,gross_profit,Gross Profit,0,1188281.61
+2026-05,2026,actual,gross_profit,Gross Profit,0,1252901.09
+2026-06,2026,in_close,gross_profit,Gross Profit,0,1276215.03
+2026-07,2026,forecast,gross_profit,Gross Profit,0,1370545.49
+2026-08,2026,forecast,gross_profit,Gross Profit,0,1540173.41
+2026-09,2026,forecast,gross_profit,Gross Profit,0,1545914.16
+2026-10,2026,forecast,gross_profit,Gross Profit,0,1655502.41
+2026-11,2026,forecast,gross_profit,Gross Profit,0,1654908.78
+2026-12,2026,forecast,gross_profit,Gross Profit,0,1663384.57
+2026-01,2026,actual,indirect_payroll,Indirect Payroll,1,927507.70
+2026-02,2026,actual,indirect_payroll,Indirect Payroll,1,957367.49
+2026-03,2026,actual,indirect_payroll,Indirect Payroll,1,1011144.12
+2026-04,2026,actual,indirect_payroll,Indirect Payroll,1,1050386.84
+2026-05,2026,actual,indirect_payroll,Indirect Payroll,1,1104405.12
+2026-06,2026,in_close,indirect_payroll,Indirect Payroll,1,1155720.95
+2026-07,2026,forecast,indirect_payroll,Indirect Payroll,1,1208053.87
+2026-08,2026,forecast,indirect_payroll,Indirect Payroll,1,1275252.02
+2026-09,2026,forecast,indirect_payroll,Indirect Payroll,1,1305813.83
+2026-10,2026,forecast,indirect_payroll,Indirect Payroll,1,1364015.46
+2026-11,2026,forecast,indirect_payroll,Indirect Payroll,1,1369339.73
+2026-12,2026,forecast,indirect_payroll,Indirect Payroll,1,2217127.93
+2026-01,2026,actual,employee_expenses,Employee Expenses,1,240587.91
+2026-02,2026,actual,employee_expenses,Employee Expenses,1,248277.23
+2026-03,2026,actual,employee_expenses,Employee Expenses,1,261449.82
+2026-04,2026,actual,employee_expenses,Employee Expenses,1,270262.43
+2026-05,2026,actual,employee_expenses,Employee Expenses,1,283166.87
+2026-06,2026,in_close,employee_expenses,Employee Expenses,1,296979.44
+2026-07,2026,forecast,employee_expenses,Employee Expenses,1,309662.35
+2026-08,2026,forecast,employee_expenses,Employee Expenses,1,327252.77
+2026-09,2026,forecast,employee_expenses,Employee Expenses,1,334007.05
+2026-10,2026,forecast,employee_expenses,Employee Expenses,1,350534.90
+2026-11,2026,forecast,employee_expenses,Employee Expenses,1,351738.39
+2026-12,2026,forecast,employee_expenses,Employee Expenses,1,568541.98
+2026-01,2026,actual,sales_marketing,Sales & Marketing,1,226941.06
+2026-02,2026,actual,sales_marketing,Sales & Marketing,1,222436.71
+2026-03,2026,actual,sales_marketing,Sales & Marketing,1,231821.36
+2026-04,2026,actual,sales_marketing,Sales & Marketing,1,233661.75
+2026-05,2026,actual,sales_marketing,Sales & Marketing,1,246048.83
+2026-06,2026,in_close,sales_marketing,Sales & Marketing,1,251956.25
+2026-07,2026,forecast,sales_marketing,Sales & Marketing,1,268649.50
+2026-08,2026,forecast,sales_marketing,Sales & Marketing,1,300785.33
+2026-09,2026,forecast,sales_marketing,Sales & Marketing,1,301315.00
+2026-10,2026,forecast,sales_marketing,Sales & Marketing,1,323590.17
+2026-11,2026,forecast,sales_marketing,Sales & Marketing,1,323523.18
+2026-12,2026,forecast,sales_marketing,Sales & Marketing,1,348168.93
+2026-01,2026,actual,travel_entertainment,Travel & Entertainment,1,37600.00
+2026-02,2026,actual,travel_entertainment,Travel & Entertainment,1,39200.00
+2026-03,2026,actual,travel_entertainment,Travel & Entertainment,1,41200.00
+2026-04,2026,actual,travel_entertainment,Travel & Entertainment,1,42800.00
+2026-05,2026,actual,travel_entertainment,Travel & Entertainment,1,44800.00
+2026-06,2026,in_close,travel_entertainment,Travel & Entertainment,1,46400.00
+2026-07,2026,forecast,travel_entertainment,Travel & Entertainment,1,48400.00
+2026-08,2026,forecast,travel_entertainment,Travel & Entertainment,1,51200.00
+2026-09,2026,forecast,travel_entertainment,Travel & Entertainment,1,52400.00
+2026-10,2026,forecast,travel_entertainment,Travel & Entertainment,1,55200.00
+2026-11,2026,forecast,travel_entertainment,Travel & Entertainment,1,55600.00
+2026-12,2026,forecast,travel_entertainment,Travel & Entertainment,1,56000.00
+2026-01,2026,actual,it,IT,1,31302.00
+2026-02,2026,actual,it,IT,1,32634.00
+2026-03,2026,actual,it,IT,1,34299.00
+2026-04,2026,actual,it,IT,1,35631.00
+2026-05,2026,actual,it,IT,1,37296.00
+2026-06,2026,in_close,it,IT,1,38628.00
+2026-07,2026,forecast,it,IT,1,40293.00
+2026-08,2026,forecast,it,IT,1,42624.00
+2026-09,2026,forecast,it,IT,1,43623.00
+2026-10,2026,forecast,it,IT,1,45954.00
+2026-11,2026,forecast,it,IT,1,46287.00
+2026-12,2026,forecast,it,IT,1,46620.00
+2026-01,2026,actual,hr,HR,1,18800.00
+2026-02,2026,actual,hr,HR,1,19600.00
+2026-03,2026,actual,hr,HR,1,20600.00
+2026-04,2026,actual,hr,HR,1,21400.00
+2026-05,2026,actual,hr,HR,1,22400.00
+2026-06,2026,in_close,hr,HR,1,23200.00
+2026-07,2026,forecast,hr,HR,1,24200.00
+2026-08,2026,forecast,hr,HR,1,25600.00
+2026-09,2026,forecast,hr,HR,1,26200.00
+2026-10,2026,forecast,hr,HR,1,27600.00
+2026-11,2026,forecast,hr,HR,1,27800.00
+2026-12,2026,forecast,hr,HR,1,28000.00
+2026-01,2026,actual,admin,Admin,1,25098.00
+2026-02,2026,actual,admin,Admin,1,26166.00
+2026-03,2026,actual,admin,Admin,1,27501.00
+2026-04,2026,actual,admin,Admin,1,28569.00
+2026-05,2026,actual,admin,Admin,1,29904.00
+2026-06,2026,in_close,admin,Admin,1,30972.00
+2026-07,2026,forecast,admin,Admin,1,32307.00
+2026-08,2026,forecast,admin,Admin,1,34176.00
+2026-09,2026,forecast,admin,Admin,1,34977.00
+2026-10,2026,forecast,admin,Admin,1,36846.00
+2026-11,2026,forecast,admin,Admin,1,37113.00
+2026-12,2026,forecast,admin,Admin,1,37380.00
+2026-01,2026,actual,facilities,Facilities,1,43898.00
+2026-02,2026,actual,facilities,Facilities,1,45766.00
+2026-03,2026,actual,facilities,Facilities,1,48101.00
+2026-04,2026,actual,facilities,Facilities,1,49969.00
+2026-05,2026,actual,facilities,Facilities,1,52304.00
+2026-06,2026,in_close,facilities,Facilities,1,54172.00
+2026-07,2026,forecast,facilities,Facilities,1,56507.00
+2026-08,2026,forecast,facilities,Facilities,1,59776.00
+2026-09,2026,forecast,facilities,Facilities,1,61177.00
+2026-10,2026,forecast,facilities,Facilities,1,64446.00
+2026-11,2026,forecast,facilities,Facilities,1,64913.00
+2026-12,2026,forecast,facilities,Facilities,1,65380.00
+2026-01,2026,actual,insurance,Insurance,1,16210.08
+2026-02,2026,actual,insurance,Insurance,1,15888.34
+2026-03,2026,actual,insurance,Insurance,1,16558.67
+2026-04,2026,actual,insurance,Insurance,1,16690.12
+2026-05,2026,actual,insurance,Insurance,1,17574.92
+2026-06,2026,in_close,insurance,Insurance,1,17996.87
+2026-07,2026,forecast,insurance,Insurance,1,19189.25
+2026-08,2026,forecast,insurance,Insurance,1,21484.67
+2026-09,2026,forecast,insurance,Insurance,1,21522.50
+2026-10,2026,forecast,insurance,Insurance,1,23113.58
+2026-11,2026,forecast,insurance,Insurance,1,23108.80
+2026-12,2026,forecast,insurance,Insurance,1,24869.21
+2026-01,2026,actual,stock_based_comp,Stock-based Compensation,1,284970.55
+2026-02,2026,actual,stock_based_comp,Stock-based Compensation,1,292522.01
+2026-03,2026,actual,stock_based_comp,Stock-based Compensation,1,305255.97
+2026-04,2026,actual,stock_based_comp,Stock-based Compensation,1,313915.83
+2026-05,2026,actual,stock_based_comp,Stock-based Compensation,1,325547.39
+2026-06,2026,in_close,stock_based_comp,Stock-based Compensation,1,339518.43
+2026-07,2026,forecast,stock_based_comp,Stock-based Compensation,1,351534.47
+2026-08,2026,forecast,stock_based_comp,Stock-based Compensation,1,367508.22
+2026-09,2026,forecast,stock_based_comp,Stock-based Compensation,1,373629.89
+2026-10,2026,forecast,stock_based_comp,Stock-based Compensation,1,389594.26
+2026-11,2026,forecast,stock_based_comp,Stock-based Compensation,1,390346.76
+2026-12,2026,forecast,stock_based_comp,Stock-based Compensation,1,394322.81
+2026-01,2026,actual,depreciation_amortization,Depreciation & Amortization,1,37013.00
+2026-02,2026,actual,depreciation_amortization,Depreciation & Amortization,1,38564.33
+2026-03,2026,actual,depreciation_amortization,Depreciation & Amortization,1,40354.00
+2026-04,2026,actual,depreciation_amortization,Depreciation & Amortization,1,41974.33
+2026-05,2026,actual,depreciation_amortization,Depreciation & Amortization,1,43833.00
+2026-06,2026,in_close,depreciation_amortization,Depreciation & Amortization,1,45522.33
+2026-07,2026,forecast,depreciation_amortization,Depreciation & Amortization,1,33143.33
+2026-08,2026,forecast,depreciation_amortization,Depreciation & Amortization,1,35218.00
+2026-09,2026,forecast,depreciation_amortization,Depreciation & Amortization,1,36308.00
+2026-10,2026,forecast,depreciation_amortization,Depreciation & Amortization,1,38244.00
+2026-11,2026,forecast,depreciation_amortization,Depreciation & Amortization,1,38357.00
+2026-12,2026,forecast,depreciation_amortization,Depreciation & Amortization,1,38862.33
+2026-01,2026,actual,total_opex,Total Operating Expenses,0,1889928.29
+2026-02,2026,actual,total_opex,Total Operating Expenses,0,1938422.12
+2026-03,2026,actual,total_opex,Total Operating Expenses,0,2038284.92
+2026-04,2026,actual,total_opex,Total Operating Expenses,0,2105260.30
+2026-05,2026,actual,total_opex,Total Operating Expenses,0,2207280.12
+2026-06,2026,in_close,total_opex,Total Operating Expenses,0,2301066.28
+2026-07,2026,forecast,total_opex,Total Operating Expenses,0,2391939.77
+2026-08,2026,forecast,total_opex,Total Operating Expenses,0,2540877.01
+2026-09,2026,forecast,total_opex,Total Operating Expenses,0,2590973.27
+2026-10,2026,forecast,total_opex,Total Operating Expenses,0,2719138.38
+2026-11,2026,forecast,total_opex,Total Operating Expenses,0,2728126.86
+2026-12,2026,forecast,total_opex,Total Operating Expenses,0,3825273.18
+2026-01,2026,actual,operating_income,Operating Income (EBIT),0,-731364.03
+2026-02,2026,actual,operating_income,Operating Income (EBIT),0,-807234.26
+2026-03,2026,actual,operating_income,Operating Income (EBIT),0,-859438.61
+2026-04,2026,actual,operating_income,Operating Income (EBIT),0,-916978.69
+2026-05,2026,actual,operating_income,Operating Income (EBIT),0,-954379.04
+2026-06,2026,in_close,operating_income,Operating Income (EBIT),0,-1024851.25
+2026-07,2026,forecast,operating_income,Operating Income (EBIT),0,-1021394.28
+2026-08,2026,forecast,operating_income,Operating Income (EBIT),0,-1000703.60
+2026-09,2026,forecast,operating_income,Operating Income (EBIT),0,-1045059.11
+2026-10,2026,forecast,operating_income,Operating Income (EBIT),0,-1063635.97
+2026-11,2026,forecast,operating_income,Operating Income (EBIT),0,-1073218.08
+2026-12,2026,forecast,operating_income,Operating Income (EBIT),0,-2161888.62
+2026-01,2026,actual,interest_other,Interest / Other,1,71122.76
+2026-02,2026,actual,interest_other,Interest / Other,1,72126.51
+2026-03,2026,actual,interest_other,Interest / Other,1,67982.86
+2026-04,2026,actual,interest_other,Interest / Other,1,65257.92
+2026-05,2026,actual,interest_other,Interest / Other,1,62385.97
+2026-06,2026,in_close,interest_other,Interest / Other,1,59764.48
+2026-07,2026,forecast,interest_other,Interest / Other,1,56932.80
+2026-08,2026,forecast,interest_other,Interest / Other,1,56098.53
+2026-09,2026,forecast,interest_other,Interest / Other,1,57592.07
+2026-10,2026,forecast,interest_other,Interest / Other,1,56912.54
+2026-11,2026,forecast,interest_other,Interest / Other,1,54897.86
+2026-12,2026,forecast,interest_other,Interest / Other,1,60494.14
+2026-01,2026,actual,taxes,Taxes,1,0.00
+2026-02,2026,actual,taxes,Taxes,1,0.00
+2026-03,2026,actual,taxes,Taxes,1,0.00
+2026-04,2026,actual,taxes,Taxes,1,0.00
+2026-05,2026,actual,taxes,Taxes,1,0.00
+2026-06,2026,in_close,taxes,Taxes,1,0.00
+2026-07,2026,forecast,taxes,Taxes,1,0.00
+2026-08,2026,forecast,taxes,Taxes,1,0.00
+2026-09,2026,forecast,taxes,Taxes,1,0.00
+2026-10,2026,forecast,taxes,Taxes,1,0.00
+2026-11,2026,forecast,taxes,Taxes,1,0.00
+2026-12,2026,forecast,taxes,Taxes,1,0.00
+2026-01,2026,actual,net_income,Net Income,0,-660241.27
+2026-02,2026,actual,net_income,Net Income,0,-735107.75
+2026-03,2026,actual,net_income,Net Income,0,-791455.75
+2026-04,2026,actual,net_income,Net Income,0,-851720.77
+2026-05,2026,actual,net_income,Net Income,0,-891993.07
+2026-06,2026,in_close,net_income,Net Income,0,-965086.76
+2026-07,2026,forecast,net_income,Net Income,0,-964461.49
+2026-08,2026,forecast,net_income,Net Income,0,-944605.08
+2026-09,2026,forecast,net_income,Net Income,0,-987467.03
+2026-10,2026,forecast,net_income,Net Income,0,-1006723.44
+2026-11,2026,forecast,net_income,Net Income,0,-1018320.22
+2026-12,2026,forecast,net_income,Net Income,0,-2101394.48
