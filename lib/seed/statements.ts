@@ -377,8 +377,7 @@ export function buildSeedBalanceSheet(period: Month, accounts: readonly GlAccoun
   const aIdx = Math.max(0, actualEnd);
   // The ACTUAL column rolls up from the GL account→line BALANCES (override-aware §17): re-pointing an
   // account carries its opening + cumulative activity to the target line. Forecast stays the FY-end
-  // series snapshot (forecast months aren't journalized). `?? ser[aIdx]` keeps any line with no
-  // contributing account on its series value. Byte-identical at the generator chart (gl.ts bsTie).
+  // series snapshot (forecast months aren't journalized). Byte-identical at the generator chart (gl.ts bsTie).
   const balByLine = balanceByStatementLine(accounts, aIdx);
   // `?? 0` (NOT ?? series): a line a re-point moved its account AWAY from correctly shows 0 actual (its
   // balance now rolls up under the target line) — so the section sum, and Assets = L + E on the actual

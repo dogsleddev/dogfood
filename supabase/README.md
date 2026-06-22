@@ -16,14 +16,24 @@ demo running on an in-memory seed. It leans on the **`DataStore` "Swap Don't Rew
 
 ## Migration plan (staged)
 
-1. **Schema** — `migrations/0001_init.sql` (this commit). Tables + the write tables (`flux_notes`,
-   `scenarios`, `scenario_inputs`, `budget_snapshots`).
-2. **Schema patches — DONE.** `migrations/0002_ratio_precision.sql` (ratio columns → `double precision`
-   for exact float round-trip) and `migrations/0003_flux_notes.sql` (the flux-note write store: 3 anchor
-   grains + thread + `source`). **RLS / auth** is still TODO — a future migration once the auth model is
-   decided (current posture: trusted single-tenant, server-side service-role, permissive/no RLS).
+1. **Schema** — `migrations/0001_init.sql` (kept current: the later migrations below are FOLDED into it,
+   so a fresh apply of `0001` alone == applying `0001`→`0006` in sequence). The write tables are
+   `flux_notes`, `scenarios`, `budget_snapshots`, and `account_overrides`. (`scenario_inputs` is the
+   orphaned flat table from before 0004 — kept in the schema, never written; adjustments live in
+   `scenarios.adjustments` JSONB.)
+2. **Schema patches — DONE** (each is a standalone migration AND folded into `0001`): `0002_ratio_precision`
+   (ratio columns → `double precision`), `0003_flux_notes` (the flux-note write store: 3 anchor grains +
+   thread + `source`), `0004_scenario_jsonb` (`scenarios.adjustments` → JSONB lossless `Adjustment[]`;
+   orphans `scenario_inputs`), `0005_account_overrides` (the Account-Mapping override write table — keyed
+   by `code`, no hard FK, excluded from the seed-loader clear array so it survives re-import), and
+   `0006_vendor_bill_subcode` (`vendor_bills.sub_code`, the expense-granularity display code). **RLS / auth**
+   stays optional (trusted single-tenant, server-side service-role which bypasses RLS, edge HTTP Basic Auth
+   via `middleware.ts` as the real gate). DDL goes via the Session pooler (`scripts/apply-schema.ts` — the
+   direct `db.<ref>` host is IPv6-only).
 3. **Seed loader — DONE.** `scripts/seed-supabase.ts`: runs the generator, upserts every record + series
-   into Supabase (idempotent on the stable ids). 21 data tables loaded (the 4 write tables stay empty).
+   into Supabase (idempotent on the stable ids). 21 data tables loaded; the 4 write tables
+   (`flux_notes` / `scenarios` / `budget_snapshots` / `account_overrides`) stay empty — the CFO's work,
+   preserved across re-seeds.
 4. **SupabaseDataStore — DONE + validated.** `lib/datastore/supabase.ts` extends `InMemoryDataStore`
    and overrides the record/config reads to `select` from Supabase; statements/metrics/models are
    inherited (the TS builders read the generator). `getDataStore()` selects it when **`DATASTORE=supabase`**

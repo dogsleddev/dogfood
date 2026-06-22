@@ -85,6 +85,7 @@ async function main() {
   const baseMPnL = await ds.getMonthlyPnL(P);
   const baseMBS = await ds.getMonthlyBalanceSheet(P);
   const baseMCF = await ds.getMonthlyCashFlow(P);
+  const baseDash = JSON.stringify(await ds.getDashboardSummary(P)); // must NOT move on a re-point (reads Budget/Forecast)
 
   console.log("\n[1] Empty ⇒ identical (store === direct builder)");
   ok("getPnL === buildSeedPnL", pnlSame(basePnL, buildSeedPnL(P)));
@@ -118,6 +119,8 @@ async function main() {
   ok("Monthly P&L IT closed cell → 0", itClosedMoved);
   ok("Monthly P&L totals UNCHANGED (forecast path)",
      mp2.lines.every((l) => minor(l.total) === minor(line(baseMPnL.lines, l.id).total)));
+  ok("Dashboard UNCHANGED by the P&L re-point (reads Budget/Forecast, never the Actual rollup)",
+     JSON.stringify(await ds.getDashboardSummary(P)) === baseDash);
   await clearAll();
   ok("Reset ⇒ P&L byte-identical to baseline", pnlSame(await ds.getPnL(P), basePnL));
 
@@ -154,8 +157,29 @@ async function main() {
   let mcfMax = 0;
   for (const l of mcf4.lines) mcfMax = Math.max(mcfMax, Math.abs(minor(l.total) - minor(line(cf3.lines, l.id).values.forecast)));
   ok("every monthly CF line total === FY CF Forecast column (≤ 1¢)", mcfMax < 100, `max Δ $${mcfMax / 100}`);
+
+  // monthly Balance Sheet board: CLOSED-month cells roll up too (the override is still active). May
+  // (the 5th FY month, idx 4) is the last closed month for FY2026.
+  const mbs3 = await ds.getMonthlyBalanceSheet(P);
+  const mayIdx = 4;
+  const baseArMay = minor(line(baseMBS.lines, "accounts_receivable").monthly[mayIdx]);
+  const baseWipMay = minor(line(baseMBS.lines, "unbilled_wip").monthly[mayIdx]);
+  ok("Monthly BS: AR closed cell (May) → 0", minor(line(mbs3.lines, "accounts_receivable").monthly[mayIdx]) === 0);
+  ok("Monthly BS: WIP closed cell (May) === AR + WIP", minor(line(mbs3.lines, "unbilled_wip").monthly[mayIdx]) === baseArMay + baseWipMay,
+     `${minor(line(mbs3.lines, "unbilled_wip").monthly[mayIdx]) / 100} vs ${(baseArMay + baseWipMay) / 100}`);
+  // Assets = L+E on EVERY closed monthly column (each of ~11 lines is independently usd-rounded per month
+  // → use the < $1 section-sum tolerance, NOT 1¢).
+  let mbsIdMax = 0;
+  for (let i = 0; i <= mayIdx; i++) {
+    const a = mbs3.lines.filter((l) => l.section === "asset").reduce((sum, l) => sum + minor(l.monthly[i]), 0);
+    const le = mbs3.lines.filter((l) => l.section === "liability" || l.section === "equity").reduce((sum, l) => sum + minor(l.monthly[i]), 0);
+    mbsIdMax = Math.max(mbsIdMax, Math.abs(a - le));
+  }
+  ok("Monthly BS: Assets = L+E on every closed column (≤ $1)", mbsIdMax < 100, `max Δ $${mbsIdMax / 100}`);
+
   await clearAll();
   ok("Reset ⇒ BS byte-identical to baseline", pnlSame(await ds.getBalanceSheet(P), baseBS));
+  ok("Reset ⇒ Monthly BS byte-identical to baseline", monthlySame(await ds.getMonthlyBalanceSheet(P), baseMBS));
 
   // ── [5] field-only override (classification/function) moves ZERO numbers ──
   console.log("\n[5] Field-only override (classification/function) is number-neutral");
@@ -177,16 +201,21 @@ async function main() {
   };
   await rejects("cross-section: AR (asset) → Accounts Payable (liability)", () => guardedSetOverride("1100", { statementLineId: "accounts_payable" }));
   await rejects("cross-statement: IT (P&L) → Cash (BS)", () => guardedSetOverride("6400", { statementLineId: "cash" }));
+  await rejects("CoR↔OpEx: Direct Payroll (CoR) → Sales & Marketing (OpEx) — would move Gross Profit", () => guardedSetOverride("5000", { statementLineId: "sales_marketing" }));
   await rejects("subtotal target: IT → total_opex", () => guardedSetOverride("6400", { statementLineId: "total_opex" }));
   await rejects("equity source: Paid-in Capital → anything", () => guardedSetOverride("3000", { statementLineId: "paid_in_capital" }));
   await rejects("below-the-line: Interest Income → taxes", () => guardedSetOverride("7000", { statementLineId: "taxes" }));
   await rejects("classification on a non-expense account (Cash)", () => guardedSetOverride("1000", { classification: "cost_of_revenue" }));
   await rejects("invalid function value", () => guardedSetOverride("6400", { function: "bogus" }));
   await rejects("unknown account", () => guardedSetOverride("9999", { statementLineId: "admin" }));
-  // and a VALID re-point is NOT rejected (the guard isn't over-broad)
+  // and VALID same-group re-points are NOT rejected (the guard isn't over-broad)
   let validOk = true;
   try { await guardedSetOverride("6400", { statementLineId: "admin" }); } catch { validOk = false; }
-  ok("a VALID same-group re-point (IT → Admin) is accepted", validOk);
+  ok("a VALID same-group OpEx re-point (IT → Admin) is accepted", validOk);
+  await clearAll();
+  let validCor = true;
+  try { await guardedSetOverride("5000", { statementLineId: "non_employee_cor" }); } catch { validCor = false; }
+  ok("a VALID same-group CoR re-point (Direct Payroll → Non-employee CoR) is accepted", validCor);
   await clearAll();
 
   console.log(`\n================ override-check: ${passed} passed, ${failed} failed ================`);

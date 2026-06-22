@@ -107,7 +107,7 @@ export class InMemoryDataStore implements DataStore {
 
   // ── account-mapping override layer (mutable; read fresh, never cached) ──
   async listAccountOverrides(): Promise<readonly AccountOverride[]> {
-    return this.accountOverrides;
+    return [...this.accountOverrides]; // defensive copy (match the sibling getters; never hand out the live array)
   }
   async setAccountOverride(code: string, delta: Omit<AccountOverride, "code" | "updatedAt">): Promise<void> {
     const row: AccountOverride = { ...delta, code, updatedAt: new Date().toISOString() };

@@ -26,7 +26,9 @@ export async function setAccountLineAction(formData: FormData): Promise<void> {
   const code = String(formData.get("accountCode") ?? "");
   const statementLineId = String(formData.get("statementLineId") ?? "");
   if (!code || !statementLineId) return;
-  await setAccountOverride(code, { statementLineId }); // throws on an incoherent re-point; surfaced to the user
+  // rejects an incoherent re-point (logged server-side); the edit panel's <select> only offers same-group
+  // targets, so the guard is unreachable from the form — it's defense-in-depth for programmatic / Scout callers.
+  await setAccountOverride(code, { statementLineId });
   revalidateMappingSurfaces();
 }
 

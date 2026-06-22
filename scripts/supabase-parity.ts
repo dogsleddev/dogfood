@@ -13,6 +13,7 @@
 import { readFileSync, existsSync } from "node:fs";
 import { InMemoryDataStore } from "@/lib/datastore/in-memory";
 import { SupabaseDataStore } from "@/lib/datastore/supabase";
+import type { StatementLineId, StatementClassification, CostFunction } from "@/lib/types/common";
 
 function loadEnvLocal() {
   if (!existsSync(".env.local")) return;
@@ -104,6 +105,39 @@ async function main() {
   // spot-check a filtered read + a single-record lookup go through identically
   compareList("expenses (2026-05)", await mem.listExpenseTransactions({ period: "2026-05" as never }), await sup.listExpenseTransactions({ period: "2026-05" as never }));
   compareOne("getContract(first)", await mem.getContract((await mem.listContracts())[0].id), await sup.getContract((await mem.listContracts())[0].id));
+
+  // ── Account-Mapping OVERRIDE write→read→compose→clear round-trip on the REAL backend ──
+  // The empty-override path returns base by reference, so rowToAccountOverride + setAccountOverride + the
+  // NON-empty composeGlAccounts branch are otherwise never exercised against Supabase — exactly the
+  // blind-spot class that shipped the subCode bug. Re-points IT (6400) → the Admin line (same OpEx group).
+  // `finally` cleans up so no stray override is ever left in the live table.
+  {
+    const CODE = "6400";
+    const before = (await sup.listGlAccounts()).find((a) => a.code === CODE)!;
+    let roundtripOk = false;
+    let composeOk = false;
+    let clearedOk = false;
+    try {
+      await sup.setAccountOverride(CODE, {
+        statementLineId: "admin" as StatementLineId,
+        classification: "operating_expense" as StatementClassification,
+        function: "ga" as CostFunction,
+        source: "ui",
+      });
+      const ovr = (await sup.listAccountOverrides()).find((o) => o.code === CODE);
+      roundtripOk = !!ovr && ovr.statementLineId === "admin" && ovr.classification === "operating_expense" && ovr.function === "ga" && ovr.source === "ui";
+      composeOk = (await sup.listGlAccounts()).find((a) => a.code === CODE)!.statementLineId === ("admin" as StatementLineId);
+    } finally {
+      await sup.clearAccountOverride(CODE);
+      const after = (await sup.listGlAccounts()).find((a) => a.code === CODE)!;
+      const residue = (await sup.listAccountOverrides()).filter((o) => o.code === CODE);
+      clearedOk = after.statementLineId === before.statementLineId && residue.length === 0;
+    }
+    const allOk = roundtripOk && composeOk && clearedOk;
+    if (!allOk) fail++;
+    console.log(`  ${ok(allOk)}  account_overrides round-trip (write→read→compose→clear)`);
+    if (!allOk) console.log(`        roundtrip=${roundtripOk} compose=${composeOk} cleared=${clearedOk}`);
+  }
 
   console.log(`\n================ SUPABASE PARITY: ${fail === 0 ? "PASS — Supabase round-trips the generator exactly" : `${fail} MISMATCH`} ================\n`);
   if (fail > 0) process.exitCode = 1;

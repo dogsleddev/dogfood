@@ -121,8 +121,8 @@ export function AccountEditPanel({
             </select>
           </div>
           <p className="text-[10px] text-steel">
-            Tags drive metric views (CAC, R&amp;D %), not the statement totals — re-point the statement line to move dollars
-            between Cost of Revenue and Operating Expenses.
+            Descriptive tags — they label the account&apos;s classification and function but do not move statement totals.
+            The statement line above is what places the dollars (re-points stay within the account&apos;s section).
           </p>
           <button type="submit" className="rounded-lg border border-ember/60 px-3 py-1.5 text-xs font-medium text-ember-deep hover:bg-ember-tint">
             Save tags

@@ -22,27 +22,33 @@ export async function getExpenseGroup(id: ExpenseGroupId): Promise<ExpenseGroup 
 // ── the override layer (§17) — re-point a mapping; field-level deltas ──
 
 /**
- * Re-point GROUPS. A re-point is allowed ONLY within a group, which guarantees the statement stays
- * coherent and the empty-path invariants are preserved under a re-point:
- *  • P&L revenue ↔ revenue and operating-cost ↔ operating-cost (CoR ∪ OpEx) both keep total revenue
- *    and (revenue − total cost) invariant, so Net Income never moves on an allowed P&L re-point.
- *  • BS asset ↔ asset and liability ↔ liability keep each section's sum invariant, so Assets = L + E
- *    holds under a re-point.
+ * Re-point GROUPS — the P&L "sections" (Revenue / Cost of Revenue / OpEx) and the BS sections (Asset /
+ * Liability), mirroring how the statements subtotal. A re-point is allowed ONLY within a group, which
+ * keeps EVERY reported subtotal invariant under a re-point (not just Net Income):
+ *  • P&L revenue ↔ revenue keeps Total Revenue (and everything below it) invariant.
+ *  • P&L CoR ↔ CoR keeps Total Cost of Revenue invariant, so Gross Profit / Gross Margin % hold.
+ *  • P&L OpEx ↔ OpEx keeps Total OpEx invariant, so Operating Income / Gross Profit hold.
+ *  • BS asset ↔ asset and liability ↔ liability keep each section's sum invariant, so Assets = L + E holds.
+ * CoR and OpEx are DELIBERATELY separate groups: collapsing them into one "operating cost" group would
+ * accept a CoR↔OpEx re-point that silently shifts Gross Profit / Gross Margin % (a reported metric) even
+ * though Net Income is unchanged. Reclassifying an account across the CoR/OpEx boundary is a larger
+ * accounting-policy decision, intentionally NOT an in-app re-point this slice (§17).
  * Lines ABSENT from this map are not re-point targets: the 6 P&L subtotals (computed, never backed by
  * an account), the equity lines (paid_in_capital / accumulated_deficit), and the below-the-line
  * singletons (interest_other / taxes — re-pointing them would move Net Income).
  */
-type RepointGroup = "pnl_revenue" | "pnl_operating_cost" | "bs_asset" | "bs_liability";
+type RepointGroup = "pnl_revenue" | "pnl_cor" | "pnl_opex" | "bs_asset" | "bs_liability";
 const LINE_GROUP: Readonly<Record<string, RepointGroup>> = {
   // P&L revenue
   subscription: "pnl_revenue", services: "pnl_revenue",
-  // P&L operating cost (CoR + OpEx leaves)
-  direct_payroll: "pnl_operating_cost", non_employee_cor: "pnl_operating_cost",
-  indirect_payroll: "pnl_operating_cost", employee_expenses: "pnl_operating_cost",
-  sales_marketing: "pnl_operating_cost", travel_entertainment: "pnl_operating_cost",
-  it: "pnl_operating_cost", hr: "pnl_operating_cost", admin: "pnl_operating_cost",
-  facilities: "pnl_operating_cost", insurance: "pnl_operating_cost",
-  stock_based_comp: "pnl_operating_cost", depreciation_amortization: "pnl_operating_cost",
+  // P&L Cost of Revenue leaves (roll into Total Cost of Revenue → Gross Profit)
+  direct_payroll: "pnl_cor", non_employee_cor: "pnl_cor",
+  // P&L OpEx leaves (roll into Total Operating Expenses)
+  indirect_payroll: "pnl_opex", employee_expenses: "pnl_opex",
+  sales_marketing: "pnl_opex", travel_entertainment: "pnl_opex",
+  it: "pnl_opex", hr: "pnl_opex", admin: "pnl_opex",
+  facilities: "pnl_opex", insurance: "pnl_opex",
+  stock_based_comp: "pnl_opex", depreciation_amortization: "pnl_opex",
   // BS asset
   cash: "bs_asset", accounts_receivable: "bs_asset", unbilled_wip: "bs_asset",
   prepaid_expenses: "bs_asset", fixed_assets_net: "bs_asset", rou_asset: "bs_asset",
@@ -54,8 +60,8 @@ const LINE_GROUP: Readonly<Record<string, RepointGroup>> = {
 function repointGroupOf(accountType: AccountType): RepointGroup | null {
   switch (accountType) {
     case "revenue": return "pnl_revenue";
-    case "cost_of_revenue":
-    case "operating_expense": return "pnl_operating_cost";
+    case "cost_of_revenue": return "pnl_cor";
+    case "operating_expense": return "pnl_opex";
     case "asset": return "bs_asset";
     case "liability": return "bs_liability";
     default: return null; // equity, contra_equity, other_income, tax → not re-pointable
