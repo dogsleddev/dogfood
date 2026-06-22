@@ -461,9 +461,17 @@ Served in-app under Setup ▸ User Guides. Writing them is part of speccing each
 
 ---
 
-## 17. Open decisions & outstanding ideas  _(updated 2026-06-21)_
+## 17. Open decisions & outstanding ideas  _(updated 2026-06-22)_
 
 Most of the design is now locked. What remains:
+
+**Decided 2026-06-22 (the Run — CSV importer architecture; Chris: a little more than a demo — 50-100 trial users over 3 days + a Loom recording, so the tie-out must be visibly, provably accurate) `[LOCKED]`:**
+- **The trial balance is the single source of truth** for the statements' Actual — and already is at read time: post the override-layer slice, the Actual column rolls up from the GL at the account grain (`activityByStatementLine` → statement line), which IS the trial balance. The seed's drivers are only how the books were generated; what the statements PRESENT is the TB (it balances on its own — no plug). This formalizes the §4/§16 TB-driven model; it is not a rewrite.
+- **The control total is the detail-to-TB reconciliation** (the back-check Chris asked for): for accounts with a sub-ledger (expenses↔vendor bills, revenue↔invoices, payroll↔paychecks, AR↔receipts), `Σ(detail per account, period) === the TB movement`, with a signed variance + a Σ|variance| control total + a BLOCKING "needs attention" flag over a materiality threshold (`max($1, 0.1%·line)`) — never a plug, fix-upstream (§16). Accounts with no sub-ledger (equity, D&A, manual JEs) are TB-only (authoritative; nothing to reconcile up → no false variance). It surfaces ON **Setup → Data Import** (Chris's call): a standing reconciliation control total + a TB upload that runs the same check + the import-time commit. The detailed-account tie-out is already proven by the gates (data-sweep "Vendor bills → GL sub-account" + "P&L Actual ← GL rollup", both Δ$0.00); the work is making it VISIBLE + wiring the importer.
+- **The TB storage-overlay is DEFERRED** (a restatement engine where a DIFFERING imported TB moves a closed-month Actual). Accuracy comes from the reconciliation control total, not from letting imports rewrite Actuals; the overlay would create a 2nd source of truth, silently desync Cash Flow NI from P&L NI (`statements.ts:446`), and has zero data-sweep coverage. Stays behind a clean `TBOverlayStore` seam.
+- **BUILT this session (the importer foundation):** the global as-of is now WRITABLE (`getCloseBoundary`/`setCloseBoundary` mutable + `DataStore.updateSettings`/`advanceClose`; proven tie-out-neutral by `importer-asof-check`), and trial-balance VALIDATION (`lib/import/{parse-csv,types,validate}.ts`; the real TB foots to the penny). **Next session builds the reconciliation control total** (the locked model above) — see `Handoff.md` ▶ NEXT.
+
+**Also resolved 2026-06-22 `[LOCKED]`:** Scout's FULL scenario WRITE surface is wired (create/duplicate/setDriver/reset/delete — resolves the long-open Scout-scenario-scope item below), and the deferred QC finding **F4** (a flux note follows its account's statement-line re-point) is fixed.
 
 **Decided 2026-06-21 (the Run — next-steps review + decision gate; Chris: "fully resolve, no defer") `[LOCKED]`:**
 - **Guides truthful + a 7th guide (DONE).** `lib/guides/content.ts` is Scout's product-knowledge corpus; corrected the ERP-"one live integration" line (→ every domain batch-imports, connectors are roadmap, §16/§18), the Scout-`setDriver`-is-live implication, and the budget-lock framing; added `creating-a-flux-analysis` (guide #7), adapted to the `GuideBody` markdown subset. **§14 is now seven guides.**

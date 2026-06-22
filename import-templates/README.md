@@ -1,9 +1,14 @@
 # Dogfood import templates
 
 How to format ERP- and sub-system-generated reports into the CSV shapes Dogfood ingests to update
-actuals and refresh every statement, the Dashboard, and Scout. These are **proposed** templates +
-the import model — the importer itself (Setup → Data Import) is a later build; this folder is the
-contract it will read.
+actuals and refresh every statement, the Dashboard, and Scout. This folder is the **contract** the
+importer reads. **Build status (2026-06-22):** the importer FOUNDATION is built — trial-balance
+parsing + validation (`lib/import/`, the file below foots + validates clean) and a writable global
+as-of (closing a month advances the actual/forecast split, proven tie-out-neutral). The
+**reconciliation control total** (the detail-to-TB back-check) and the Setup → Data Import UI are the
+active next build (see `Handoff.md`). The trial balance is the single source of truth; the detailed
+transactions reconcile UP to it with a control total, and a gap is a blocking "needs attention" flag,
+never a plug (the model below is the spec).
 
 ## The model (read this first)
 
