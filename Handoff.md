@@ -13,10 +13,10 @@
 > flakiness (crashes / wedged renderer / dropped streams under OneDrive+Turbopack). Git-initialized
 > here (`main` branch, first commit); `.env.local` is gitignored and carries the Supabase + Anthropic
 > keys. The old `...\OneDrive\02_Projects\dogfood` copy is the stale original — delete once confident.
-> Verified at the new location: tsc 0 · lint 0 · data-sweep 43/43 · `next build` exit 0. **GitHub home = the `dogsleddev` account** (Chris's / the studio's); not yet pushed —
-> `gh` is not authenticated and there is no remote. Push: `gh auth login` (as dogsleddev), then
-> `gh repo create dogsleddev/dogfood --private --source=. --remote=origin --push`. Commits are ready
-> on `main` (truthful guides + Flux guide #7 + the edge access gate; the decision-gate resolution).
+> Verified at the new location: tsc 0 · lint 0 · data-sweep 43/43 · `next build` exit 0. **Pushed to GitHub: https://github.com/dogsleddev/dogfood-app (PUBLIC)** — `main` tracks
+> `origin/main`; all commits authored as Chris <dougherty4@gmail.com>. (The pre-existing
+> `dogsleddev/dogfood` is a separate public landing site, left untouched; the app lives in its own
+> `dogfood-app` repo.)
 > Auto-memory was migrated to the `C--dev-dogfood` namespace.
 
 ## ▶ NEXT SESSION — START HERE
