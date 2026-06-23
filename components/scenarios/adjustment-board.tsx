@@ -5,6 +5,7 @@ import type { Adjustment, LeverId } from "@/lib/types/scenario";
 import type { ScenarioId } from "@/lib/types/common";
 import { SEED_DEPARTMENTS, SEED_EXPENSE_GROUPS } from "@/lib/target/placeholder";
 import { addAdjustmentAction, removeAdjustmentAction } from "@/app/scenarios/drivers/actions";
+import { DriverSlider, type SliderKind } from "./driver-slider";
 
 /**
  * The Scenario Drivers board (CLAUDE.md §9; diagrams/scenario-drivers.svg). Each adjustment is
@@ -65,6 +66,21 @@ function magnitudeOf(adj: Adjustment): { text: string; tone: "pos" | "neg" | "mu
       return { text: `${m.value} ${m.unit}`, tone: "muted" };
     case "categorical":
       return { text: slugLabel(m.value), tone: "neg" };
+  }
+}
+
+/** Slider config for an adjustment's magnitude — or null for categorical (freeze), which has no slider. */
+function sliderFor(adj: Adjustment): { kind: SliderKind; stored: number; label: string } | null {
+  const m = adj.magnitude;
+  switch (m.kind) {
+    case "rate":
+      return { kind: "rate", stored: m.value as number, label: "Rate change" };
+    case "level":
+      return { kind: "level", stored: m.delta, label: adj.lever === "personnel" ? "Headcount · $/mo" : "Monthly delta" };
+    case "absolute":
+      return { kind: "absolute", stored: m.value, label: "DSO · days" };
+    case "categorical":
+      return null;
   }
 }
 
@@ -191,9 +207,10 @@ export function AdjustmentBoard({
           const meta = LEVER_META[adj.lever];
           const sub = subDimensionOf(adj);
           const mag = magnitudeOf(adj);
+          const slider = sliderFor(adj);
           return (
             <div key={adj.id} className="rounded-xl border border-parchment-line bg-surface p-5">
-              <div className="flex flex-wrap items-start justify-between gap-x-6 gap-y-4">
+              <div className="flex flex-wrap items-start justify-between gap-x-6 gap-y-3">
                 <div className="min-w-[14rem]">
                   <div className="flex items-center gap-2">
                     <span className="font-heading text-lg text-ink">{meta.label}</span>
@@ -204,12 +221,6 @@ export function AdjustmentBoard({
                     ) : null}
                   </div>
                   <p className="mt-1 text-sm text-steel">{meta.blurb}</p>
-                </div>
-                <div className="grid grid-cols-2 gap-x-8 gap-y-4 sm:grid-cols-4">
-                  <Chip label="Magnitude" value={mag.text} tone={mag.tone} />
-                  <Chip label="Window" value={windowOf(adj)} tone="muted" />
-                  <Chip label="Shape" value={adj.shape === "ramp" ? "Ramp" : "Step"} tone="muted" />
-                  <Chip label="Granularity" value="Monthly" tone="muted" />
                 </div>
                 {!readOnly ? (
                   <form action={removeAdjustmentAction}>
@@ -223,6 +234,25 @@ export function AdjustmentBoard({
                     </button>
                   </form>
                 ) : null}
+              </div>
+              <div className="mt-4 grid items-end gap-x-8 gap-y-4 sm:grid-cols-[minmax(0,1fr)_auto]">
+                {slider ? (
+                  <DriverSlider
+                    scenarioId={scenarioId}
+                    adjId={adj.id}
+                    kind={slider.kind}
+                    stored={slider.stored}
+                    label={slider.label}
+                    disabled={readOnly}
+                  />
+                ) : (
+                  <Chip label="Magnitude" value={mag.text} tone={mag.tone} />
+                )}
+                <div className="flex gap-x-8 gap-y-2">
+                  <Chip label="Window" value={windowOf(adj)} tone="muted" />
+                  <Chip label="Shape" value={adj.shape === "ramp" ? "Ramp" : "Step"} tone="muted" />
+                  <Chip label="Granularity" value="Monthly" tone="muted" />
+                </div>
               </div>
             </div>
           );

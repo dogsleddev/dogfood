@@ -97,6 +97,50 @@ export async function addAdjustmentAction(formData: FormData): Promise<void> {
   redirect(`${PATH}?scenario=${scenarioId}`); // clear any prior ?error and refresh
 }
 
+/** Re-point one adjustment's magnitude to a new value, preserving its kind. */
+function withMagnitude(a: Adjustment, value: number): Adjustment {
+  switch (a.magnitude.kind) {
+    case "rate":
+      return { ...a, magnitude: { kind: "rate", value: percent(value) } };
+    case "level":
+      return { ...a, magnitude: { kind: "level", delta: value } };
+    case "absolute":
+      return { ...a, magnitude: { kind: "absolute", value, unit: a.magnitude.unit } };
+    case "categorical":
+      return a; // not slider-editable
+  }
+}
+
+/**
+ * Set an existing adjustment's magnitude — the Scenario Drivers slider's commit (CLAUDE.md §9). Called
+ * directly from the DriverSlider client component (not a form). Validates against the live horizon +
+ * the lever rails BEFORE saving (the slider is range-bounded to the rails, so a drag never rejects);
+ * an immutable Base/preset id throws in upsert and is swallowed. Stays contained to /scenarios/*.
+ */
+export async function setAdjustmentMagnitudeAction(input: {
+  scenarioId: string;
+  adjId: string;
+  value: number;
+}): Promise<void> {
+  const scenarioId = String(input.scenarioId ?? "") as ScenarioId;
+  const { adjId, value } = input;
+  if (!scenarioId || !adjId || !Number.isFinite(value)) return;
+  const sc = await findScenario(scenarioId);
+  if (!sc) return;
+  const next: Scenario = {
+    ...sc,
+    adjustments: sc.adjustments.map((a) => (a.id === adjId ? withMagnitude(a, value) : a)),
+  };
+  const { forecastHorizon } = await getDataStore().getSettings();
+  if (!validateScenario(next, forecastHorizon).ok) return; // out of range / invalid → ignore the commit
+  try {
+    await upsertUserScenario(next);
+  } catch {
+    return; // immutable Base/preset — no-op
+  }
+  revalidatePath("/scenarios", "layout"); // refresh the contained group (board + Scenario P&L recompute)
+}
+
 export async function removeAdjustmentAction(formData: FormData): Promise<void> {
   const scenarioId = String(formData.get("scenarioId") ?? "") as ScenarioId;
   const adjId = String(formData.get("adjId") ?? "");
