@@ -21,7 +21,40 @@
 
 ## ▶ NEXT SESSION — START HERE
 
-### State (2026-06-23, LATEST · big UI/UX + Loom-readiness pass — all DEPLOYED to dogfood.cafe) — GREEN  ·  _authoritative; the blocks below are prior context_
+### State (2026-06-23 · LATEST · mobile interstitial SHIPPED + full QC pass GREEN + the long-run mobile strategy decided) — GREEN  ·  _authoritative; the blocks below are prior context_
+
+**CONTEXT: This session shipped the mobile interstitial (the last pre-LinkedIn-traffic gap), ran a thorough Scout-focused QC pass (all green), and DECIDED the long-run mobile strategy. Chris is posting to LinkedIn now. Git: working tree clean, local == origin/main @ `380b8c1`.**
+
+**Shipped + deployed this session (commit `380b8c1`):**
+- **Mobile interstitial — DONE + DEPLOYED + verified live.** The rail (`components/nav/sidebar.tsx`) has no responsive collapse, so phones crushed the dense workspace to ~100px. Fix: a pure-CSS `md:hidden` branded gate ("Dogfood is a desktop FP&A workspace — open on a larger screen") + render the app frame `hidden md:flex`, so desktop is byte-untouched and small screens get the gate. SSR-safe, no hydration flash, no client JS / viewport detection. Files: `components/shell/mobile-interstitial.tsx` (new) + `components/shell/app-shell.tsx` (wrap). Verified: tsc 0 · live SSR HTML · mobile screenshot (clean gate, Scout correctly hidden) · desktop screenshot (full dashboard untouched) · live smoke 57/57.
+
+**QC pass (Scout-focused, before the traffic spike) — ALL GREEN:**
+- Deterministic gates: tsc/lint 0 · data-sweep (tie-outs, max Δ $0.01) · peer-check §11 (runway 49mo / Rule-of-40 25% / burn 0.6x) · scout-readiness **78/78** · scenario-check **20/20** · override-check **44/44** · importer-check + importer-asof + flux-repoint **PASS**.
+- Live route smoke vs `https://www.dogfood.cafe`: **57/57** routes healthy (incl. the streaming Scout API + the new interstitial).
+- **Scout 22-question live sample** (real Claude tool-use loop, via a temporary `SCOUT_QC_N` sampling env added to `scripts/scout-100.ts` then REVERTED — tree clean): **routing 21/22 (95%, above the 90% gate)** · **grounding 4/4 (100% — every numeric answer surfaced the exact tool figure, zero hallucinations)**. The one "miss" — *"what's our net burn?"* → Scout used `getCashBurnBridge`+`getMetric(runway)`+`getMetric(burn_multiple)` instead of the bare `net_burn` metric — was verified against the LIVE API as a **richer-correct** answer ($350K/mo + 49mo runway, correct + grounded), NOT a bug.
+- **NON-BLOCKING follow-up (cosmetic):** the `net_burn` case predicate in `scripts/scout-100.ts` / `scout-eval.ts` could also accept `getCashBurnBridge` (or nudge Scout to also call the `net_burn` metric). The live answer is already correct; this only quiets the eval.
+
+**MOBILE STRATEGY — DECIDED (the long-run direction; SUPERSEDES the old "responsive nav drawer tonight" line below).** The nav drawer is NOT the right mobile play at any timescale: (1) the mobile bottleneck is CONTENT density (5-column statements, 12-month board views), not nav — a drawer exposes cramped content, doesn't fix it; (2) `md`=768px, so everything ≥768px (incl. iPad portrait) ALREADY gets the full rail untouched — a drawer would only serve sub-768px devices where the dense tables are unreadable regardless; (3) it risks the live launch for ~zero usability gain. **The right long-run mobile = a purpose-built mobile-native SLICE, not the desktop app shrunk down:**
+  1. **(NOW, done)** the interstitial — the honest "best on desktop" posture; correct, not a stopgap.
+  2. **Mobile-native Scout — the recommended NEXT mobile step (~3h build + ~2h QC ≈ half a session).** Conversational AI is inherently mobile-native AND on-strategy (the AI-native differentiator — competitors' mobile is "shrink the spreadsheet," ours is "ask the agent"). Scout is already tool-complete. **THE WORK:** lift the launcher + panel OUT of the `hidden md:flex` wrapper in `app-shell.tsx` (today they're hidden on mobile — that is why the interstitial currently has NO interaction); make `components/scout/scout-panel.tsx` a full-screen sheet on phones / floating lower-right on desktop; add focus-trap + body-scroll-lock + escape-to-close; optionally surface "Ask Scout" ON the interstitial so mobile visitors can interact. Streaming/tools/receipts already work — this is layout + a bit of state wiring. QC: device-width verify (375/390/414), streaming + receipts tappable on mobile, keyboard doesn't break layout, the no-key router path.
+  3. **(then)** a glanceable READ-ONLY KPI/dashboard view — the existing tiles in a single column, drill/peek suppressed on mobile. ~4h build + ~3h QC.
+  4. **(last / maybe never)** responsive WORKING surfaces (full statements, scenario editing) — open-ended (weeks); recommendation: DON'T, unless usage data demands it.
+  Total mobile slice ≈ 2–3 focused sessions; the high-value core (mobile Scout) ≈ half a session and stands alone. The OOM-prone dev server (dashboard route) ~doubles UI-QC time.
+
+**OPERATIONAL NOTES for the LinkedIn traffic spike:** (a) the public Scout endpoint hits the Anthropic API server-side with NO rate limit — a spike = API spend + possible 529 throttling (no hard cap). (b) Mobile visitors hit the interstitial with NO interaction (Scout is desktop-only until step 2 above) — a large share of LinkedIn clicks are mobile. (c) Contained writes (scenarios, flux notes) are SHARED across all anon users (they see each other's edits) and wiped nightly by the Vercel cron — the ▶ NEXT #3 shared-vs-scoped decision is still open.
+
+**▶ NEXT — priority order (carried forward + updated):**
+1. **MOBILE-NATIVE SCOUT** — the recommended next mobile step now that the interstitial closed the launch gap. ~half a session. See MOBILE STRATEGY above.
+2. **`getFluxDetail` tie-out** [P2]: returns FY-column figures next to single-month transactions — they don't reconcile (only on a flux-detail drill, but it's the "everything ties out" story). `lib/queries/flux.ts`.
+3. **Shared-vs-scoped contained writes** (Chris's decision): 50-100+ anon users share ONE scenarios/flux_notes set; accept + document, or add lightweight per-session scoping.
+4. **Small wiring:** `getPeriodConfig` + `getExpenseGroups` (registry `wired:false`, data exists) + resolve `lockBudget(source=scenario)` notImplemented (`lib/queries/statements.ts:61`).
+5. **Doc nits:** CLAUDE.md §14 says "six guides" (7 ship).
+6. **(cosmetic)** the `net_burn` eval-predicate tweak above.
+7. **Loom:** reconciliation control total + the runway bridge as the credibility moment + Scout demoing both.
+
+**KEY GOTCHAS:** see the prior block's "KEY GOTCHAS" — unchanged (machine OOMs: `next dev` + tsx/build together; stop dev before tsx gates or smoke the live deploy; `next build` needs `--max-old-space-size`; push to origin/main auto-deploys via Vercel, `gh auth setup-git` first; restart dev after seed/DataStore-method edits).
+
+### State (2026-06-23 · big UI/UX + Loom-readiness pass — all DEPLOYED to dogfood.cafe) — GREEN  ·  _prior context_
 
 **CONTEXT: Chris is posting to LinkedIn NOW (public traffic → dogfood.cafe), recording the Loom TONIGHT. The site is DESKTOP-ready (smoke 57/57 live); the ONE pre-traffic gap is MOBILE. Do the ▶ NEXT items immediately, in order. Git: working tree clean, local == origin/main @ `9b543dc`.**
 
