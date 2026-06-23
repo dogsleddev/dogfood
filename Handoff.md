@@ -21,7 +21,33 @@
 
 ## ▶ NEXT SESSION — START HERE
 
-### State (2026-06-22, LATEST · the RECONCILIATION CONTROL TOTAL — built + verified live; the Loom centerpiece) — GREEN  ·  _authoritative; the blocks below are prior context_
+### State (2026-06-23, LATEST · big UI/UX + Loom-readiness pass — all DEPLOYED to dogfood.cafe) — GREEN  ·  _authoritative; the blocks below are prior context_
+
+**CONTEXT: Chris is posting to LinkedIn NOW (public traffic → dogfood.cafe), recording the Loom TONIGHT. The site is DESKTOP-ready (smoke 57/57 live); the ONE pre-traffic gap is MOBILE. Do the ▶ NEXT items immediately, in order. Git: working tree clean, local == origin/main @ `9b543dc`.**
+
+**Shipped + deployed this session (commits `6e06db3` → `9b543dc`):**
+- **Dashboard:** §6 peek pane (tile → `?inspect=<metricId>` → `MetricInspectPane`; peek tiles carry Open full, pure metrics decompose via `components/dashboard/metric-decomposition.ts`); removed the peek/pane label badges; **fixed the card sparklines** (FY-aggregate metrics were step-flat → smooth TTM via `fyTrailValue`/`getMonthlyFinancials` in `lib/seed/dashboard-metrics.ts`); a "Trends" chart band.
+- **Charts:** reusable SVG primitives in `components/dashboard/charts/`; bands on the **P&L** (`pnl-charts.tsx`: cascade + margins) and **Cash Flow** (`cash-flow-charts.tsx`). All read the monthly statement queries (tie out).
+- **Scenario Drivers → sliders** (FreightClose style): `components/scenarios/driver-slider.tsx` + `setAdjustmentMagnitudeAction`; range-bounded to the validator rails; read-only for Base/presets. Verified E2E.
+- **User Guides redesign:** built the missing **`/setup/guides` index** (was a 404 nav + Scout receipts hit); a **Scout-safe `figures` field** + GuideBody figure renderer (body untouched → Scout corpus unchanged); **14 inline SVG diagrams** across all 7 guides; in-guide TOC + quick-ref; synced stale prose. See [[guide-figures-system]].
+- **Scout dog branding:** floating dog FAB launcher lower-right (`components/scout/scout-launcher.tsx`); rail "Ask Scout" → paw-print icon, dropped "opens lower-right"; panel header → dog.
+- **Demo user renamed Chris → Max · Chief Barking Officer** (nav footer + flux author `getCurrentUser` + the flux guide).
+- **Runway bridge (Loom credibility centerpiece):** `getCashBurnBridge(period)` fuses getCashFlow+getRunway+getNonGaapReconciliation; `components/statements/cash-burn-bridge.tsx` callout on the Cash Flow page (GAAP −$11.9M → +non-cash $4.6M → **+annual-prepay deferred-revenue $5.6M** → OCF −$3.24M → FCF −$3.89M) + Scout tool `getCashBurnBridge`. **WINDOW CAVEAT (in the footnote + Scout windowNote): bridge rows are whole-FY26 (tie to the CF Forecast column); the runway tile is TTM — never divide FY FCF by 12.** Numbers adversarially re-derived vs the seed (Σ = fyOperatingCashFlow[2026] to the dollar; runway 48.8→49).
+- **Full-route smoke gate:** `scripts/route-smoke.ts` + `npm run smoke`; all 32 routes + variants, status + render + soft /api/scout. **Ran against live: 57/57 ✓.** `SMOKE_BASE_URL=` targets a deploy.
+
+**Gates:** tsc/lint 0 · scout-readiness **78/78** · smoke **57/57 live** · data-sweep 44/44 / §11 unmoved (not re-run — no seed change; sparkline fix is display-only) · scout-eval +1 case (LLM not re-run, API was 529-flaky).
+
+**▶ NEXT — do immediately, in priority order (Chris is time-boxed):**
+1. **MOBILE (the only pre-traffic risk).** The rail is a fixed `w-72` (288px) `<aside>` in `components/nav/sidebar.tsx`, NO responsive collapse; `components/shell/app-shell.tsx` is a plain `flex`. On a phone content collapses to ~100px → looks broken; LinkedIn skews mobile. **Ship-now: a `md:hidden` interstitial** ("Dogfood is a desktop FP&A workspace — open on a larger screen"), desktop untouched. **Tonight: responsive nav** — hide the rail below `md`, add a top bar + hamburger drawer (sidebar is already `"use client"`). Recommend the interstitial NOW, the drawer with the Loom.
+2. **`getFluxDetail` tie-out** [P2]: returns FY-column figures next to single-month transactions — they don't reconcile (only visible on a flux-detail drill, but it's the "everything ties out" story). `lib/queries/flux.ts`.
+3. **Shared-vs-scoped contained writes** (Chris's decision): 50-100+ anon users share ONE scenarios/flux_notes set (contained; cleared nightly by the cron). Accept + document, or add lightweight per-session scoping.
+4. **Small wiring:** `getPeriodConfig` + `getExpenseGroups` (registry `wired:false`, data exists) + resolve `lockBudget(source=scenario)` notImplemented (`lib/queries/statements.ts:61`).
+5. **Doc nits:** CLAUDE.md §14 says "six guides" (7 ship).
+6. **Loom (tonight):** reconciliation control total + the runway bridge as the credibility moment + Scout demoing both.
+
+**KEY GOTCHAS (read before building):** (a) **Memory pressure on this machine** — `next dev` + `npx tsx`/`next build` together OOM (`next build` exit 9 at type-check → use `--max-old-space-size=8192`; `VirtualAlloc failed` / CLR `HRESULT 80004005` from tsx/PowerShell). STOP the preview dev server before tsx gates/builds, or run `npm run smoke` against the live deploy. (b) **Deploy:** push to `origin/main` auto-deploys (Vercel); `gh auth setup-git` first (credential-hang); verify with `SMOKE_BASE_URL=https://www.dogfood.cafe npm run smoke`. (c) Restart the dev server after seed-module edits (HMR/singleton). See [[dashboard-direction]], [[guide-figures-system]].
+
+### State (2026-06-22 · the RECONCILIATION CONTROL TOTAL — built + verified live; the Loom centerpiece) — GREEN  ·  _prior context_
 
 **The detail-to-TB reconciliation control total (the importer's slices 1b + 2) is BUILT, gated, and verified live on Supabase.** This is the on-camera proof the books are accurate: for every account with a sub-ledger, `Σ(detail) === the trial balance` to the dollar; a contradiction is a blocking flag, never a plug. Slice 3 (COA base-import) is the only deferred piece.
 
