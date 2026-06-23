@@ -7,6 +7,7 @@ import { CashFlowTable } from "@/components/statements/cash-flow-table";
 import { MonthlyCashFlowTable } from "@/components/statements/monthly-cash-flow-table";
 import { StatementInspectPane } from "@/components/statements/statement-inspect-pane";
 import { StatementViewToggle } from "@/components/statements/view-toggle";
+import { CashFlowCharts } from "@/components/statements/cash-flow-charts";
 import { CF_DRILL, CF_NOTE } from "@/components/statements/bs-cf-drill";
 import { addLineFluxNoteAction, resolveCfFluxNoteAction, deleteCfFluxNoteAction } from "./actions";
 
@@ -71,6 +72,8 @@ export default async function CashFlowPage({
       </header>
 
       <RunwayStrip runway={runway} />
+
+      <CashFlowCharts period={PERIOD} />
 
       {monthly ? <MonthlyView /> : <FyView inspect={inspect} />}
     </div>

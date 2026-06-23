@@ -9,6 +9,7 @@ import { InspectPane } from "@/components/statements/inspect-pane";
 import { MonthlyPnlTable } from "@/components/statements/monthly-pnl-table";
 import { StatementViewToggle } from "@/components/statements/view-toggle";
 import { BudgetStatus } from "@/components/statements/budget-status";
+import { PnlCharts } from "@/components/statements/pnl-charts";
 
 const PERIOD = month(2026, 6);
 
@@ -51,6 +52,8 @@ export default async function ForecastedPnlPage({
             : "Budget · Actual · Variance · Forecast. Tap any number to peek its lineage in the pane — actual months open the register, forecast months open the driver (§6). Reads the seed; subtotals foot and net income ties to the cash flow by construction."}
         </p>
       </header>
+
+      <PnlCharts period={PERIOD} />
 
       {monthly ? (
         <MonthlyView />
