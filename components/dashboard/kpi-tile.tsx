@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { PanelRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { KpiTile } from "@/lib/types/dashboard";
 import { formatMetricValue, metricMagnitude } from "@/lib/types/metrics";
@@ -20,13 +20,13 @@ function deltaVsBudget(tile: KpiTile): { text: string; favorable: boolean } | nu
 }
 
 /**
- * A Dashboard metric tile (diagrams/drilldowns-dashboard.svg) — now with current value,
- * a trend sparkline, delta vs budget, and the prior-year + budget comparators.
- * Peek tiles carry "Open full ↗"; pane-only pure metrics show their tie-out basis.
+ * A Dashboard metric tile (diagrams/drilldowns-dashboard.svg) — current value, a trend sparkline,
+ * delta vs budget, and the prior-year + budget comparators. The whole tile is the peek trigger:
+ * tapping it opens the right-side pane (?inspect=<metricId>) with the lineage in place (§6 — peek
+ * where you read). Peek tiles carry "Open full ↗" in the pane; pure metrics decompose there.
  */
-export function KpiTileCard({ tile }: { tile: KpiTile }) {
+export function KpiTileCard({ tile, selected }: { tile: KpiTile; selected?: boolean }) {
   const { definition, value, priorYear, budget, trail } = tile;
-  const isPeek = definition.firstTap === "peek";
   const delta = deltaVsBudget(tile);
 
   const higherBetter = definition.higherIsBetter !== false;
@@ -35,17 +35,19 @@ export function KpiTileCard({ tile }: { tile: KpiTile }) {
   const trendFavorable = higherBetter ? cur >= py : cur <= py;
 
   return (
-    <div className="flex flex-col rounded-xl border border-parchment-line bg-surface p-4 transition-colors hover:border-ember/40">
+    <Link
+      href={`/dashboard?inspect=${definition.id}`}
+      scroll={false}
+      aria-label={`Inspect ${definition.label}`}
+      className={cn(
+        "flex flex-col rounded-xl border bg-surface p-4 transition-colors",
+        selected
+          ? "border-ember bg-ember-tint/30 ring-1 ring-ember/30"
+          : "border-parchment-line hover:border-ember/40",
+      )}
+    >
       <div className="flex items-start justify-between gap-2">
         <span className="text-xs font-medium text-steel">{definition.label}</span>
-        <span
-          className={cn(
-            "shrink-0 rounded px-1.5 py-0.5 text-[10px] font-medium",
-            isPeek ? "bg-ember-tint text-ember-deep" : "bg-secondary text-steel",
-          )}
-        >
-          {isPeek ? "peek" : "pane"}
-        </span>
       </div>
 
       <div className="mt-1 flex items-end justify-between gap-2">
@@ -69,17 +71,15 @@ export function KpiTileCard({ tile }: { tile: KpiTile }) {
       </div>
 
       <div className="mt-3 border-t border-parchment-line/60 pt-2">
-        {isPeek && definition.openFull?.length ? (
-          <Link
-            href={definition.openFull[0]}
-            className="inline-flex items-center gap-1 text-xs font-medium text-ember-deep hover:underline"
-          >
-            Open full <ArrowUpRight className="size-3" />
-          </Link>
-        ) : (
-          <span className="text-xs leading-tight text-steel">{definition.basis}</span>
-        )}
+        <span
+          className={cn(
+            "inline-flex items-center gap-1 text-xs font-medium",
+            selected ? "text-ember-deep" : "text-steel",
+          )}
+        >
+          <PanelRight className="size-3" /> Inspect
+        </span>
       </div>
-    </div>
+    </Link>
   );
 }

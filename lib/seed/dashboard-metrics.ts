@@ -159,6 +159,102 @@ function computeMetricsAt(idx: number): Record<string, number> {
   };
 }
 
+/**
+ * The 8 metrics whose HEADLINE is a fiscal-year aggregate (or FY ratio). computeMetricsAt buckets
+ * these by calendar FY (fyOf), so a month-stepped sparkline of them is a step-then-flat line, not a
+ * trend (the "sparklines look wrong" report). For the sparkline we instead plot a smooth TRAILING-
+ * 12-MONTH series built from the monthly seed leaves — same magnitude scale as the annual headline,
+ * and a genuine month-over-month trajectory. (The 12 other tiles are already point-in-time / TTM in
+ * computeMetricsAt, so their trail is a real trend and is used as-is.)
+ */
+const FY_TRAIL_METRICS = new Set([
+  "revenue",
+  "gross_profit",
+  "operating_income",
+  "net_income",
+  "gross_margin_pct",
+  "net_margin_pct",
+  "growth_rate",
+  "rule_of_40",
+]);
+
+interface MonthlyFinancials {
+  readonly revenue: number[];
+  readonly grossProfit: number[];
+  readonly operatingIncome: number[];
+  readonly netIncome: number[];
+  readonly sbc: number[];
+}
+let _monthlyFin: MonthlyFinancials | null = null;
+/** Monthly P&L leaves (major units), reconstructed exactly as seedPnLColumns composes them, so the
+ *  TTM sparkline ties to the statement. Memoized — the seed is deterministic for the process. */
+function getMonthlyFinancials(): MonthlyFinancials {
+  if (_monthlyFin) return _monthlyFin;
+  const sub = getSubscriptionSeed();
+  const svc = getServicesSeed();
+  const per = getPersonnelSeed();
+  const cor = getCostOfRevenueSeed();
+  const opx = getOpExSeed();
+  const bs = getBalanceSheetSeed();
+  const sbcSer = getSbcSeed().series.monthly;
+  const at = (a: readonly number[], i: number) => a[i] ?? 0;
+  const n = sub.series.recognized.length;
+  const revenue: number[] = [];
+  const grossProfit: number[] = [];
+  const operatingIncome: number[] = [];
+  const netIncome: number[] = [];
+  const sbc: number[] = [];
+  for (let i = 0; i < n; i++) {
+    const rev = at(sub.series.recognized, i) + at(svc.series.recognized, i);
+    const cogs = at(per.series.directPayroll, i) + at(cor.series.nonEmployee, i);
+    const gp = rev - cogs;
+    let groups = 0;
+    for (const g of opx.series.groups) groups += at(g.monthly, i);
+    const opex = at(per.series.indirectPayroll, i) + groups + at(sbcSer, i) + at(bs.series.depreciation, i);
+    const oi = gp - opex;
+    const ni = oi + at(bs.series.interestIncome, i); // taxes = 0 (NOLs), matching the P&L leaf set
+    revenue.push(rev);
+    grossProfit.push(gp);
+    operatingIncome.push(oi);
+    netIncome.push(ni);
+    sbc.push(at(sbcSer, i));
+  }
+  _monthlyFin = { revenue, grossProfit, operatingIncome, netIncome, sbc };
+  return _monthlyFin;
+}
+
+/** The trailing-12-month value of an FY-aggregate metric at month `idx` — the sparkline point. */
+function fyTrailValue(id: string, idx: number): number {
+  const f = getMonthlyFinancials();
+  const rev = ttm(f.revenue, idx);
+  switch (id) {
+    case "revenue":
+      return rev;
+    case "gross_profit":
+      return ttm(f.grossProfit, idx);
+    case "operating_income":
+      return ttm(f.operatingIncome, idx);
+    case "net_income":
+      return ttm(f.netIncome, idx);
+    case "gross_margin_pct":
+      return rev > 0 ? ttm(f.grossProfit, idx) / rev : 0;
+    case "net_margin_pct":
+      return rev > 0 ? ttm(f.netIncome, idx) / rev : 0;
+    case "growth_rate": {
+      const prior = ttm(f.revenue, idx - 12);
+      return prior > 0 ? rev / prior - 1 : 0;
+    }
+    case "rule_of_40": {
+      const prior = ttm(f.revenue, idx - 12);
+      const growth = prior > 0 ? rev / prior - 1 : 0;
+      const opMargin = rev > 0 ? (ttm(f.operatingIncome, idx) + ttm(f.sbc, idx)) / rev : 0;
+      return growth + opMargin;
+    }
+    default:
+      return 0;
+  }
+}
+
 /** Financial-family budgets read the P&L budget column, so the cards tie to the statement. */
 function financialBudgetMag(id: string, period: Month): number | undefined {
   const c = seedPnLColumns(period);
@@ -216,8 +312,12 @@ export function buildSeedKpiTile(metricId: MetricId, period: Month): KpiTile | u
   const py = computeMetricsAt(idx - 12)[id] ?? 0;
   const budgetMag =
     financialBudgetMag(id, period) ?? cur * (BUDGET_FACTOR_OVERRIDE[id] ?? (definition.higherIsBetter === false ? 0.94 : 1.04));
-  // real trailing sparkline: this metric over the last 7 months
-  const trail = Array.from({ length: 7 }, (_, k) => computeMetricsAt(idx - 6 + k)[id] ?? 0);
+  // real trailing sparkline: this metric over the last 7 months. FY-aggregate metrics use a smooth
+  // trailing-12-month series (else they'd step-then-flat at the calendar-FY boundary); the rest are
+  // already point-in-time / TTM in computeMetricsAt, so their monthly trail is a genuine trend.
+  const trail = FY_TRAIL_METRICS.has(id)
+    ? Array.from({ length: 7 }, (_, k) => fyTrailValue(id, idx - 6 + k))
+    : Array.from({ length: 7 }, (_, k) => computeMetricsAt(idx - 6 + k)[id] ?? 0);
   return {
     definition,
     value: valueOf(id, period, definition.kind, cur),
