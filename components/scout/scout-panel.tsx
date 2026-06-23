@@ -1,7 +1,7 @@
 "use client";
 import { useState, useRef, useEffect, type FormEvent } from "react";
 import Link from "next/link";
-import { Sparkles, X, Send, ExternalLink, PawPrint } from "lucide-react";
+import { Dog, X, Send, ExternalLink, PawPrint } from "lucide-react";
 import { useScout } from "./scout-context";
 import type { ScoutReceipt, ScoutResponse, ScoutStreamEvent } from "@/lib/scout/types";
 
@@ -92,7 +92,7 @@ export function ScoutPanel() {
       {/* header */}
       <div className="flex items-center gap-3 border-b border-parchment-line px-4 py-3">
         <div className="flex size-9 items-center justify-center rounded-full bg-[linear-gradient(135deg,var(--color-ember),var(--color-amber))] text-white">
-          <Sparkles className="size-4" />
+          <Dog className="size-4" />
         </div>
         <div className="min-w-0 flex-1">
           <div className="font-heading text-base leading-tight text-ink">Scout</div>
