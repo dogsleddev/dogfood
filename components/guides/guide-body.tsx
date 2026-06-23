@@ -1,11 +1,26 @@
 import { Fragment, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
+import type { GuideFigure } from "@/lib/guides/content";
 
 /**
  * Minimal Markdown renderer for the User Guides (CLAUDE.md §14). The corpus is a controlled internal
  * subset — ## / ### headings, "- " bullet lists, **bold**, `inline code`, and paragraphs — so a small
  * renderer beats pulling in a full markdown dependency. Used by the guides route + the help surface.
+ *
+ * Figures (diagrams) are NOT in the body string (Scout reads the body verbatim); they are passed
+ * separately and interleaved after the h2 whose text they name (figure.afterHeading), so the agent's
+ * corpus stays text-only while the rendered guide shows the diagram in place.
  */
+
+/** Stable anchor id for an h2 — shared with the in-guide TOC so its links resolve. */
+export function headingId(text: string): string {
+  return text
+    .replace(/[*`]/g, "")
+    .toLowerCase()
+    .replace(/&amp;/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
 
 function inline(text: string, keyPrefix: string): ReactNode[] {
   return text.split(/(\*\*[^*]+\*\*|`[^`]+`)/g).map((p, i) => {
@@ -20,10 +35,32 @@ function inline(text: string, keyPrefix: string): ReactNode[] {
   });
 }
 
-export function GuideBody({ body, className }: { body: string; className?: string }) {
+/** One diagram card — the inline SVG (authored, trusted) with a title band + caption. */
+function FigureBlock({ fig }: { fig: GuideFigure }) {
+  return (
+    <figure className="my-6 overflow-hidden rounded-xl border border-parchment-line bg-surface">
+      <figcaption className="border-b border-parchment-line px-4 py-2 text-xs font-semibold uppercase tracking-wider text-ember-deep">
+        {fig.title}
+      </figcaption>
+      <div className="overflow-x-auto px-4 py-4 [&_svg]:h-auto [&_svg]:w-full" dangerouslySetInnerHTML={{ __html: fig.svg }} />
+      {fig.alt ? <div className="border-t border-parchment-line/60 px-4 py-2 text-xs text-steel">{fig.alt}</div> : null}
+    </figure>
+  );
+}
+
+export function GuideBody({
+  body,
+  figures = [],
+  className,
+}: {
+  body: string;
+  figures?: readonly GuideFigure[];
+  className?: string;
+}) {
   const blocks: ReactNode[] = [];
   let para: string[] = [];
   let list: string[] = [];
+  const placed = new Set<string>();
   const flushPara = (k: string) => {
     if (para.length) {
       blocks.push(<p key={`p-${k}`} className="text-[15px] leading-7 text-ink/90">{inline(para.join(" "), `p-${k}`)}</p>);
@@ -45,6 +82,16 @@ export function GuideBody({ body, className }: { body: string; className?: strin
       list = [];
     }
   };
+  /** Inject any figure(s) anchored to this heading text, right after the heading renders. */
+  const flushFigures = (headingText: string) => {
+    const want = headingId(headingText);
+    for (const fig of figures) {
+      if (!placed.has(fig.id) && headingId(fig.afterHeading) === want) {
+        placed.add(fig.id);
+        blocks.push(<FigureBlock key={`fig-${fig.id}`} fig={fig} />);
+      }
+    }
+  };
 
   body.split("\n").forEach((raw, idx) => {
     const line = raw.trimEnd();
@@ -54,7 +101,13 @@ export function GuideBody({ body, className }: { body: string; className?: strin
       blocks.push(<h3 key={`h3-${k}`} className="mt-6 font-heading text-base font-semibold text-ink">{inline(line.slice(4), `h3-${k}`)}</h3>);
     } else if (line.startsWith("## ")) {
       flushPara(k); flushList(k);
-      blocks.push(<h2 key={`h2-${k}`} className="mt-8 border-b border-parchment-line pb-1.5 font-heading text-xl text-ink">{inline(line.slice(3), `h2-${k}`)}</h2>);
+      const text = line.slice(3);
+      blocks.push(
+        <h2 key={`h2-${k}`} id={headingId(text)} className="mt-8 scroll-mt-24 border-b border-parchment-line pb-1.5 font-heading text-xl text-ink">
+          {inline(text, `h2-${k}`)}
+        </h2>,
+      );
+      flushFigures(text);
     } else if (line.startsWith("- ")) {
       flushPara(k); list.push(line.slice(2));
     } else if (line.trim() === "") {
@@ -64,6 +117,11 @@ export function GuideBody({ body, className }: { body: string; className?: strin
     }
   });
   flushPara("end"); flushList("end");
+
+  // Any figure whose anchor heading wasn't found — append at the end so it's never silently dropped.
+  for (const fig of figures) {
+    if (!placed.has(fig.id)) blocks.push(<FigureBlock key={`fig-${fig.id}`} fig={fig} />);
+  }
 
   return <div className={cn("space-y-3.5", className)}>{blocks}</div>;
 }
