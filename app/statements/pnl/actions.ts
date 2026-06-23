@@ -6,6 +6,7 @@
  */
 import { revalidatePath } from "next/cache";
 import { addFluxNote, resolveFluxNote, deleteFluxNote, resetBudget } from "@/lib/queries";
+import { isAdmin } from "@/lib/auth/admin";
 import type { Month } from "@/lib/types/period";
 
 const PATH = "/statements/pnl";
@@ -16,6 +17,7 @@ const PATH = "/statements/pnl";
  * both read the same locked snapshot, so revalidate both.
  */
 export async function resetBudgetAction(_formData: FormData): Promise<void> {
+  if (!(await isAdmin())) return; // app-wide write (moves the Budget column for everyone) — admin only
   await resetBudget();
   revalidatePath(PATH);
   revalidatePath("/dashboard");

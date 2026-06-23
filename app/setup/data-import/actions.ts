@@ -9,8 +9,13 @@ import { revalidatePath } from "next/cache";
 import { getDataStore } from "@/lib/datastore";
 import { runTrialBalanceImport } from "@/lib/queries/import";
 import { sampleTbFor, type SampleTbKind } from "@/lib/import/sample-tb";
+import { isAdmin } from "@/lib/auth/admin";
+import { resetDemo } from "@/lib/queries/admin";
 
 export async function importTrialBalanceAction(formData: FormData): Promise<void> {
+  // App-wide write (moves the global as-of / everyone's Actual) — admin only (CLAUDE.md §17). The UI
+  // hides the controls for non-admins; this is defense-in-depth for a programmatic caller.
+  if (!(await isAdmin())) return;
   let csv = "";
 
   const sample = formData.get("sample");
@@ -47,5 +52,13 @@ export async function importTrialBalanceAction(formData: FormData): Promise<void
     }
   }
   // The as-of is global — a committed advance re-renders every surface. Revalidate the whole app.
+  revalidatePath("/", "layout");
+}
+
+/** Admin "Reset demo" — revert the shared sandbox (scenarios / flux notes / overrides + the as-of) to
+ *  the seed baseline. Same effect as the daily cron, on demand. Admin only. */
+export async function resetDemoAction(): Promise<void> {
+  if (!(await isAdmin())) return;
+  await resetDemo();
   revalidatePath("/", "layout");
 }

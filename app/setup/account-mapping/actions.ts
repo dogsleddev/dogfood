@@ -8,6 +8,7 @@
  */
 import { revalidatePath } from "next/cache";
 import { addFluxNote, resolveFluxNote, deleteFluxNote, setAccountOverride, clearAccountOverride } from "@/lib/queries";
+import { isAdmin } from "@/lib/auth/admin";
 import type { Month } from "@/lib/types/period";
 
 const PATH = "/setup/account-mapping";
@@ -23,6 +24,7 @@ function revalidateMappingSurfaces() {
 
 /** Re-point an account's statement line (the override layer). Validated + merged by the query layer. */
 export async function setAccountLineAction(formData: FormData): Promise<void> {
+  if (!(await isAdmin())) return; // re-points move everyone's Actual columns — admin only (§17)
   const code = String(formData.get("accountCode") ?? "");
   const statementLineId = String(formData.get("statementLineId") ?? "");
   if (!code || !statementLineId) return;
@@ -34,6 +36,7 @@ export async function setAccountLineAction(formData: FormData): Promise<void> {
 
 /** Edit an expense account's descriptive classification / function tags (number-neutral metadata). */
 export async function setAccountTagsAction(formData: FormData): Promise<void> {
+  if (!(await isAdmin())) return; // admin only (§17)
   const code = String(formData.get("accountCode") ?? "");
   if (!code) return;
   const delta: { classification?: string; function?: string } = {};
@@ -48,6 +51,7 @@ export async function setAccountTagsAction(formData: FormData): Promise<void> {
 
 /** Reset an account to its default (immutable-chart) mapping — clears the whole override. */
 export async function resetAccountMappingAction(formData: FormData): Promise<void> {
+  if (!(await isAdmin())) return; // admin only (§17)
   const code = String(formData.get("accountCode") ?? "");
   if (!code) return;
   await clearAccountOverride(code);

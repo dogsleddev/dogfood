@@ -2,7 +2,8 @@ import { getDataImportView } from "@/lib/queries";
 import { monthLabel } from "@/lib/types/period";
 import { cn } from "@/lib/utils";
 import { ReconciliationTable } from "@/components/setup/reconciliation-table";
-import { importTrialBalanceAction } from "./actions";
+import { importTrialBalanceAction, resetDemoAction } from "./actions";
+import { isAdmin } from "@/lib/auth/admin";
 import type { ImportRun } from "@/lib/import/types";
 
 const usd0 = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
@@ -15,6 +16,7 @@ const STATUS_STYLE: Record<ImportRun["status"], { dot: string; text: string; lab
 
 export default async function DataImportPage() {
   const { settings, reconciliation, runs } = await getDataImportView();
+  const admin = await isAdmin();
   const close = settings.closeThrough;
   const inClose = settings.inCloseMonth;
   const reconciled = reconciliation.reconciled;
@@ -79,7 +81,7 @@ export default async function DataImportPage() {
           A contradicting figure is blocked. Re-importing a closed month is a restatement (the as-of stays put).
         </p>
 
-        {last && (
+        {admin && last && (
           <div className={cn("mb-4 rounded-xl border px-4 py-3 text-sm", last.status === "reconciled" ? "border-sage/30 bg-sage/10" : last.status === "needs_attention" ? "border-ember/30 bg-ember-tint/60" : "border-amber/30 bg-amber/10")}>
             <div className="mb-0.5 flex items-center gap-2">
               <span className={cn("h-2 w-2 rounded-full", STATUS_STYLE[last.status].dot)} />
@@ -92,6 +94,7 @@ export default async function DataImportPage() {
           </div>
         )}
 
+        {admin ? (
         <div className="grid gap-6 lg:grid-cols-2">
           <form action={importTrialBalanceAction} className="rounded-xl border border-parchment-line bg-surface p-4">
             <div className="mb-2 text-sm font-medium text-ink">Upload a trial balance (CSV)</div>
@@ -126,6 +129,19 @@ export default async function DataImportPage() {
             </div>
           </form>
         </div>
+        ) : (
+          <div className="rounded-xl border border-parchment-line bg-secondary/40 px-4 py-3 text-sm text-steel">
+            Importing is admin-only on the live trial — the reconciliation above always reflects the current
+            books. <a href="/admin" className="font-medium text-ember-deep underline">Sign in as admin</a> to import a trial balance.
+          </div>
+        )}
+        {admin && (
+          <form action={resetDemoAction} className="mt-4">
+            <button type="submit" className="rounded-md border border-parchment-line bg-secondary px-3 py-1.5 text-xs text-steel hover:bg-secondary/70">
+              ↺ Reset demo — clear scenarios + flux notes and restore the as-of
+            </button>
+          </form>
+        )}
       </section>
 
       {/* ── import history ── */}
