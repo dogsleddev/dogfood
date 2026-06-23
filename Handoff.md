@@ -2,7 +2,7 @@
 
 > Read this AND `CLAUDE.md` at the start of every session. `CLAUDE.md` is authoritative on
 > product/architecture/spec; this file tracks where the build is. Do not read `archive/`.
-> Last updated 2026-06-22.
+> Last updated 2026-06-23.
 >
 > Everything below the "Session history + reference" divider is older per-session logs and reference,
 > some predating the Run. The section here is authoritative for the current state.
@@ -21,7 +21,19 @@
 
 ## ▶ NEXT SESSION — START HERE
 
-### State (2026-06-23 · LATEST · mobile interstitial SHIPPED + full QC pass GREEN + the long-run mobile strategy decided) — GREEN  ·  _authoritative; the blocks below are prior context_
+### State (2026-06-23 · LATEST · MOBILE-NATIVE SCOUT shipped — recovered from a mid-work crash) — GREEN  ·  _authoritative; the blocks below are prior context_
+
+**CONTEXT: a crash interrupted the mobile-native Scout build (▶ NEXT #1 from the block below). Recovery review found NO file corruption — only an orphaned dev-server process tree holding port 3000 (cleaned up). The in-progress work was complete + coherent on disk; this session verified it and is picking it up. Git: HEAD `a73139b`, 1 ahead of origin; the mobile-native-Scout work is committed LOCALLY but NOT pushed (push → Vercel deploy = awaiting Chris's go).**
+
+**Shipped this session (mobile-native Scout — ▶ NEXT #1, now DONE):** Scout works on phones, where it is the one usable surface behind the interstitial. THE WORK (all from the spec in the block below):
+- `app-shell.tsx` — lifted `<ScoutLauncher/>` + `<ScoutPanel/>` OUT of the `hidden md:flex` desktop frame so Scout renders on every screen (desktop FAB + floating card / mobile full-screen sheet). Desktop frame otherwise byte-untouched.
+- `scout-panel.tsx` — responsive: floating lower-right card on desktop (`md:`), full-screen sheet on mobile (`fixed inset-x-0 top-0 h-[100dvh] w-full`). Modal behaviors while open: `role="dialog"`/`aria-modal`, body-scroll-lock, Escape-to-close, Tab focus-trap, and **visualViewport height tracking** so the on-screen keyboard never covers the composer. Desktop autofocuses the input; mobile holds off (so the keyboard doesn't pop before the welcome is read).
+- `scout-launcher.tsx` — the FAB is now `hidden md:flex` (desktop-only); on mobile the interstitial's own CTA is the entry point, so a floating FAB over it would be redundant.
+- `mobile-interstitial.tsx` — now a client component with a prominent **"Ask Scout anything"** CTA (`useScout().setOpen(true)`) + "our AI analyst works great on mobile" subtext; copy updated ("and Scout" / "mobile layout on the way" lines removed). This is the on-strategy mobile play — "ask the agent," not "shrink the spreadsheet."
+
+**Verified this session:** tsc 0 · lint 0 · live preview (fresh managed dev server) — desktop renders the full dashboard/rail untouched; mobile (375px) shows the interstitial + CTA, the CTA opens Scout as a full-screen sheet (snapshot + screenshot confirm), zero console errors. The 32-route smoke was SKIPPED (the change is client-only app-shell, already render-verified live on the dashboard route where the shell renders identically to every route; running it needs `dev` + `tsx` together = the OOM combo). Re-run `npm run smoke` against a local or live server if you want the full sweep.
+
+### State (2026-06-23 · mobile interstitial SHIPPED + full QC pass GREEN + the long-run mobile strategy decided) — GREEN  ·  _prior context_
 
 **CONTEXT: This session shipped the mobile interstitial (the last pre-LinkedIn-traffic gap), ran a thorough Scout-focused QC pass (all green), and DECIDED the long-run mobile strategy. Chris is posting to LinkedIn now. Git: working tree clean, local == origin/main @ `380b8c1`.**
 
@@ -44,7 +56,7 @@
 **OPERATIONAL NOTES for the LinkedIn traffic spike:** (a) the public Scout endpoint hits the Anthropic API server-side with NO rate limit — a spike = API spend + possible 529 throttling (no hard cap). (b) Mobile visitors hit the interstitial with NO interaction (Scout is desktop-only until step 2 above) — a large share of LinkedIn clicks are mobile. (c) Contained writes (scenarios, flux notes) are SHARED across all anon users (they see each other's edits) and wiped nightly by the Vercel cron — the ▶ NEXT #3 shared-vs-scoped decision is still open.
 
 **▶ NEXT — priority order (carried forward + updated):**
-1. **MOBILE-NATIVE SCOUT** — the recommended next mobile step now that the interstitial closed the launch gap. ~half a session. See MOBILE STRATEGY above.
+1. ~~**MOBILE-NATIVE SCOUT**~~ — **DONE this session** (committed locally, awaiting push/deploy). The next mobile slice (optional, later) is the glanceable read-only KPI view — see MOBILE STRATEGY step 3 above.
 2. **`getFluxDetail` tie-out** [P2]: returns FY-column figures next to single-month transactions — they don't reconcile (only on a flux-detail drill, but it's the "everything ties out" story). `lib/queries/flux.ts`.
 3. **Shared-vs-scoped contained writes** (Chris's decision): 50-100+ anon users share ONE scenarios/flux_notes set; accept + document, or add lightweight per-session scoping.
 4. **Small wiring:** `getPeriodConfig` + `getExpenseGroups` (registry `wired:false`, data exists) + resolve `lockBudget(source=scenario)` notImplemented (`lib/queries/statements.ts:61`).
