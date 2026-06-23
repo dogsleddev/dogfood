@@ -1,5 +1,5 @@
 /**
- * Seed → the 19 dashboard metrics (step 6). The Financial family is derived from the seed P&L
+ * Seed → the 20 dashboard metrics (step 6). The Financial family is derived from the seed P&L
  * (one source, two callers — it ties to the statement by construction); the SaaS metrics
  * (ARR/MRR, bookings, NRR, logo retention, CAC, CAC payback, LTV:CAC, magic number, utilization,
  * burn, runway, Rule of 40, burn multiple) compute from the real seed series — with a REAL prior-year

@@ -164,6 +164,10 @@ const DET_CASES: readonly { q: string; tool: string }[] = [
   { q: "What was the biggest revenue month in 2025?", tool: "getMonthlyPnL" },
   { q: "Show me the balance sheet by month.", tool: "getMonthlyBalanceSheet" },
   { q: "Break down cash flow month by month.", tool: "getMonthlyCashFlow" },
+  // annual cash flow — guards the \bcash\b-shadows-cash-flow router bug (was returning the Balance Sheet)
+  { q: "How is cash flow looking this year?", tool: "getCashFlow" },
+  // month-qualified burn → the monthly CF trajectory, not the scalar net_burn metric
+  { q: "What's our monthly burn this year?", tool: "getMonthlyCashFlow" },
   { q: "What are total assets on the balance sheet?", tool: "getBalanceSheet" },
   { q: "What renewals are coming up?", tool: "getRenewals" },
   { q: "How much open pipeline do we have?", tool: "getPipeline" },

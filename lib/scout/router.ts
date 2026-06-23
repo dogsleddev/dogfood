@@ -18,7 +18,9 @@ interface Route {
 // Most specific first. A question that matches nothing falls through to the dashboard overview.
 const ROUTES: readonly Route[] = [
   { test: /runway|cash\s*out|months? of cash/i, tool: "getMetric", input: { metricId: "runway" } },
-  { test: /\bburn\b/i, tool: "getMetric", input: { metricId: "net_burn" } },
+  // bare "burn" → the scalar net_burn metric, BUT a month-qualified burn ("monthly burn", "burn by
+  // month") must fall through to the monthly Cash Flow trajectory below — so exclude any "month" token.
+  { test: /^(?!.*\bmonth).*\bburn\b/i, tool: "getMetric", input: { metricId: "net_burn" } },
   { test: /magic/i, tool: "getMetric", input: { metricId: "magic_number" } },
   { test: /rule of 40/i, tool: "getMetric", input: { metricId: "rule_of_40" } },
   // Renewals register BEFORE the retention-rate metrics: "renewal" / "gross (dollar) retention" / GRR
@@ -71,7 +73,9 @@ const ROUTES: readonly Route[] = [
   { test: /\bdso\b|ar forecast|receivables forecast|days sales/i, tool: "getArForecast", input: {} },
   { test: /\bcapex\b|capital expenditure|fixed asset|depreciation schedule/i, tool: "getFixedAssetForecast", input: {} },
   { test: /prepaid/i, tool: "getPrepaidsForecast", input: {} },
-  { test: /balance sheet|assets|liabilit|equity|\bcash\b/i, tool: "getBalanceSheet", input: {} },
+  // `\bcash\b(?!\s*flow)` so "how much cash do we have" → balance sheet, but "cash flow" falls through
+  // to the cash-flow route below (the bare \bcash\b token otherwise shadows every cash-flow question).
+  { test: /balance sheet|assets|liabilit|equity|\bcash\b(?!\s*flow)/i, tool: "getBalanceSheet", input: {} },
   { test: /cash flow/i, tool: "getCashFlow", input: {} },
   // monthly/"which month" intent BEFORE the annual P&L route (getPnL is FY-only)
   { test: /\bmonth(ly|s)?\b|by month|each month|which month|most profitable|biggest.*(month|sales)/i, tool: "getMonthlyPnL", input: {} },

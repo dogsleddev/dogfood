@@ -8,7 +8,7 @@ import type { MetricFamily, MetricValue, MetricDefinition } from "@/lib/types/me
 import { METRIC_CATALOG } from "@/lib/types/metrics";
 import { getDataStore } from "@/lib/datastore";
 
-/** The locked metric design (the 19-tile catalog). Static — safe to read now. */
+/** The locked metric design (the 20-tile catalog). Static — safe to read now. */
 export function listMetricDefinitions(family?: MetricFamily): readonly MetricDefinition[] {
   return family ? METRIC_CATALOG.filter((d) => d.family === family) : METRIC_CATALOG;
 }

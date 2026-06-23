@@ -233,8 +233,12 @@ export function accountTrialBalanceAt(
   // still sits in the income-statement accounts until it closes), and that is exactly what foots the
   // books: Assets + Σ(expense FYTD) + AccDef[priorFY] === Liabilities + Paid-in + Σ(revenue FYTD).
   // Source it from the balance-sheet deficit series at the prior FY-end (0 before the first FY).
-  const deficitSeries = getBalanceSheetSeed().series.accumulatedDeficit;
-  const priorFyEndDeficit = fy0 >= 1 ? deficitSeries[fy0 - 1] ?? 0 : 0;
+  const bsSeed = getBalanceSheetSeed();
+  const deficitSeries = bsSeed.series.accumulatedDeficit;
+  // For the FIRST fiscal year (fy0 === 0) the "prior FY-end" deficit is the pre-window OPENING deficit
+  // (the plug that balances the opening sheet), NOT 0 — otherwise the contra-equity debit it should
+  // carry is missing and the TB is short the opening deficit on the debit side (it would not foot).
+  const priorFyEndDeficit = fy0 >= 1 ? deficitSeries[fy0 - 1] ?? 0 : bsSeed.opening.accumulatedDeficit;
   const out = new Map<string, number>();
   for (const a of accounts) {
     if (a.accountType === "contra_equity") {

@@ -82,6 +82,23 @@ for (const p of [month(2024, 12), month(2025, 12), month(2026, 5)] as Month[]) {
   check(`reconciled at ${p} (Σ|gap| $${r.unreconciledTotal.toFixed(2)})`, r.reconciled);
 }
 
+// the TB itself FOOTS at every FY boundary, INCLUDING the first FY (the accumulated-deficit fix — the
+// opening deficit must carry into FY2024 or the TB is short $8.27M on the debit side). The standing
+// gate only footed the close month, which is exactly how that regression would have slipped.
+console.log("\nTB FOOTS across FY boundaries (accountTrialBalanceAt: Σ debit-side === Σ credit-side)");
+for (const p of [month(2024, 1), month(2024, 6), month(2024, 12), month(2025, 12), month(2026, 5)] as Month[]) {
+  const tb = accountTrialBalanceAt(p);
+  let dr = 0;
+  let cr = 0;
+  for (const a of CHART_OF_ACCOUNTS) {
+    const nat = tb.get(a.code) ?? 0;
+    const debitSide = isDebitNormal(a.accountType) ? nat : -nat;
+    if (debitSide >= 0) dr += debitSide;
+    else cr += -debitSide;
+  }
+  check(`${p} foots (Σdebit === Σcredit)`, Math.abs(dr - cr) < 1, `Δ $${(dr - cr).toFixed(2)}`);
+}
+
 // ── 4. a CONTRADICTING TB is BLOCKED — never plugged, the gap is flagged on the right account (§16) ──
 console.log("\nCONTRADICTING TB — the gap blocks, no plug");
 const brokenTb = new Map(accountTrialBalanceAt(closePeriod));

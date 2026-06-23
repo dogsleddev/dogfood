@@ -5,8 +5,9 @@ actuals and refresh every statement, the Dashboard, and Scout. This folder is th
 importer reads. **Build status (2026-06-22):** the importer FOUNDATION is built — trial-balance
 parsing + validation (`lib/import/`, the file below foots + validates clean) and a writable global
 as-of (closing a month advances the actual/forecast split, proven tie-out-neutral). The
-**reconciliation control total** (the detail-to-TB back-check) and the Setup → Data Import UI are the
-active next build (see `Handoff.md`). The trial balance is the single source of truth; the detailed
+**reconciliation control total** (the detail-to-TB back-check) and the Setup → Data Import UI **shipped
+this session and are live** (verified on Supabase; migration 0007 applied). Slice 3 (COA base-import)
+is the remaining deferred piece (see `Handoff.md`). The trial balance is the single source of truth; the detailed
 transactions reconcile UP to it with a control total, and a gap is a blocking "needs attention" flag,
 never a plug (the model below is the spec).
 
