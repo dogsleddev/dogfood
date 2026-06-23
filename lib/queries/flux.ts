@@ -12,9 +12,9 @@ import type { Money } from "@/lib/types/money";
 import type { PnLLineId } from "@/lib/types/statements";
 import type { FluxNote, FluxNoteAnchor, FluxNoteSource, FluxNoteFilter } from "@/lib/types/flux";
 
-/** Trusted single-tenant: one user (the nav footer's "Chris · CFO"). Swap for an auth lookup at login. */
+/** Trusted single-tenant: one user (the nav footer's "Max · Chief Barking Officer"). Swap for an auth lookup at login. */
 export function getCurrentUser(): string {
-  return "Chris";
+  return "Max";
 }
 
 export async function listFluxNotes(filter: FluxNoteFilter = {}): Promise<readonly FluxNote[]> {

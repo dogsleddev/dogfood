@@ -178,11 +178,11 @@ export function Sidebar() {
       <div className="space-y-3 border-t border-white/10 px-3 py-3">
         <div className="flex items-center gap-2.5 px-1">
           <span className="flex size-8 items-center justify-center rounded-full bg-[#16273a] text-sm font-medium text-parchment">
-            C
+            M
           </span>
           <span className="min-w-0 flex-1">
-            <span className="block truncate text-sm font-medium text-parchment">Chris</span>
-            <span className="block truncate text-xs text-steel">CFO</span>
+            <span className="block truncate text-sm font-medium text-parchment">Max</span>
+            <span className="block truncate text-xs text-steel">Chief Barking Officer</span>
           </span>
         </div>
         <ScoutLauncher />
