@@ -71,6 +71,7 @@ const ARGS: Record<QueryName, readonly unknown[]> = {
   getScenarioDashboard: [["base"] as ScenarioId[]],
   listFluxNotes: [{}],
   getFluxDetail: ["sales_marketing", PERIOD],
+  getReconciliation: [PERIOD],
 };
 const callQuery = (name: QueryName): Promise<unknown> =>
   (TOOL_THUNKS[name] as (...a: readonly unknown[]) => Promise<unknown>)(...ARGS[name]);

@@ -124,6 +124,9 @@ const CASES: readonly Case[] = [
   { q: "What was our total revenue this fiscal year?", want: "getPnL OR getMetric(revenue), NOT getRevenueForecast", check: (rs) => !has(rs, "getRevenueForecast") && (has(rs, "getPnL") || metricsOf(rs).includes("revenue")) },
   // Board package
   { q: "Pull up the board package for the period.", want: "getBoardPackage", check: (rs) => has(rs, "getBoardPackage") },
+  // Reconciliation control total (Data Import) — "tie out / reconcile" must NOT grab getBalanceSheet
+  { q: "Are the books reconciled?", want: "getReconciliation", check: (rs) => has(rs, "getReconciliation") },
+  { q: "Do the detailed transactions tie out to the trial balance?", want: "getReconciliation, NOT getBalanceSheet", check: (rs) => has(rs, "getReconciliation") && !has(rs, "getBalanceSheet") },
   // Scenarios — READ saved scenarios (distinct from the what-if guard below)
   { q: "What scenarios do we have set up?", want: "getScenarios", check: (rs) => has(rs, "getScenarios") },
   { q: "Show me the 25% Profit scenario's P&L.", want: "getScenarioPnL", check: (rs) => has(rs, "getScenarioPnL") },
@@ -175,6 +178,8 @@ const DET_CASES: readonly { q: string; tool: string }[] = [
   { q: "What's the capex plan?", tool: "getFixedAssetForecast" },
   { q: "Show me the prepaids schedule.", tool: "getPrepaidsForecast" },
   { q: "Pull up the board package.", tool: "getBoardPackage" },
+  { q: "Are the books reconciled?", tool: "getReconciliation" },
+  { q: "Do the detailed transactions tie out to the trial balance?", tool: "getReconciliation" },
   { q: "What scenarios do we have?", tool: "getScenarios" },
   { q: "Compare the breakeven and base scenarios.", tool: "compareScenarios" },
   { q: "Show the 25% profit scenario P&L.", tool: "getScenarioPnL" },

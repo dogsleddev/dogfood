@@ -85,7 +85,7 @@ Here is what comes in, and from where.
 
 When you import, Dogfood runs five checks before anything lands. Each one guarantees a specific property of a clean period.
 
-- **The trial balance balances.** Sum of `debit` equals sum of `credit` for the period. This is the **hard gate**: a TB that does not foot is not a close, and the import stops here. (Bearing's real May 2026 `trial_balance` foots to $59,567,335.23 on each side.)
+- **The trial balance balances.** Sum of `debit` equals sum of `credit` for the period. This is the **hard gate**: a TB that does not foot is not a close, and the import stops here. (Bearing's real May 2026 `trial_balance` foots to $59,587,121.23 on each side.)
 - **Every account is known.** Every `account_code` in the trial balance exists in `chart_of_accounts`. No mystery accounts.
 - **Every account is mapped.** Every account maps to exactly one `statement_line`: no orphans, no gaps. This is what guarantees every dollar in the TB has a home on a statement.
 - **One row per (`period`, `account_code`).** A trial balance has a single row per account per period, so re-importing a period cleanly overwrites it instead of double-counting.

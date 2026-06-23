@@ -73,6 +73,8 @@ export function stepLabel(tool: string, args: Record<string, unknown> = {}): str
       return "Unrolling the prepaids…";
     case "getBoardPackage":
       return "Fetching the board deck…";
+    case "getReconciliation":
+      return "Checking the books tie out…";
     case "getScenarios":
       return "Rounding up the scenarios…";
     case "getScenarioPnL":

@@ -46,6 +46,7 @@ import type {
 import type { DashboardSummary, KpiTile } from "@/lib/types/dashboard";
 import type { MetricValue } from "@/lib/types/metrics";
 import type { FluxNote, NewFluxNote, FluxNoteFilter } from "@/lib/types/flux";
+import type { ImportRun, NewImportRun } from "@/lib/import/types";
 import { randomUUID } from "node:crypto";
 import type { SubscriptionSeed } from "@/lib/seed/subscription";
 import type { ServicesSeed } from "@/lib/seed/services";
@@ -85,6 +86,9 @@ export class InMemoryDataStore implements DataStore {
   private scenarios = new Map<ScenarioId, Scenario>();
   private budget: BudgetSnapshot | undefined;
   private fluxNotes: FluxNote[] = [];
+  // The import audit trail (§16). Persists across requests via the globalThis store singleton, like
+  // fluxNotes; SupabaseDataStore overrides this to persist to the import_runs table (graceful fallback).
+  private importRuns: ImportRun[] = [];
   // The override layer (§17): a mutable delta list off the immutable chart. Starts EMPTY, so
   // listGlAccounts() returns CHART_OF_ACCOUNTS by reference (the byte-identical path). Persists across
   // requests via the globalThis store singleton, exactly like fluxNotes.
@@ -240,6 +244,16 @@ export class InMemoryDataStore implements DataStore {
   }
   async deleteScenario(id: ScenarioId): Promise<void> {
     this.scenarios.delete(id);
+  }
+
+  // ── import audit trail (mutable in-memory; persists across requests via the globalThis store) ──
+  async recordImportRun(run: NewImportRun): Promise<ImportRun> {
+    const saved: ImportRun = { ...run, id: randomUUID(), createdAt: new Date().toISOString() };
+    this.importRuns.unshift(saved); // newest first
+    return saved;
+  }
+  async listImportRuns(): Promise<readonly ImportRun[]> {
+    return [...this.importRuns];
   }
 
   // ── flux notes (mutable in-memory thread; persists across requests via the globalThis store) ──

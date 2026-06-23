@@ -56,22 +56,54 @@ export interface ValidationResult {
   readonly footing: readonly PeriodFooting[];
 }
 
-/** A single (account, period) reconciliation outcome — imported TB movement vs generator GL activity. */
+/** A single (account, period) reconciliation outcome — TB figure vs the sub-ledger detail it should explain. */
 export interface ReconFinding {
   readonly accountCode: string;
   readonly accountName: string;
+  /** the statement line the account maps to (the EFFECTIVE map), for rolling the control total up to a line */
+  readonly statementLineId: string;
   readonly period: Month;
-  /** the imported TB figure (natural-balance: P&L = FYTD activity, BS = period-end balance) */
+  /** the TB figure (natural-balance: P&L = FYTD activity, BS = period-end balance) */
   readonly tbAmount: number;
-  /** what the generator's GL says it should be (the "detail") */
+  /** what the sub-ledger detail sums to (the independent re-derivation) */
   readonly detailAmount: number;
   readonly gap: number; // signed: tb − detail
+  /** the materiality threshold for this line: max($1, 0.1%·|tbAmount|) */
+  readonly threshold: number;
   readonly reconciled: boolean; // |gap| <= threshold
 }
 
+/** A TB account with NO sub-ledger to reconcile up — authoritative from the TB (§16; never false-flagged). */
+export interface TbOnlyAccount {
+  readonly accountCode: string;
+  readonly accountName: string;
+  readonly statementLineId: string;
+  readonly tbAmount: number;
+}
+
 export interface ReconResult {
-  readonly reconciled: boolean; // every finding within threshold
+  readonly period: Month;
+  readonly reconciled: boolean; // every detailed finding within threshold
   readonly findings: readonly ReconFinding[];
+  /** accounts with no sub-ledger (equity, D&A, SBC, deferred, cash, …) — authoritative, not reconciled */
+  readonly tbOnly: readonly TbOnlyAccount[];
   /** the Σ|gap| of the unreconciled findings (the §16 "needs attention" dollar total) */
   readonly unreconciledTotal: number;
 }
+
+/** An audit row for a committed import run (the §16 import history; persisted in `import_runs`). */
+export interface ImportRun {
+  readonly id: string;
+  readonly kind: ImportKind;
+  readonly period: string;
+  /** "reconciled" (clean), "needs_attention" (an unreconciled gap), or "rejected" (validation failed) */
+  readonly status: "reconciled" | "needs_attention" | "rejected";
+  /** whether this run advanced the global as-of (a clean new in-close month) */
+  readonly advancedAsOf: boolean;
+  readonly unreconciledTotal: number;
+  readonly note: string;
+  readonly createdAt: string;
+}
+
+/** A new import-run audit row (the store stamps `id` + `createdAt`). */
+export type NewImportRun = Omit<ImportRun, "id" | "createdAt">;

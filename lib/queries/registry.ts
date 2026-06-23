@@ -49,6 +49,8 @@ import {
   getScenarioDashboard,
   listFluxNotes,
   getFluxDetail,
+  // --- Setup · Data Import: the detail-to-TB reconciliation control total ---
+  getReconciliation,
 } from "@/lib/queries";
 
 /**
@@ -96,6 +98,7 @@ export const TOOL_THUNKS = {
   getScenarioDashboard,
   listFluxNotes,
   getFluxDetail,
+  getReconciliation,
 } satisfies Record<string, Query>;
 // Write queries (addFluxNote) are NOT in TOOL_THUNKS: scout-readiness executes every thunk, and a
 // write must never run there. The write tool is wired with a dedicated impl (see lib/scout/tools.ts).
@@ -439,6 +442,16 @@ export const SCOUT_REGISTRY: readonly ScoutToolBinding[] = [
     write: true,
     wired: true,
     description: "WRITE a Flux Analysis note on the user's behalf — Scout's only write. Anchor it with transactionId, or accountCode + period, or statementLine + period; pass the note body. It's recorded as the user (attributed to them, flagged entered-via-Scout) and can be removed from the note card. Use when the user says 'add/record a note that…', 'flag…', 'note that…', 'write down why…'. To READ existing notes use getFluxNotes instead.",
+  },
+
+  // ── Setup · Data Import — the detail-to-TB reconciliation control total (§16) ──
+  {
+    tool: "getReconciliation",
+    module: "config",
+    lane: "data",
+    query: "getReconciliation",
+    wired: true,
+    description: "Whether the books RECONCILE: for every account with a sub-ledger, the detailed transactions vs the trial balance (the control total on Data Import). Returns reconciled? + how many accounts tie + any 'needs attention' exceptions (account + variance). Use for 'are the books reconciled / do the books tie out / is the trial balance reconciled / any reconciliation exceptions / did we close cleanly'. For the actual statement numbers use getPnL/getBalanceSheet; for one bill's detail use getExpenseTransactions.",
   },
 
   // ── Config (load-bearing reads; flip to live when account-mapping exposes them) ─

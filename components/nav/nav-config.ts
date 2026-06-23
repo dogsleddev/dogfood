@@ -136,6 +136,7 @@ export const NAV: readonly NavGroup[] = [
   {
     label: "Setup",
     items: [
+      leaf("Data Import", "/setup/data-import", "Upload"),
       leaf("Account Mapping", "/setup/account-mapping", "Map"),
       leaf("Settings", "/setup/settings", "Settings"),
       {

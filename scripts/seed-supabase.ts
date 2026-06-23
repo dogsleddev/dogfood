@@ -79,18 +79,29 @@ async function main() {
     ["cash_receipts", "id"], ["customer_invoices", "id"], ["timesheets", "id"], ["paychecks", "id"], ["vendor_bills", "id"],
     ["journal_lines", "id"], ["journal_entries", "id"], ["revrec_by_project", "project_id"], ["revrec_by_contract", "contract_id"],
     ["monthly_series", "period"], ["renewals", "id"], ["pipeline", "id"], ["projects", "id"], ["contracts", "id"], ["staff", "id"],
-    ["customers", "id"], ["gl_accounts", "code"], ["expense_groups", "id"], ["departments", "id"], ["settings", "id"], ["firm", "id"],
+    ["customers", "id"], ["gl_accounts", "code"], ["expense_groups", "id"], ["departments", "id"], ["firm", "id"],
+    // NOTE: `settings` is intentionally NOT cleared — see the upsert-if-absent below. `import_runs` (and the
+    // other write tables: flux_notes / scenarios / budget_snapshots / account_overrides) are write surfaces,
+    // also never cleared, so a re-seed preserves the CFO's work.
   ] as const) {
     await clear(t, col);
   }
 
   // ── config ──
   await insert("firm", [{ id: PLACEHOLDER_FIRM.id, name: PLACEHOLDER_FIRM.name, short_code: PLACEHOLDER_FIRM.shortCode }]);
-  await insert("settings", [{
-    id: 1, currency: PLACEHOLDER_SETTINGS.currency, fiscal_year_start_month: PLACEHOLDER_SETTINGS.fiscalYearStartMonth,
-    close_through: PLACEHOLDER_SETTINGS.closeThrough, in_close_month: PLACEHOLDER_SETTINGS.inCloseMonth ?? null,
-    forecast_horizon_start: PLACEHOLDER_SETTINGS.forecastHorizon.start, forecast_horizon_end: PLACEHOLDER_SETTINGS.forecastHorizon.end,
-  }]);
+  // Settings is upsert-IF-ABSENT: the close boundary (global as-of) is the CFO's write surface (the
+  // importer advances it), so a re-seed must NOT reset an advanced as-of back to the default May. Only
+  // seed the default row when the table is empty (fresh project).
+  const { data: existingSettings } = await db.from("settings").select("id").eq("id", 1).maybeSingle();
+  if (existingSettings) {
+    console.log("  settings               present — preserved (as-of not reset)");
+  } else {
+    await insert("settings", [{
+      id: 1, currency: PLACEHOLDER_SETTINGS.currency, fiscal_year_start_month: PLACEHOLDER_SETTINGS.fiscalYearStartMonth,
+      close_through: PLACEHOLDER_SETTINGS.closeThrough, in_close_month: PLACEHOLDER_SETTINGS.inCloseMonth ?? null,
+      forecast_horizon_start: PLACEHOLDER_SETTINGS.forecastHorizon.start, forecast_horizon_end: PLACEHOLDER_SETTINGS.forecastHorizon.end,
+    }]);
+  }
   await insert("departments", SEED_DEPARTMENTS.map((d) => ({ id: d.id, name: d.name, function: d.function })));
   await insert("expense_groups", SEED_EXPENSE_GROUPS.map((g) => ({
     id: g.id, label: g.label, classification: g.classification, function: g.function ?? null, sort_order: g.order,

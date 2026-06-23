@@ -1,5 +1,5 @@
 period,account_code,account_name,debit,credit
-2026-05,1000,Cash,17929345.20,0.00
+2026-05,1000,Cash,17829345.20,0.00
 2026-05,1100,Accounts Receivable,2531999.03,0.00
 2026-05,1200,Unbilled WIP,288750.00,0.00
 2026-05,1300,Prepaid Expenses,809630.20,0.00
@@ -16,7 +16,7 @@ period,account_code,account_name,debit,credit
 2026-05,5100,Non-employee Cost of Revenue,1507132.05,0.00
 2026-05,6000,Indirect Payroll,5050811.27,0.00
 2026-05,6100,Employee Expenses,1303744.26,0.00
-2026-05,6200,Sales & Marketing,1160909.71,0.00
+2026-05,6200,Sales & Marketing,1260909.71,0.00
 2026-05,6300,Travel & Entertainment,205600.00,0.00
 2026-05,6400,IT,171162.00,0.00
 2026-05,6500,HR,102800.00,0.00

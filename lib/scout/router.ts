@@ -49,6 +49,9 @@ const ROUTES: readonly Route[] = [
   { test: /projects?|\bwip\b|work[- ]in[- ]progress|utiliz|services delivery|billable|engagement/i, tool: "getProjects", input: {} },
   { test: /\bstaff\b|head\s?count|employees?|\bfte\b|how many people|roster|by department|hiring plan/i, tool: "getStaff", input: {} },
   { test: /expense (transaction|detail|bill)|vendor bill|what did we spend|spend(ing)? on|\bap\b detail/i, tool: "getExpenseTransactions", input: {} },
+  // Reconciliation control total (Data Import) — BEFORE the balance-sheet route so "do the books
+  // reconcile / tie out" doesn't get grabbed by the broad balance-sheet keyword.
+  { test: /reconcil|tie[- ]?out|do the books|books? (tie|balance to)|control total|needs attention|trial balance|close(d)? (cleanly|the month|the books)/i, tool: "getReconciliation", input: {} },
   // Monthly BS/CF intent — BEFORE the flux "break down" route and the annual BS/CF/P&L routes, so
   // "break down cash flow month by month" hits the monthly series, not flux-detail. (Both regexes
   // require a balance-sheet/cash-flow token, so they never grab flux/driver questions.)
@@ -132,6 +135,10 @@ function summarize(tool: string, data: any): string {
       return `${data.fiscalYear} prepaids: additions ${data.fyAdditions}, amortization ${data.fyAmortization}, closing ${data.closingBalance}.`;
     case "getBoardPackage":
       return `Board package, ${data.period}: ${data.sections.map((s: any) => s.section).join(" · ")}.`;
+    case "getReconciliation":
+      return data.reconciled
+        ? `${data.period}: books reconciled — ${data.message}`
+        : `${data.period}: ${data.message} Exceptions: ${(data.exceptions ?? []).map((e: any) => `${e.account} (${e.variance})`).join(", ")}.`;
     case "getScenarios":
       return `${data.scenarios.length} scenarios: ${data.scenarios.map((s: any) => s.name).join(", ")}.`;
     case "getScenarioPnL": {

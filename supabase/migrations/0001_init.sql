@@ -300,6 +300,19 @@ create table account_overrides (
   updated_at      timestamptz not null default now()
 );
 
+-- the CSV importer audit trail (one row per committed import run; §16; folded from 0007_import_runs.sql).
+-- A write table — EXCLUDED from the seed loader's clear array, so a re-seed never erases the history.
+create table import_runs (
+  id                 uuid primary key default gen_random_uuid(),
+  kind               text not null default 'trial_balance' check (kind in ('trial_balance','chart_of_accounts')),
+  period             text not null,
+  status             text not null check (status in ('reconciled','needs_attention','rejected')),
+  advanced_as_of     boolean not null default false,
+  unreconciled_total numeric(16,2) not null default 0,
+  note               text,
+  created_at         timestamptz not null default now()
+);
+
 -- ── indexes for period-filtered + drill reads ──
 create index on vendor_bills (period);
 create index on paychecks (period);
@@ -311,6 +324,7 @@ create index on journal_lines (entry_id);
 create index on flux_notes (transaction_id);
 create index on flux_notes (period, statement_line);
 create index if not exists flux_notes_acct_ix on flux_notes (account_code, period);  -- (folded from 0003)
+create index if not exists import_runs_created_ix on import_runs (created_at desc);  -- (folded from 0007)
 
 -- updated_at maintenance for the mutable tables
 create or replace function set_updated_at() returns trigger as $$

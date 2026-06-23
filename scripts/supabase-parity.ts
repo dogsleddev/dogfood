@@ -79,7 +79,12 @@ async function main() {
 
   // config
   compareOne("getFirm", await mem.getFirm(), await sup.getFirm());
-  compareOne("getSettings", await mem.getSettings(), await sup.getSettings());
+  // Snapshot the in-memory settings to a PLAIN object BEFORE reading Supabase: mem.getSettings() returns
+  // PLACEHOLDER_SETTINGS by reference (lazy getters over the global close boundary), and sup.getSettings()
+  // read-repairs that same global — so serializing mem after sup would adopt the Supabase as-of and mask a
+  // real closeThrough/inCloseMonth divergence (the exact fields the importer persists).
+  const memSettings = { ...(await mem.getSettings()) };
+  compareOne("getSettings", memSettings, await sup.getSettings());
   compareList("departments", await mem.listDepartments(), await sup.listDepartments());
   compareList("expense_groups", await mem.listExpenseGroups(), await sup.listExpenseGroups());
   compareList("gl_accounts", await mem.listGlAccounts(), await sup.listGlAccounts());

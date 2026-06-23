@@ -78,6 +78,7 @@ import type {
 } from "@/lib/types/source";
 import type { CustomerInvoice, CashReceipt, Paycheck, Timesheet, VendorBill, DocStatus, CustomerInvoiceKind } from "@/lib/types/transactions";
 import type { FluxNote, NewFluxNote, FluxNoteFilter, FluxNoteSource } from "@/lib/types/flux";
+import type { ImportRun, NewImportRun } from "@/lib/import/types";
 import type { Scenario, Adjustment, Magnitude, ScenarioBaseline, AdjustmentShape } from "@/lib/types/scenario";
 import { parseMonth } from "@/lib/types/period";
 
@@ -245,6 +246,17 @@ const rowToScenario = (r: Row): Scenario => ({
   name: s(r.name),
   baseline: parseBaseline(r.baseline),
   adjustments: ((r.adjustments ?? []) as Record<string, unknown>[]).map(parseAdjustment),
+});
+
+const rowToImportRun = (r: Row): ImportRun => ({
+  id: s(r.id),
+  kind: s(r.kind) as ImportRun["kind"],
+  period: s(r.period),
+  status: s(r.status) as ImportRun["status"],
+  advancedAsOf: Boolean(r.advanced_as_of),
+  unreconciledTotal: num(r.unreconciled_total),
+  note: s(r.note),
+  createdAt: s(r.created_at),
 });
 
 export class SupabaseDataStore extends InMemoryDataStore {
@@ -505,5 +517,32 @@ export class SupabaseDataStore extends InMemoryDataStore {
   override async deleteScenario(id: ScenarioId): Promise<void> {
     const { error } = await this.client.from("scenarios").delete().eq("id", id);
     if (error) throw new Error(`SupabaseDataStore: delete scenarios: ${error.message}`);
+  }
+
+  // ── import audit trail — persist to import_runs; if the migration (0007) isn't applied yet, fall back
+  // to the inherited in-memory array so an import still demos (the run is just session-local then). ──
+  override async recordImportRun(run: NewImportRun): Promise<ImportRun> {
+    const row = {
+      kind: run.kind,
+      period: run.period,
+      status: run.status,
+      advanced_as_of: run.advancedAsOf,
+      unreconciled_total: Number(run.unreconciledTotal.toFixed(2)),
+      note: run.note,
+    };
+    const { data, error } = await this.client.from("import_runs").insert(row).select("*").single();
+    if (error) {
+      if (/does not exist|could not find the table|schema cache/i.test(error.message)) return super.recordImportRun(run);
+      throw new Error(`SupabaseDataStore: insert import_runs: ${error.message}`);
+    }
+    return rowToImportRun(data as Row);
+  }
+  override async listImportRuns(): Promise<readonly ImportRun[]> {
+    const { data, error } = await this.client.from("import_runs").select("*").order("created_at", { ascending: false });
+    if (error) {
+      if (/does not exist|could not find the table|schema cache/i.test(error.message)) return super.listImportRuns();
+      throw new Error(`SupabaseDataStore: select import_runs: ${error.message}`);
+    }
+    return (data as Row[]).map(rowToImportRun);
   }
 }

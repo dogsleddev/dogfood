@@ -53,6 +53,7 @@ import {
   listFluxNotes,
   addFluxNote,
   getFluxDetail,
+  getReconciliation,
 } from "@/lib/queries";
 import type { DriverInput } from "@/lib/queries/scenarios";
 import type { LeverId, AdjustmentShape } from "@/lib/types/scenario";
@@ -817,6 +818,31 @@ export const SCOUT_TOOL_IMPLS: Record<string, ScoutToolImpl> = {
           sections: bp.sections.map((sec) => ({ section: sec.title, tiles: sec.tiles.map((t) => ({ metric: t.definition.label, value: formatMetricValue(t.value) })) })),
         },
         receipt: receipt("getBoardPackage", { period }, "Board Package", "/board-package"),
+      };
+    },
+  },
+
+  // ── Setup · Data Import — the detail-to-TB reconciliation control total (§16) ──
+  getReconciliation: {
+    inputSchema: { type: "object", properties: { period: PERIOD_PROP }, additionalProperties: false },
+    async run(input) {
+      const period = periodOf(input);
+      const r = await getReconciliation(period);
+      const exceptions = r.findings
+        .filter((f) => !f.reconciled)
+        .map((f) => ({ account: `${f.accountCode} ${f.accountName}`, statementLine: f.statementLineId, variance: `$${Math.round(f.gap).toLocaleString()}` }));
+      return {
+        data: {
+          period: monthLabel(period),
+          reconciled: r.reconciled,
+          message: r.reconciled
+            ? `All ${r.findings.length} accounts with a sub-ledger tie to the trial balance to the dollar; ${r.tbOnly.length} more are authoritative (no sub-ledger to reconcile up).`
+            : `${exceptions.length} account(s) need attention (Σ|gap| $${Math.round(r.unreconciledTotal).toLocaleString()}) — fix upstream and re-import, never plug.`,
+          detailedAccounts: r.findings.length,
+          authoritativeAccounts: r.tbOnly.length,
+          exceptions,
+        },
+        receipt: receipt("getReconciliation", { period }, "Data Import · reconciliation", "/setup/data-import"),
       };
     },
   },

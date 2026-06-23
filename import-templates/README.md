@@ -178,7 +178,7 @@ operating_expense | blank) · `function` (direct | rnd | sm | ga | blank).
 `period` · `account_code` · `account_name` · `debit` · `credit`. Balance-sheet accounts carry their
 period-end balance; P&L accounts carry fiscal-year-to-date activity; exactly one of debit/credit is
 non-zero per row. The example file is Bearing's **real May-2026 trial balance** and balances to the
-penny ($59,567,335.23 each side) — import it and the May Balance Sheet, P&L (YTD), and Cash Flow
+penny ($59,587,121.23 each side) — import it and the May Balance Sheet, P&L (YTD), and Cash Flow
 reproduce.
 
 ### expense_transactions.csv

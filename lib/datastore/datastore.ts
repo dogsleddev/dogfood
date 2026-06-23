@@ -32,6 +32,7 @@ import type {
 } from "@/lib/types/source";
 import type { CustomerInvoice, CashReceipt, Paycheck, Timesheet } from "@/lib/types/transactions";
 import type { FluxNote, NewFluxNote, FluxNoteFilter } from "@/lib/types/flux";
+import type { ImportRun, NewImportRun } from "@/lib/import/types";
 import type { Scenario } from "@/lib/types/scenario";
 import type {
   PnL,
@@ -162,6 +163,10 @@ export interface DataStore {
   getScenario(id: ScenarioId): Promise<Scenario | undefined>;
   upsertScenario(scenario: Scenario): Promise<void>;
   deleteScenario(id: ScenarioId): Promise<void>;
+
+  // ── import audit trail (one row per committed CSV import run; §16 import history) ──
+  recordImportRun(run: NewImportRun): Promise<ImportRun>;
+  listImportRuns(): Promise<readonly ImportRun[]>;
 
   // ── flux notes (the first user-WRITE surface — flux-analysis.md; a comment thread per anchor) ──
   listFluxNotes(filter?: FluxNoteFilter): Promise<readonly FluxNote[]>;

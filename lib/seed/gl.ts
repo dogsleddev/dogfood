@@ -12,6 +12,7 @@
  */
 import { usd } from "@/lib/types/money";
 import { indexToMonth } from "./params";
+import { monthToIndex, fyStartIndex } from "@/lib/types/period";
 import type { Month } from "@/lib/types/period";
 import type { GlAccount, JournalEntry, JournalLine, JournalSource } from "@/lib/types/source";
 import type { GlAccountId, StatementLineId, CostFunction, AccountType } from "@/lib/types/common";
@@ -91,8 +92,9 @@ export const CHART_OF_ACCOUNTS: readonly GlAccount[] = ACCOUNTS.map((a) => ({
   statementLineId: sln(a.statementLineId),
 }));
 
-/** Debit-normal account types add to balance on a debit; the rest on a credit. */
-const isDebitNormal = (t: AccountType): boolean =>
+/** Debit-normal account types add to balance on a debit; the rest on a credit. (Exported so the CSV
+ *  importer converts an imported TB row's debit/credit to the same natural balance the GL/TB use.) */
+export const isDebitNormal = (t: AccountType): boolean =>
   t === "asset" || t === "cost_of_revenue" || t === "operating_expense" || t === "tax" || t === "contra_equity";
 
 const OPEX_GROUP_TO_ACCOUNT: Record<string, string> = {
@@ -202,6 +204,50 @@ export function balanceSeriesByLine(
     byLine.set(a.statementLineId, arr);
   }
   return byLine;
+}
+
+/** A GL account's natural balance is a point-in-time STOCK (assets/liabilities/equity) vs a period FLOW (P&L). */
+const isBalanceSheetType = (t: AccountType): boolean =>
+  t === "asset" || t === "liability" || t === "equity" || t === "contra_equity";
+
+/**
+ * The trial balance AT `period`, per account code, in NATURAL balance (the importer's TB representation —
+ * import-templates/README.md: "Balance-sheet accounts carry their period-end balance; P&L accounts carry
+ * fiscal-year-to-date activity"). This is the TB side of the detail-to-TB reconciliation control total
+ * (CLAUDE.md §16): the imported TB is compared against the sub-ledger detail, and the seed's OWN books
+ * use this as the standing control total. Reuses the GL's natural-balance `activity` + `openingByCode()` —
+ * the same opening literal `buildLedger`'s bsTie uses, so it never drifts (the data-sweep BS-rollup
+ * tripwire guards that). BS = opening + Σactivity[0..i]; P&L = Σactivity[fyStart..i] (FYTD).
+ */
+export function accountTrialBalanceAt(
+  period: Month,
+  accounts: readonly GlAccount[] = CHART_OF_ACCOUNTS,
+): Map<string, number> {
+  const { activity } = getLedger();
+  const opening = openingByCode();
+  const i = monthToIndex(period);
+  const fy0 = fyStartIndex(period);
+  // The accumulated deficit is NOT posted in the monthly-summary GL — there is no period-end closing
+  // entry rolling P&L into equity (the close is the ERP's job, §16). In a trial balance with OPEN P&L
+  // accounts, equity therefore carries its PRIOR-fiscal-year-end balance (the current FY's profit/loss
+  // still sits in the income-statement accounts until it closes), and that is exactly what foots the
+  // books: Assets + Σ(expense FYTD) + AccDef[priorFY] === Liabilities + Paid-in + Σ(revenue FYTD).
+  // Source it from the balance-sheet deficit series at the prior FY-end (0 before the first FY).
+  const deficitSeries = getBalanceSheetSeed().series.accumulatedDeficit;
+  const priorFyEndDeficit = fy0 >= 1 ? deficitSeries[fy0 - 1] ?? 0 : 0;
+  const out = new Map<string, number>();
+  for (const a of accounts) {
+    if (a.accountType === "contra_equity") {
+      out.set(a.code, priorFyEndDeficit); // a positive debit balance (accumulated losses)
+      continue;
+    }
+    const act = activity.get(a.code);
+    const bsAcct = isBalanceSheetType(a.accountType);
+    let sum = bsAcct ? opening[a.code] ?? 0 : 0; // P&L accounts open at 0 (FYTD)
+    if (act) for (let k = bsAcct ? 0 : fy0; k <= i; k++) sum += act[k] ?? 0;
+    out.set(a.code, sum);
+  }
+  return out;
 }
 
 /** Point-in-time wrapper: each line's balance AT `asOfIdx` (clamped to ≥ 0). Absent lines → no entry. */
