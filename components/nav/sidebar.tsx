@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { ChevronDown, ChevronRight, Sparkles, ArrowUpRight } from "lucide-react";
+import { ChevronDown, ChevronRight, PawPrint, ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { NAV, type NavGroup, type NavEntry, type NavLeaf, type NavParent } from "./nav-config";
 import { Icon } from "./icon";
@@ -142,11 +142,8 @@ function ScoutLauncher() {
       onClick={toggle}
       className="flex w-full items-center gap-2.5 rounded-lg border border-ember/40 bg-[linear-gradient(135deg,rgba(236,109,63,0.9),rgba(70,201,154,0.55))] px-3 py-2.5 text-left text-white shadow-sm transition-opacity hover:opacity-95"
     >
-      <Sparkles className="size-4 shrink-0" />
-      <span className="min-w-0 flex-1">
-        <span className="block text-sm font-medium leading-tight">Ask Scout</span>
-        <span className="block text-[11px] leading-tight text-white/80">opens lower-right</span>
-      </span>
+      <PawPrint className="size-4 shrink-0" />
+      <span className="min-w-0 flex-1 text-sm font-medium">Ask Scout</span>
       <ArrowUpRight className="size-4 shrink-0 text-white/90" />
     </button>
   );
