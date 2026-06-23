@@ -267,3 +267,26 @@ export interface NonGaapReconciliation {
   readonly freeCashFlow: Money; // operating cash flow − capex
   readonly freeCashFlowMargin: Percent;
 }
+
+/**
+ * The GAAP-net-income → cash-burn → runway bridge (CLAUDE.md §11). The bridge rows are the FY
+ * cash-flow (forecast) figures — whole-FY26, tying to the Cash Flow Forecast column — while the
+ * runway is trailing-12-month (the tile's window). The two frames are coupled but distinct; callers
+ * must label the window. Surfaced on the Cash Flow page + Scout's getCashBurnBridge ("why ~49 months").
+ */
+export interface CashBurnBridge {
+  readonly period: Month;
+  readonly gaapNetIncome: Money;
+  readonly dAndA: Money;
+  readonly sbc: Money;
+  readonly nonCashAddbacks: Money; // D&A + SBC
+  readonly deferredRevenueInflow: Money; // Δ deferred revenue — the annual-prepay inflow (the headline)
+  readonly otherWorkingCapital: Money; // Δ AR + AP + WIP + prepaids
+  readonly operatingCashFlow: Money;
+  readonly capex: Money;
+  readonly freeCashFlow: Money; // net change in cash (FY; financing 0)
+  readonly runway: Runway; // TTM window
+  readonly gaapNetMargin: Percent;
+  readonly nonGaapNetMargin: Percent;
+  readonly freeCashFlowMargin: Percent;
+}

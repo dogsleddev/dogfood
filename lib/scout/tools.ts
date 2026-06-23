@@ -17,6 +17,7 @@ import {
   getMonthlyBalanceSheet,
   getCashFlow,
   getMonthlyCashFlow,
+  getCashBurnBridge,
   getMetric,
   getDashboardSummary,
   getKpiTile,
@@ -337,6 +338,35 @@ export const SCOUT_TOOL_IMPLS: Record<string, ScoutToolImpl> = {
           months,
         },
         receipt: receipt("getMonthlyCashFlow", { period }, `Monthly Cash Flow · ${mcf.label ?? ""}`.trim(), "/statements/cash-flow?view=monthly"),
+      };
+    },
+  },
+
+  getCashBurnBridge: {
+    inputSchema: { type: "object", properties: { period: PERIOD_PROP }, additionalProperties: false },
+    async run(input) {
+      const period = periodOf(input);
+      const b = await getCashBurnBridge(period);
+      const months = b.runway.months === null ? "cash-flow positive" : String(Math.round(b.runway.months));
+      return {
+        data: {
+          period,
+          bridge: {
+            gaapNetIncome: m(b.gaapNetIncome),
+            nonCashAddBacks: m(b.nonCashAddbacks),
+            deferredRevenueInflow: m(b.deferredRevenueInflow),
+            deferredRevenueNote: "The driver — Bearing bills annual-prepay, so subscription growth collects cash up front.",
+            otherWorkingCapital: m(b.otherWorkingCapital),
+            operatingCashFlow: m(b.operatingCashFlow),
+            capex: m(b.capex),
+            freeCashFlow: m(b.freeCashFlow),
+          },
+          margins: { gaapNet: pctLabel(b.gaapNetMargin), nonGaapNet: pctLabel(b.nonGaapNetMargin), freeCashFlow: pctLabel(b.freeCashFlowMargin) },
+          runway: { asOf: monthLabel(b.runway.asOf), cash: m(b.runway.cash), netBurnPerMonth: `${m(b.runway.netBurn)} (trailing 12 mo)`, months },
+          windowNote: `The bridge rows are the FY window (they tie to the Cash Flow Forecast column); net burn and runway are trailing-12-months ending ${monthLabel(b.runway.asOf)}. Do not divide FY free cash flow by 12 — the runway uses the TTM window.`,
+          summary: `A ${pctLabel(b.gaapNetMargin)} GAAP margin becomes a ${pctLabel(b.freeCashFlowMargin)} free-cash-flow margin because of the ${m(b.deferredRevenueInflow)} annual-prepay deferred-revenue inflow; the ~${months}-month runway is a structural consequence of the prepay model, not an over-raised balance sheet.`,
+        },
+        receipt: receipt("getCashBurnBridge", { period }, "Cash Flow Forecast", "/statements/cash-flow"),
       };
     },
   },

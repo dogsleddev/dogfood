@@ -7,7 +7,8 @@
     "build": "node --max-old-space-size=4096 node_modules/next/dist/bin/next build",
     "start": "next start",
     "lint": "node --max-old-space-size=4096 node_modules/eslint/bin/eslint.js",
-    "typecheck": "node --max-old-space-size=4096 node_modules/typescript/bin/tsc --noEmit"
+    "typecheck": "node --max-old-space-size=4096 node_modules/typescript/bin/tsc --noEmit",
+    "smoke": "npx tsx scripts/route-smoke.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.105.0",

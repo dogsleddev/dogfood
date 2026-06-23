@@ -91,6 +91,8 @@ const CASES: readonly Case[] = [
   // overlap pairs (fan-out will sharpen these) — accept either credible surface
   { q: "What's our deferred revenue balance?", want: "getContracts OR getBalanceSheet", check: (rs) => anyOf(rs, "getContracts", "getBalanceSheet") },
   { q: "How many months of runway do we have?", want: "getMetric(runway) OR getCashFlow OR getDashboard", check: (rs) => metricsOf(rs).includes("runway") || anyOf(rs, "getCashFlow", "getDashboard") },
+  // the WHY/explain question (not the number) → the cash-burn bridge; siblings getCashFlow/getMetric(runway) are distractors
+  { q: "Explain the cash burn — how does a -51% GAAP margin become a -17% free-cash-flow margin?", want: "getCashBurnBridge", check: (rs) => has(rs, "getCashBurnBridge") },
   { q: "What's our gross margin?", want: "getMetric(gross_margin_pct) OR getPnL", check: (rs) => metricsOf(rs).includes("gross_margin_pct") || has(rs, "getPnL") },
   { q: "What's our ARR right now?", want: "getMetric(arr_mrr) OR getCustomers", check: (rs) => metricsOf(rs).includes("arr_mrr") || has(rs, "getCustomers") },
   // MRR alone must reach the arr_mrr metric (the routing miss the live eval caught)

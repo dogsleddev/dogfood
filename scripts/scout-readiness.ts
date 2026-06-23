@@ -48,6 +48,7 @@ const ARGS: Record<QueryName, readonly unknown[]> = {
   getMonthlyBalanceSheet: [PERIOD],
   getCashFlow: [PERIOD],
   getMonthlyCashFlow: [PERIOD],
+  getCashBurnBridge: [PERIOD],
   listContracts: [],
   getContract: ["C-sub-init-0"],
   getBookingsHistory: [PERIOD],

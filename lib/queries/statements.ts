@@ -12,7 +12,9 @@ import type {
   MonthlyCashFlow,
   Runway,
   NonGaapReconciliation,
+  CashBurnBridge,
 } from "@/lib/types/statements";
+import { usd, sumMoney } from "@/lib/types/money";
 import { getDataStore } from "@/lib/datastore";
 import { notImplemented, assertBaseScope, type ScenarioOpt } from "./util";
 
@@ -99,4 +101,38 @@ export async function getRunway(asOf: Month): Promise<Runway> {
 // ── GAAP → non-GAAP reconciliation (SBC add-back + free cash flow), the way real SaaS reports ──
 export async function getNonGaapReconciliation(period: Month): Promise<NonGaapReconciliation> {
   return getDataStore().getNonGaapReconciliation(period);
+}
+
+/**
+ * The cash-burn bridge (§11): GAAP net loss → add-backs → the annual-prepay deferred-revenue inflow →
+ * operating cash flow → free cash flow, plus the runway tile. Pure wiring over three existing spine
+ * functions (one source, two callers — the Cash Flow callout + Scout). The bridge rows are the FY
+ * cash-flow forecast figures (whole-FY26, tying to the Forecast column); the runway is TTM — callers
+ * must label the window so the two frames are never conflated.
+ */
+export async function getCashBurnBridge(period: Month): Promise<CashBurnBridge> {
+  const [cf, runway, nonGaap] = await Promise.all([
+    getCashFlow(period),
+    getRunway(period),
+    getNonGaapReconciliation(period),
+  ]);
+  const fc = (id: string) => cf.lines.find((l) => l.id === id)?.values.forecast ?? usd(0);
+  const dAndA = fc("depreciation");
+  const sbc = fc("stock_based_comp");
+  return {
+    period,
+    gaapNetIncome: fc("net_income"),
+    dAndA,
+    sbc,
+    nonCashAddbacks: sumMoney([dAndA, sbc]),
+    deferredRevenueInflow: fc("change_deferred_revenue"),
+    otherWorkingCapital: sumMoney([fc("change_ar"), fc("change_ap"), fc("change_unbilled_wip"), fc("change_prepaids")]),
+    operatingCashFlow: fc("operating_cash_flow"),
+    capex: fc("capex"),
+    freeCashFlow: fc("net_change_in_cash"),
+    runway,
+    gaapNetMargin: nonGaap.gaapNetMargin,
+    nonGaapNetMargin: nonGaap.nonGaapNetMargin,
+    freeCashFlowMargin: nonGaap.freeCashFlowMargin,
+  };
 }

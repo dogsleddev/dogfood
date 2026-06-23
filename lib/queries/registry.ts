@@ -23,6 +23,7 @@ import {
   getMonthlyBalanceSheet,
   getCashFlow,
   getMonthlyCashFlow,
+  getCashBurnBridge,
   // --- Sales / Contracts + Customers (live once the layer-1 stubs were forwarded to the DataStore) ---
   listContracts,
   getContract,
@@ -75,6 +76,7 @@ export const TOOL_THUNKS = {
   getMonthlyBalanceSheet,
   getCashFlow,
   getMonthlyCashFlow,
+  getCashBurnBridge,
   listContracts,
   getContract,
   getBookingsHistory,
@@ -258,6 +260,14 @@ export const SCOUT_REGISTRY: readonly ScoutToolBinding[] = [
     query: "getMonthlyCashFlow",
     wired: true,
     description: "The Cash Flow broken out MONTH BY MONTH for the fiscal year containing `period` (each cell is that month's flow; the Total column = the FY flow sum). Use for a monthly cash-flow trend, the month-by-month burn, or any 'which month' cash question. For the whole-year Cash Flow use getCashFlow.",
+  },
+  {
+    tool: "getCashBurnBridge",
+    module: "cash-flow",
+    lane: "data",
+    query: "getCashBurnBridge",
+    wired: true,
+    description: "WHY the cash burn and runway are what they are: the GAAP-net-income → free-cash-flow bridge (D&A, stock comp, and the annual-prepay deferred-revenue inflow) PLUS the runway tile (cash, net burn/mo TTM, months). Use for 'explain the burn', 'why is runway ~49 months', 'how does a -51% GAAP margin become a -17% free-cash-flow margin'. For the raw line-by-line statement use getCashFlow; for a single metric use getMetric.",
   },
   {
     tool: "getCashFlowLine",
