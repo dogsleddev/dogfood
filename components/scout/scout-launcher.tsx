@@ -7,6 +7,9 @@ import { useScout } from "./scout-context";
  * A small dog FAB in the Scout ember→amber gradient; it tilts its head on hover (playful, but static
  * at rest so it never distracts). Hidden while the panel is open — the panel has its own close button.
  * The bottom-of-rail "Ask Scout" button still works too; this is just a more discoverable entry point.
+ *
+ * Desktop-only (`hidden md:flex`): on phones the workspace is replaced by the interstitial, which carries
+ * its own prominent "Ask Scout" CTA, so a floating FAB over it would be redundant.
  */
 export function ScoutLauncher() {
   const { open, setOpen } = useScout();
@@ -17,7 +20,7 @@ export function ScoutLauncher() {
       onClick={() => setOpen(true)}
       aria-label="Ask Scout"
       title="Ask Scout"
-      className="group fixed bottom-5 right-5 z-40 flex size-14 items-center justify-center rounded-full bg-[linear-gradient(135deg,var(--color-ember),var(--color-amber))] text-white shadow-lg shadow-ember/25 ring-1 ring-black/5 transition-transform duration-200 hover:scale-105 active:scale-95"
+      className="group fixed bottom-5 right-5 z-40 hidden size-14 items-center justify-center rounded-full bg-[linear-gradient(135deg,var(--color-ember),var(--color-amber))] text-white shadow-lg shadow-ember/25 ring-1 ring-black/5 transition-transform duration-200 hover:scale-105 active:scale-95 md:flex"
     >
       <Dog className="size-7 transition-transform duration-300 ease-out group-hover:-rotate-12" />
       {/* a small "available" dot, no animation */}

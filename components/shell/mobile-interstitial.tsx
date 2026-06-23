@@ -1,10 +1,19 @@
+"use client";
+import { Dog } from "lucide-react";
+import { useScout } from "@/components/scout/scout-context";
+
 /**
- * Mobile interstitial (ship-now). Dogfood is a dense, multi-column FP&A workspace
- * built around the Midnight rail; the layout has no responsive collapse yet, so on a
- * phone the content crushes to ~100px and reads as broken. Until the responsive nav
- * (top bar + hamburger drawer) lands, gate small screens behind a branded "open on a
- * larger screen" panel. Pure CSS (`md:hidden`) so it is SSR-safe with no hydration
- * flash; the desktop app is rendered `hidden md:flex` alongside and is untouched.
+ * Mobile interstitial. Dogfood is a dense, multi-column FP&A workspace built around the
+ * Midnight rail; the working surfaces (5-column statements, 12-month board views) are
+ * desktop-only by design, so on a phone the layout would crush to ~100px and read as
+ * broken. Small screens are gated behind a branded "open on a larger screen" panel —
+ * `md:hidden`, so it is SSR-safe with no hydration flash; the desktop app is rendered
+ * `hidden md:flex` alongside and is untouched.
+ *
+ * But Scout IS mobile-native, so the interstitial carries a prominent "Ask Scout" CTA:
+ * phone visitors can't drive the spreadsheet, but they can ask the agent (which opens as
+ * a full-screen sheet). This is the on-strategy mobile play — "ask the agent," not
+ * "shrink the spreadsheet."
  */
 function TrailMark() {
   return (
@@ -17,6 +26,8 @@ function TrailMark() {
 }
 
 export function MobileInterstitial() {
+  const { setOpen } = useScout();
+
   return (
     <div
       className="flex min-h-screen flex-col items-center justify-center px-6 py-12 text-center text-sidebar-foreground md:hidden"
@@ -35,13 +46,26 @@ export function MobileInterstitial() {
         </h1>
 
         <p className="text-sm leading-relaxed text-steel">
-          The platform packs statements, forecasts, scenarios, and Scout into a dense,
-          multi-column cockpit. Open it on a laptop or desktop for the full experience —
-          a mobile layout is on the way.
+          The platform packs statements, forecasts, and scenarios into a dense,
+          multi-column cockpit best driven on a laptop or desktop.
         </p>
 
+        {/* Scout is mobile-native — the one surface phone visitors can use right now. */}
+        <div className="mt-1 flex flex-col items-center gap-2.5">
+          <button
+            onClick={() => setOpen(true)}
+            className="inline-flex items-center gap-2 rounded-full bg-[linear-gradient(135deg,var(--color-ember),var(--color-amber))] px-6 py-3 text-sm font-medium text-white shadow-lg shadow-ember/25 ring-1 ring-black/5 transition-transform active:scale-95"
+          >
+            <Dog className="size-4" />
+            Ask Scout anything
+          </button>
+          <p className="text-xs text-steel">
+            Our AI analyst works great on mobile — try &ldquo;What&apos;s our runway?&rdquo;
+          </p>
+        </div>
+
         <div className="mt-1 rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-xs text-steel">
-          Best viewed at <span className="font-medium text-parchment">1024px</span> or wider
+          Open the full workspace at <span className="font-medium text-parchment">1024px</span> or wider
         </div>
       </div>
     </div>

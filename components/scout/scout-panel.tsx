@@ -1,15 +1,20 @@
 "use client";
-import { useState, useRef, useEffect, type FormEvent } from "react";
+import { useState, useRef, useEffect, type FormEvent, type KeyboardEvent as ReactKeyboardEvent } from "react";
 import Link from "next/link";
 import { Dog, X, Send, ExternalLink, PawPrint } from "lucide-react";
 import { useScout } from "./scout-context";
 import type { ScoutReceipt, ScoutResponse, ScoutStreamEvent } from "@/lib/scout/types";
 
 /**
- * Scout — the floating panel, lower-right (CLAUDE.md §10; diagrams/scout-dock.svg).
+ * Scout — the floating panel (CLAUDE.md §10; diagrams/scout-dock.svg).
  * Wired to /api/scout (tool-use over the query spine). Every answer carries RECEIPTS — a chip per
  * tool call linking to the exact surface — so the numbers are auditable. Falls back to a
  * deterministic lookup when no model key is configured (the answer is tagged accordingly).
+ *
+ * Responsive: a floating card lower-right on desktop, a full-screen sheet on mobile (where it is the
+ * one usable surface — see the interstitial). On mobile it behaves like a modal dialog: body scroll is
+ * locked, Escape closes it, focus is trapped, and it tracks the visual viewport so the on-screen
+ * keyboard never covers the composer.
  */
 interface UiMessage {
   role: "user" | "assistant";
@@ -27,11 +32,67 @@ export function ScoutPanel() {
   const [busy, setBusy] = useState(false);
   // The calculations Scout is running right now (narrated live as each tool fires).
   const [steps, setSteps] = useState<string[]>([]);
+  // On the mobile full-screen sheet, height tracks the visual viewport so the keyboard never overlaps
+  // the composer; null on desktop (the md: classes own the size there).
+  const [mobileHeight, setMobileHeight] = useState<number | null>(null);
   const threadRef = useRef<HTMLDivElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     threadRef.current?.scrollTo({ top: threadRef.current.scrollHeight });
   }, [messages, busy, steps]);
+
+  // Modal behavior while open: lock the page behind, close on Escape, and size the mobile sheet to the
+  // visual viewport (so the on-screen keyboard pushes the composer up instead of hiding it).
+  useEffect(() => {
+    if (!open) return;
+
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const vv = window.visualViewport;
+    const phone = window.matchMedia("(max-width: 767px)");
+    const syncHeight = () => setMobileHeight(phone.matches && vv ? vv.height : null);
+    syncHeight();
+    vv?.addEventListener("resize", syncHeight);
+    phone.addEventListener("change", syncHeight);
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("keydown", onKey);
+
+    // Focus the composer when opening on desktop; on mobile we hold off so the keyboard doesn't pop
+    // before the user has read the welcome.
+    if (window.matchMedia("(min-width: 768px)").matches) inputRef.current?.focus();
+
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      vv?.removeEventListener("resize", syncHeight);
+      phone.removeEventListener("change", syncHeight);
+      document.removeEventListener("keydown", onKey);
+      setMobileHeight(null);
+    };
+  }, [open, setOpen]);
+
+  // Trap Tab within the panel while it is open (full-screen modal on mobile).
+  function onPanelKeyDown(e: ReactKeyboardEvent<HTMLDivElement>) {
+    if (e.key !== "Tab" || !panelRef.current) return;
+    const focusables = Array.from(
+      panelRef.current.querySelectorAll<HTMLElement>('button, [href], input, textarea, [tabindex]:not([tabindex="-1"])'),
+    ).filter((el) => !el.hasAttribute("disabled"));
+    if (focusables.length === 0) return;
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  }
 
   if (!open) return null;
 
@@ -88,7 +149,15 @@ export function ScoutPanel() {
   }
 
   return (
-    <div className="fixed bottom-5 right-5 z-50 flex h-[560px] w-[400px] flex-col overflow-hidden rounded-2xl border border-parchment-line bg-surface shadow-2xl">
+    <div
+      ref={panelRef}
+      role="dialog"
+      aria-modal="true"
+      aria-label="Scout"
+      onKeyDown={onPanelKeyDown}
+      style={mobileHeight ? { height: mobileHeight } : undefined}
+      className="fixed inset-x-0 top-0 z-50 flex h-[100dvh] w-full flex-col overflow-hidden bg-surface shadow-2xl md:inset-auto md:bottom-5 md:right-5 md:h-[560px] md:w-[400px] md:rounded-2xl md:border md:border-parchment-line"
+    >
       {/* header */}
       <div className="flex items-center gap-3 border-b border-parchment-line px-4 py-3">
         <div className="flex size-9 items-center justify-center rounded-full bg-[linear-gradient(135deg,var(--color-ember),var(--color-amber))] text-white">
@@ -168,6 +237,7 @@ export function ScoutPanel() {
       <form onSubmit={onSubmit} className="border-t border-parchment-line p-3">
         <div className="flex items-center gap-2 rounded-full border border-parchment-line bg-secondary/60 px-3 py-2 focus-within:border-ember/60">
           <input
+            ref={inputRef}
             value={input}
             onChange={(e) => setInput(e.target.value)}
             disabled={busy}
