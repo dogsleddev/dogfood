@@ -21,9 +21,24 @@
 
 ## ▶ NEXT SESSION — START HERE
 
-### State (2026-06-23 · LATEST · MOBILE-NATIVE SCOUT shipped — recovered from a mid-work crash) — GREEN  ·  _authoritative; the blocks below are prior context_
+### State (2026-06-23 · LATEST · MOBILE v1 — read-only dashboard home built) — GREEN  ·  _authoritative; the blocks below are prior context_
 
-**CONTEXT: a crash interrupted the mobile-native Scout build (▶ NEXT #1 from the block below). Recovery review found NO file corruption — only an orphaned dev-server process tree holding port 3000 (cleaned up). The in-progress work was complete + coherent on disk; this session verified it and is picking it up. Git: HEAD `a73139b`, 1 ahead of origin; the mobile-native-Scout work is committed LOCALLY but NOT pushed (push → Vercel deploy = awaiting Chris's go).**
+**CONTEXT: with mobile-native Scout shipped + deployed, this session built MOBILE STRATEGY step 3 — a glanceable read-only mobile dashboard home. Phones now get a real mobile-native slice (KPI snapshot + Scout), not just the dead-end interstitial. Chris's hard constraint — "Scout must keep working as-is on mobile" — verified intact. Git: committed LOCALLY (`05c728e`), NOT yet pushed (push → Vercel deploy = awaiting Chris's go); local main ahead of origin/main @ `e9486d8` by 1.**
+
+**Shipped this session (Mobile v1 — read-only dashboard home):** the bare interstitial is replaced by a purpose-built mobile home. Architecture (deliberately NO churn across the 25 dense pages; Scout components untouched):
+- `components/shell/mobile-home.tsx` (NEW, server) — renders in the shell's `md:hidden` slot: a Midnight top bar (logo + an always-reachable compact "Ask Scout"), a hero Scout CTA, and a glanceable READ-ONLY KPI snapshot (the same `getDashboardSummary` builder the Dashboard uses — no new data path — all 4 metric families, 2-col, drill/peek suppressed), + an honest "open the full workspace at 1024px+ on desktop" note.
+- `components/shell/mobile-scout-cta.tsx` (NEW, client) — compact + hero variants, both just `useScout().setOpen(true)`.
+- `components/dashboard/kpi-tile.tsx` — added a `readOnly` mode (plain card, no inspect `Link`/peek footer); desktop passes nothing → byte-identical (verified: 20 inspect-tile links still present on desktop).
+- `app-shell.tsx` — swap `<MobileInterstitial/>` → `<MobileHome/>`; desktop frame unchanged. `mobile-interstitial.tsx` DELETED (superseded).
+- **TRADE-OFF (documented): `MobileHome` is in the shell, so `getDashboardSummary()` runs on EVERY route's SSR (it's `md:hidden`, but still renders) — incl. desktop.** It's the deterministic in-memory builder (no DB round-trip; SupabaseDataStore inherits the TS metric builders per §4), so the cost is small, but if it ever matters: make the shell route-aware (only build on `/dashboard`) or memoize the summary. Chose this over client-converting `app-shell` (Sidebar ripple risk) or editing 25 pages.
+
+**Verified this session:** tsc 0 · lint 0 · live preview — mobile 375px renders the home (top bar + hero CTA + read-only tiles, numbers tie to §11: Revenue $23.4M / NI -$11.9M / NRR 109% / magic 1.2x), zero console errors; **Scout still opens full-screen from the home and returns a grounded answer + receipt ("155 contracts — 141 active, 14 churned") — the hard constraint HOLDS**; desktop unaffected (full rail, 20 interactive inspect tiles, Scout = floating lower-right card). Smoke NOT run (shell change, client-only mobile slice; re-run `npm run smoke` for the full sweep if desired).
+
+**▶ NEXT mobile (optional, traffic-gated):** per MOBILE STRATEGY below, the remaining steps are Tier-3 read-only summaries for the dense surfaces (statements / Data Import reconciliation control total / Board Package) — do these selectively IF the LinkedIn analytics show phone users actually hitting them. Cheap Tier-2 wins (Guides/Settings as mobile-readable) need the shell to render `{children}` route-by-route (currently the mobile home is shown for ALL routes — a phone user only ever sees the home, since `/`→`/dashboard` is the landing and there's no mobile nav yet). Tier-4 (responsive working surfaces / editing): DON'T unless data demands it.
+
+### State (2026-06-23 · MOBILE-NATIVE SCOUT shipped + PUSHED + deployed — recovered from a mid-work crash) — GREEN  ·  _prior context_
+
+**CONTEXT: a crash interrupted the mobile-native Scout build. Recovery review found NO file corruption — only an orphaned dev-server process tree holding port 3000 (cleaned up). The in-progress work was complete + coherent on disk; this session verified it, committed, PUSHED (`6ece696`+`e9486d8`), and confirmed live (new "Ask Scout anything" CTA on www.dogfood.cafe + live smoke 57/57). Functional E2E on mobile 375px: CTA → full-screen sheet → "runway?" → grounded "49 months" + tappable receipt.**
 
 **Shipped this session (mobile-native Scout — ▶ NEXT #1, now DONE):** Scout works on phones, where it is the one usable surface behind the interstitial. THE WORK (all from the spec in the block below):
 - `app-shell.tsx` — lifted `<ScoutLauncher/>` + `<ScoutPanel/>` OUT of the `hidden md:flex` desktop frame so Scout renders on every screen (desktop FAB + floating card / mobile full-screen sheet). Desktop frame otherwise byte-untouched.
