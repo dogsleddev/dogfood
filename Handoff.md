@@ -21,7 +21,24 @@
 
 ## ▶ NEXT SESSION — START HERE
 
-### State (2026-06-23 · LATEST · MOBILE v1 — read-only dashboard home built) — GREEN  ·  _authoritative; the blocks below are prior context_
+### State (2026-06-23 · LATEST · SCOUT RATE-LIMITER — launch-hardening P0 #1) — GREEN  ·  _authoritative; the blocks below are prior context_
+
+**CONTEXT: a multi-agent progress review (5 reviewers) reframed the work — the build is in LAUNCH-HARDENING, not build-more (all 25 surfaces + scenario engine + Scout + mobile are live). Its #1 was: rate-limit the public Scout endpoint before the LinkedIn spike. Done this session. Git: committed LOCALLY (`5c8a243` + this handoff), pushing to deploy. Migration 0008 already applied to live Supabase.**
+
+**Shipped this session (rate-limit the public Scout endpoint — the review's #1 launch-hardening P0):** `/api/scout` ran the agent loop server-side with NO per-user auth / no cap → a spike = uncapped Anthropic spend + 529s on the headline feature.
+- `supabase/migrations/0008_scout_rate_limit.sql` (NEW; folded into 0001; APPLIED to live via the IPv4 session pooler) — a `scout_rate_limit` table + an ATOMIC `scout_rate_check(p_ip, ip_limit, ip_window, global_limit, global_window)` plpgsql function (per-IP window incremented first; if it trips, the global window is left untouched so a blocked abuser can't DoS the global counter; self-cleans stale windows). Registered in `scripts/schema-check.ts`.
+- `lib/scout/rate-limit.ts` (NEW) — two-tier limiter: per-IP 30/5min (the abuse control) + GLOBAL 3000/hr (a runaway/spend circuit-breaker shared across all lambdas — an in-memory counter can't, that's why DB-backed). FAIL-OPEN on any error, admin-exempt, IP hashed. **A 1.5s `AbortSignal.timeout` on the RPC** so a hung DB fails fast into fail-open instead of pinning the lambda.
+- `app/api/scout/route.ts` — gate runs BEFORE any Anthropic work → 429 + `Retry-After`. `scout-panel.tsx` — friendly "fielding a lot of questions" 429 message (shown wait capped at 5min so a global trip never says "~60 min").
+- New gate `scripts/scout-rl-check.ts` (live function behavior).
+- **Limits are tunable constants in `lib/scout/rate-limit.ts`** — per-IP 30/5min is the abuse control; GLOBAL 3000/hr is the catastrophe breaker (≈bounded low-hundreds $/hr worst case). Tune GLOBAL down for a harder spend ceiling, up if a launch gets blocked.
+
+**Verified:** tsc/lint 0 · `scout-rl-check` 5/5 (live function trips correctly) · schema-check PASS (table live) · happy path = HTTP 200 + streamed grounded answer · over-limit (bucket pre-seeded) = HTTP 429 + `Retry-After: 299`, no LLM call. **Adversarial review (3-lens × verify, 14 candidates → 2 confirmed P2, both FIXED):** the missing RPC timeout + the 600/hr global cap being too low for a launch (→ 3000 + capped message).
+
+**▶ NEXT (the review's remaining launch-hardening, in order):** (1) **fix the `getFluxDetail` FY-vs-month tie-out** [P0] — `lib/queries/flux.ts:121 vs 128` pairs whole-FY P&L columns with single-month transactions, so the ONE on-camera tie-out drill doesn't reconcile (tie-out is the Loom credibility moment). (2) **pin the canonical arc** (NRR 109% / ~84-16 mix / 49mo — §11 already matches; just ensure Loom narration/Scout don't quote stale figures). (3) **lead the Loom with the cash-burn bridge** (`getCashBurnBridge`) as the rebuttal to the 49mo runway + a Scout system-prompt nudge to volunteer the annual-prepay explanation. (4) **decide shared-vs-scoped anon writes** (one-line "shared sandbox, resets nightly" banner, or per-session scoping). (5) small-wins batch: wire `getPeriodConfig`/`getExpenseGroups`, rename/alias the `cac_payback` metric id (reads as a 136-mo payback in the raw export), `lockBudget(source=scenario)`, guide-count doc nit (7 not 6). Full review synthesis: workflow `wf_10046cd4-2a1`; the rate-limit adversarial review: `wf_750c586b-14e`.
+
+### State (2026-06-23 · MOBILE v1 — read-only dashboard home built + shipped) — GREEN  ·  _prior context_
+
+**CONTEXT: with mobile-native Scout shipped + deployed, this session built MOBILE STRATEGY step 3 — a glanceable read-only mobile dashboard home. Phones now get a real mobile-native slice (KPI snapshot + Scout), not just the dead-end interstitial. Chris's hard constraint — "Scout must keep working as-is on mobile" — verified intact. SHIPPED: `05c728e` (feature) + `16d2700` (handoff) PUSHED; deploy LIVE on www.dogfood.cafe (mobile-home marker confirmed) + live smoke 57/57. local == origin/main.**
 
 **CONTEXT: with mobile-native Scout shipped + deployed, this session built MOBILE STRATEGY step 3 — a glanceable read-only mobile dashboard home. Phones now get a real mobile-native slice (KPI snapshot + Scout), not just the dead-end interstitial. Chris's hard constraint — "Scout must keep working as-is on mobile" — verified intact. SHIPPED: `05c728e` (feature) + `16d2700` (handoff) PUSHED; deploy LIVE on www.dogfood.cafe (mobile-home marker confirmed) + live smoke 57/57. local == origin/main.**
 
