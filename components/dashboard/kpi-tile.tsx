@@ -24,8 +24,11 @@ function deltaVsBudget(tile: KpiTile): { text: string; favorable: boolean } | nu
  * delta vs budget, and the prior-year + budget comparators. The whole tile is the peek trigger:
  * tapping it opens the right-side pane (?inspect=<metricId>) with the lineage in place (§6 — peek
  * where you read). Peek tiles carry "Open full ↗" in the pane; pure metrics decompose there.
+ *
+ * `readOnly` renders the tile as a plain card (no inspect link, no peek footer) — used on the
+ * mobile home, where the side pane has no room and "go deeper" is handled by Scout instead.
  */
-export function KpiTileCard({ tile, selected }: { tile: KpiTile; selected?: boolean }) {
+export function KpiTileCard({ tile, selected, readOnly }: { tile: KpiTile; selected?: boolean; readOnly?: boolean }) {
   const { definition, value, priorYear, budget, trail } = tile;
   const delta = deltaVsBudget(tile);
 
@@ -34,18 +37,8 @@ export function KpiTileCard({ tile, selected }: { tile: KpiTile; selected?: bool
   const py = priorYear ? metricMagnitude(priorYear) : cur;
   const trendFavorable = higherBetter ? cur >= py : cur <= py;
 
-  return (
-    <Link
-      href={`/dashboard?inspect=${definition.id}`}
-      scroll={false}
-      aria-label={`Inspect ${definition.label}`}
-      className={cn(
-        "flex flex-col rounded-xl border bg-surface p-4 transition-colors",
-        selected
-          ? "border-ember bg-ember-tint/30 ring-1 ring-ember/30"
-          : "border-parchment-line hover:border-ember/40",
-      )}
-    >
+  const body = (
+    <>
       <div className="flex items-start justify-between gap-2">
         <span className="text-xs font-medium text-steel">{definition.label}</span>
       </div>
@@ -70,16 +63,38 @@ export function KpiTileCard({ tile, selected }: { tile: KpiTile; selected?: bool
         {priorYear && <span>PY {formatMetricValue(priorYear)}</span>}
       </div>
 
-      <div className="mt-3 border-t border-parchment-line/60 pt-2">
-        <span
-          className={cn(
-            "inline-flex items-center gap-1 text-xs font-medium",
-            selected ? "text-ember-deep" : "text-steel",
-          )}
-        >
-          <PanelRight className="size-3" /> Inspect
-        </span>
-      </div>
+      {!readOnly && (
+        <div className="mt-3 border-t border-parchment-line/60 pt-2">
+          <span
+            className={cn(
+              "inline-flex items-center gap-1 text-xs font-medium",
+              selected ? "text-ember-deep" : "text-steel",
+            )}
+          >
+            <PanelRight className="size-3" /> Inspect
+          </span>
+        </div>
+      )}
+    </>
+  );
+
+  if (readOnly) {
+    return <div className="flex flex-col rounded-xl border border-parchment-line bg-surface p-4">{body}</div>;
+  }
+
+  return (
+    <Link
+      href={`/dashboard?inspect=${definition.id}`}
+      scroll={false}
+      aria-label={`Inspect ${definition.label}`}
+      className={cn(
+        "flex flex-col rounded-xl border bg-surface p-4 transition-colors",
+        selected
+          ? "border-ember bg-ember-tint/30 ring-1 ring-ember/30"
+          : "border-parchment-line hover:border-ember/40",
+      )}
+    >
+      {body}
     </Link>
   );
 }
