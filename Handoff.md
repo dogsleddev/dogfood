@@ -23,7 +23,7 @@
 
 ### State (2026-06-23 · LATEST · MOBILE v1 — read-only dashboard home built) — GREEN  ·  _authoritative; the blocks below are prior context_
 
-**CONTEXT: with mobile-native Scout shipped + deployed, this session built MOBILE STRATEGY step 3 — a glanceable read-only mobile dashboard home. Phones now get a real mobile-native slice (KPI snapshot + Scout), not just the dead-end interstitial. Chris's hard constraint — "Scout must keep working as-is on mobile" — verified intact. Git: committed LOCALLY (`05c728e`), NOT yet pushed (push → Vercel deploy = awaiting Chris's go); local main ahead of origin/main @ `e9486d8` by 1.**
+**CONTEXT: with mobile-native Scout shipped + deployed, this session built MOBILE STRATEGY step 3 — a glanceable read-only mobile dashboard home. Phones now get a real mobile-native slice (KPI snapshot + Scout), not just the dead-end interstitial. Chris's hard constraint — "Scout must keep working as-is on mobile" — verified intact. SHIPPED: `05c728e` (feature) + `16d2700` (handoff) PUSHED; deploy LIVE on www.dogfood.cafe (mobile-home marker confirmed) + live smoke 57/57. local == origin/main.**
 
 **Shipped this session (Mobile v1 — read-only dashboard home):** the bare interstitial is replaced by a purpose-built mobile home. Architecture (deliberately NO churn across the 25 dense pages; Scout components untouched):
 - `components/shell/mobile-home.tsx` (NEW, server) — renders in the shell's `md:hidden` slot: a Midnight top bar (logo + an always-reachable compact "Ask Scout"), a hero Scout CTA, and a glanceable READ-ONLY KPI snapshot (the same `getDashboardSummary` builder the Dashboard uses — no new data path — all 4 metric families, 2-col, drill/peek suppressed), + an honest "open the full workspace at 1024px+ on desktop" note.
