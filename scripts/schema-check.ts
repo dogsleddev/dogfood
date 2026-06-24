@@ -48,6 +48,7 @@ const EXPECTED_TABLES = [
   "journal_entries", "journal_lines", "vendor_bills", "paychecks", "timesheets",
   "customer_invoices", "cash_receipts", "monthly_series", "revrec_by_contract", "revrec_by_project",
   "flux_notes", "scenarios", "scenario_inputs", "budget_snapshots", "account_overrides", "import_runs",
+  "scout_rate_limit", // 0008 — the public-Scout rate limiter (table + the scout_rate_check function)
 ];
 const EXPECTED_COLUMNS: Record<string, string[]> = {
   settings: ["close_through", "in_close_month", "forecast_horizon_start"],

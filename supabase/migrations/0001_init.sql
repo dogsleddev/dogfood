@@ -334,3 +334,61 @@ create trigger flux_notes_updated_at before update on flux_notes
   for each row execute function set_updated_at();
 create trigger account_overrides_updated_at before update on account_overrides
   for each row execute function set_updated_at();
+
+-- rate limiting for the public Scout endpoint (§10/§17; folded from 0008_scout_rate_limit.sql).
+-- An operational table (request-scoped counters) — EXCLUDED from the seed loader's clear array; the
+-- function self-cleans stale windows. See 0008 for the full rationale + the atomic check function.
+create table scout_rate_limit (
+  bucket        text        not null,
+  window_start  timestamptz not null,
+  count         integer     not null default 0,
+  primary key (bucket, window_start)
+);
+
+create or replace function scout_rate_check(
+  p_ip                  text,
+  p_ip_limit            integer,
+  p_ip_window_secs      integer,
+  p_global_limit        integer,
+  p_global_window_secs  integer
+) returns table(allowed boolean, retry_after integer)
+language plpgsql
+as $$
+declare
+  v_now            timestamptz := now();
+  v_ip_window      timestamptz := to_timestamp(floor(extract(epoch from v_now) / p_ip_window_secs) * p_ip_window_secs);
+  v_global_window  timestamptz := to_timestamp(floor(extract(epoch from v_now) / p_global_window_secs) * p_global_window_secs);
+  v_ip_count       integer;
+  v_global_count   integer;
+begin
+  if random() < 0.02 then
+    delete from scout_rate_limit where window_start < v_now - interval '2 hours';
+  end if;
+
+  insert into scout_rate_limit as r (bucket, window_start, count)
+    values ('ip:' || p_ip, v_ip_window, 1)
+    on conflict (bucket, window_start) do update set count = r.count + 1
+    returning r.count into v_ip_count;
+
+  if v_ip_count > p_ip_limit then
+    allowed := false;
+    retry_after := greatest(1, ceil(extract(epoch from (v_ip_window + make_interval(secs => p_ip_window_secs) - v_now)))::int);
+    return next;
+    return;
+  end if;
+
+  insert into scout_rate_limit as r (bucket, window_start, count)
+    values ('global', v_global_window, 1)
+    on conflict (bucket, window_start) do update set count = r.count + 1
+    returning r.count into v_global_count;
+
+  if v_global_count > p_global_limit then
+    allowed := false;
+    retry_after := greatest(1, ceil(extract(epoch from (v_global_window + make_interval(secs => p_global_window_secs) - v_now)))::int);
+  else
+    allowed := true;
+    retry_after := 0;
+  end if;
+  return next;
+end;
+$$;

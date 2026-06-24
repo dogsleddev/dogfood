@@ -6,11 +6,21 @@
  */
 import { NextResponse } from "next/server";
 import { runScout } from "@/lib/scout/agent";
+import { checkScoutRateLimit } from "@/lib/scout/rate-limit";
 import type { ScoutMessage, ScoutStreamEvent } from "@/lib/scout/types";
 
 export const runtime = "nodejs";
 
 export async function POST(req: Request) {
+  // Cap the public endpoint before doing any Anthropic work (per-IP + a global spend circuit-breaker).
+  const gate = await checkScoutRateLimit(req);
+  if (!gate.allowed) {
+    return NextResponse.json(
+      { error: "rate_limited", retryAfter: gate.retryAfter },
+      { status: 429, headers: { "retry-after": String(gate.retryAfter) } },
+    );
+  }
+
   let body: { messages?: unknown };
   try {
     body = await req.json();

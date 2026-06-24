@@ -110,6 +110,17 @@ export function ScoutPanel() {
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ messages: history.map((m) => ({ role: m.role, content: m.content })) }),
       });
+      if (res.status === 429) {
+        // Rate-limited (per-IP or the global spend cap). Show a friendly, on-brand "busy" reply.
+        // Cap the shown wait so an early global-window trip never tells the user "~60 min" (it rolls sooner).
+        const retry = Math.min(Number(res.headers.get("retry-after")) || 0, 300);
+        const when = retry >= 60 ? "a few minutes" : retry > 0 ? `about ${retry}s` : "a moment";
+        setMessages([
+          ...history,
+          { role: "assistant", content: `I'm fielding a lot of questions right now — give me ${when} and ask again.` },
+        ]);
+        return;
+      }
       if (!res.ok || !res.body) throw new Error(`HTTP ${res.status}`);
 
       // Read the NDJSON stream: {type:"step"} lines narrate the work live; {type:"final"} lands the answer.
