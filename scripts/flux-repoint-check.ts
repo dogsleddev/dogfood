@@ -9,7 +9,7 @@
  */
 process.env.DATASTORE = "in-memory";
 
-import { addFluxNote, listFluxNotes } from "@/lib/queries/flux";
+import { addFluxNote, listFluxNotes, getFluxDetail } from "@/lib/queries/flux";
 import { setAccountOverride, clearAccountOverride } from "@/lib/queries/account-mapping";
 import { getDataStore } from "@/lib/datastore";
 
@@ -49,6 +49,16 @@ async function main() {
   // cleanup
   await clearAccountOverride(ACCOUNT);
   await getDataStore().deleteFluxNote(note.id);
+
+  // ── getFluxDetail month tie-out (the on-camera credibility fix) ──
+  // The drill now shows THIS month's actual (was the whole-FY column) next to the month's bills, so for
+  // an expense line in a closed month the figure equals the sum of the transactions listed.
+  console.log("\n  -- getFluxDetail month tie-out --");
+  const fd = await getFluxDetail("it", period); // IT (6400) — a vendor-bill-backed OpEx line
+  const txnSum = fd.transactions.reduce((s, t) => s + t.amount.minor, 0);
+  check("period resolves to a closed (actual) month", fd.line.periodStatus === "actual", `${fd.line.periodStatus}`);
+  check("monthActual === Σ transactions (month grain ties to the bills)", fd.line.monthActual?.minor === txnSum, `${fd.line.monthActual?.minor} vs ${txnSum}`);
+  check("monthActual ≠ FY actual (it's the month, not the whole year)", fd.line.monthActual?.minor !== fd.line.fullYear?.actual?.minor);
 
   console.log(`\n================ FLUX-REPOINT-CHECK: ${fail === 0 ? "PASS" : `${fail} FAILING`} ================\n`);
   process.exitCode = fail === 0 ? 0 : 1;

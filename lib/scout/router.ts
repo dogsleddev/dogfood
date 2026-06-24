@@ -153,7 +153,7 @@ function summarize(tool: string, data: any): string {
     case "compareScenarios":
       return `Comparing ${data.columns.length} scenarios (${data.period}): ${data.columns.map((c: any) => c.scenario).join(" vs ")}.`;
     case "getFluxDetail":
-      return `${data.line} (${data.period}): actual ${data.actual} vs budget ${data.budget}, variance ${data.variance}. Top items: ${(data.topTransactions ?? []).slice(0, 3).map((t: any) => `${t.vendor} ${t.amount}`).join(", ")}.`;
+      return `${data.line} (${data.period}): actual ${data.monthActual}, composed of ${(data.topTransactions ?? []).length} bills totaling ${data.transactionsTotal}. Top items: ${(data.topTransactions ?? []).slice(0, 3).map((t: any) => `${t.vendor} ${t.amount}`).join(", ")}. FY budget ${data.fullYear?.budget ?? "—"}, FY variance ${data.fullYear?.variance ?? "—"}.`;
     case "getFluxNotes":
       return data.count === 0
         ? "No flux notes on this anchor yet — add one to explain the variance."

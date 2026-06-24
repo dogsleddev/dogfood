@@ -1123,19 +1123,25 @@ export const SCOUT_TOOL_IMPLS: Record<string, ScoutToolImpl> = {
       additionalProperties: false,
     },
     async run(input) {
-      const period = periodOf(input);
+      // Flux is a CLOSED-month analysis (explain a month's variance from its bills), so when no period is
+      // given default to the last closed month — not the in-close current period — so the drill lands
+      // where the actuals + bills exist and the tie-out holds.
+      const period = typeof input.period === "string" && input.period ? periodOf(input) : PLACEHOLDER_SETTINGS.closeThrough;
       const statementLine = str(input, "statementLine");
       const d = await getFluxDetail(statementLine, period);
+      const transactionsTotal = sumMoney(d.transactions.map((t) => t.amount));
       return {
         data: {
           line: d.line.label,
           period: monthLabel(period),
-          actual: m(d.line.actual),
-          forecast: m(d.line.forecast),
-          budget: m(d.line.budget),
-          variance: m(d.line.variance),
+          periodStatus: d.line.periodStatus,
+          monthActual: m(d.line.monthActual),
+          transactionsTotal: m(transactionsTotal), // ties to monthActual for an expense (vendor-bill) line
           topTransactions: d.transactions.slice(0, 8).map((t) => ({ vendor: t.vendor, account: t.accountCode, amount: m(t.amount) })),
-          note: "The line's actual vs budget/forecast + the bills composing the actual (largest first). Pair with getFluxNotes for the written explanation.",
+          fullYear: d.line.fullYear
+            ? { actual: m(d.line.fullYear.actual), forecast: m(d.line.fullYear.forecast), budget: m(d.line.fullYear.budget), variance: m(d.line.fullYear.variance) }
+            : undefined,
+          note: "monthActual is THIS month's actual for the line and (for an expense line) equals transactionsTotal — the bills below compose it. fullYear is the FY P&L context, not this month. Pair with getFluxNotes for the written explanation.",
         },
         receipt: receipt("getFluxDetail", { statementLine }, `Flux detail: ${d.line.label}`, `/reporting/expense-transactions?period=${period}`),
       };

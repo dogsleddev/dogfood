@@ -5,11 +5,11 @@
  * ERP data, pinned by a stable anchor — never an edit to the actuals.
  */
 import { getDataStore } from "@/lib/datastore";
-import { getPnLLine } from "./statements";
+import { getPnLLine, getMonthlyPnL } from "./statements";
 import { listExpenseTransactions } from "./reporting";
-import type { Month } from "@/lib/types/period";
+import { compareMonth, type Month } from "@/lib/types/period";
 import type { Money } from "@/lib/types/money";
-import type { PnLLineId } from "@/lib/types/statements";
+import type { PnLLineId, MonthStatus } from "@/lib/types/statements";
 import type { FluxNote, FluxNoteAnchor, FluxNoteSource, FluxNoteFilter } from "@/lib/types/flux";
 
 /** Trusted single-tenant: one user (the nav footer's "Max · Chief Barking Officer"). Swap for an auth lookup at login. */
@@ -103,17 +103,34 @@ export interface FluxDetailTxn {
 export interface FluxDetail {
   readonly statementLine: string;
   readonly period: Month;
-  /** the line's columns from the P&L (undefined if `statementLine` isn't a P&L line) */
-  readonly line: { readonly label: string; readonly actual?: Money; readonly forecast?: Money; readonly budget?: Money; readonly variance?: Money };
+  readonly line: {
+    readonly label: string;
+    /**
+     * THIS month's actual for the line — the figure that ties to `transactions` (same period). For a
+     * closed month it rolls up from the GL, so for a vendor-bill-backed line it equals Σ `transactions`
+     * (the tie-out). undefined if `statementLine` isn't a P&L line.
+     */
+    readonly monthActual?: Money;
+    /** closed (actual) / in_close / forecast — so a reader knows whether `monthActual` is a real actual. */
+    readonly periodStatus?: MonthStatus;
+    /** full-year P&L context for the line (NOT this month): the FY Actual / Forecast / Budget / Variance. */
+    readonly fullYear?: { readonly actual?: Money; readonly forecast?: Money; readonly budget?: Money; readonly variance?: Money };
+  };
   /** the actual transactions composing the line this period, largest first — what to write the note from */
   readonly transactions: readonly FluxDetailTxn[];
 }
 
 /**
- * The variance decomposition for a statement line: the line's Actual / Forecast / Budget / Variance
- * (from the P&L) plus the actual transactions that compose it (the bills on the accounts mapping to
- * the line, largest first). Composes existing spine reads — no new data path. Pairs with getFluxNotes:
- * the notes explain *why*, this shows the numbers *behind* it (so a reviewer can write the note).
+ * The variance decomposition for a statement line: THIS month's actual for the line (the figure that
+ * ties to the transactions below) + the full-year P&L context + the actual transactions composing the
+ * line this period (the bills on the accounts mapping to the line, largest first). Composes existing
+ * spine reads — no new data path. Pairs with getFluxNotes: the notes explain *why*, this shows the
+ * numbers *behind* it (so a reviewer can write the note).
+ *
+ * Grain note (the tie-out): `transactions` are month-grain (this `period`), so the headline figure is
+ * `line.monthActual` — the line's cell for THIS month from the monthly P&L (closed months roll up from
+ * the GL → a vendor-bill-backed line's month actual === Σ its bills). The FY columns live under
+ * `line.fullYear`, explicitly labeled, so an FY total is never shown as if it were the month's.
  */
 export async function getFluxDetail(statementLine: string, period: Month): Promise<FluxDetail> {
   const ds = getDataStore();
@@ -125,10 +142,19 @@ export async function getFluxDetail(statementLine: string, period: Month): Promi
 
   let line: FluxDetail["line"] = { label: statementLine };
   try {
-    const pl = await getPnLLine(statementLine as PnLLineId, period);
-    line = { label: pl.label, actual: pl.values.actual, forecast: pl.values.forecast, budget: pl.values.budget, variance: pl.values.variance };
+    const fy = await getPnLLine(statementLine as PnLLineId, period); // FY columns + the canonical label
+    // The MONTH actual (what ties to `transactions`) is the line's cell for this month in the monthly P&L.
+    const monthly = await getMonthlyPnL(period);
+    const idx = monthly.months.findIndex((c) => compareMonth(c.month, period) === 0);
+    const ml = monthly.lines.find((l) => (l.id as string) === statementLine);
+    line = {
+      label: fy.label,
+      monthActual: idx >= 0 && ml ? ml.monthly[idx] : undefined,
+      periodStatus: idx >= 0 ? monthly.months[idx].status : undefined,
+      fullYear: { actual: fy.values.actual, forecast: fy.values.forecast, budget: fy.values.budget, variance: fy.values.variance },
+    };
   } catch {
-    // statementLine may be an account-only grain or not a P&L line — leave the totals undefined.
+    // statementLine may be an account-only grain or not a P&L line — leave the figures undefined.
   }
   return { statementLine, period, line, transactions };
 }
