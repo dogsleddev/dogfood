@@ -64,7 +64,7 @@ export const METRIC_DECOMPOSITION: Record<string, MetricDecomposition> = {
       { label: "Prior-year revenue", href: "/statements/pnl?view=monthly" },
     ],
   },
-  cac_payback: {
+  cac_per_logo: {
     formula: "Trailing-12-mo S&M (lagged 1 quarter) ÷ new logos",
     parts: [
       { label: "Sales & Marketing spend", href: "/forecasts/expenses/sales-marketing" },
@@ -74,7 +74,7 @@ export const METRIC_DECOMPOSITION: Record<string, MetricDecomposition> = {
   cac_payback_months: {
     formula: "CAC per logo ÷ (avg ARR per logo × gross margin % ÷ 12)",
     parts: [
-      { label: "CAC per new logo", metricId: "cac_payback", href: dash("cac_payback") },
+      { label: "CAC per new logo", metricId: "cac_per_logo", href: dash("cac_per_logo") },
       { label: "ARR / MRR", metricId: "arr_mrr", href: dash("arr_mrr") },
       { label: "Gross margin %", metricId: "gross_margin_pct", href: dash("gross_margin_pct") },
     ],
@@ -84,7 +84,7 @@ export const METRIC_DECOMPOSITION: Record<string, MetricDecomposition> = {
     parts: [
       { label: "Gross margin %", metricId: "gross_margin_pct", href: dash("gross_margin_pct") },
       { label: "Logo retention / churn", metricId: "logo_retention", href: dash("logo_retention") },
-      { label: "CAC per new logo", metricId: "cac_payback", href: dash("cac_payback") },
+      { label: "CAC per new logo", metricId: "cac_per_logo", href: dash("cac_per_logo") },
     ],
   },
   magic_number: {

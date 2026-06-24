@@ -1,6 +1,7 @@
 import { listScenarios, getScenarioDashboard } from "@/lib/queries";
 import type { ScenarioId } from "@/lib/types/common";
 import { ScenarioList } from "@/components/scenarios/scenario-list";
+import { DemoSandboxNote } from "@/components/shell/demo-sandbox-note";
 
 export default async function ScenarioManagerPage() {
   const scenarios = await listScenarios();
@@ -26,6 +27,8 @@ export default async function ScenarioManagerPage() {
           stays Base plus actuals. Headline deltas below compare each scenario against Base.
         </p>
       </header>
+
+      <DemoSandboxNote className="mb-5" />
 
       <ScenarioList scenarios={scenarios} dashboard={dashboard} />
 

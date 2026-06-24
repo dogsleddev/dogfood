@@ -65,7 +65,7 @@ export const METRIC_CATALOG: readonly MetricDefinition[] = [
   { id: m("growth_rate"), label: "Revenue growth (FY)", family: "growth_retention", firstTap: "pane_only", kind: "percent", basis: "FY recognized revenue ÷ prior FY − 1 (lags ARR growth via ratable recognition)" },
 
   // Unit Economics
-  { id: m("cac_payback"), label: "CAC per new logo", family: "unit_economics", firstTap: "pane_only", kind: "money", higherIsBetter: false, basis: "trailing-12-mo S&M (payroll + programs, lagged 1 quarter) ÷ new logos (dollar CAC, not payback months — for the period see CAC payback)" },
+  { id: m("cac_per_logo"), label: "CAC per new logo", family: "unit_economics", firstTap: "pane_only", kind: "money", higherIsBetter: false, basis: "trailing-12-mo S&M (payroll + programs, lagged 1 quarter) ÷ new logos (dollar CAC, not payback months — for the period see CAC payback)" },
   { id: m("cac_payback_months"), label: "CAC payback", family: "unit_economics", firstTap: "pane_only", kind: "count", higherIsBetter: false, basis: "months to recover CAC: CAC per new logo ÷ (avg ARR per logo × gross margin % ÷ 12), the gross-margin-adjusted payback period" },
   { id: m("ltv_cac"), label: "LTV : CAC", family: "unit_economics", firstTap: "pane_only", kind: "ratio", basis: "LTV (avg ARR × gross margin % × min(1 ÷ annual churn, 5 yr)) ÷ CAC (S&M lagged 1 quarter)" },
   { id: m("magic_number"), label: "Magic number", family: "unit_economics", firstTap: "pane_only", kind: "ratio", basis: "trailing-12-mo net ΔARR ÷ trailing-12-mo S&M (lagged 1 quarter)" },

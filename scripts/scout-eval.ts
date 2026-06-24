@@ -62,7 +62,7 @@ const CASES: readonly Case[] = [
   // bookings OVER TIME must hit getBookingsHistory, not a single-month getContracts (the lumpy-YoY trap)
   { q: "What were our bookings this year compared to last year?", want: "getBookingsHistory", check: (rs) => has(rs, "getBookingsHistory") },
   { q: "How are bookings trending year over year?", want: "getBookingsHistory", check: (rs) => has(rs, "getBookingsHistory") },
-  { q: "What's our CAC?", want: "getMetric(cac_payback)", check: (rs) => metricsOf(rs).includes("cac_payback") },
+  { q: "What's our CAC?", want: "getMetric(cac_per_logo)", check: (rs) => metricsOf(rs).includes("cac_per_logo") },
   // CAC payback PERIOD (months) is a distinct metric from the dollar CAC — must not collide either way
   { q: "What's our CAC payback period in months?", want: "getMetric(cac_payback_months)", check: (rs) => metricsOf(rs).includes("cac_payback_months") },
   { q: "How long does it take to recover our customer acquisition cost?", want: "getMetric(cac_payback_months)", check: (rs) => metricsOf(rs).includes("cac_payback_months") },
@@ -90,7 +90,7 @@ const CASES: readonly Case[] = [
   { q: "What are our NRR and magic number, and how do they compare?", want: "getMetric(nrr) + getMetric(magic_number)", check: (rs) => metricsOf(rs).includes("nrr") && metricsOf(rs).includes("magic_number") },
   // overlap pairs (fan-out will sharpen these) — accept either credible surface
   { q: "What's our deferred revenue balance?", want: "getContracts OR getBalanceSheet", check: (rs) => anyOf(rs, "getContracts", "getBalanceSheet") },
-  { q: "How many months of runway do we have?", want: "getMetric(runway) OR getCashFlow OR getDashboard", check: (rs) => metricsOf(rs).includes("runway") || anyOf(rs, "getCashFlow", "getDashboard") },
+  { q: "How many months of runway do we have?", want: "getMetric(runway) OR getCashBurnBridge OR getCashFlow OR getDashboard", check: (rs) => metricsOf(rs).includes("runway") || anyOf(rs, "getCashBurnBridge", "getCashFlow", "getDashboard") },
   // the WHY/explain question (not the number) → the cash-burn bridge; siblings getCashFlow/getMetric(runway) are distractors
   { q: "Explain the cash burn — how does a -51% GAAP margin become a -17% free-cash-flow margin?", want: "getCashBurnBridge", check: (rs) => has(rs, "getCashBurnBridge") },
   { q: "What's our gross margin?", want: "getMetric(gross_margin_pct) OR getPnL", check: (rs) => metricsOf(rs).includes("gross_margin_pct") || has(rs, "getPnL") },

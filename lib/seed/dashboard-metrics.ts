@@ -147,7 +147,7 @@ function computeMetricsAt(idx: number): Record<string, number> {
     nrr,
     logo_retention: logoRetention,
     growth_rate: growthRate,
-    cac_payback: cac,
+    cac_per_logo: cac,
     cac_payback_months: cacPaybackMonths,
     ltv_cac: ltvCac,
     magic_number: magicNumber,
@@ -292,7 +292,7 @@ const BUDGET_FACTOR_OVERRIDE: Record<string, number> = {
   nrr: 0.98, // retention beat plan
   logo_retention: 0.99,
   growth_rate: 0.93, // grew faster than planned
-  cac_payback: 1.07, // CAC per logo came in below plan (lower is better → beat)
+  cac_per_logo: 1.07, // CAC per logo came in below plan (lower is better → beat)
   cac_payback_months: 1.06, // recovered CAC a bit faster than planned (lower is better → beat)
   ltv_cac: 0.91, // unit economics beat plan
   magic_number: 1.05, // efficiency slightly below plan

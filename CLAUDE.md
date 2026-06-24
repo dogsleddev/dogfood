@@ -223,7 +223,7 @@ SETUP
   · Data Import
   · Account Mapping
   · Settings
-  · User Guides ▸ (6)
+  · User Guides ▸ (7)
 footer: Chris · CFO  ·  Ask Scout launcher (bottom of rail; opens as a floating panel, lower-right)
 ```
 
@@ -412,12 +412,12 @@ The Run does not start until every item below is checked off. Front-loading only
 - **Scenario model — DEFINED** as a typed contract + engine spec (§9). Engine built in the Run.
 - **Metrics layer — DESIGN decided** (§5 / §17). Built under the Dashboard in the Run.
 - **Scout-ready** — the spine satisfies the §4 bar.
-- **Guides — DRAFTED (2026-06-20, Run).** All six User Guides now exist as grounded prose in `lib/guides/content.ts`, rendered at `app/setup/guides/[slug]` (no longer placeholders). They are the single source for BOTH the help route AND Scout's product-knowledge lane (§10) — "one source, two callers" for guide text. Refine exact UI wording against built modules as the Run ships them. [The earlier "~0% prose" status is resolved.]
+- **Guides — DRAFTED (2026-06-20, Run).** All seven User Guides now exist as grounded prose in `lib/guides/content.ts`, rendered at `app/setup/guides/[slug]` (no longer placeholders). They are the single source for BOTH the help route AND Scout's product-knowledge lane (§10) — "one source, two callers" for guide text. Refine exact UI wording against built modules as the Run ships them. [The earlier "~0% prose" status is resolved.]
 
 ### The Run (C) — builds for real on the above
 
 - **Phases 3–5:** the Reporting + Sales module surfaces, Account Mapping wiring, the remaining drivers and the Balance Sheet / Cash Flow statement modules, the **Metrics layer** (the Dashboard's metric tiles + drill-downs), the **Scenarios engine**, and **Scout tools per shipped module** (wire against the typed `lib/queries/registry.ts` seam — the full two-lane tool surface is declared, `wired: false`).
-- **Guides & processes — a FIRST-CLASS, early step (do partially up front).** The six User Guides are drafted (`lib/guides/content.ts`) and double as Scout's product-knowledge lane; keep them moving alongside each module (they capture the "how to use it" processes/SOPs and ground Scout's how-to answers), refining exact UI wording as modules ship. Having the processes partially done substantially de-risks the rest of the Run.
+- **Guides & processes — a FIRST-CLASS, early step (do partially up front).** The seven User Guides are drafted (`lib/guides/content.ts`) and double as Scout's product-knowledge lane; keep them moving alongside each module (they capture the "how to use it" processes/SOPs and ground Scout's how-to answers), refining exact UI wording as modules ship. Having the processes partially done substantially de-risks the rest of the Run.
 - **Scout** — wire tools as modules ship (Scout Follows Modules); see §10 for the tool surface, the two lanes, receipts, the routing eval, and the model choice.
 
 A kickoff prompt for **Harness** points Claude Code at this file and starts at **Phase 0 → Phase 1**: scaffold the spine, then stand up the example Dashboard + P&L against the confirmed target numbers. (The Run gets its own kickoff prompt once Harness's DoD is met.)

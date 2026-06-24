@@ -34,7 +34,7 @@ const ROUTES: readonly Route[] = [
   // CAC payback PERIOD (months) is its own metric, distinct from the dollar CAC — match "payback"
   // before the bare /cac/ route, since "CAC payback" also contains "cac".
   { test: /payback/i, tool: "getMetric", input: { metricId: "cac_payback_months" } },
-  { test: /\bcac\b/i, tool: "getMetric", input: { metricId: "cac_payback" } },
+  { test: /\bcac\b/i, tool: "getMetric", input: { metricId: "cac_per_logo" } },
   { test: /gross margin/i, tool: "getMetric", input: { metricId: "gross_margin_pct" } },
   // Pipeline register (open deals) — a unique keyword, so place it before the sales record routes.
   { test: /pipeline|opportunit|\bfunnel\b|open deals|deals? by (stage|rep)|win prob/i, tool: "getPipeline", input: {} },

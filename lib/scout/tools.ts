@@ -164,7 +164,7 @@ export const SCOUT_TOOL_IMPLS: Record<string, ScoutToolImpl> = {
     inputSchema: {
       type: "object",
       properties: {
-        metricId: { type: "string", description: "Metric id, e.g. runway, nrr, magic_number, cac_payback (dollar CAC per new logo), cac_payback_months (months to recover CAC — the payback PERIOD), ltv_cac, rule_of_40, burn_multiple, gross_margin_pct, arr_mrr. ARR, MRR, and 'monthly/annual recurring revenue' all use arr_mrr." },
+        metricId: { type: "string", description: "Metric id, e.g. runway, nrr, magic_number, cac_per_logo (dollar CAC per new logo), cac_payback_months (months to recover CAC — the payback PERIOD), ltv_cac, rule_of_40, burn_multiple, gross_margin_pct, arr_mrr. ARR, MRR, and 'monthly/annual recurring revenue' all use arr_mrr." },
         period: PERIOD_PROP,
       },
       required: ["metricId"],
